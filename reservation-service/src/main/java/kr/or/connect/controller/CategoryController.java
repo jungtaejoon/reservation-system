@@ -21,8 +21,13 @@ public class CategoryController {
 	}
 	
 	@PostMapping
-	public void insert(@RequestBody Category category) {
-		categoryService.insertCategory(category);
+	public Category insert(@RequestBody Category category) {
+		return categoryService.insertCategory(category);
+	}
+	
+	@DeleteMapping("/{id}")
+	public int delete(@PathVariable Long id) {
+		return categoryService.delete(id);
 	}
 
 }

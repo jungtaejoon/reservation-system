@@ -1,19 +1,23 @@
 package kr.or.connect.controller;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by 강경미 on 2017. 6. 3..
- */
+import kr.or.connect.service.*;
+
 @Controller
 @RequestMapping("/")
 public class MainController {
 	
+	@Autowired
+	CategoryService categoryService;
+	
     @GetMapping
-    public String index(Model model){
-        return "index";
+    public String home(Model model){
+    	model.addAttribute("categories", categoryService.getAll());
+        return "category";
     }
 
 }

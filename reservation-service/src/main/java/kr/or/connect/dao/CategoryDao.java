@@ -23,9 +23,10 @@ public class CategoryDao {
 		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("category").usingGeneratedKeyColumns("id");
 	}
 	
-	public Long insert(Category category) {
+	public Category insert(Category category) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(category);
-		return insertAction.executeAndReturnKey(params).longValue();
+		category.setId(insertAction.executeAndReturnKey(params).longValue());
+		return category;
 	}
 
 	public List<Category> getAll() {
