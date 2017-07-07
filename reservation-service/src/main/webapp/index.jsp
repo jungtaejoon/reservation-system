@@ -24,9 +24,9 @@
 	$(document).ready(function(){
 		$('#category-form').submit(function() { 
 			event.preventDefault()
-			console.log("ww")
 			var category = new Object();
 			category.name = $('#name').val();
+			console.log(category);
 			jsonStr = JSON.stringify(category);
 			$.ajax({
 			    method : 'post',
@@ -36,7 +36,10 @@
 			    url : '/categories',
 			    success : function(response) {
 			      console.log(response);
-			    }
+			    },
+			    error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+			    	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    	},
 			})
 		});
 

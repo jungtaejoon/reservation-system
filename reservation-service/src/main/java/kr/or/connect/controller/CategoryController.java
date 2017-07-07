@@ -13,7 +13,7 @@ import kr.or.connect.service.*;
 public class CategoryController {
 	
 	@Autowired
-	CategoryServiceImpl categoryService;
+	CategoryService categoryService;
 	
 	@GetMapping
 	public List<Category> getAll() {
@@ -21,7 +21,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping
-	public void insert(@RequestParam Category category) {
+	public void insert(@RequestBody Category category) {
 		categoryService.insertCategory(category);
 	}
 
