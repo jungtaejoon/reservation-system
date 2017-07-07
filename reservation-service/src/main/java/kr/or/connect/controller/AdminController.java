@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import kr.or.connect.service.*;
 
 @Controller
-@RequestMapping("/")
-public class MainController {
+@RequestMapping("/admin")
+public class AdminController {
 	
 	@Autowired
 	CategoryService categoryService;
@@ -17,7 +17,7 @@ public class MainController {
     @GetMapping
     public String home(Model model){
     	model.addAttribute("categories", categoryService.getAll());
-        return "category";
+        return "admin";
     }
 
 }
