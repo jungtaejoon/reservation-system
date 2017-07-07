@@ -46,7 +46,6 @@ public class CategoryDao {
 	}
 
 	public int updateById(Category category) {
-		// bean 값이 비어있으면 쓸수 없는거 같음 
 		SqlParameterSource params = new BeanPropertySqlParameterSource(category);
 		return jdbc.update(CategorySqls.UPDATE_BY_ID, params);
 	}

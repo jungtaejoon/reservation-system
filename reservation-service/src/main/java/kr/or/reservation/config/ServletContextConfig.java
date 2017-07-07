@@ -26,6 +26,6 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");  //   webapp/resources 경로를 의미
+    	 registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 }

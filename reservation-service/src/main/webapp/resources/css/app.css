@@ -1,0 +1,24 @@
+table {
+	width: 100%;
+	text-align: center;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #444444;
+}
+
+.category-list {
+	margin: 25px auto;
+	width: 600px;
+}
+
+.input-box {
+	margin: auto;
+	width: 600px;
+}
+
+#modify {
+	display: none;
+}

@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.reservation.domain.Category;
@@ -39,7 +36,6 @@ public class CategoryController {
     
     @PostMapping(path = "/")
     public String insert(Model model,@RequestParam String name){
-    	ModelAndView mav = new ModelAndView("category");
     	Category category = new Category(name);
     	catergoryservice.insert(category);
     	return "redirect:/";
@@ -52,6 +48,7 @@ public class CategoryController {
     	catergoryservice.deleteById(id);
     }
     
+   
     @PutMapping(path = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable("id") long id, @RequestBody Category category){
