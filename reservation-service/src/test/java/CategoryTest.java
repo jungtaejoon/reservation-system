@@ -23,7 +23,7 @@ public class CategoryTest {
 	@Test
 	public void shouldInsertAndSelect() {
 		Category category = new Category("카테고리");
-		Long categoryPk = categoryDao.insert(category);
+		Long categoryPk = categoryDao.insert(category).getId();
 
 		Category result = categoryDao.selectById(categoryPk);
 
@@ -34,7 +34,7 @@ public class CategoryTest {
 	@Test(expected = EmptyResultDataAccessException.class)
 	public void shouldDelete() {
 		Category category = new Category("카테고리");
-		Long categoryPk = categoryDao.insert(category);
+		Long categoryPk = categoryDao.insert(category).getId();
 		categoryDao.delete(categoryPk);
 		
 		categoryDao.selectById(categoryPk);
