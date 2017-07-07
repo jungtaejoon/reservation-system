@@ -19,5 +19,10 @@ public class CategoryController {
 	public List<Category> getAll() {
 		return categoryService.getAll();
 	}
+	
+	@PostMapping
+	public void insert(@RequestParam Category category) {
+		categoryService.insertCategory(category);
+	}
 
 }

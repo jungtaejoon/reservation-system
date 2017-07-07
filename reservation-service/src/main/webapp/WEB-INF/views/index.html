@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<table id="category-list">
+			<tr><th>카테고리명</th><th>삭제</th></tr>		
+		</table>
+	
+	</div>
+	<div id="category-form">
+		<form action="/categories" method="post">
+			카테고리 이름 : <input type="text" name="name"><br>
+			<button type="submit">저장</button>
+		</form>
+	</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		console.log("dd")
+	});
+
+
+</script>
+</body>
+</html>

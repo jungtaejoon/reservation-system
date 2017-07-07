@@ -11,7 +11,7 @@ import org.springframework.web.filter.*;
 import org.springframework.web.servlet.*;
 
 public class WebInitializer implements WebApplicationInitializer {
-    private static final String CONFIG_LOCATION = "carami.todo.config";
+    private static final String CONFIG_LOCATION = "kr.or.connect.config";
     private static final String MAPPING_URL = "/";
 
     public WebInitializer(){
