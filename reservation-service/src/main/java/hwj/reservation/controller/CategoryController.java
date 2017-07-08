@@ -52,7 +52,11 @@ public class CategoryController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public String delete(@PathVariable Integer id){
-		categoryService.deleteById(id);
+		Category check = categoryService.getById(id);
+		//check validation
+		if(check!=null){
+			categoryService.deleteById(id);
+		}
 		return "redirect:/category";
 	}
 	
@@ -60,8 +64,12 @@ public class CategoryController {
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void update(@PathVariable Integer id, @RequestBody Category category){
-		categoryService.update(category);
-		log.info("category updated");
+		//check validation
+		Category check =  categoryService.getById(category.getId());
+		if(check!=null){
+			categoryService.update(category);
+			log.info("category updated");
+		}
 	}
 	
 }
