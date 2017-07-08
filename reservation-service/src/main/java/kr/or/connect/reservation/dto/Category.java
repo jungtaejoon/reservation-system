@@ -1,13 +1,13 @@
 package kr.or.connect.reservation.dto;
 
-public class Member {
+public class Category {
     private long id;
     private String name;
 
-    public Member() {
+    public Category() {
     }
 
-    public Member(String name) {
+    public Category(String name) {
         this.name = name;
     }
 
@@ -29,7 +29,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

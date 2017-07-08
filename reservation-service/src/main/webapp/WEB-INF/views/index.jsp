@@ -15,7 +15,7 @@
 		
    	   function putCategory(name) {
 		  $.ajax({
-		    url: "./members",
+		    url: "./category",
 		    type: "POST",
 		    contentType:"application/json; charset=UTF-8",
 		    dataType:"json",
@@ -23,7 +23,8 @@
 		    success: function(data) {
 		    	
 		    		$('#mytable > tbody:last').append('<tr><td class = id>'+data.id+'</td><td class = name>'+data.name+ '</td><td class = up>' + '<input class ='+ "update" +'type="text"> <button id =' + "upbtn" +">"+"변경"+'</button>'+'</td><td>' + "<button id="+ "delete" +">"+"삭제하기"+"</button>" + '</td></tr>');
-		    		alert("카테고리 추가를 완료했습니다.")
+		    		alert("카테고리 추가를 완료했습니다.");
+		    		
 		    		
 		     }
 		  });
@@ -31,7 +32,7 @@
    
    		function updateCategory(name,id) {
 		  $.ajax({
-		    url: "./members",
+		    url: "./category",
 		    type: "PUT",
 		    contentType:"application/json; charset=UTF-8",
 		    dataType:"json",
@@ -46,7 +47,7 @@
    
 		  function getList() {
 			  $.ajax({
-			   url: "./members",
+			   url: "./category",
 			   type: "GET",
 			   contentType:"application/json; charset=UTF-8",
 			   dataType:"json",
@@ -61,7 +62,7 @@
 		  
 		  function deleteList(i) {
 			  $.ajax({
-			    url: "./members/"+i,
+			    url: "./category/"+i,
 			    type: "DELETE",
 			    contentType:"application/json; charset=UTF-8",
 			    success: function(data) {

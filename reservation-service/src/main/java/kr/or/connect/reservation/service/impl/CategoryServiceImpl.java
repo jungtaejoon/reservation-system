@@ -8,49 +8,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.connect.reservation.dao.MemberDao;
-import kr.or.connect.reservation.dto.Member;
-import kr.or.connect.reservation.service.MemberService;
+import kr.or.connect.reservation.dao.CategoryDao;
+import kr.or.connect.reservation.dto.Category;
+import kr.or.connect.reservation.service.CategoryService;
 
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
-    MemberDao memberDao;
+    CategoryDao categoryDao;
 
     @Transactional(readOnly = true)
-	public Member get(Long id) {
+	public Category get(Long id) {
 		// TODO Auto-generated method stub
-		return memberDao.selectById(id);
+		return categoryDao.selectById(id);
 	}
 
+    
     @Transactional(readOnly = false)
-	public Member addMember(Member member) {
+	public Category addMember(Category category) {
 		// TODO Auto-generated method stub
-		Long insert = memberDao.insert(member);
-        member.setId(insert);
-        return member;
+		Long insert = categoryDao.insert(category);
+		category.setId(insert);
+        return category;
 
 	}
     
     
-    
-    public Collection<Member> getAll()
+    public Collection<Category> getAll()
     {
-    		return memberDao.selectAll();
+    		return categoryDao.selectAll();
     }
     
     @Transactional(readOnly = false)
 	public boolean delete(Integer id) {
 		// TODO Auto-generated method stub
-		int affected = memberDao.deleteById(id);
+		int affected = categoryDao.deleteById(id);
 		return affected == 1;
 	}
 
     
-	public boolean update(Member member) {
+	public boolean update(Category category) {
 		// TODO Auto-generated method stub
-		int affected = memberDao.update(member);
+		int affected = categoryDao.update(category);
 		return affected == 1;
 	}
 }

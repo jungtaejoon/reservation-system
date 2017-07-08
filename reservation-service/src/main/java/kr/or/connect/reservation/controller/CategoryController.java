@@ -20,43 +20,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.connect.reservation.dto.Member;
-import kr.or.connect.reservation.dto.MemberFormParam;
-import kr.or.connect.reservation.service.MemberService;
+import kr.or.connect.reservation.dto.Category;
+import kr.or.connect.reservation.dto.CategoryFormParam;
+import kr.or.connect.reservation.service.CategoryService;
 
 @RestController
-@RequestMapping("/members")
-public class MemberController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Autowired
-    private MemberService memberService;
+    private CategoryService categoryService;
 
-    // 회원 가입시 form에서 알맞은 값을 입력하였는지 프론트 javascript를 이용하여 검증을 해야겠지만,
-    // 프론트를 무시하고 요청을 보낼 수도 있기 때문에 서버에서도 해당 값이 올바른지 검증하는 코드가 반드시 존재해야 한다.
     @PostMapping
-    public Member create(@RequestBody Member member) {
-        if (member.getName() == null || member.getName().length() == 0 ) {
-            return null; // 이름, email, passwd1, passwd2 중에서 하나라도 입력하지 않은 것이 있을 경우 이동
+    public Category create(@RequestBody Category category) {
+        if (category.getName() == null || category.getName().length() == 0 ) {
+            return null; 
         }else {
                 
-                Member resultMember = memberService.addMember(member);
+                Category resultCategory = categoryService.addMember(category);
 
-                return resultMember; // 회원 가입 후 봐야할 화면으로 redirect
+                return resultCategory;
             }
         }
     
     @GetMapping
-	Collection<Member> readList() {
-		return memberService.getAll();
+	Collection<Category> readList() {
+		return categoryService.getAll();
 	}
     
     @DeleteMapping("/{id}")
     boolean delete(@PathVariable Integer id){
-		return memberService.delete(id);
+		return categoryService.delete(id);
 	}
     
     @PutMapping
-	boolean update(@RequestBody Member member){		
-		return memberService.update(member);
+	boolean update(@RequestBody Category category){		
+		return categoryService.update(category);
 	}
 }

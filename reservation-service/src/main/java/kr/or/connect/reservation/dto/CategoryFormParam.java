@@ -1,6 +1,6 @@
 package kr.or.connect.reservation.dto;
 
-public class MemberParam {
+public class CategoryFormParam {
     private String name;
 
     public String getName() {
