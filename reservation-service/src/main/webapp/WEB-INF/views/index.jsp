@@ -7,74 +7,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.delete {
-	cursor: pointer;
-}
-
-.delete:hover {
-	color: white;
-}
-</style>
+<link type="text/css" rel="stylesheet" href="/resources/css/category.css">
 </head>
 <body>
-	Hello First Spring Task
-	<br> Category CRUD
+	<h1>Hello First Spring Task (Category CRUD)</h1>
+
+	<br>
+
+	<h3>Input Category Name</h3>
+
 	<br>
 
 	<form method="post" action="/category">
-		추가할 카테고리 이름 : <input type="text" name="name"><br> <input
-			type="submit" value="확인">
+		<input type="text" name="name"> <input type="submit"
+			value="ADD">
 	</form>
 
 	<c:if test="${categories != null}">
-		<ul class="cate_wrapper">
+		<div class="cate_wrapper">
+			<h2>Categories</h2>
 			<c:forEach items="${categories}" var="cate">
-				<li data-id="${cate.id}"><c:out value="${cate.name}" /> <a
-					class="delete">Delete</a></li>
+				<div data-id="${cate.id}" class="flex-row">
+					<div id="name">
+						<c:out value="${cate.name}" />
+					</div>
+					<input type="text" class="edit" value="" name="edit">
+					<button class="update">Update</button>
+					<button class="delete">Delete</button>
+				</div>
 			</c:forEach>
-		</ul>
+		</div>
 	</c:if>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
-<script>
-	(function(window) {
-		'use strict';
-
-		var Category = {
-			init : function() {
-				this.bindEvents()
-			},
-			bindEvents : function() {
-				$(".cate_wrapper").on("click", ".delete", this.deleteCategory);
-			},
-			deleteCategory : function(event) {
-				var $cateList = $(event.target).closest("li");
-				var id = $cateList.data("id");
-				var url = '/category/' + id;
-				var result = $.ajax({
-					contentType : 'application/json; charset=UTF-8',
-					method : 'DELETE',
-					url : url,
-					dataType : 'json',
-				});
-
-				result.done(function(res) {
-					if (res)
-						$cateList.remove();
-				});
-
-				result.fail(function(err) {
-					console.log(err);
-				});
-
-			},
-		};
-
-		Category.init();
-
-	})(window);
-</script>
+<script src="/resources/js/category.js"></script>
 </html>

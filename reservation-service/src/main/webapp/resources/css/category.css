@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+button {
+	color: white;
+	margin-left: 0.5em;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	margin-top: 0.5em;
+}
+
+.delete {
+	background-color: red;
+}
+
+.update {
+	background-color: blue;
+}
+
+.complete {
+	background-color: green;
+	color: white;
+}
+
+.edit {
+	display: none;
+}
