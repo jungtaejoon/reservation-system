@@ -23,6 +23,7 @@
 		    success: function(data) {
 		    	
 		    		$('#mytable > tbody:last').append('<tr><td class = id>'+data.id+'</td><td class = name>'+data.name+ '</td><td class = up>' + '<input class ='+ "update" +'type="text"> <button id =' + "upbtn" +">"+"변경"+'</button>'+'</td><td>' + "<button id="+ "delete" +">"+"삭제하기"+"</button>" + '</td></tr>');
+		    		alert("카테고리 추가를 완료했습니다.")
 		    		
 		     }
 		  });
@@ -50,8 +51,10 @@
 			   contentType:"application/json; charset=UTF-8",
 			   dataType:"json",
 			   success: function(data) {
+				   
 				   for(var i in data)
 				   $('#mytable > tbody:last').append('<tr><td class = id>'+data[i].id+'</td><td class = name>'+data[i].name+ '</td><td class = up>' + '<input class ='+ "update" +'type="text"> <button id =' + "upbtn"+">"+"변경"+'</button>'+'</td><td>' + "<button id="+ "delete" + ">"+"삭제하기"+"</button>" + '</td></tr>');
+				   
 			   }
 			  });
 			  }
@@ -62,6 +65,9 @@
 			    type: "DELETE",
 			    contentType:"application/json; charset=UTF-8",
 			    success: function(data) {
+			    	
+			    		alert("카테고리 삭제를 완료했습니다.")
+			    		
 			     }
 			  });
 			  }
