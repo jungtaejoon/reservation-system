@@ -1,6 +1,7 @@
 package kr.or.connect.reservation.dao;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,12 @@ public class CategoryDao {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(category);
 		return insertAction.executeAndReturnKey(params).longValue();
 	}
+	
+	public Category selectById(long id) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		return jdbc.queryForObject(CategorySqls.SELECT_BY_ID, params, rowMapper);
+	}
 
 	public List<Category> selectAll() {
 		Map<String, Object> params = Collections.emptyMap();
@@ -39,7 +46,9 @@ public class CategoryDao {
 	}
 
 	public int update(Category category) {
-		SqlParameterSource params = new BeanPropertySqlParameterSource(category);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", category.getId());
+		params.put("name", category.getName());
 		return jdbc.update(CategorySqls.UPDATE_BY_ID, params);
 	}
 
