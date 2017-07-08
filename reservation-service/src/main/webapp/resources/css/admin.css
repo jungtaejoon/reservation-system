@@ -1,0 +1,48 @@
+*{
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 0;
+}
+.btn {
+	padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid;
+    background-color: white;
+    color: #008CBA;
+}
+#btnMvCate {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -350px;
+    margin-left: -100px;
+}
+#newCategory {
+	padding: 10px 20px;
+}
+#btnUpdate {
+	/* vertical-align:text-top; */
+}
+.btnCate {
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+    border: 2px solid;
+    background-color: white;
+    color: black;
+}
+.header-nav {
+	width:100%;
+	float:left;
+	border-bottom: 1px solid #ddd;
+	box-shadow: 0 0 3px #ccc;
+}
+
+
+
