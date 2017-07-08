@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.category_td {
+	border: 1px solid BLACK; 
+	padding: 5px; 
+	height:25px;
+}
+
+label:first-child {
+	padding: 5px;
+	font-size: large;
+	margin-bottom: 10px;
+}

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.category_td {
+	border: 1px solid BLACK; 
+	padding: 5px; 
+	height:25px;
+	width: 210px;
+}
+
+.category_td button {
+	float: right;
+	margin-left: 3px;
+	width: 50px;
+}
+
+.category_label {
+	display: inline-block;
+	text-align: center;
+	width: 100px;
+}
+
+.category_edit {
+	width: 100px;
+	text-align: center;
+}
+
+.invisible {
+	display: none;
+}
+
+table {
+	margin-top: 10px;
+}
