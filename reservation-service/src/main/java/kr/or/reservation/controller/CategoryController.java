@@ -26,6 +26,7 @@ public class CategoryController {
 	@Autowired
 	CategoryService catergoryservice;
 	
+	// get 방식, 등록된 모든 List를 가져와서 model로 보여준다.
     @GetMapping(path = "/")
     public ModelAndView selectAll(Model model){
     	ModelAndView mav = new ModelAndView("category");
@@ -34,6 +35,7 @@ public class CategoryController {
     	return mav;
     }
     
+    // Post 방식을 사용시, 넘겨받은 name을 통해 category 등록 후, redirect 
     @PostMapping(path = "/")
     public String insert(Model model,@RequestParam String name){
     	Category category = new Category(name);
@@ -42,13 +44,14 @@ public class CategoryController {
     }
     
     
+    // url 로 id를 받아 해당 데이터를 삭제
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") long id){
     	catergoryservice.deleteById(id);
     }
     
-   
+    // delete와 마찬가지로 url로 id를 받고, body 부분에 json으로 id / name을 받아 수정함.
     @PutMapping(path = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@PathVariable("id") long id, @RequestBody Category category){

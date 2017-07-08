@@ -41,7 +41,7 @@ public class CategoryDao {
 	}
 	
 	public List<Category> selectforList() {
-		Map<String, Object> params = Collections.emptyMap();
+		Map<String, ?> params = Collections.emptyMap();
 		return jdbc.query(CategorySqls.SELECT_ALL,params,rowMapper);
 	}
 
@@ -52,7 +52,7 @@ public class CategoryDao {
 
 	public int deleteById(long id) {
 		Map<String , ?> map = Collections.singletonMap("id",id);
-		return jdbc.update(CategorySqls.Delete_BY_ID, map);
+		return jdbc.update(CategorySqls.DELETE_BY_ID, map);
 	}
 	
 
