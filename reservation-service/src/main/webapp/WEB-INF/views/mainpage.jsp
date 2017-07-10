@@ -62,6 +62,24 @@
                                             </div>
                                         </a>
                                     </li>
+                                    <li class="item" style="background-image: url(http://naverbooking.phinf.naver.net/20170119_48/1484802596907hmVDm_JPEG/image.jpg); width: 338px;">
+                                        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
+                                            <div class="event_txt">
+                                                <h4 class="event_txt_tit">뮤지컬-김종욱찾기 네이버 예약</h4>
+                                                <p class="event_txt_adr">대학로 쁘띠첼씨어터</p>
+                                                <p class="event_txt_dsc">네이버 예매시, 손크림/발크림(중 래덤)을 드립니다</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                  		            <li class="item" style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
+                                        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
+                                            <div class="event_txt">
+                                                <h4 class="event_txt_tit"></h4>
+                                                <p class="event_txt_adr"></p>
+                                                <p class="event_txt_dsc"></p>
+                                            </div>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <span class="nxt_fix"></span>
@@ -155,12 +173,15 @@
     <script type="text/javascript">
     	$(document).ready(function(){
     		(function slider(){
-	    		var sliderIndex = 0;
+	    		var sliderIndex = 1;
 	    		var lastSliderIndex = 2;
+    			$('.group_visual .visual_img').animate({
+    			    left: sliderIndex * (-338),
+    			}, 0);
 	    		function moveSlide() {
 	    			$('.group_visual .visual_img').animate({
 	    			    left: sliderIndex * (-338),
-	    			  });
+	    			});
 	    		}
 	    		function slideNext() {
 	    			if(sliderIndex < lastSliderIndex) {
@@ -168,18 +189,26 @@
 	    				moveSlide();
 	    			}
 	    			else if(sliderIndex == lastSliderIndex) {
-	    				sliderIndex = 0;
+	    				++sliderIndex;
 	    				moveSlide();
+	    				sliderIndex = 1;
+	        			$('.group_visual .visual_img').animate({
+	        			    left: sliderIndex * (-338),
+	        			}, 0);
 	    			}
 	    		}
 	    		function slidePrev() {
-	    			if(sliderIndex > 0) {
+	    			if(sliderIndex > 1) {
 	    				--sliderIndex;
 	    				moveSlide();
 	    			}
-	    			else if(sliderIndex == 0) {
-	    				sliderIndex = lastSliderIndex;
+	    			else if(sliderIndex == 1) {
+	    				--sliderIndex;
 	    				moveSlide();
+	    				sliderIndex = lastSliderIndex;
+	        			$('.group_visual .visual_img').animate({
+	        			    left: sliderIndex * (-338),
+	        			}, 0);
 	    			}
 	    		}
 	    		var slideLoop = setInterval(slideNext, 2000);
