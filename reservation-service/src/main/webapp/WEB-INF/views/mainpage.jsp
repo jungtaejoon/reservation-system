@@ -163,18 +163,28 @@
     			    // Animation complete.
     			  });
     		}
-    		$('.btn_pre_e').on('click', function() {
-    			if(sliderIndex > 0) {
-    				--sliderIndex;
-    				moveSlide();
-    			}
-    		});
-    		$('.btn_nxt_e').on('click', function() {
+    		function slideNext() {
     			if(sliderIndex < lastSliderIndex) {
     				++sliderIndex;
     				moveSlide();
     			}
-    		});
+    			else if(sliderIndex == lastSliderIndex) {
+    				sliderIndex = 0;
+    				moveSlide();
+    			}
+    		}
+    		function slidePrev() {
+    			if(sliderIndex > 0) {
+    				--sliderIndex;
+    				moveSlide();
+    			}
+    			else if(sliderIndex == 0) {
+    				sliderIndex = lastSliderIndex;
+    				moveSlide();
+    			}
+    		}
+    		$('.btn_nxt_e').on('click', slideNext);
+    		$('.btn_pre_e').on('click', slidePrev);
     	});
     </script>
 </body>
