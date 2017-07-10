@@ -31,9 +31,9 @@
 	</div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#category-form').submit(function() { 
-			event.preventDefault()
-			var category = new Object();
+		$('#category-form').submit(function(event) { 
+			event.preventDefault();
+			var category = {};
 			category.name = $('#name').val();
 			jsonStr = JSON.stringify(category);
 			$.ajax({
