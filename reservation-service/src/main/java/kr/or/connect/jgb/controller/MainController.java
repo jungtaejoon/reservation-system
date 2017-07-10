@@ -24,7 +24,7 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@GetMapping
+	@GetMapping("/category")
 	public ModelAndView catergory(HttpServletRequest req,HttpServletResponse res) {
 		ModelAndView mav = new ModelAndView("category");
 		List<Category> categories;
@@ -33,10 +33,28 @@ public class MainController {
 		return mav;
 	}
 	
-	@PostMapping
+	@GetMapping("/myreservation")
+	public ModelAndView myreservation(HttpServletRequest req,HttpServletResponse res) {
+		ModelAndView mav = new ModelAndView("myreservation");
+		return mav;
+	}
+	
+	@GetMapping("/detail")
+	public ModelAndView detail(HttpServletRequest req,HttpServletResponse res) {
+		ModelAndView mav = new ModelAndView("detail");
+		return mav;
+	}
+	
+	@GetMapping
+	public ModelAndView index(HttpServletRequest req,HttpServletResponse res) {
+		ModelAndView mav = new ModelAndView("mainpage");
+		return mav;
+	}
+	
+	@PostMapping("/category")
     public String create(@RequestParam(name="name") String name,HttpServletRequest request) {
         Category category = new Category(name);
         categoryService.addCategory(category);
-        return "redirect:/";
+        return "redirect:/category";
     }
 }

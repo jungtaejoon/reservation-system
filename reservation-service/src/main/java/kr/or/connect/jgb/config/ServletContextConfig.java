@@ -10,16 +10,29 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import kr.or.connect.jgb.config.resolver.HtmlViewResolver;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages= {"kr.or.connect.jgb.controller"})
 public class ServletContextConfig extends WebMvcConfigurerAdapter{
 	@Bean
-    public ViewResolver viewResolver() {
+    public ViewResolver jspViewResolver() {
          InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
+        viewResolver.setOrder(1);
+        return viewResolver;
+    }
+	
+	@Bean
+    public ViewResolver htmlViewResolver2() {
+         InternalResourceViewResolver viewResolver = new HtmlViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/resources/html/");
+        viewResolver.setSuffix(".html");
+        viewResolver.setOrder(0);
         return viewResolver;
     }
     

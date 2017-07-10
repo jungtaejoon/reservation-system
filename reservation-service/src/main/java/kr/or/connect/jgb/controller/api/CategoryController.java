@@ -1,5 +1,6 @@
 package kr.or.connect.jgb.controller.api;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.connect.jgb.domain.Category;
 import kr.or.connect.jgb.service.CategoryService;
@@ -26,6 +28,12 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@GetMapping
+	public Collection<Category> list(HttpServletRequest req,HttpServletResponse res) {
+		
+		return categoryService.getAll();
+	}
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
