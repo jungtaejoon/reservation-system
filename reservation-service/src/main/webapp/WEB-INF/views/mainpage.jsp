@@ -151,7 +151,7 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    <script type="text/javascript" src="/resources/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
     		(function slider(){
@@ -184,8 +184,9 @@
 	    		}
 	    		var slideLoop = setInterval(slideNext, 2000);
 	    		function waitAndSlide() {
-	    			clearInterval(slideLoop);
+    				clearInterval(slideLoop);
 	    			setTimeout(function(){
+	    				clearInterval(slideLoop);
 	    				slideLoop = setInterval(slideNext, 2000);
 	    			}, 2000);
 	    		}
