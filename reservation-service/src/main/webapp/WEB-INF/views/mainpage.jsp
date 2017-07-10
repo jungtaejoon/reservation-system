@@ -183,21 +183,25 @@
 	    			}
 	    		}
 	    		var slideLoop = setInterval(slideNext, 2000);
+	    		function waitAndSlide() {
+	    			clearInterval(slideLoop);
+	    			setTimeout(function(){
+	    				slideLoop = setInterval(slideNext, 2000);
+	    			}, 2000);
+	    		}
 	    		$('.btn_nxt_e').on('click', function() {
 	    		    if ($('.group_visual .visual_img').is(':animated')) {
 	    		        return;
 	    		    }
 	    			slideNext();
-	    			clearInterval(slideLoop);
-	    			slideLoop = setInterval(slideNext, 2000);
+	    			waitAndSlide();
 	    		});
 	    		$('.btn_pre_e').on('click', function() {
 	    		    if ($('.group_visual .visual_img').is(':animated')) {
 	    		        return;
 	    		    } 
 	    			slidePrev();
-	    			clearInterval(slideLoop);
-	    			slideLoop = setInterval(slideNext, 2000);
+	    			waitAndSlide();
 	    		});
     		})();
     		
