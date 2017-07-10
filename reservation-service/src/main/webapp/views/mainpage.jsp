@@ -52,33 +52,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="item" style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
-                                        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
-                                            <div class="event_txt">
-                                                <h4 class="event_txt_tit"></h4>
-                                                <p class="event_txt_adr"></p>
-                                                <p class="event_txt_dsc"></p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                     <li class="item" style="background-image: url(http://naverbooking.phinf.naver.net/20170119_48/1484802596907hmVDm_JPEG/image.jpg); width: 338px;">
-                                        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
-                                            <div class="event_txt">
-                                                <h4 class="event_txt_tit">뮤지컬-김종욱찾기 네이버 예약</h4>
-                                                <p class="event_txt_adr">대학로 쁘띠첼씨어터</p>
-                                                <p class="event_txt_dsc">네이버 예매시, 손크림/발크림(중 래덤)을 드립니다</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="item" style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
-                                        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
-                                            <div class="event_txt">
-                                                <h4 class="event_txt_tit"></h4>
-                                                <p class="event_txt_adr"></p>
-                                                <p class="event_txt_dsc"></p>
-                                            </div>
-                                        </a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                             <span class="nxt_fix"></span>
@@ -202,11 +176,14 @@
 
 $(document).ready(function(){
 	// ul 과 length 를 설정
+	// 초기에 뒤에 2개를 추가. 
+	// 끝 과 끝에서 위치를 바꿔 순환되게 끔 작동 
 	var $ul = $(".visual_img"),
-	total_length = $(".visual_img > li").length - 1 ;
+	total_length =0;
 	current_length = 0,
 	moveLength =0,
-	maxLength = 0;
+	maxLength = 0,
+	imgLength = 338;
 	
 	// Auto Caraoucel 부분
 	var startAuto = 0,
@@ -220,8 +197,24 @@ $(document).ready(function(){
 	caroucelRight= {},
 	clear = {};
 	
-	// 초기에 2 번쨰 화면부터 보여줌 .. 
+	var init_first ='', 
+	init_secon = '';
 	
+	// Jquery에서 OuterHtml이 없기에, 구현 
+	// 해당 함수는 초기 앞 2개의 li를 구할때 사용 .
+	function OuterHtml(url){
+		return url.clone().wrapAll("<div/>").parent().html();
+	}
+	
+	
+	(function init(){
+		// 초기 앞 2개 img를 뒤에 붙여, 전체 길이를 구함 . 해당 길이로
+		// 순환 로직을 작성.
+		init_first = OuterHtml($ul.children().eq(0));
+		init_secon = OuterHtml($ul.children().eq(1));
+		$ul.append(init_first).append(init_secon);
+		total_length = $ul.children().length - 1 ;
+	})();
 	
 	
 	(function setMax(){
@@ -230,33 +223,39 @@ $(document).ready(function(){
 		}
 	})();
 	
+	// img 4개를 생성해두고,
+	// 위치가  0 일때 Left를 누르면 위치를 2로 바꾸로 이벤트 동작 .
+	// 위치가 2 일때 right를 누르면 0으로 바꾸고 이벤트 동작. 
+	
 	caroucelLeft = function LeftEvent(){
 		if(current_length !== 0){
 			// ul 의 자식중 current_length 번쨰 를 선택 .
-			var $child = $ul.children().eq(current_length);
-			$ul.animate({"right": "-="+$child.width()}, "slow");
-			moveLength -= $child.width();
+			$ul.animate({"right": "-="+imgLength}, "slow");
+			moveLength -= imgLength;
 			current_length --;
+
 		}else{
-			$ul.animate({"right": "+="+maxLength}, 0);
-			moveLength = maxLength;
-			current_length = total_length;
+			$ul.animate({"right": imgLength*2}, 0);
+			$ul.animate({"right": "-="+imgLength}, "slow");
+			moveLength = imgLength;
+			current_length = 1;
 		}
 	};
 	
 	caroucelRight = function RightEvent(event){	
-		if(current_length === total_length){
-			$ul.animate({"right": "-="+moveLength}, "slow");
-			moveLength = 0;
-			current_length =0;
+		if(current_length === total_length -1  ){
+			$ul.animate({"right": 0}, 0);
+			$ul.animate({"right": "+="+imgLength}, "slow");
+			
+			moveLength = imgLength;
+			current_length =1;
+			
 			// 처음으로 돌아가는 코드
 		}else{
 			// ul 의 자식중 current_length 번쨰 를 선택 .
-			var $child = $ul.children().eq(current_length);
-			$ul.animate({"right": "+="+$child.width()}, "slow");
-			moveLength += $child.width();
-			current_length ++;
-			
+			$ul.animate({"right": "+="+imgLength}, "slow");
+			moveLength += imgLength;
+			++current_length;
 		}
 	}
 	
@@ -271,9 +270,9 @@ $(document).ready(function(){
 		caroucelRight();
 	};
 	
-	(autoSlide = function setfuc(){
+	  (autoSlide = function setfuc(){
 	 	autoSlid_ID = setInterval(caroucelRight, 2000);
-	})();
+	})();  
  
 	 
 	clear = function clearfunc(){
