@@ -9,12 +9,7 @@
 <body>
 	<div class="wrap">
 
-      <h1>카테고리 목록보기/등록/수정/삭제</h1>
-      <h2>등록</h2>
-      <form class="" action="${url}" method="post">
-          <input type="text" name="name">
-          <input type="submit" name="submit" value="등록">
-      </form>
+      <h1>카테고리 목록보기/수정/삭제</h1>
 
       <h2>목록보기/수정/삭제</h2>
       <c:if test="${ !empty list }">
@@ -35,9 +30,6 @@
 	</div>
 	
   <script>
-  	<c:if test="${ error != null}">
-		alert("${ error}");
-	</c:if>
     reservation.category.init();
   </script>
 </body>

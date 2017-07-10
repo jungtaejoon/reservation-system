@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -48,12 +49,20 @@ public class CategoryDao {
     }
     
     public Category selectById (long id) {
-    		Map<String, ?> params = Collections.singletonMap("id", id);
-		return jdbc.queryForObject(CategorySqls.SELECT_BY_ID, params, rowMapper);
+    		try {
+	    		Map<String, ?> params = Collections.singletonMap("id", id);
+			return jdbc.queryForObject(CategorySqls.SELECT_BY_ID, params, rowMapper);
+    		} catch (EmptyResultDataAccessException e) {
+    			return null;
+    		}
     }
     
     public Collection<Category> selectAll () {
-		Map<String, Object> params = Collections.emptyMap();
-    		return jdbc.query(CategorySqls.SELECT_ALL, params, rowMapper);
+    		try {
+			Map<String, Object> params = Collections.emptyMap();
+	    		return jdbc.query(CategorySqls.SELECT_ALL, params, rowMapper);
+    		} catch (EmptyResultDataAccessException e) {
+    			return null;
+    		}
     }
 }

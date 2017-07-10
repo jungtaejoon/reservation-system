@@ -21,26 +21,35 @@ import kgw.reservation.dto.ResponseCode;
 import kgw.reservation.service.CategoryService;
 
 @Controller
-@RequestMapping("/admin/categorys")
+@RequestMapping("/admin/categories")
 public class CategoryController {
-	private static final String DIRNAME ="/admin/categorys";
+	private static final String DIRNAME ="/admin/categories";
 	CategoryService categoryService;
 	@Autowired
 	public CategoryController(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
+	
 	@GetMapping
 	public String index(Model model) {
-		getIndexInfo(model);
+		model.addAttribute("list", categoryService.find());
 		
 		return DIRNAME+"/index";
 	}
+	
+	@GetMapping("/form")
+	public String form(Model model) {
+		model.addAttribute("url", DIRNAME);
+		
+		return DIRNAME+"/form";
+	}
+	
 	@PostMapping
 	public String create(@Valid @ModelAttribute Category category, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			getIndexInfo(model);
+			model.addAttribute("url", DIRNAME);
 			model.addAttribute("error","빈 값은 넣을수 없습니다.");
-			return DIRNAME+"/index";
+			return DIRNAME+"/form";
 		}
 		
 		categoryService.create(category);
@@ -57,9 +66,5 @@ public class CategoryController {
 	public ResponseCode delete(@PathVariable String id) {
 		return categoryService.delete(Long.parseLong(id)) ? new ResponseCode(1) : new ResponseCode(0);
 	}
-	
-	private void getIndexInfo(Model model) {
-		model.addAttribute("list", categoryService.find());
-		model.addAttribute("url", DIRNAME);
-	}
+
 }

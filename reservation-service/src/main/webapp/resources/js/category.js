@@ -11,14 +11,16 @@
     var editInput = "._editInput";
     // 카테고리 이름 수정 중일 때
     var EDITING = "editing";
-    var URL = "/admin/categorys/";
+    var APIURL = "/admin/categories/";
     var SUCCESS = 1;
 
     // 이벤트 리스닝
     function eventListen(){
-      $(categoryList).on("click", modifyBtn, modifyListener);
-      $(categoryList).on("click", destroyBtn, destroyListener);
-      $(categoryList).on("keyup", editInput, modifyEnterListener);
+    	
+    	  $(categoryList).on("click", modifyBtn, modifyListener)
+    	  				.on("click", destroyBtn, destroyListener)
+    	  				.on("keyup", editInput, modifyEnterListener);
+    	  
       $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
             console.log(xhr);
             alert("일시적 오류가 발생하였습니다.");
@@ -37,7 +39,7 @@
     function reqDestroy($item) {
       $.ajax({
         method: "delete",
-        url : URL+getId($item),
+        url : APIURL+getId($item),
         headers: {
           "Content-Type" :"application/json",
           "X-HTTP-Method-Override" : "delete"}
@@ -110,7 +112,7 @@
 
       $.ajax({
         method: "put",
-        url : URL+getId($item),
+        url : APIURL+getId($item),
         headers: {
           "Content-Type" :"application/json",
           "X-HTTP-Method-Override" : "put"},
