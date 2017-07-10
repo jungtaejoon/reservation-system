@@ -12,35 +12,41 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.jayway.jsonpath.internal.Path;
 
 import kr.or.reservation.domain.Category;
 import kr.or.reservation.service.CategoryService;
 
 
 @Controller
+@RequestMapping("/categorys")
 public class CategoryController {
 	
 	@Autowired
 	CategoryService catergoryservice;
 	
 	// get 방식, 등록된 모든 List를 가져와서 model로 보여준다.
-    @GetMapping(path = "/")
+ /*   @GetMapping()
     public ModelAndView selectAll(Model model){
     	ModelAndView mav = new ModelAndView("category");
     	List<Category> list = catergoryservice.selectforList();
     	mav.addObject("list",list);
     	return mav;
-    }
+    }*/
+    
+
     
     // Post 방식을 사용시, 넘겨받은 name을 통해 category 등록 후, redirect 
-    @PostMapping(path = "/")
+    @PostMapping()
     public String insert(Model model,@RequestParam String name){
     	Category category = new Category(name);
     	catergoryservice.insert(category);
-    	return "redirect:/";
+    	return "redirect:/categorys";
     }
     
     

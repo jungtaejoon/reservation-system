@@ -13,8 +13,9 @@ $(function() {
 		$.ajax({
 			  method: "DELETE",
 			  contentType: "application/json; charset=utf-8",
-			  url: "/"+id
-		}).then(success , fail)
+			  url: "/categorys/"+id
+		}).then(success , fail);
+		
 	};
 	
 	// 클릭시 해당 name이 input에 들어가고, 수정하기 버튼 보이도록
@@ -36,6 +37,7 @@ $(function() {
 	
 	// 수정하기 a tag 클릭시 ajax로 전송하고 , reload
 	var updateSend = function(){
+		
 		var name = $("input[name=name]").val();
 		var id = $("input[name=name]").data("id");
 		
@@ -45,16 +47,17 @@ $(function() {
 		category.name = name;
 		
 		// message
-		var success = function( msg ) {
+		var success = function() {
 		    alert("수정되었습니다.");
 		    location.reload();
 		};
+		
 		var fail = function(){ alert("수정에 실패하엿습니다.")};
 		
 		//  Put ajax
 		$.ajax({
 			  method: "PUT",
-			  url: "/"+id,
+			  url: "/categorys/"+id,
 			  contentType: "application/json; charset=utf-8",
 	          dataType: "json",
 			  data : JSON.stringify(category)
@@ -65,4 +68,5 @@ $(function() {
 	$(document).on("click",".remove", removefunc);
 	$(document).on("click",".update", updateReady);
 	$(document).on("click","#modify",updateSend);
+	
 });
