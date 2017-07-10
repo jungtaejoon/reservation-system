@@ -173,11 +173,14 @@
     <script type="text/javascript">
     	$(document).ready(function(){
     		(function slider(){
-	    		var sliderIndex = 1;
+	    		var sliderIndex = 2;
 	    		var lastSliderIndex = 2;
-    			$('.group_visual .visual_img').animate({
-    			    left: sliderIndex * (-338),
-    			}, 0);
+	    		fakeSlide();
+	    		function fakeSlide() {
+	    			$('.group_visual .visual_img').animate({
+	    			    left: sliderIndex * (-338),
+	    			}, 0);
+	    		}
 	    		function moveSlide() {
 	    			$('.group_visual .visual_img').animate({
 	    			    left: sliderIndex * (-338),
@@ -192,9 +195,7 @@
 	    				++sliderIndex;
 	    				moveSlide();
 	    				sliderIndex = 1;
-	        			$('.group_visual .visual_img').animate({
-	        			    left: sliderIndex * (-338),
-	        			}, 0);
+	    				fakeSlide();
 	    			}
 	    		}
 	    		function slidePrev() {
@@ -206,9 +207,7 @@
 	    				--sliderIndex;
 	    				moveSlide();
 	    				sliderIndex = lastSliderIndex;
-	        			$('.group_visual .visual_img').animate({
-	        			    left: sliderIndex * (-338),
-	        			}, 0);
+	    				fakeSlide();
 	    			}
 	    		}
 	    		var slideLoop = setInterval(slideNext, 2000);
