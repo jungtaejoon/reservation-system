@@ -23,12 +23,12 @@
                     <div class="container_visual">
                         <div class="prev_e">
                             <div class="prev_inn">
-                                <a href="#" class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
+                                <a class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
                             </div>
                         </div>
                         <div class="nxt_e">
                             <div class="nxt_inn">
-                                <a href="#" class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
+                                <a class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
                             </div>
                         </div>
                         <div>
@@ -154,46 +154,54 @@
     <script type="text/javascript" src="/resources/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
-    		var sliderIndex = 0;
-    		var lastSliderIndex = 2;
-    		function moveSlide() {
-    			$('.group_visual .visual_img').animate({
-    			    left: sliderIndex * (-338),
-    			  }, 500, function() {
-    			    // Animation complete.
-    			  });
-    		}
-    		function slideNext() {
-    			if(sliderIndex < lastSliderIndex) {
-    				++sliderIndex;
-    				moveSlide();
-    			}
-    			else if(sliderIndex == lastSliderIndex) {
-    				sliderIndex = 0;
-    				moveSlide();
-    			}
-    		}
-    		function slidePrev() {
-    			if(sliderIndex > 0) {
-    				--sliderIndex;
-    				moveSlide();
-    			}
-    			else if(sliderIndex == 0) {
-    				sliderIndex = lastSliderIndex;
-    				moveSlide();
-    			}
-    		}
-    		var slideLoop = setInterval(slideNext, 2000);
-    		$('.btn_nxt_e').on('click', function() {
-    			slideNext();
-    			clearInterval(slideLoop);
-    			slideLoop = setInterval(slideNext, 2000);
-    		});
-    		$('.btn_pre_e').on('click', function() {
-    			slidePrev();
-    			clearInterval(slideLoop);
-    			slideLoop = setInterval(slideNext, 2000);
-    		});
+    		(function slider(){
+	    		var sliderIndex = 0;
+	    		var lastSliderIndex = 2;
+	    		function moveSlide() {
+	    			$('.group_visual .visual_img').animate({
+	    			    left: sliderIndex * (-338),
+	    			  });
+	    		}
+	    		function slideNext() {
+	    			if(sliderIndex < lastSliderIndex) {
+	    				++sliderIndex;
+	    				moveSlide();
+	    			}
+	    			else if(sliderIndex == lastSliderIndex) {
+	    				sliderIndex = 0;
+	    				moveSlide();
+	    			}
+	    		}
+	    		function slidePrev() {
+	    			if(sliderIndex > 0) {
+	    				--sliderIndex;
+	    				moveSlide();
+	    			}
+	    			else if(sliderIndex == 0) {
+	    				sliderIndex = lastSliderIndex;
+	    				moveSlide();
+	    			}
+	    		}
+	    		var slideLoop = setInterval(slideNext, 2000);
+	    		$('.btn_nxt_e').on('click', function() {
+	    		    if ($('.group_visual .visual_img').is(':animated')) {
+	    		        return;
+	    		    }
+	    			slideNext();
+	    			clearInterval(slideLoop);
+	    			slideLoop = setInterval(slideNext, 2000);
+	    		});
+	    		$('.btn_pre_e').on('click', function() {
+	    		    if ($('.group_visual .visual_img').is(':animated')) {
+	    		        return;
+	    		    } 
+	    			slidePrev();
+	    			clearInterval(slideLoop);
+	    			slideLoop = setInterval(slideNext, 2000);
+	    		});
+    		})();
+    		
+    		
     	});
     </script>
 </body>
