@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/style.css" rel="stylesheet">
 <style>
 	input[readonly] {
 		background-color: #f7f5f5;
@@ -15,7 +16,7 @@
 	<header><h1>카테고리 관리자 페이지</h1></header>
 	<section>
 		<h2>카테고리 등록하기</h2>
-		<form action="/api/insert" method="post">
+		<form action="/category/admin/insert" method="post">
 			<input type="text" name="name" />
 			<button class="create" type="submit">등록</button>
 		</form>
@@ -60,7 +61,7 @@
 			var $listNode = el.parentNode;	// <li>
 			var $input = $listNode.querySelector("input"); 	// <input>
  			var categoryId = $listNode.getAttribute("data-id");
-			xhr.open('POST', '/api/update', true);
+			xhr.open('POST', '/category/admin/update', true);
 			var postdata = "id="+categoryId
 				+"&name="+$input.value;
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -80,7 +81,7 @@
 		function deleteCategory(el) {
 			var $listNode = el.parentNode;
 			var categoryId = $listNode.getAttribute("data-id");
-			xhr.open('POST', '/api/delete', true);
+			xhr.open('POST', '/category/admin/delete', true);
 			var postdata = "id="+categoryId;
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.onreadystatechange = function(aEvt) {

@@ -16,7 +16,7 @@ import kr.or.connect.jy.dto.Category;
 import kr.or.connect.jy.service.CategoryService;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/category/admin")
 public class CategoryController {
 	private CategoryService categoryService;
 	
