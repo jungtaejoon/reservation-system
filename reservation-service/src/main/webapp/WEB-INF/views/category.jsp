@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카테고리 관리자 페이지</title>
 <link href="/resources/css/style.css" rel="stylesheet">
 <style>
 	input[readonly] {
@@ -27,23 +27,21 @@
 					varStatus="listCount">
 					<li data-id=${categories.id } data-name=${categories.name }>
 						<input class="categoryName" type="text" name="name" value="${categories.name }" readonly/>
-						<button class="update">수정</button>
-						<button class="delete">삭제</button>
+						<button class="update send">수정</button>
+						<button class="delete send">삭제</button>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
 	</section>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script>
 	(function(){
 		'use strict';
 		
-		var xhr = new XMLHttpRequest();
-		
-		var $categorylist = document.querySelector("section ul");
-		var $deleteBtn = document.querySelector("section > ul .delete");
-		$categorylist.addEventListener("click", controlCategory);
+		var $categorylist = $('section ul');
+		var $deleteBtn = $('section > ul .delete');
+		$categorylist.on('click', 'button.send', controlCategory);
 		
 		// 수정 버튼이면 updateCategory, 삭제 버튼이면 deleteCategory
 		function controlCategory(evt) {
@@ -61,55 +59,50 @@
 			var $listNode = el.parentNode;	// <li>
 			var $input = $listNode.querySelector("input"); 	// <input>
  			var categoryId = $listNode.getAttribute("data-id");
-			xhr.open('POST', '/category/admin/update', true);
-			var postdata = "id="+categoryId
-				+"&name="+$input.value;
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function(res) {
-				if (xhr.readyState == 4) {
-					if (xhr.status == 200)
-						// 요청 성공하면 데이터도 갱신한다.
-						$parentNode.setAttribute("data-name",$input.value);
-					else
-						console.log("failed");
-				}
-			};
-			xhr.send(postdata);
-		}
+ 			var postdata = "id="+categoryId
+			+"&name="+$input.value;
+		
+			$.ajax({
+				url: '/category/admin/update',
+				contentType: 'application/x-www-form-urlencoded',
+				type: 'POST',
+				data: postdata
+			}).done(function(){
+				$listNode.setAttribute("data-name",$input.value);
+			}).fail(function(){
+				console.log("failed");
+			});
+ 		}
 		
 		// 카테고리 하나 삭제
 		function deleteCategory(el) {
 			var $listNode = el.parentNode;
 			var categoryId = $listNode.getAttribute("data-id");
-			xhr.open('POST', '/category/admin/delete', true);
-			var postdata = "id="+categoryId;
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function(aEvt) {
-				if (xhr.readyState == 4) {
-					if (xhr.status == 200)
-						// 삭제 성공하면 list를 지운다.
-						$listNode.remove();
-					else
-						console.log("failed");
-				}
-			};
-			xhr.send(postdata);
+			
+			$.ajax({
+				url: '/category/admin/' + categoryId,
+				type: 'DELETE'
+			}).done(function(){
+				$listNode.remove();
+			}).fail(function(){
+				console.log("failed");
+			})
 		}
 		
 		// 편집하기 버튼에 readonly 설정/해제
-		var $btnEdit = document.querySelector("h2.categorylist > button.edit");
-		$btnEdit.addEventListener("click", letEditable);
+		var $btnEdit = $("h2.categorylist > button.edit");
+		$btnEdit.on("click", letEditable);
 		
  		function letEditable(evt){
-			var inputs = $categorylist.querySelectorAll(".categoryName");
-			inputs.forEach(switchReadOnly);
+			var inputs = $categorylist.find(".categoryName");
+			inputs.each(switchReadOnly);
 		}
 			
-		function switchReadOnly(element, index, array){
-			if(element.readOnly){
-				element.readOnly = false;
+		function switchReadOnly(index){
+			if(this.readOnly){
+				this.readOnly = false;
 			} else {
-				element.readOnly = true;
+				this.readOnly = true;
 			}
 		}
 	})();

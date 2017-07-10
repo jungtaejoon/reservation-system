@@ -4,18 +4,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.connect.jy.dto.Category;
 import kr.or.connect.jy.service.CategoryService;
 
-@Controller
+@RestController
 @RequestMapping("/category/admin")
 public class CategoryController {
 	private CategoryService categoryService;
@@ -28,7 +29,7 @@ public class CategoryController {
 	@PostMapping("/insert")
 	public ModelAndView insert(Category category) {
 		categoryService.insert(category);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/category/admin");
 	};
 	
 	@GetMapping
@@ -43,15 +44,15 @@ public class CategoryController {
 		if(category != null) {
 			categoryService.update(category);
 		}
-		return "redirect:/";
+		return "redirect:/category/admin";
 	};
 
 	
-	@PostMapping("/delete")
-	public String delete(@RequestParam(name="id") Integer id, HttpServletRequest request) {
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable Integer id) {
 		if(id != null) {
 			categoryService.delete(id);
 		}
-		return "redirect:/";
+		return "redirect:/category/admin";
 	};
 }
