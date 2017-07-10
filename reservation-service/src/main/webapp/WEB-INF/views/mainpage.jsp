@@ -151,6 +151,32 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
+    <script type="text/javascript" src="/resources/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		var sliderIndex = 0;
+    		var lastSliderIndex = 2;
+    		function moveSlide() {
+    			$('.group_visual .visual_img').animate({
+    			    left: sliderIndex * (-338),
+    			  }, 500, function() {
+    			    // Animation complete.
+    			  });
+    		}
+    		$('.btn_pre_e').on('click', function() {
+    			if(sliderIndex > 0) {
+    				--sliderIndex;
+    				moveSlide();
+    			}
+    		});
+    		$('.btn_nxt_e').on('click', function() {
+    			if(sliderIndex < lastSliderIndex) {
+    				++sliderIndex;
+    				moveSlide();
+    			}
+    		});
+    	});
+    </script>
 </body>
 
 </html>
