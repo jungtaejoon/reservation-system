@@ -74,9 +74,9 @@
                     <li class="item" data-category="0">
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
-       	  	    	<c-rt:forEach var="category" items="${categories}">
+       	  	    	<c-rt:forEach var="category" items="${categories}" varStatus="status">
    	                    <li class="item" data-category="${category.id}">
-	                        <a class="anchor"> <span>${category.name}</span> </a>
+	                        <a class="anchor <c-rt:if test="${status.last}">last</c-rt:if>"> <span>${category.name}</span> </a>
 	                    </li>
 				    </c-rt:forEach>
                 </ul>
@@ -200,6 +200,17 @@
 	    			slideLoop = setInterval(slideNext, 2000);
 	    		});
     		})();
+    		
+    		(function categoryActiveToggle() {
+        		$(document).on('click', '.anchor', function() {
+        			if($(this).hasClass('active')) return;
+        			else {
+        				$('.anchor').removeClass('active');
+        				$(this).addClass('active');
+        			}
+        		});
+    		})();
+
     		
     		
     	});
