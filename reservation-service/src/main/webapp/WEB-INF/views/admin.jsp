@@ -4,7 +4,7 @@
 
 <html>
 <head>
- <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+ <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
