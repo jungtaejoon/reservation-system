@@ -183,8 +183,17 @@
     				moveSlide();
     			}
     		}
-    		$('.btn_nxt_e').on('click', slideNext);
-    		$('.btn_pre_e').on('click', slidePrev);
+    		var slideLoop = setInterval(slideNext, 2000);
+    		$('.btn_nxt_e').on('click', function() {
+    			slideNext();
+    			clearInterval(slideLoop);
+    			slideLoop = setInterval(slideNext, 2000);
+    		});
+    		$('.btn_pre_e').on('click', function() {
+    			slidePrev();
+    			clearInterval(slideLoop);
+    			slideLoop = setInterval(slideNext, 2000);
+    		});
     	});
     </script>
 </body>
