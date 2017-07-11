@@ -10,6 +10,7 @@ import kr.or.reservation.dao.CategoryDao;
 import kr.or.reservation.domain.Category;
 
 @Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
@@ -27,7 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	@Transactional(readOnly = false)
 	public int deleteById(Long id) {
 		// TODO Auto-generated method stub
 		return categorydao.deleteById(id);

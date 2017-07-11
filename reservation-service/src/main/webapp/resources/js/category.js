@@ -1,3 +1,53 @@
+// mainpage의 category 가져오는 js
+$('document').ready(function(){
+	var $ul = $(".tab_lst_min");
+	var template = {},
+	categoryEvent = {};
+	
+	
+	template = function tmepFunc(index,contents){
+		return ' <li class="item" data-category='+index+'>'+
+		       	 	'<a class="anchor"> <span>'+contents+'</span> </a>'+
+		        '</li>';
+	}
+	
+	// category와 관련된 함수들을 객체로 묶음. 
+	categoryEvent = {
+			// 즉시 실행 함수로 저장 ?
+			getCategory  : function getCategoryAjax(){
+				$.ajax({
+					  method: "GET",
+					  url: "/categorys",
+					  contentType: "application/json; charset=utf-8",
+			          dataType: "json",
+				}).then(categoryEvent.success , categoryEvent.fail);
+			},
+			clickEvent : function ClickEvent(){
+				$(".anchor").removeClass("active");
+				$(this).children().addClass("active");
+			},
+			success : function successFunc(data){
+				$.each(data,function(index,data){
+					$ul.append(template(data.id,data.name));
+				})
+				$(".anchor:last").addClass("last");
+			},
+			
+			fail  : function failFunc(){
+				alert("가져오기 실패");
+			}
+	};
+	
+	// 함수 실행 
+	categoryEvent.getCategory();
+	
+	// Event 바인딩 
+	$(document).on("click", ".tab_lst_min > .item" ,categoryEvent.clickEvent);
+
+});
+
+
+/* 지난번 진행했던 소스 
 $(function() {
 
 	// remove 클릭시 삭제
@@ -47,9 +97,10 @@ $(function() {
 		category.name = name;
 		
 		// message
-		var success = function() {
+		var success = function(data) {
+			console.log(data);
 		    alert("수정되었습니다.");
-		    location.reload();
+		    //location.reload();
 		};
 		
 		var fail = function(){ alert("수정에 실패하엿습니다.")};
@@ -59,7 +110,7 @@ $(function() {
 			  method: "PUT",
 			  url: "/categorys/"+id,
 			  contentType: "application/json; charset=utf-8",
-	          dataType: "json",
+	          //dataType: "json",
 			  data : JSON.stringify(category)
 		}).then(success , fail); 
 	};
@@ -70,3 +121,5 @@ $(function() {
 	$(document).on("click","#modify",updateSend);
 	
 });
+
+*/

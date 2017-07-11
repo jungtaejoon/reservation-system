@@ -138,7 +138,14 @@
         </div>
     </footer>
 
+<!--  get JQuery   -->
 <script src="//code.jquery.com/jquery.min.js"></script>
+
+<!--  get category and ClickEvnet Binding  -->
+<script src="resources/js/category.js"></script>
+
+<!--  img Slide  -->
+<script src="resources/js/caroucel.js"></script>
 <script>
 	$(document).ready(function(){
 		
@@ -170,175 +177,10 @@
 	//$( ".btn_my" ).load("/ .gototop");
 </script>
 
-<script>
 
-
-
-$(document).ready(function(){
-	// ul 과 length 를 설정
-	// 초기에 뒤에 2개를 추가. 
-	// 끝 과 끝에서 위치를 바꿔 순환되게 끔 작동 
-	var $ul = $(".visual_img"),
-	total_length =0;
-	current_length = 0,
-	moveLength =0,
-	maxLength = 0,
-	imgLength = 338;
-	
-	// Auto Caraoucel 부분
-	var startAuto = 0,
-	autoSlid_ID = 0,
-	autoSlide = {};
-	
-	// caroucel click 함수 부분
-	var caroucelRightClick = {},
-	caroucelLeftClick = {},
-	caroucelLeft  = {},
-	caroucelRight= {},
-	clear = {};
-	
-	var init_first ='', 
-	init_secon = '';
-	
-	// Jquery에서 OuterHtml이 없기에, 구현 
-	// 해당 함수는 초기 앞 2개의 li를 구할때 사용 .
-	function OuterHtml(url){
-		return url.clone().wrapAll("<div/>").parent().html();
-	}
-	
-	
-	(function init(){
-		// 초기 앞 2개 img를 뒤에 붙여, 전체 길이를 구함 . 해당 길이로
-		// 순환 로직을 작성.
-		init_first = OuterHtml($ul.children().eq(0));
-		init_secon = OuterHtml($ul.children().eq(1));
-		$ul.append(init_first).append(init_secon);
-		total_length = $ul.children().length - 1 ;
-	})();
-	
-	
-	(function setMax(){
-		for(var i =0; i < $ul.children().length -1; ++i){
-			maxLength += $ul.children().eq(i).width();
-		}
-	})();
-	
-	// img 4개를 생성해두고,
-	// 위치가  0 일때 Left를 누르면 위치를 2로 바꾸로 이벤트 동작 .
-	// 위치가 2 일때 right를 누르면 0으로 바꾸고 이벤트 동작. 
-	
-	caroucelLeft = function LeftEvent(){
-		if(current_length !== 0){
-			// ul 의 자식중 current_length 번쨰 를 선택 .
-			$ul.animate({"right": "-="+imgLength}, "slow");
-			moveLength -= imgLength;
-			current_length --;
-
-		}else{
-			$ul.animate({"right": imgLength*2}, 0);
-			$ul.animate({"right": "-="+imgLength}, "slow");
-			moveLength = imgLength;
-			current_length = 1;
-		}
-	};
-	
-	caroucelRight = function RightEvent(event){	
-		if(current_length === total_length -1  ){
-			$ul.animate({"right": 0}, 0);
-			$ul.animate({"right": "+="+imgLength}, "slow");
-			
-			moveLength = imgLength;
-			current_length =1;
-			
-			// 처음으로 돌아가는 코드
-		}else{
-			// ul 의 자식중 current_length 번쨰 를 선택 .
-			$ul.animate({"right": "+="+imgLength}, "slow");
-			moveLength += imgLength;
-			++current_length;
-		}
-	}
-	
-	
-	caroucelLeftClick = function LeftClickEvent(event){
-		clear();
-		caroucelLeft();
-	};
-	
-	caroucelRightClick = function LeftClickEvent(event){
-		clear();
-		caroucelRight();
-	};
-	
-	  (autoSlide = function setfuc(){
-	 	autoSlid_ID = setInterval(caroucelRight, 2000);
-	})();  
- 
-	 
-	clear = function clearfunc(){
-		clearInterval(autoSlid_ID);
-		clearTimeout(startAuto);
-		startAuto =  setTimeout(autoSlide,4000); 	
-	
-	}
-	
-	$(".prev_inn").on("click",caroucelLeftClick);
-	$(".nxt_inn").on("click",caroucelRightClick);
-	
-});
-</script>
 
 <script>
-$('document').ready(function(){
-	var $ul = $(".tab_lst_min");
-	var template = {},
-	success = {},
-	fail  = {},
-	getCategory = {},
-	categoryClickEvent={};
-	
-
-	template = function tmepFunc(index,contents){
-		return ' <li class="item" data-category='+index+'>'+
-		       	 	'<a class="anchor"> <span>'+contents+'</span> </a>'+
-		        '</li>';
-	}
-	
-	success = function successFunc(data){
-		$.each(data,function(index,data){
-			$ul.append(template(data.id,data.name));
-		})
-		$(".anchor:last").addClass("last");
-	}
-	
-	fail  = function failFunc(){
-		alert("가져오기 실패");
-	}
-	
-	
-	categoryClickEvent = function ClickEvent(){
-		$(".anchor").removeClass("active");
-		$(this).children().addClass("active");
-	}
-	
-	$(document).on("click", ".tab_lst_min > .item" ,categoryClickEvent);
-	
-	( getCategory = function getCategoryAjax(){
-		$.ajax({
-			  method: "GET",
-			  url: "/categorys",
-			  contentType: "application/json; charset=utf-8",
-	          dataType: "json",
-		}).then(success , fail);
-	})();
-	
-	// 즉시실행 함수 위치에 따라 실행이 되고 , 안돼 .. 
-});
-</script>
-
-<script>
-
-
+// 클릭시 페이지 넘어가는 부분 
 $(document).ready(function(){
 
 	$(document).on("click", ".visual_img > .item" , function(){
