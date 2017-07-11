@@ -10,10 +10,10 @@ import kr.or.connect.service.*;
 @Controller
 @RequestMapping("/main")
 public class MainController {
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@GetMapping
 	public String main(Model model) {
 		model.addAttribute("categories", categoryService.getAll());
