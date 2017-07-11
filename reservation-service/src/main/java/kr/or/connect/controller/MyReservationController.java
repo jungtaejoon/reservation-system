@@ -23,10 +23,10 @@ public class MyReservationController {
 		User checkingUser = loginService.loginCheck(request, response);
 		if(checkingUser != null) {
 			model.addAttribute("user", checkingUser);
-			returnPath = "/my-reservation";
+			returnPath = "myreservation";
 		} else {
 			model.addAttribute("requestURI", request.getRequestURI());
-			returnPath = "/loginForm";
+			returnPath = "loginForm";
 		}
 		return returnPath;
 	}

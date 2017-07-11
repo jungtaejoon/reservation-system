@@ -100,9 +100,34 @@
                 </ul>
             </div>
             <div class="section_event_lst">
-                <p class="event_lst_txt">바로 예매 가능한 전시, 공연, 행사가 <span class="pink">40개</span> 있습니다</p>
+                <p class="event_lst_txt">바로 예매 가능한 전시, 공연, 행사가 <span class="pink">${countInCategory}개</span> 있습니다</p>
                 <div class="wrap_event_box">
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
+          	  	    <c-rt:forEach var="product" items="${products}" step=1 varStatus="status">
+				    	<ul class="lst_event_box">
+					    	<c-rt:if test="${status.index % 2 == 0}">
+		                        <li class="item">
+		                            <a href="#" class="item_book">
+		                                <div class="item_preview"> <img alt="뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
+		                                <div class="event_txt">
+		                                    <h4 class="event_txt_tit"> <span>${product.name }</span> <small class="sm">샤롯데 씨어터</small> </h4>
+		                                    <p class="event_txt_dsc">${product.description }</p>
+		                                </div>
+		                            </a>
+		                        </li>
+	                        </c-rt:if>
+	                        <li class="item">
+	                            <a href="#" class="item_book">
+	                                <div class="item_preview"> <img alt="뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
+	                                <div class="event_txt">
+	                                    <h4 class="event_txt_tit"> <span>${product.name }</span> <small class="sm">샤롯데 씨어터</small> </h4>
+	                                    <p class="event_txt_dsc">${product.description }</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                    </ul>
+				    </c-rt:forEach>
+
                     <ul class="lst_event_box">
                         <li class="item">
                             <a href="#" class="item_book">
