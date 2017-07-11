@@ -14,6 +14,6 @@ public interface CategoryService {
     public int deleteById(int id);
     public int deleteAll();
     public int updateById(HttpServletRequest reuqest);
-    public ModelAndView getAll();
+    public List<Category> getAll();
     public int getAllCount();
 }

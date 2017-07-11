@@ -56,16 +56,11 @@ public class CategoryServiceimpl implements CategoryService {
 	}
 	
 	@Override
-	public ModelAndView getAll() {
-		ModelAndView model = new ModelAndView();
-		
+	public List<Category> getAll() {
 		List<Category> list = new ArrayList<Category>();
 		list = categoryDao.selectAll();
 		
-		model.addObject("category", list);
-		model.setViewName("category");
-		
-		return model;
+		return list;
 	}
 	
 	@Override

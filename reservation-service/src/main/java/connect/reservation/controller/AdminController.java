@@ -21,20 +21,25 @@ import connect.reservation.service.CategoryService;
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	CategoryService category;
+	CategoryService categoryService;
 	
 	
-	@RequestMapping(value="/viewCategory")
+	@RequestMapping(value="/viewCategory", method=RequestMethod.GET)
 	public ModelAndView viewCategory(HttpServletRequest request){
 		ModelAndView model = new ModelAndView();
-		model = category.getAll();	
+		
+		List<Category> list = new ArrayList<Category>();
+		list = categoryService.getAll();
+		
+		model.addObject("category", list);
+		model.setViewName("category");
 		
 		return model;
 	}
 	
 	@RequestMapping(value="/addNewCategory", method=RequestMethod.POST)
 	public String newCategory(HttpServletRequest request) {
-		category.addCategory(request.getParameter("newCategory"));
+		categoryService.addCategory(request.getParameter("newCategory"));
 		
 		return "redirect:/admin/viewCategory";
 	}
@@ -42,14 +47,14 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/deleteCategory/{cateSeq}", method=RequestMethod.POST)
 	public String deleteCategory(HttpServletRequest request, @PathVariable int cateSeq) {
-		category.deleteById(cateSeq);
+		categoryService.deleteById(cateSeq);
 		
-		return "redirect:/admin/viewCategory";
+		return "Success";
 	}
 	
 	@RequestMapping(value="/updateCategory", method=RequestMethod.POST)
 	public String updateCategory(HttpServletRequest request) {
-		category.updateById(request);
+		categoryService.updateById(request);
 		
 		return "redirect:/admin/viewCategory";
 	}

@@ -7,4 +7,6 @@ public class CategorySqls {
 	final static String DELETE_ALL = "DELETE FROM category";
 	final static String SELECT_ALL = "SELECT id, name FROM category ORDER BY id";
 	final static String SELECT_ALL_COUNT = "SELECT count(id) FROM category";
+//	final static String SELECT_FIRST_ID = "select id from category order by id asc limit 1;";
+//	final static String SELECT_LAST_ID = "select id from category order by id desc limit 1;";
 }

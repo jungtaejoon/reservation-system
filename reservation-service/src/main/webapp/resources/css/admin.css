@@ -21,6 +21,13 @@
     margin-top: -350px;
     margin-left: -100px;
 }
+/* .indexBtn {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -350px;
+    margin-left: -100px;
+} */
 #newCategory {
 	padding: 10px 20px;
 }

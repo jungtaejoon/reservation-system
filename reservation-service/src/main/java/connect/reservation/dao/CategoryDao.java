@@ -66,4 +66,14 @@ public class CategoryDao {
     	Map<String, Object> params = Collections.emptyMap();
     	return jdbc.queryForObject(CategorySqls.SELECT_ALL_COUNT, params, Integer.class);
     }
+    
+//    public int selectFirstId() {
+//    	Map<String, Object> params = Collections.emptyMap();
+//    	return jdbc.queryForObject(CategorySqls.SELECT_FIRST_ID, params, Integer.class);
+//    }
+//    
+//    public int selectLastId() {
+//    	Map<String, Object> params = Collections.emptyMap();
+//    	return jdbc.queryForObject(CategorySqls.SELECT_LAST_ID, params, Integer.class);
+//    }
 }

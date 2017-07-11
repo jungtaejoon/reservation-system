@@ -3,12 +3,13 @@ $(document).ready(function() {
 });
 
 function deleteCategory(cateId) {
+	var element = $(this).parent('tr');
 	$.ajax({
 	    url : "/admin/deleteCategory/"+cateId,
 	    type : "POST",
 	    data : "cateId="+cateId,
 	    success: function(data) {
-	    	location.reload();
+	    	element.remove();
 	    },
 	    error:function(request,status,error){
 	        alert("code:"+request.status+"\n"+"error:"+error);
