@@ -3,13 +3,12 @@ package connect.reservation.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import connect.reservation.dao.CategoryDao;
+import connect.reservation.dao.ProductInfoDao;
 import connect.reservation.domain.Category;
 import connect.reservation.service.CategoryService;
 
@@ -17,6 +16,9 @@ import connect.reservation.service.CategoryService;
 public class CategoryServiceimpl implements CategoryService {
 	@Autowired
 	CategoryDao categoryDao;
+	
+	@Autowired
+	ProductInfoDao productInfoDao;
 	
 	@Override
 	@Transactional(readOnly = true)
