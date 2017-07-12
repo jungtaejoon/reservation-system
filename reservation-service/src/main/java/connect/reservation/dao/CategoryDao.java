@@ -58,8 +58,9 @@ public class CategoryDao {
     }
     
     public List<Category> selectAll() {
-    	Map<String, Object> params = Collections.emptyMap();
-    	return jdbc.query(CategorySqls.SELECT_ALL, params, rowMapper);
+    	//Map<String, Object> params = Collections.emptyMap();
+    	//return jdbc.query(CategorySqls.SELECT_ALL, params, rowMapper);
+    	return jdbc.query(CategorySqls.SELECT_ALL, rowMapper);
     }
     
     public int selectAllCount() {

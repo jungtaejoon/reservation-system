@@ -5,7 +5,7 @@ $(document).ready(function() {
 function deleteCategory(cateId) {
 	var element = $(this).parent('tr');
 	$.ajax({
-	    url : "/admin/deleteCategory/"+cateId,
+	    url : "/category/removeCategory/"+cateId,
 	    type : "POST",
 	    data : "cateId="+cateId,
 	    success: function(data) {

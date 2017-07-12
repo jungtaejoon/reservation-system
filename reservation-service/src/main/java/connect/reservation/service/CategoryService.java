@@ -13,7 +13,7 @@ public interface CategoryService {
     public Category addCategory(String categoryName);
     public int deleteById(int id);
     public int deleteAll();
-    public int updateById(HttpServletRequest reuqest);
+    public int updateById(String newCategory, int id);
     public List<Category> getAll();
     public int getAllCount();
 }
