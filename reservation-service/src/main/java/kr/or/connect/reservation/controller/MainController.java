@@ -16,7 +16,11 @@ public class MainController {
 	
 	@GetMapping
 	public String index(Model model) {
-		model.addAttribute("categories", service.getAllCategory());
-		return "index";
+		return "mainpage";
+	}
+	
+	@GetMapping("/my")
+	public String myreservation(Model model) {
+		return "myreservation";
 	}
 }
