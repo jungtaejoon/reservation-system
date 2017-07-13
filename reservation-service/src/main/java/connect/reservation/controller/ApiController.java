@@ -31,6 +31,6 @@ public class ApiController {
 	
 	@GetMapping("/changeCategory/{categoryId}/start/{start}")
 	public Map<String, Object> getCategoryProduct(@PathVariable(name = "categoryId") int categoryId, @PathVariable(name = "start") int start) {
-		return productInfoService.getCategoryInfo(categoryId, start);
+		return productInfoService.getCategoryInfo(categoryId, start*productNum);
 	}
 }

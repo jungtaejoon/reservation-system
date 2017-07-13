@@ -26,14 +26,19 @@ public class ProductInfoDaoTest {
 	
 	@Test
 	public void shouldSelectAll() {		
-/*		List<ProductInfo> list = new ArrayList<ProductInfo>();
-		list = productInfoDao.getMainInfo(1, 3);
+		List<ProductInfo> list = new ArrayList<ProductInfo>();
+		list = productInfoDao.getMainInfo(0);
 		
 //		for(int i=0; i<list.size(); i++) {
 //			System.out.println(list.get(i).toString());
 //		}
 		
-		assertThat(list.size(), is(3));*/
+		int count = productInfoDao.getProductCount();
+		
+		if(count > 10)
+			assertThat(list.size(), is(10));
+		else
+			assertThat(list.size(), is(count));
 	}
 	
 	@Test
@@ -45,14 +50,20 @@ public class ProductInfoDaoTest {
 	
 	@Test
 	public void shouldSelectCategoryProduct() {
-//		List<ProductInfo> list = new ArrayList<ProductInfo>();
-//		list = productInfoDao.getCategoryInfo(1, 0, 2);
-//		
+		int categoryId = 1;
+		List<ProductInfo> list = new ArrayList<ProductInfo>();
+		list = productInfoDao.getCategoryInfo(categoryId, 0);
+		
 //		for(int i=0; i<list.size(); i++) {
 //			System.out.println(list.get(i).toString());
 //		}
-//		
-//		assertThat(list.size(), is(2));
+		
+		int count = productInfoDao.getCategoryProductCount(categoryId);
+		
+		if(count > 10)
+			assertThat(list.size(), is(10));
+		else
+			assertThat(list.size(), is(count));
 	}
 
 }

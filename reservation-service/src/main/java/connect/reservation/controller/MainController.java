@@ -39,13 +39,8 @@ public class MainController {
 	public String mvMain(Model model) {		
 		List<Category> categoryList = new ArrayList<Category>();
 		categoryList = categoryService.getAll();
-				
-//		List<ProductInfo> productInfoList = new ArrayList<ProductInfo>();	
-//		productInfoList = productInfoService.getMainInfo(0);
 		
 		model.addAttribute("category", categoryList);
-//		model.addAttribute("productCount", productInfoService.getProductCount());
-//		model.addAttribute("product", productInfoList);
 		
 		return "mainpage";
 	}

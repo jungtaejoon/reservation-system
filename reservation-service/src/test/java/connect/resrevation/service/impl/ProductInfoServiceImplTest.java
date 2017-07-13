@@ -30,16 +30,34 @@ public class ProductInfoServiceImplTest {
 	
 	@Test
 	public void shouldSelectAll() {		
-/*		List<ProductInfo> list = new ArrayList<ProductInfo>();
-		list = productInfoService.getMainInfo(1, 3);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = productInfoService.getMainInfo(0);
 		
-		assertThat(list.size(), is(3));*/
+//		for(int i=0; i<list.size(); i++) {
+//			System.out.println(list.get(i).toString());
+//		}
+		
+		int count = productInfoService.getProductCount();
+		
+		assertThat(map.get("productCount"), is(count));
 	}
 	
 	@Test
-	public void shouldSelectCategoryProductCount() {		
-		int cnt = productInfoService.getCategoryProductCount(1);
+	public void shouldSelectCategoryProductCount() {	
+		int categoryId = 1;
 		
-		assertNotNull(cnt);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = productInfoService.getCategoryInfo(categoryId, 0);
+		
+//		for(int i=0; i<list.size(); i++) {
+//			System.out.println(list.get(i).toString());
+//		}
+		
+		int count = productInfoService.getCategoryProductCount(categoryId);
+		
+		if(count > 10)
+			assertThat(map.get("productCount"), is(10));
+		else
+			assertThat(map.get("productCount"), is(count));
 	}
 }
