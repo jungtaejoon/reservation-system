@@ -12,6 +12,7 @@
 
 <body>
 <input type="hidden" id="currentCategory" value="0">
+<input type="hidden" id="moreCnt" value="0">
     <div id="container">
     	<c:import url="/WEB-INF/views/header.jsp" />
         <hr>
@@ -101,7 +102,7 @@
                                 	</div>
                             	</a>
                         	</li>
-						{{/productList}}
+							{{/productList}}
 						</script>
                     </ul>
                     <ul class="lst_event_box">
@@ -116,7 +117,7 @@
     </div>
     <c:import url="/WEB-INF/views/footer.jsp" />
 </body>
-<script src="/resources/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="/resources/js/handlebars-v4.0.5.js"></script>
-<script src="/resources/js/main.js"></script>
+<script src="/resources/js/main_module.js"></script>
 </html>
