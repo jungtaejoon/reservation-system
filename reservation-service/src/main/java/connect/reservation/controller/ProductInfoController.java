@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 import connect.reservation.service.ProductInfoService;
 
 @RestController
-@RequestMapping(path = "/api")
-public class ApiController {
+@RequestMapping("/productInfo")
+public class ProductInfoController {
 	private final ProductInfoService productInfoService;
-	
-	final static int productNum = 10;
+
+final static int productNum = 10;
 	
 	@Autowired
-	public ApiController(ProductInfoService productInfoService) {
+	public ProductInfoController(ProductInfoService productInfoService) {
 		this.productInfoService = productInfoService;
 	}
 	
 	
-	@GetMapping("/getAllProduct/{start}")
+	@GetMapping("/all/{start}")
 	public Map<String, Object> getAllProduct(@PathVariable int start) {
 
 		return productInfoService.getMainInfo(start*productNum);
 	}
 	
-	@GetMapping("/changeCategory/{categoryId}/start/{start}")
+	@GetMapping("/category/{categoryId}/start/{start}")
 	public Map<String, Object> getCategoryProduct(@PathVariable(name = "categoryId") int categoryId, @PathVariable(name = "start") int start) {
 		return productInfoService.getCategoryInfo(categoryId, start*productNum);
 	}

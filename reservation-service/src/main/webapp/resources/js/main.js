@@ -116,15 +116,15 @@ function getProducInfo(flag, categoryId, start) {
 	if(flag == false)	// '더보기'가 아닐 경우 0번째부터 가져옴
 		start = 0;
 
-	var urlInfo = "";
+	var urlInfo = "/productInfo";
 	var dataInfo = "";
 
 	if(categoryId == 0 || categoryId == undefined) {	// 전체보기 상품
-		urlInfo = "/api/getAllProduct/"+start;
+		urlInfo += "/all/"+start;
 		dataInfo = "start="+start;
 	}
 	else {	// 카테고리별 상품
-		urlInfo = "/api/changeCategory/"+categoryId+"/start/"+start;
+		urlInfo += "/category/"+categoryId+"/start/"+start;
 		dataInfo = "categoryId="+categoryId+"&start="+start;
 	}
 	
@@ -134,7 +134,11 @@ function getProducInfo(flag, categoryId, start) {
 	    data : dataInfo,
 	    success: function(data) {
 	    	countProduct(data.productCount);
-	    	productAppend(data.productList);
+	    	
+	    	if(data.productList.length == 0)
+	    		alert("더이상 상품이 없습니다!");
+	    	else 
+	    		productAppend(data.productList);
 	    },
 	    error:function(request,status,error){
 	        alert("code:"+request.status+"\n"+"error:"+error);
