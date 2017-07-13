@@ -26,6 +26,6 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");		
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 }
