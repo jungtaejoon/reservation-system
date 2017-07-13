@@ -6,10 +6,13 @@ $(document).ready(function() {
 var start = 0;
 var categoryFlag = false;
 
+
+// 배너 관리
 var setRolling;
 var timeCheck=null;
 
 var test = function autoRolling() {
+	// 상단 배너 자동 롤링
 	setRolling = setInterval(bannerRolling_nxt, 2000);
 }
 
@@ -20,7 +23,7 @@ var len = $('.banner_list').length;
 
 $('.visual_img').css('width', len*size);
 
-function bannerRolling_nxt() { // 오른쪽
+function bannerRolling_nxt() { // 배너 오른쪽 이동
 	cnt++;
 	if(cnt > len){
 		cnt = 1;
@@ -37,7 +40,7 @@ function bannerRolling_nxt() { // 오른쪽
 	}*/
 };
 
-function bannerRolling_pre() {// 왼쪽
+function bannerRolling_pre() {// 배너 왼쪽 이동
 	cnt--;
 	if(cnt <= 0){
 		cnt = 3;
@@ -71,12 +74,14 @@ $('.btnBanner ').bind('click', function() {
 });
 
 function clearEvent() {
+	// 이벤트 해제
 	clearInterval(setRolling);
 	clearTimeout(timeCheck);
 }
 
 
 
+// 카테고리 선택 관리
 function manageCategory() {
 	$('.cate_list:last').find('a').addClass('last');
 	$('.cate_list:first').find('a').addClass('active');
@@ -104,6 +109,8 @@ function addActiveClass(obj) {
 	}
 };
 
+
+// 상품 리스트 관리
 function getProducInfo(flag, categoryId, start) {
 	
 	if(flag == false)	// '더보기'가 아닐 경우 0번째부터 가져옴
@@ -126,7 +133,7 @@ function getProducInfo(flag, categoryId, start) {
 	    type : "GET",
 	    data : dataInfo,
 	    success: function(data) {
-	    	$('.event_lst_txt .pink').html(data.productCount+'개');
+	    	countProduct(data.productCount);
 	    	productAppend(data.productList);
 	    },
 	    error:function(request,status,error){
@@ -142,37 +149,25 @@ $('.btnMore').click(function(){
 	getProducInfo(categoryFlag, $('#currentCategory').val(), start);
 })
 
+function countProduct(count) {
+	$('.event_lst_txt .pink').html(count+'개');
+}
 
-function productAppend(data) {
-	var appendZone = '';
-	var odd = '';
-	var even = '';
+function productAppend(result) {
 	
-	$.each(data, function(index, product){
-		appendZone = 
-			"<li class='product_list item category'"+product.categoryId+">"+
-			"<a href='#' class='item_book'>" +
-			"<div class='item_preview'>" +
-			"<img alt="+product.fileName+" class='img_thumb' src="+product.saveFileName+">" +
-			"<span class='img_border'></span>" +
-			"</div>" +
-			"<div class='event_txt'>" +
-			"<h4 class='event_txt_tit'>" +
-			"<span>"+product.productName+"</span>" +
-			"<small class='sm'>"+product.placeName+"</small>" +
-			"</h4>" +
-			"<p class='event_txt_dsc'>"+product.description+"</p>" +
-			"</div></a></li>";
-		
-		if(product.productId % 2 != 0) // 홀수
-			odd += appendZone;
-		else // 짝수
-			even += appendZone;
-	});
+	var source = $("#product_template").html();
+	var template = Handlebars.compile(source);
 	
 	if(categoryFlag == false)	// '더보기'가 아닐 경우 리스트 비움
-		$('.lst_event_box').empty();
+		$('.lst_event_box li').remove();
 	
-	$('.lst_event_box:first').append(odd);
-	$('.lst_event_box:last').append(even);
+	$.each(result, function(index, product){
+		var data = {productList : product};
+		var html = template(data);
+		
+		if(index % 2 == 0)
+			$(".lst_event_box:first").append(html);
+		else // 짝수
+			$(".lst_event_box:last").append(html);
+	});	
 }

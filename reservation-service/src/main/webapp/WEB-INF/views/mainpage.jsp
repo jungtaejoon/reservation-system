@@ -84,6 +84,25 @@
                 <div class="wrap_event_box">
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
                     <ul class="lst_event_box">
+                    	<script id="product_template" type="text/x-handlebars-template">
+							{{#productList}}
+								<li class="product_list item category{{categoryId}}">
+                    	        <a href="#" class="item_book">
+                        	        <div class="item_preview"> 
+                            	    	<img alt="{{fileName}}" class="img_thumb" src="{{saveFileName}}">
+                                		<span class="img_border"></span> 
+                              	  </div>
+                     	           <div class="event_txt">
+                        	            <h4 class="event_txt_tit"> 
+                            	        	<span>{{productName}}</span>
+                                	    	<small class="sm">{{placeName}}</small>
+                                	    </h4>
+                                	    <p class="event_txt_dsc">{{description}}</p>
+                                	</div>
+                            	</a>
+                        	</li>
+						{{/productList}}
+						</script>
                     </ul>
                     <ul class="lst_event_box">
                     </ul>
@@ -98,5 +117,6 @@
     <c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 <script src="/resources/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="/resources/js/handlebars-v4.0.5.js"></script>
 <script src="/resources/js/main.js"></script>
 </html>
