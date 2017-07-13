@@ -128,6 +128,7 @@
 
     var Category = {
         init : function () {
+            this.categoryTemplate = Handlebars.compile($('#category-template').html());
             this.getAllCategories()
             this.bindEvents()
         },
@@ -168,10 +169,8 @@
                         item.active = '';
                         if(i === 0) item.active = 'active';
                         if(res.length-1 === i) item.active = 'last';
-                        html += Common.categoryTemplate(item);
                     });
-
-                    $('.event_tab_lst').html(html);
+                    $('.event_tab_lst').html(Category.categoryTemplate(res));
                 }
             });
         },
@@ -194,6 +193,7 @@
         },
 
         init : function() {
+            this.productTemplate = Handlebars.compile($('#product-template').html());
             this.bindEvents()
             this.initializingProducts()
         },
@@ -244,8 +244,8 @@
                     // data caching
                     Products.data.item.push(p);
 
-                    if(i === 0 || (i % 2 === 0)) leftSection += Common.productTemplate(p);
-                    else rightSection += Common.productTemplate(p);
+                    if(i % 2 === 0) leftSection += Products.productTemplate(p);
+                    else rightSection += Products.productTemplate(p);
                     
                 });
 
@@ -255,7 +255,7 @@
 
                 // 총 갯수와 현재 아이템 갯수를 비교해서 같아지면 모든 데이터를 받아온 것 이기 때문에 '더보기' 버튼 invisible
                 // 또, product의 데이터가 홀수인 경우,
-                if((res.totalCount <= Products.data.item.length) && res.totalCount % 2 !== 0)
+                if((res.totalCount === Products.data.item.length))
                     $('div.more .btn').addClass('invisible');
                 else
                     $('div.more .btn').removeClass('invisible');
@@ -310,22 +310,6 @@
 				data : data,
 				dataType : 'json',
 			});
-        },
-
-        categoryTemplate : function(c) {
-            return '<li class="item" data-category="' + c.id + '">'
-                    + '<a class="anchor ' + (c.active) + '"> <span>' + c.name + '</span> </a>'
-                    + '</li>';
-        },
-
-        productTemplate : function(p) {
-            return '<li class="item" data-product="' + p.id + '">'
-                    + '<a href="/" class="item_book">'
-                    + '<div class="item_preview"> <img alt="'+ p.name + '" class="img_thumb" src=' + p.saveFileName + '><span class="img_border"></span> </div>'
-                    + '<div class="event_txt">'
-                    + '<h4 class="event_txt_tit"> <span>' + p.name + '</span> <small class="sm">' + p.placeName + '</small> </h4>'
-                    + '<p class="event_txt_dsc">' + p.description + '</p>'
-                    + '</div></a></li>';
         },
 
         infiniteScroll : function(flag) {
