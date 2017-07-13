@@ -159,17 +159,11 @@
         },
 
         getAllCategories : function () {
-            var html = '';
-
+            
             var result =  Common.ajaxWrapper.call(undefined, 'GET', '/categories', null);
             
             result.done(function(res) {
                 if(res) {
-                    res.forEach(function(item, i) {
-                        item.active = '';
-                        if(i === 0) item.active = 'active';
-                        if(res.length-1 === i) item.active = 'last';
-                    });
                     $('.event_tab_lst').html(Category.categoryTemplate(res));
                 }
             });

@@ -75,7 +75,7 @@
                     <script id="category-template" type="text/x-handlebars-template">
                         {{#each this}}
                         <li class="item" data-category="{{id}}">
-                            <a class="anchor {{active}}"><span>{{name}}</span></a>
+                            <a class="anchor{{#if @first}} active{{/if}}{{#if @last}} last{{/if}}"><span>{{name}}</span></a>
                         </li>
                         {{/each}}
                     </script>
