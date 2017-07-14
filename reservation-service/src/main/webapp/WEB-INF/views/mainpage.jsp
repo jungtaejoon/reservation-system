@@ -89,7 +89,7 @@
                         <!-- Product List HandlebarJS  -->
                         <script id="product-template" type="text/x-handlebars-template">
                             <li class="item" data-product="{{id}}">
-                                <a href="/" class="item_book">
+                                <a href="/product/{{id}}" class="item_book">
                                     <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src={{saveFileName}}><span class="img_border"></span> </div>
                                         <div class="event_txt">
                                         <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
@@ -121,5 +121,6 @@
     </footer>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
+<script src="/resources/js/module/carousel.js"></script>
 <script src="/resources/js/main.js"></script>
 </html>

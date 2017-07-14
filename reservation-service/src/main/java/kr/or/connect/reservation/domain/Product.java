@@ -7,11 +7,15 @@ public class Product {
 	private long categoryId;
 	private String name;
 	private String description;
-	private String placeName;
-	private String fileName;
-	private String saveFileName;
+	private Date sales_start;
+	private Date sales_end;
+	private int sales_flag;
+	private String event;
+	private Date create_date;
+	private Date modify_date;
 
 	public Product() {
+
 	}
 
 	public long getId() {
@@ -46,34 +50,59 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getPlaceName() {
-		return placeName;
+	public Date getSales_start() {
+		return sales_start;
 	}
 
-	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
+	public void setSales_start(Date sales_start) {
+		this.sales_start = sales_start;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public Date getSales_end() {
+		return sales_end;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setSales_end(Date sales_end) {
+		this.sales_end = sales_end;
 	}
 
-	public String getSaveFileName() {
-		return saveFileName;
+	public int getSales_flag() {
+		return sales_flag;
 	}
 
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
+	public void setSales_flag(int sales_flag) {
+		this.sales_flag = sales_flag;
+	}
+
+	public String getEvent() {
+		return event;
+	}
+
+	public void setEvent(String event) {
+		this.event = event;
+	}
+
+	public Date getCreate_date() {
+		return create_date;
+	}
+
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
+	}
+
+	public Date getModify_date() {
+		return modify_date;
+	}
+
+	public void setModify_date(Date modify_date) {
+		this.modify_date = modify_date;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", description=" + description
-				+ ", placeName=" + placeName + ", fileName=" + fileName + ", saveFileName=" + saveFileName + "]";
+				+ ", sales_start=" + sales_start + ", sales_end=" + sales_end + ", sales_flag=" + sales_flag
+				+ ", event=" + event + ", create_date=" + create_date + ", modify_date=" + modify_date + "]";
 	}
 
 }

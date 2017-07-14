@@ -4,119 +4,6 @@
 (function(window) {
 	'use strict';
 
-    // GLOBAL VALUE
-    var TIMER = null;
-    var CLICK_EVENT = null;
-    
-    /**
-     * 
-     * --------------------------------------------------------------------------------------
-     * 프로모션 영역
-     * PromotionCarousel
-     * --------------------------------------------------------------------------------------
-     * 
-     */
-    var PromotionCarousel = {
-
-        option : {
-            index : 0,
-            size : 0,
-            view_time: 1500,
-            rolling_time: 2500,
-            restart_time: 4000,
-        },
-
-        init : function() {
-            this.bindEvents()
-            this.carouselInit()
-            this.carouselStart()
-        },
-
-        bindEvents : function() {
-            $(".container_visual").on("click", ".prev_e", this.prevPromotion.bind(this));
-            $(".container_visual").on("click", ".nxt_e, .nxt_fix", this.nextPromotion.bind(this));
-        },
-
-        carouselInit : function() {
-            // 순환되는 캐러샐을 위해서 앞뒤로 마지막과 첫번째 슬라이드를 복제해서 넣는다.
-            var cloneLast = $('.visual_img li:last').clone(true);
-            var cloneFirst = $('.visual_img li:first').clone(true);
-
-            $('.visual_img li:first').before(cloneLast);
-            $('.visual_img li:last').after(cloneFirst);
-
-            $('.visual_img').css({'left' : -338}); // 초기화
-        },
-
-        // Promotion Auto Rolling Carousel
-        carouselStart : function() {
-            TIMER = setInterval(function(){
-                PromotionCarousel.promotionAnimation(PromotionCarousel.option.view_time, 'next'); // auto increment
-            }, PromotionCarousel.option.rolling_time);
-        },
-
-        carouselStop : function() {
-            TIMER != null && clearInterval(TIMER);
-
-            // clear & reset timer
-            clearTimeout(CLICK_EVENT);
-            
-            // 4초 아무 이벤트 없을 시 리스타트 캐러셀
-            CLICK_EVENT = setTimeout(function() {    
-                PromotionCarousel.carouselStart();
-            }, PromotionCarousel.option.restart_time);
-        },
-
-        promotionAnimation : function(duration, direction) {
-            var $item = $(".visual_img li")
-            var $slider = $(".visual_img");
-            var itemWidth = $item.outerWidth();
-            
-            if(direction === 'prev') {
-
-                var leftIndent = parseInt($('ul.visual_img').css('left')) + itemWidth;
-
-                $slider.filter(':not(:animated)').animate({ "left" : leftIndent }, duration, 
-                function compldeted() {
-                    // $('ul.visual_img').prepend($('.visual_img li:last')); // 차이점 ?
-                    $('.visual_img li:first').before($('.visual_img li:last'));
-                    $slider.css({'left' : -itemWidth}); // 초기화
-                });
-            } else {
-
-                var leftIndent = parseInt($('ul.visual_img').css('left')) - itemWidth;
-
-                $slider.filter(':not(:animated)').animate({ "left" : leftIndent }, duration, 
-                function compldeted() {
-                    // $('ul.visual_img').append($('.visual_img li:first')); 차이점 ?
-                    $('.visual_img li:last').after($('.visual_img li:first'));
-                    $slider.css({'left' : -itemWidth}); // 초기화
-
-                });
-            }
-        },
-
-        prevPromotion : function () {
-            event.preventDefault();
-            
-            // 캐러샐 중지
-            this.carouselStop();
-            this.promotionAnimation(500, 'prev');
-
-        },
-
-        nextPromotion : function () {
-            event.preventDefault();
-
-            // 캐러샐 중지
-            this.carouselStop();
-            this.promotionAnimation(500, 'next');
-
-        },
-
-    };
-
-
     /**
      * 
      * --------------------------------------------------------------------------------------
@@ -316,10 +203,27 @@
             }
         }
     }
-	
-    PromotionCarousel.init();
-    Category.init();
-    Products.init();
-    Common.infiniteScroll(false); // true => infinite Scroll active!
+    
+    var Main = {
+        init : function () {
+            Carousel.init({
+                autoStart: true,
+                carouselName : '.visual_img'
+            });
+            Category.init();
+            Products.init();
+            Common.infiniteScroll(true); // true => infinite Scroll active!
+
+            this.bindEvents();
+        },
+        bindEvents : function () {
+            $('.container_visual').on('click', '.prev_e', 
+                Carousel.promotionAnimation.bind(Carousel, 500, 'prev'));
+            $('.container_visual').on('click', '.nxt_e, .nxt_fix', 
+                Carousel.promotionAnimation.bind(Carousel, 500, 'next'));
+        }
+    }
+
+    Main.init();
 
 })(window);

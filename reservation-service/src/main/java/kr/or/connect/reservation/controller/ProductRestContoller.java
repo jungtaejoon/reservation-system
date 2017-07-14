@@ -5,11 +5,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.connect.reservation.dto.DetailProductDto;
 import kr.or.connect.reservation.service.ProductService;
 
 @RestController
@@ -25,7 +27,7 @@ public class ProductRestContoller {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	Map<String, Object> getProductsList(
+	public Map<String, Object> getProductsList(
 			@RequestParam(value = "limit", required = false) String limit,
 			@RequestParam(value = "offset", required = false) String offset,
 			@RequestParam(value = "cid", required = false) String cid) {
@@ -40,4 +42,12 @@ public class ProductRestContoller {
 		
 		return service.getAllProduct(limitVal, offsetVal);
 	}
+
+	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public DetailProductDto getProductById(@PathVariable("id") Long id) {
+		
+		return null;
+	}
+	
 }

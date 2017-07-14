@@ -46,7 +46,7 @@ public class ProductDao {
 		result.put("products", products);
 		
 		if(products == null || products.isEmpty() || totalCount == 0) {
-			throw new EmptyResultDataAccessException(1);
+			return null;
 		}
 		
 		return result;
@@ -67,7 +67,8 @@ public class ProductDao {
 		result.put("products", products);
 		
 		if(products == null || products.isEmpty() || totalCount == 0) {
-			throw new EmptyResultDataAccessException(1);
+//			throw new EmptyResultDataAccessException(1);
+			return null;
 		}
 		
 		return result;
