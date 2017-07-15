@@ -2,7 +2,7 @@
  * rolling plugins
  */
 
-(function($, window, document) {
+(function($) {
 
     /**
      * Default Options Object
@@ -229,7 +229,7 @@
             }
 
             /**
-             * status update....
+             * TODO:: status update.... 
              */
             var $container = $('.figure_pagination');
             var $indexElem = $container.find('span.num:first');
@@ -304,4 +304,4 @@
         }
     }
 
-})($, window, document);
+})($);
