@@ -121,6 +121,6 @@
     </footer>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
-<script src="/resources/js/module/carousel.js"></script>
+<script src="/resources/js/module/rolling.js"></script>
 <script src="/resources/js/main.js"></script>
 </html>

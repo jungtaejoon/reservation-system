@@ -205,11 +205,18 @@
     }
     
     var Main = {
+
+        callback : {},
+
         init : function () {
-            Carousel.init({
-                autoStart: true,
-                carouselName : '.visual_img'
+            //rolling
+            this.callback = $('.visual_img').rolling({ 
+                autoStart: true, 
+                circulation: true,
+                flicking: false,
+                viewTime: 300,
             });
+            
             Category.init();
             Products.init();
             Common.infiniteScroll(true); // true => infinite Scroll active!
@@ -217,10 +224,8 @@
             this.bindEvents();
         },
         bindEvents : function () {
-            $('.container_visual').on('click', '.prev_e', 
-                Carousel.promotionAnimation.bind(Carousel, 500, 'prev'));
-            $('.container_visual').on('click', '.nxt_e, .nxt_fix', 
-                Carousel.promotionAnimation.bind(Carousel, 500, 'next'));
+            $('.container_visual').on('click', '.prev_e', this.callback.prev);
+            $('.container_visual').on('click', '.nxt_e, .nxt_fix', this.callback.next);
         }
     }
 

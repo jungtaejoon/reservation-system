@@ -42,15 +42,18 @@ var Carousel = {
      * @param options : Carousel.init({options}) 할때에 옵션 Object 넘어온 변수들만 자동 할당
      */
     initOptions : function(options) {
-        if(typeof options === "object" 
-            && Object.keys(options).length > 0) {
+        // if(typeof options === "object" 
+        //     && Object.keys(options).length > 0) {
 
-            options.viewTime && (this.options.viewTime = options.viewTime)
-            options.rollingTime && (this.options.rollingTime = options.rollingTime)
-            options.restartTime && (this.options.restartTime = options.restartTime)
-            options.carouselName != null && !options.carouselName && (this.options.carouselName = options.carouselName)
-            options.autoStart != null && !options.autoStart && (this.options.autoStart = options.autoStart)
-        }
+        //     options.viewTime && (this.options.viewTime = options.viewTime)
+        //     options.rollingTime && (this.options.rollingTime = options.rollingTime)
+        //     options.restartTime && (this.options.restartTime = options.restartTime)
+        //     options.carouselName != null && !options.carouselName && (this.options.carouselName = options.carouselName)
+        //     options.autoStart != null && !options.autoStart && (this.options.autoStart = options.autoStart)
+        // }
+
+        var extendedObj = $.extend({}, this.options, options);
+        console.log(extendedObj);
     },
 
     /**

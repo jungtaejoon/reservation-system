@@ -6,16 +6,24 @@
 
     var DetailProduct = {
 
+        callback : {},
+
         /**
          * 초기화 함수
          */
         init : function () {
-            Carousel.init({
-                autoStart: false,
-                carouselName : '.visual_img',
+            this.bindEvents();
+
+            //rolling
+            this.callback = $('.visual_img').rolling({ 
+                autoStart: false, 
+                circulation: false,
+                flicking: true,
+                viewTime: 300,
             });
 
-            this.bindEvents();
+            console.log(this.callback);
+
         },
         
         /**
@@ -28,24 +36,19 @@
 
         /**
          * 이전 슬라이드 클릭
+         * @param status : 슬라이드 이동간에 rotate
          */
         prevProduct : function () {
-            var result = Carousel.promotionAnimation(500, 'prev');
-            
-            result.then(function(status) {
-                this.updateIndex(status.index, status.size);
-            }.bind(this));
+            var status = this.callback.prev();
+            status && this.updateIndex(status.index, status.size);
         },
 
         /**
          * 다음 슬라이드 클릭
          */
         nextProduct : function () {
-            var result = Carousel.promotionAnimation(500, 'next');
-            
-            result.then(function(status) {
-                this.updateIndex(status.index, status.size);
-            }.bind(this));
+            var status = this.callback.next();
+            status && this.updateIndex(status.index, status.size);
         },
 
         /**
@@ -53,13 +56,13 @@
          * @param index : 현재 이미지 슬라이드 위치
          * @param total : 총 이미지 슬라이드 갯수
          */
-        updateIndex : function (index, total) {
+        updateIndex : function (index, size) {
             var $container = $('.figure_pagination');
             var $indexElem = $container.find('span.num:first');
             var $totalElem = $container.find('span.num.off');
 
             $indexElem.text(index);
-            $totalElem.text(' / ' + total);
+            $totalElem.text(' / ' + size);
         }
     }
     

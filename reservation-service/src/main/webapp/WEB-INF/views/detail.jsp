@@ -47,7 +47,7 @@
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img">
                                     <!-- Product Promotion Image List HandlebarJS  -->
-                                    <script id="category-template" type="text/x-handlebars-template">
+                                    <!-- <script id="category-template" type="text/x-handlebars-template">
                                         {{#each this}}
                                         <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
                                             <div class="visual_txt">
@@ -58,28 +58,28 @@
                                             </div>
                                         </li>
                                         {{/each}}
-                                    </script>
+                                    </script> -->
                                     <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
                                         <div class="visual_txt">
                                             <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc">asdfasdfasdfadf</p>
+                                                <h2 class="visual_txt_tit"> <span>First Page 뮤지컬스</span> </h2>
+                                                <p class="visual_txt_dsc">첫번째 페이지야</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
                                         <div class="visual_txt">
                                             <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
+                                                <h2 class="visual_txt_tit"> <span>Second Page 뮤지컬스</span> </h2>
+                                                <p class="visual_txt_dsc">2번째 페이지야</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
                                         <div class="visual_txt">
                                             <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
+                                                <h2 class="visual_txt_tit"> <span>Third Page 뮤지컬스</span> </h2>
+                                                <p class="visual_txt_dsc">3번째 페이지란다</p>
                                             </div>
                                         </div>
                                     </li>
@@ -268,6 +268,6 @@
     <div id="photoviwer"></div>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
-<script src="/resources/js/module/carousel.js"></script>
+<script src="/resources/js/module/rolling.js"></script>
 <script src="/resources/js/detail.js"></script>
 </html>
