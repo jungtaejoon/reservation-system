@@ -40,7 +40,7 @@
          */
         prevProduct : function () {
             var status = this.callback.prev();
-            status && this.updateIndex(status.index, status.size);
+            status && this.updateStatus(status.index, status.size);
         },
 
         /**
@@ -48,7 +48,7 @@
          */
         nextProduct : function () {
             var status = this.callback.next();
-            status && this.updateIndex(status.index, status.size);
+            status && this.updateStatus(status.index, status.size);
         },
 
         /**
@@ -56,14 +56,42 @@
          * @param index : 현재 이미지 슬라이드 위치
          * @param total : 총 이미지 슬라이드 갯수
          */
-        updateIndex : function (index, size) {
+        updateStatus : function (index, size) {
             var $container = $('.figure_pagination');
             var $indexElem = $container.find('span.num:first');
             var $totalElem = $container.find('span.num.off');
 
             $indexElem.text(index);
             $totalElem.text(' / ' + size);
-        }
+
+            this.toggleOff(index, size)
+        },
+
+        toggleOff : function(index, size) {
+            // var $nextBtn = $('.nxt').find('i');
+            var $prevBtn = $('.prev').find('i');
+
+            if(index === 1) {
+                !$prevBtn.hasClass('off') && $prevBtn.addClass('off')
+
+                return false;
+            }
+
+            /**
+             * 첫 이미지만 해당되는 것인가? 마지막 이미지에 대한 style.css 정의가 되어있지 않음
+             * ico_arr6_rt.off 에 대한 opacity가 없음. 보류
+             */ 
+            /*
+            if(index === size) {
+                !$nextBtn.hasClass('off') && $nextBtn.addClass('off')
+                // 
+                return false;
+            }
+            */
+
+            // $nextBtn.removeClass('off');
+            $prevBtn.removeClass('off');
+        },
     }
     
     DetailProduct.init();
