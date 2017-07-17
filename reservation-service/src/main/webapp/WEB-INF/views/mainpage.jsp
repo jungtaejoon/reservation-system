@@ -19,10 +19,10 @@
         <div class="header">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/my" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <hr>
@@ -89,7 +89,7 @@
                         <!-- Product List HandlebarJS  -->
                         <script id="product-template" type="text/x-handlebars-template">
                             <li class="item" data-product="{{id}}">
-                                <a href="/product/{{id}}" class="item_book">
+                                <a href="/products/{{id}}" class="item_book">
                                     <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src={{saveFileName}}><span class="img_border"></span> </div>
                                         <div class="event_txt">
                                         <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
