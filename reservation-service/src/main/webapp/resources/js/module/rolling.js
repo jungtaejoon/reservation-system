@@ -18,6 +18,7 @@
      * * Status 관리 Object
      * @param index : 현재 슬라이드 위치
      * @param size  : 슬라이드 총 갯수
+     * 
      */
     $.rollingOptions = {
         viewTime: 500,
@@ -38,7 +39,25 @@
 
     /**
      * jQuery rolling function 
-     * example) $('div').rolling(options)
+     *
+     * Use Example 
+     * 
+     * var callback = $('.visual_img').rolling({ 
+     *   autoStart: true, 
+     *   circulation: true,
+     *   flicking: false,
+     *   viewTime: 300,
+     * });
+     * 
+     * 
+     * var status = callback.prev(); // prev call
+     * var status = callback.next(); // next call
+     * 
+     * // current rolling status for update view (count)
+     * status = {
+     *  index 
+     *  size 
+     * }
      * 
      * @param options = $.rollingOptions
      */
@@ -49,13 +68,8 @@
             prev : move.bind(this, options, 'prev', 0),
             next : move.bind(this, options, 'next', 0),
         }
-
-        // return this;
     }
-
-
     
-
 
     /**
      * --------------------------------------------------------------------------------------
@@ -91,17 +105,25 @@
 
         // 순환 [적용] 일 경우
         if(options.circulation) {
-            var cloneLast = $items.last().clone(true);
-            var cloneFirst = $items.first().clone(true);
+            
+            // 아이템의개수가 3이상이면, 마지막 슬라이드를 첫번째 앞에 붙이고 마지막 슬라이드를 삭제
+            // 아이템 개수가 3개 미만일 경우에는 앞뒤에 붙여준다.
+            if($items.length < 3) {
+                var cloneLast = $items.last().clone(true);
+                var cloneFirst = $items.first().clone(true);
 
-            $items.first().before(cloneLast);
-            $items.last().after(cloneFirst);
+                $items.first().before(cloneLast);
+                $items.last().after(cloneFirst);
+            } else {
+                var cloneLast = $items.last().clone(true);
+                $items.first().before(cloneLast);
+                $items.last().remove();
+            }
+            
             $slider.css({'left' : -itemWidth}); // css 초기화
         } else {
             $slider.css({'left' : 0});
         }
-
-        
 
         $.rollingOptions.status.size = $items.length;
 
@@ -146,12 +168,12 @@
     function flickingInit(_options) {
         var $elem = $(_options.carouselName);
         var options = _options
-            , status = options.status
-            , startX = 0
-            , saveX = -itemWidth * (status.index-1)
-            , movePosition = 0
-            , itemWidth = $elem.find('li').width();
-
+          , status = options.status
+          , startX = 0
+          , movePosition = 0
+          , itemWidth = $elem.find('li').width()
+          , saveX = -itemWidth * (status.index-1);
+            
         $elem.on('touchstart', function(e) {
             if ( e.type === 'touchstart' && e.touches.length === 1 ) {
                 startX = e.touches[ 0 ].pageX;
@@ -162,9 +184,8 @@
 
         $elem.on('touchmove', function(e) {
             e.preventDefault();
-            // $elem.css('transition-duration', '0ms');
             var drag = 0
-                , scroll = 0;
+              , scroll = 0;
 
             if ( e.type === 'touchmove' && e.touches.length === 1 ) {
                 drag = e.touches[0].pageX - startX;
@@ -183,9 +204,8 @@
                  * 현재 보여지는 페이지의 left 값을 가져와서 연산한다.
                  */
                 if (Math.abs(drag) > Math.abs(scroll)) {
-
-                    $elem.css({'left' : saveX + movePosition });
                     
+                    $elem.css({'left' : saveX + movePosition });
                     e.preventDefault();
                 } 
             }
@@ -207,13 +227,13 @@
                     if(movePosition < 0) { // next
                         move({
                             autoStart: false, 
-                            circulation: false,
+                            circulation: options.circulation,
                             viewTime: 300,
                         }, 'next', movePosition);
                     } else { // prev
                         move({
                             autoStart: false, 
-                            circulation: false,
+                            circulation: options.circulation,
                             viewTime: 300,
                         }, 'prev', movePosition);
                     }
@@ -229,7 +249,7 @@
             }
 
             /**
-             * TODO:: status update.... 
+             * TODO:: status update.... change reuseable code 
              */
             var $container = $('.figure_pagination');
             var $indexElem = $container.find('span.num:first');
@@ -299,8 +319,8 @@
         $.rollingOptions.status = status;
 
         return {
-            index : $.rollingOptions.status.index,
-            size : $.rollingOptions.status.size
+            index : status.index,
+            size : status.size
         }
     }
 

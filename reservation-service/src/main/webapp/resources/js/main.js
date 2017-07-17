@@ -47,7 +47,7 @@
 
         getAllCategories : function () {
             
-            var result =  Common.ajaxWrapper.call(undefined, 'GET', '/categories', null);
+            var result =  Common.ajaxWrapper.call(undefined, 'GET', '/api/categories', null);
             
             result.done(function(res) {
                 if(res) {
@@ -85,7 +85,7 @@
 
         initializingProducts : function() {
             // 초기 데이터 받아오기
-            var result = Common.ajaxWrapper.call(undefined, 'GET', '/products', null);
+            var result = Common.ajaxWrapper.call(undefined, 'GET', '/api/products', null);
             
             result.done(function(res) {
                 Products.rendering(res);
@@ -100,7 +100,7 @@
 
             // Category 에서 탭이 변경 될 때 .call을 통해서 호출
             // 카테고리별 initial products data ajaxWrapper
-            return Common.ajaxWrapper.call(undefined, 'GET', '/products?cid=' + categoryId, null);
+            return Common.ajaxWrapper.call(undefined, 'GET', '/api/products?cid=' + categoryId, null);
 
         },
 
@@ -150,7 +150,7 @@
             var categoryId = Products.data.categoryId;
 
             // 10개씩 더불러오기. 현재의 아이템의 갯수가 offset이 되고, limit은 서버에 10으로 고정
-            var getURL = '/products?cid=' + categoryId + '&offset=' + curItemCount;
+            var getURL = '/api/products?cid=' + categoryId + '&offset=' + curItemCount;
 
             // 모든 데이터를 가지고 왔을 경우 Ajax 요청을 막는다.
             if(Products.data.totalCount > curItemCount) {
