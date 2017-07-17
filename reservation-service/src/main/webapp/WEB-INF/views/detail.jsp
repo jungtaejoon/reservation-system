@@ -11,7 +11,51 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Ai5Hi4Wy72wiWXGCJWg6&submodules=geocoder"></script>
     <script src="/resources/lib/handlebars.min.js"></script>
+
+    <script id="images_templ" type="text/x-handlebars-template">
+        {{#each files}}
+            <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
+                <div class="visual_txt">
+                    <div class="visual_txt_inn">
+                        <h2 class="visual_txt_tit"> <span>{{lookup ../this "name"}}</span> </h2>
+                        <p class="visual_txt_dsc">{{lookup ../this "description"}}</p>
+                    </div>
+                </div>
+            </li>
+        {{/each}}
+    </script>
+
+    <script id="goto_templ" type="text/x-handlebars-template">
+        <a class="btn_goto_home" title="홈페이지" href="{{homepage}}" target="siteUrl"> <i class="fn fn-home1"></i> </a>
+        <a class="btn_goto_tel" title="전화" href="tel:{{tel}}"> <i class="fn fn-call1"></i> </a>
+        <a class="btn_goto_mail" title="이메일" href="mailto:{{email}}"> <i class="fn fn-mail1"></i> </a>
+    </script>
+
+    <script id="content_templ" type="text/x-handlebars-template">  
+        <p class="dsc">
+            {{content}}
+        </p>
+    </script>
+
+    <script id="event_templ" type="text/x-handlebars-template">
+        <div class="event_info_box">
+            <div class="event_info_tit">
+                <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
+            </div>
+            <div class="event_info">
+                <div class="in_dsc">{{{event}}}</div>
+            </div>
+        </div>
+    </script>
+
+    <script id="btn_templ" type="text/x-handlebars-template">
+        <button type="button" class="bk_btn"> 
+            <i class="fn fn-nbooking-calender2"></i> 
+            <span>{{statusText}}</span>
+        </button> 
+    </script>
 </head>
 
 <body>
@@ -47,18 +91,6 @@
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img">
                                     <!-- Product Promotion Image List HandlebarJS  -->
-                                <script id="images_templ" type="text/x-handlebars-template">
-                                    {{#each files}}
-                                        <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
-                                            <div class="visual_txt">
-                                                <div class="visual_txt_inn">
-                                                    <h2 class="visual_txt_tit"> <span>{{lookup ../this "name"}}</span> </h2>
-                                                    <p class="visual_txt_dsc">{{lookup ../this "description"}}</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    {{/each}}
-                                </script> 
                                 </ul>
                             </div>
                             <div class="prev">
@@ -79,11 +111,6 @@
                         </div>
                     </div>
                     <div class="group_btn_goto">
-                        <script id="goto_templ" type="text/x-handlebars-template">
-                            <a class="btn_goto_home" title="홈페이지" href="{{homepage}}" target="siteUrl"> <i class="fn fn-home1"></i> </a>
-                            <a class="btn_goto_tel" title="전화" href="tel:{{tel}}"> <i class="fn fn-call1"></i> </a>
-                            <a class="btn_goto_mail" title="이메일" href="mailto:{{email}}"> <i class="fn fn-mail1"></i> </a>
-                        </script>
                         <a href="#" class="btn_goto_path" title="길찾기"> <i class="fn fn-path-find1"></i> </a>
                         <a href="#" class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
                     </div>
@@ -91,11 +118,6 @@
                 <div class="section_store_details">
                     <!-- [D] 펼쳐보기 클릭 시 store_details에 close3 제거 -->
                     <div class="store_details close3">
-                        <script id="content_templ" type="text/x-handlebars-template">  
-                            <p class="dsc">
-                                {{content}}
-                            </p>
-                        </script>
                     </div>
                     <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
                     <a href="#" class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i> </a>
@@ -103,25 +125,9 @@
                 </div>
                 <div class="section_event">
                     <!-- [Handlebars] event section  -->
-                    <script id="event_templ" type="text/x-handlebars-template">
-                        <div class="event_info_box">
-                            <div class="event_info_tit">
-                                <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
-                            </div>
-                            <div class="event_info">
-                                <div class="in_dsc">{{{event}}}</div>
-                            </div>
-                        </div>
-                    </script>
-
+                
                 </div>
                 <div class="section_btn"> 
-                    <script id="btn_templ" type="text/x-handlebars-template">
-                        <button type="button" class="bk_btn"> 
-                            <i class="fn fn-nbooking-calender2"></i> 
-                            <span>{{statusText}}</span>
-                        </button> 
-                    </script>
                 </div>
                 
                 <div class="section_review_list">
@@ -204,9 +210,9 @@
                     <div class="detail_location hide">
                         <div class="box_store_info no_topline">
                             <a href="#" class="store_location" title="지도웹으로 연결">
-                                <img class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
-                                <span class="img_border"></span>
-                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
+                                 <img class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150"> 
+                                 <span class="img_border"></span> 
+                                 <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span> 
                             </a>
                             <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
                             <div class="store_info">
