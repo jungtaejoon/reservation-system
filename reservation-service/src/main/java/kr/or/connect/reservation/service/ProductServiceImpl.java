@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.ProductDao;
-import kr.or.connect.reservation.dto.DetailProductDto;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -28,9 +27,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public DetailProductDto getProductById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public Map<String, Object> getProductById(Long id) {
+		return dao.selectProductById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String, Object> getProductPreviewComments(Long id) {
+		return dao.selectProductPreviewComments(id);
 	}
 	
 }
