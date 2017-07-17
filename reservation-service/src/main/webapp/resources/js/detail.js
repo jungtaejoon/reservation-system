@@ -7,12 +7,16 @@
     var DetailProduct = {
 
         callback : {},
+        Template : {},
 
         /**
          * 초기화 함수
          */
         init : function () {
             this.bindEvents();
+            this.initialHandlebars();
+            this.getProduct();
+            this.getPreviewComments();
 
             //rolling
             this.callback = $('.visual_img').rolling({ 
@@ -25,6 +29,66 @@
             console.log(this.callback);
 
         },
+
+        getProduct : function() {
+            
+            var url = '/api' + window.location.pathname;
+            console.log(url);
+            var result = this.ajaxWrapper('GET', url, null);
+
+            result.then(function(res) {
+                this.titleAreaRendering(res);
+            }.bind(this));
+        },
+
+        getPreviewComments : function() {
+            var url = '/api' + window.location.pathname + '/comments';
+            console.log(url);
+            var result = this.ajaxWrapper('GET', url, null);
+
+            result.then(function(res) {
+                this.previewCommentRendering(res);
+            }.bind(this));
+        },
+
+        initialHandlebars : function() {
+            /**
+             * 상품 타이틀 영역
+             */
+            this.Template.image = Handlebars.compile($('#images_templ').html());
+            this.Template.goto = Handlebars.compile($('#goto_templ').html());
+            this.Template.content = Handlebars.compile($('#content_templ').html());
+            this.Template.event = Handlebars.compile($('#event_templ').html());
+            this.Template.confirmBtn = Handlebars.compile($('#btn_templ').html());
+
+            /**
+             * 예매자 한줄평
+             */
+            this.Template.comment = Handlebars.compile($('#comment_templ').html());
+
+
+            /**
+             * 하단 상세 설명
+             */
+        },
+
+        titleAreaRendering : function(res) {
+            var Templates = this.Template;
+            var product = res.product;
+            var statusText = this.setConfirmButton(product.salesEnd, product.salesFlag);
+
+            $('.visual_img').append(Templates.image(product));
+            $('.group_btn_goto').append(Templates.goto(product));
+            $('.store_details').append(Templates.content(product));
+            $('.section_event').append(Templates.event(product));
+            $('.section_btn').append(Templates.confirmBtn(statusText));
+        },
+
+        previewCommentRendering : function(res) {
+            var Templates = this.Template;
+            console.log(res);
+            $('.short_review_area').append(Templates.comment(res));
+        },
         
         /**
          * 슬라이드 버튼 이벤트 바인딩
@@ -32,6 +96,7 @@
         bindEvents : function () {
             $('.prev').on('click', this.prevProduct.bind(this));
             $('.nxt').on('click', this.nextProduct.bind(this));
+            $('.section_store_details').on('click', '._open, ._close', this.contentMoretoggle.bind(this));
         },
 
         /**
@@ -92,7 +157,70 @@
             // $nextBtn.removeClass('off');
             $prevBtn.removeClass('off');
         },
-    }
+        
+        /**
+         * 펼처보기 toggle
+         */
+        contentMoretoggle : function (e) {
+            e.preventDefault();
+
+            var $el = $(e.target);
+            var $container = $el.closest('.section_store_details');
+            var $content = $container.find('.store_details');
+            var $openBtn = $container.find('._open');
+            var $closeBtn = $container.find('._close');
+
+            // 닫혀있음
+            if($content.hasClass('close3')) {
+                $openBtn.hide();
+                $closeBtn.show();
+            } else {
+                $openBtn.show();
+                $closeBtn.hide();
+            }
+            $content.toggleClass('close3');
+        },
+
+        /**
+         * confirmButton statusText setting
+         */
+        setConfirmButton : function(endDate, flag) {
+            var statusText = '예매하기';
+            
+            if(flag) statusText = '매진';
+            this.isProductExpire(endDate) && (statusText = '판매 종료');
+
+            return {
+                statusText : statusText
+            }
+        },
+
+        /**
+         * Diff Date 
+         * @param endDate : 만료 사간
+         * @return [true] : 만료되지 않은 상품 , [false] : 만료된 상품
+         */
+        isProductExpire : function(endDate) {
+            var end = new Date(endDate);
+            var now = new Date();
+
+            if(end < now) return true;
+            else return false;
+        },
+
+        ajaxWrapper : function(method, url, data) {
+            return $.ajax({
+				contentType : 'application/json; charset=UTF-8',
+				method : method,
+				url : url,
+				data : data,
+				dataType : 'json',
+			});
+        },
+
+
+    };
+    
     
     DetailProduct.init();
 
