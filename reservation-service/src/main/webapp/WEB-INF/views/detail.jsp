@@ -47,42 +47,18 @@
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img">
                                     <!-- Product Promotion Image List HandlebarJS  -->
-                                    <!-- <script id="category-template" type="text/x-handlebars-template">
-                                        {{#each this}}
+                                <script id="images_templ" type="text/x-handlebars-template">
+                                    {{#each files}}
                                         <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
                                             <div class="visual_txt">
                                                 <div class="visual_txt_inn">
-                                                    <h2 class="visual_txt_tit"> <span>{{name}}</span> </h2>
-                                                    <p class="visual_txt_dsc">{{description}}</p>
+                                                    <h2 class="visual_txt_tit"> <span>{{lookup ../this "name"}}</span> </h2>
+                                                    <p class="visual_txt_dsc">{{lookup ../this "description"}}</p>
                                                 </div>
                                             </div>
                                         </li>
-                                        {{/each}}
-                                    </script> -->
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>First Page 뮤지컬스</span> </h2>
-                                                <p class="visual_txt_dsc">첫번째 페이지야</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>Second Page 뮤지컬스</span> </h2>
-                                                <p class="visual_txt_dsc">2번째 페이지야</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>Third Page 뮤지컬스</span> </h2>
-                                                <p class="visual_txt_dsc">3번째 페이지란다</p>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {{/each}}
+                                </script> 
                                 </ul>
                             </div>
                             <div class="prev">
@@ -103,9 +79,11 @@
                         </div>
                     </div>
                     <div class="group_btn_goto">
-                        <a class="btn_goto_home" title="홈페이지" href="http://naver.com" target="siteUrl"> <i class="fn fn-home1"></i> </a>
-                        <a class="btn_goto_tel" title="전화" href="tel:010-2271-4324"> <i class="fn fn-call1"></i> </a>
-						<a class="btn_goto_mail" title="이메일" href="mailto:troflev.dev@gmail.com"> <i class="fn fn-mail1"></i> </a>
+                        <script id="goto_templ" type="text/x-handlebars-template">
+                            <a class="btn_goto_home" title="홈페이지" href="{{homepage}}" target="siteUrl"> <i class="fn fn-home1"></i> </a>
+                            <a class="btn_goto_tel" title="전화" href="tel:{{tel}}"> <i class="fn fn-call1"></i> </a>
+                            <a class="btn_goto_mail" title="이메일" href="mailto:{{email}}"> <i class="fn fn-mail1"></i> </a>
+                        </script>
                         <a href="#" class="btn_goto_path" title="길찾기"> <i class="fn fn-path-find1"></i> </a>
                         <a href="#" class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
                     </div>
@@ -113,72 +91,74 @@
                 <div class="section_store_details">
                     <!-- [D] 펼쳐보기 클릭 시 store_details에 close3 제거 -->
                     <div class="store_details close3">
-                        <p class="dsc">
-                            웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다.
-                        </p>
+                        <script id="content_templ" type="text/x-handlebars-template">  
+                            <p class="dsc">
+                                {{content}}
+                            </p>
+                        </script>
                     </div>
                     <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
                     <a href="#" class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i> </a>
                     <a href="#" class="bk_more _close" style="display: none;"> <span class="bk_more_txt">접기</span> <i class="fn fn-up2"></i> </a>
                 </div>
                 <div class="section_event">
-                    <div class="event_info_box">
-                        <div class="event_info_tit">
-                            <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
+                    <!-- [Handlebars] event section  -->
+                    <script id="event_templ" type="text/x-handlebars-template">
+                        <div class="event_info_box">
+                            <div class="event_info_tit">
+                                <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
+                            </div>
+                            <div class="event_info">
+                                <div class="in_dsc">{{{event}}}</div>
+                            </div>
                         </div>
-                        <div class="event_info">
-                            <div class="in_dsc">[네이버예약 특별할인]<br>R석 50%, S석 60% 할인</div>
-                        </div>
-                    </div>
+                    </script>
+
                 </div>
-                <div class="section_btn"> <button type="button" class="bk_btn"> <i class="fn fn-nbooking-calender2"></i> <span>예매하기</span> </button> </div>
+                <div class="section_btn"> 
+                    <script id="btn_templ" type="text/x-handlebars-template">
+                        <button type="button" class="bk_btn"> 
+                            <i class="fn fn-nbooking-calender2"></i> 
+                            <span>{{statusText}}</span>
+                        </button> 
+                    </script>
+                </div>
+                
                 <div class="section_review_list">
                     <div class="review_box">
                         <h3 class="title_h3">예매자 한줄평</h3>
                         <div class="short_review_area">
-                            <div class="grade_area">
-                                <!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
-                                <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
-                                <strong class="text_value"> <span>4.2</span> <em class="total">5.0</em> </strong>
-                                <span class="join_count"><em class="green">52건</em> 등록</span>
-                            </div>
-                            <ul class="list_short_review">
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area">
-                                            <div class="thumb_area">
-                                                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" alt="리뷰이미지"> </a> <span class="img_count">1</span>                                                </div>
-                                            <h4 class="resoc_name">뮤지컬 로미오와 줄리엣</h4>
-                                            <p class="review">2층이어서 걱정했는데 꽤잘보여서 좋았습니다 고미오 너무 멋있었습니다 사진은 커튼콜때 찍었습니다 끝나고 퇴근길도 봐서 너무 좋았어요</p>
+                            <script id="comment_templ" type="text/x-handlebars-template">
+                                <div class="grade_area">
+                                    <!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
+                                    <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
+                                    <strong class="text_value"> <span>{{total.average}}</span> <em class="total">5.0</em> </strong>
+                                    <span class="join_count"><em class="green">{{total.totalCount}}건</em> 등록</span>
+                                </div>
+                                <ul class="list_short_review">
+                                    {{#each comments}}
+                                    <li class="list_item">
+                                        <div>
+                                            <div class="review_area">
+                                                {{#each images}} 
+                                                    <div class="thumb_area">
+                                                         {{#if @first}}  
+                                                        <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="{{saveFileName}}" alt="리뷰이미지"> </a>  
+                                                        <span class="img_count">{{../images.length}}</span> 
+                                                         {{/if}}  
+                                                    </div>
+                                                {{/each}} 
+                                                <h4 class="resoc_name">{{name}}</h4>
+                                                <p class="review">{{comment}}</p>
+                                            </div>
+                                            <div class="info_area">
+                                                 <div class="review_info"> <span class="grade">{{score}}</span> <span class="name">{{nickname}}</span> <span class="date">{{modifyDate}}. 방문</span> </div> 
+                                            </div>
                                         </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">4.0</span> <span class="name">dbfl****</span> <span class="date">2017.3.5. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name">뮤지컬 로미오와 줄리엣</h4>
-                                            <p class="review">너무 재밌게봤구요~<br>마지막공연 후 뒷풀이도 잘봤습니다</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">5.0</span> <span class="name">yyck****</span> <span class="date">2017.3.5. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name">뮤지컬 로미오와 줄리엣</h4>
-                                            <p class="review">좋은 공연이었습니다. <br>머큐쇼역활 하신분의 열창이 기억에 남는 반면에,,, 로미오는 별로 기억에 남지 않네요..</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">4.0</span> <span class="name">xero****</span> <span class="date">2017.3.4. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </script>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
