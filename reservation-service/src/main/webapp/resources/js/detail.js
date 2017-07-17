@@ -17,26 +17,15 @@
             this.initialHandlebars();
             this.getProduct();
             this.getPreviewComments();
-
-            //rolling
-            this.callback = $('.visual_img').rolling({ 
-                autoStart: false, 
-                circulation: false,
-                flicking: true,
-                viewTime: 300,
-            });
-
-            console.log(this.callback);
-
         },
 
         getProduct : function() {
-            
             var url = '/api' + window.location.pathname;
             console.log(url);
             var result = this.ajaxWrapper('GET', url, null);
 
             result.then(function(res) {
+                this.updateStatus(1, res.product.files.length);
                 this.titleAreaRendering(res);
             }.bind(this));
         },
@@ -48,6 +37,17 @@
 
             result.then(function(res) {
                 this.previewCommentRendering(res);
+            }.bind(this))
+            .then(function() {
+                //rolling
+                this.callback = $('.visual_img').rolling({ 
+                    autoStart: false, 
+                    circulation: false,
+                    flicking: true,
+                    viewTime: 300,
+                });
+
+                console.log(this.callback);
             }.bind(this));
         },
 
@@ -70,6 +70,7 @@
             /**
              * 하단 상세 설명
              */
+
         },
 
         titleAreaRendering : function(res) {
@@ -97,6 +98,7 @@
             $('.prev').on('click', this.prevProduct.bind(this));
             $('.nxt').on('click', this.nextProduct.bind(this));
             $('.section_store_details').on('click', '._open, ._close', this.contentMoretoggle.bind(this));
+            $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this))
         },
 
         /**
@@ -208,6 +210,27 @@
             else return false;
         },
 
+        /**
+         * 상세정보 / 오시는길 Tab 전환
+         */
+        changeInfoTab : function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $ele = $(e.target);
+            var $container = $ele.closest('.section_info_tab');
+            var $infoTab = $container.find('._detail .anchor');
+            var $pathTab = $container.find('._path .anchor');
+
+            var $infoContent = $container.find('.detail_area_wrap');
+            var $pathContent = $container.find('.detail_location');
+
+            $infoTab.toggleClass('active');
+            $pathTab.toggleClass('active');
+            $infoContent.toggleClass('hide');
+            $pathContent.toggleClass('hide');
+        },
+
         ajaxWrapper : function(method, url, data) {
             return $.ajax({
 				contentType : 'application/json; charset=UTF-8',
@@ -217,8 +240,6 @@
 				dataType : 'json',
 			});
         },
-
-
     };
     
     
