@@ -17,7 +17,7 @@ import kr.or.connect.reservation.domain.Category;
 import kr.or.connect.reservation.service.CategoryService;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryRestController {
 
 	@Autowired

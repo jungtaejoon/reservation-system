@@ -25,7 +25,7 @@ public class MainController {
 		return "myreservation";
 	}
 	
-	@GetMapping("/product/{id}")
+	@GetMapping("/products/{id}")
 	public String detailProduct(Model model, @PathVariable("id") Long id) {
 		model.addAttribute(id);
 		return "detail";

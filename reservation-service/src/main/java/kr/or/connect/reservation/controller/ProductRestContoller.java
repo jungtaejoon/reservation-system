@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.connect.reservation.dto.DetailProductDto;
 import kr.or.connect.reservation.service.ProductService;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductRestContoller {
 
 	@Autowired
@@ -45,9 +44,13 @@ public class ProductRestContoller {
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public DetailProductDto getProductById(@PathVariable("id") Long id) {
-		
-		return null;
+	public Map<String, Object> getProductById(@PathVariable("id") Long id) {
+		return service.getProductById(id);
 	}
 	
+	@GetMapping("/{id}/comments")
+	@ResponseStatus(HttpStatus.OK)
+	public Map<String, Object> getProductPreviewCommentsById(@PathVariable("id") Long id) {
+		return service.getProductPreviewComments(id);
+	}
 }
