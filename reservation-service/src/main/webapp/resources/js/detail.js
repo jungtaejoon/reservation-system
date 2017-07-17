@@ -21,7 +21,6 @@
 
         getProduct : function() {
             var url = '/api' + window.location.pathname;
-            console.log(url);
             var result = this.ajaxWrapper('GET', url, null);
 
             result.then(function(res) {
@@ -32,7 +31,6 @@
 
         getPreviewComments : function() {
             var url = '/api' + window.location.pathname + '/comments';
-            console.log(url);
             var result = this.ajaxWrapper('GET', url, null);
 
             result.then(function(res) {
@@ -46,8 +44,6 @@
                     flicking: true,
                     viewTime: 300,
                 });
-
-                console.log(this.callback);
             }.bind(this));
         },
 
@@ -87,7 +83,6 @@
 
         previewCommentRendering : function(res) {
             var Templates = this.Template;
-            console.log(res);
             $('.short_review_area').append(Templates.comment(res));
         },
         
@@ -98,7 +93,8 @@
             $('.prev').on('click', this.prevProduct.bind(this));
             $('.nxt').on('click', this.nextProduct.bind(this));
             $('.section_store_details').on('click', '._open, ._close', this.contentMoretoggle.bind(this));
-            $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this))
+            $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this));
+            $('.detail_location').on('click', '.store_location', this.connectNaverMap.bind(this));
         },
 
         /**
@@ -144,19 +140,6 @@
                 return false;
             }
 
-            /**
-             * 첫 이미지만 해당되는 것인가? 마지막 이미지에 대한 style.css 정의가 되어있지 않음
-             * ico_arr6_rt.off 에 대한 opacity가 없음. 보류
-             */ 
-            /*
-            if(index === size) {
-                !$nextBtn.hasClass('off') && $nextBtn.addClass('off')
-                // 
-                return false;
-            }
-            */
-
-            // $nextBtn.removeClass('off');
             $prevBtn.removeClass('off');
         },
         
@@ -230,6 +213,21 @@
             $infoContent.toggleClass('hide');
             $pathContent.toggleClass('hide');
         },
+
+        /**
+         * 오시는길에서 지도 눌렀을 경우 네이버 지도로 연결
+         */
+
+        connectNaverMap : function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log(e.target);
+            var url = 'http://map.naver.com/';
+
+            var win = window.open(url, '_blank');
+            win.focus();
+         },
 
         ajaxWrapper : function(method, url, data) {
             return $.ajax({

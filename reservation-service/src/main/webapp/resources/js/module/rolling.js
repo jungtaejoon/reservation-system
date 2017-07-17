@@ -62,7 +62,9 @@
      * @param options = $.rollingOptions
      */
     $.fn.rolling = function(options) {
-        init(options);
+        options.carouselName = this;
+        $.rollingOptions = $.extend({}, $.rollingOptions, options);
+        init();
 
         return {
             prev : move.bind(this, options, 'prev', 0),
@@ -82,26 +84,28 @@
      * 최초 한번 실행 initializing 함수
      * @param options : 초기 설정 시 부여하는 options Object
      */
-    function init(options) {
-        initOptions(options)
+    function init() {
+        console.log('init');
+        initOptions()
     }
 
     /**
      * @param options
      */
     function initOptions(options) {
-        var extendsOptions = $.extend({}, $.rollingOptions, options);
-        carouselInit(extendsOptions)
+        console.log('initOptions');
+        carouselInit()
     }
 
     /**
      * 캐러샐 순환 형식 적용 
      * 순환되는 캐러샐을 위해서 앞뒤로 마지막과 첫번째 슬라이드를 복제해서 넣는다.
      */
-    function carouselInit(options) {
-        var $slider = $(options.carouselName);
-        var $items = $slider.find('li');
-        var itemWidth = $items.width();
+    function carouselInit() {
+        var options = $.rollingOptions
+          , $slider = $(options.carouselName)
+          , $items = $slider.find('li')
+          , itemWidth = $items.width();
 
         // 순환 [적용] 일 경우
         if(options.circulation) {
@@ -128,7 +132,7 @@
         $.rollingOptions.status.size = $items.length;
 
         options.autoStart && carouselStart()
-        options.flicking && flickingInit(options)
+        options.flicking && flickingInit()
     }
 
     /**
@@ -165,9 +169,9 @@
         
     };
 
-    function flickingInit(_options) {
-        var $elem = $(_options.carouselName);
-        var options = _options
+    function flickingInit() {
+        var options = $.rollingOptions
+          , $elem = $(options.carouselName)
           , status = options.status
           , startX = 0
           , movePosition = 0
