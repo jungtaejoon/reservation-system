@@ -16,7 +16,7 @@
 	<header><h1>카테고리 관리자 페이지</h1></header>
 	<section>
 		<h2>카테고리 등록하기</h2>
-		<form action="/category/admin/insert" method="post">
+		<form action="/api/category" method="POST">
 			<input type="text" name="name" />
 			<button class="create" type="submit">등록</button>
 		</form>
@@ -48,6 +48,7 @@
 			if (evt.target && evt.target.matches("button.delete")) {
 				deleteCategory(evt.target);
 			}
+			console.log(this);
 			
 			if (evt.target && evt.target.matches("button.update")) {
 				updateCategory(evt.target);
@@ -59,14 +60,16 @@
 			var $listNode = el.parentNode;	// <li>
 			var $input = $listNode.querySelector("input"); 	// <input>
  			var categoryId = $listNode.getAttribute("data-id");
- 			var postdata = "id="+categoryId
-			+"&name="+$input.value;
-		
+ 			var postdata = "{id:"+categoryId
+			+",name:"+$input.value;
+			console.log(postdata);
 			$.ajax({
-				url: '/category/admin/update',
-				contentType: 'application/x-www-form-urlencoded',
-				type: 'POST',
-				data: postdata
+				url: '/api/category/' + categoryId,
+				type: 'PUT',
+				contentType: 'application/json; charset=UTF-8',
+				data: JSON.stringify({
+					name: $input.value
+				})
 			}).done(function(){
 				$listNode.setAttribute("data-name",$input.value);
 			}).fail(function(){
@@ -80,7 +83,7 @@
 			var categoryId = $listNode.getAttribute("data-id");
 			
 			$.ajax({
-				url: '/category/admin/' + categoryId,
+				url: '/api/category/' + categoryId,
 				type: 'DELETE'
 			}).done(function(){
 				$listNode.remove();

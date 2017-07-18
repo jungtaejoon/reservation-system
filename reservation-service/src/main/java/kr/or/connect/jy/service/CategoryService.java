@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.connect.jy.dao.CategoryDao;
 import kr.or.connect.jy.dto.Category;
+import kr.or.connect.jy.dto.Product;
 
 @Service
 public class CategoryService {
