@@ -1,4 +1,4 @@
-package categoryDaoTest;
+package connect.reservation.dao;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

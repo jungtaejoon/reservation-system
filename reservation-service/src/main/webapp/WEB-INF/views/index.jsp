@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Index Page</title>
-<link href="/resources/css/admin.css" rel="stylesheet">
+<link href="/resources/css/category.css" rel="stylesheet">
 </head>
 <body>
 <br>
 <h2 align="center">index 페이지</h2>
-<input type="button" class="btn indexBtn" id="btnMvCate" value="카테고리 관리" onClick="location.href='/admin/viewCategory'">
+<input type="button" class="btn indexBtn" id="btnMvCate" value="카테고리 관리" onClick="location.href='/category/viewCategory'">
 <script src="/resources/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-<script src="/resources/js/admin.js"></script>
+<script src="/resources/js/category.js"></script>
 </body>
 </html>
