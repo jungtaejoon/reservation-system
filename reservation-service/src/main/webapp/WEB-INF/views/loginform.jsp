@@ -4,6 +4,7 @@
     <title>hello</title>
 </head>
 <body>
-<h1>HelloWorldasdasds ${aa}</h1>
+ 로그인 버튼을 눌러주세요.
+ <a href = "/loginform"> <input = "/loginform" type="button" class="put" value="로그인"> </a>
 </body>
 </html>

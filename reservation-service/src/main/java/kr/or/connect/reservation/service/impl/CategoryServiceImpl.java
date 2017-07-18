@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	}
     
-    
+    @Transactional(readOnly = true)
     public Collection<Category> getAll()
     {
     		return categoryDao.selectAll();
@@ -47,10 +47,17 @@ public class CategoryServiceImpl implements CategoryService {
 		return affected == 1;
 	}
 
-    
+    @Transactional(readOnly = false)
 	public boolean update(Category category) {
 		// TODO Auto-generated method stub
 		int affected = categoryDao.update(category);
 		return affected == 1;
+	}
+    
+    @Transactional(readOnly = true)
+	@Override
+	public Collection<Category> getLimit(Integer start) {
+		// TODO Auto-generated method stub
+		return categoryDao.selectLimit(start);
 	}
 }

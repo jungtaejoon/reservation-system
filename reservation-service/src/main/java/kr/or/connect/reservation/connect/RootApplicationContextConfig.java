@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Import;
 import kr.or.connect.reservation.config.Dbconfig;
 
 
+//서비스 단에서 필요한 공장 정보를 알려줄 때
 
 @Configuration
 //dao, service에 대한 컴포넌트를 scan한다. sevice는 미리 추가한다.

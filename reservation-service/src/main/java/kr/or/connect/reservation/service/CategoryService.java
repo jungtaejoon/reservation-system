@@ -11,4 +11,5 @@ public interface CategoryService {
     public Category addMember(Category category);
     public boolean delete(Integer id);
     public boolean update(Category category);
+    public Collection<Category> getLimit(Integer start);
 }

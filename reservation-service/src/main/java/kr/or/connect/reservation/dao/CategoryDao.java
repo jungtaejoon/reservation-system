@@ -2,6 +2,7 @@ package kr.or.connect.reservation.dao;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -41,9 +42,14 @@ public class CategoryDao {
    
     
     public Category selectById(long id){
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id", id);
-        return jdbc.queryForObject(CategorySqls.SELECT_BY_ID,params,rowMapper); //rowMapper는 컬름을 담을 때만 필요하다.
+    		try {    		
+	        Map<String, Object> params = new HashMap<String, Object>();
+	        params.put("id", id);
+	        return jdbc.queryForObject(CategorySqls.SELECT_BY_ID,params,rowMapper); //rowMapper는 컬름을 담을 때만 필요하다.
+    		}catch(EmptyResultDataAccessException e)
+    		{
+    			return null;
+    		}
     }
     
     public List<Category> selectAll(){
@@ -58,5 +64,16 @@ public class CategoryDao {
     public int deleteById(Integer id){
         Map<String, ?> params = Collections.singletonMap("id", id);
         return jdbc.update(CategorySqls.DELETE_BY_ID, params);
+    }
+    
+    public  List<Category> selectLimit(Integer start){
+		try {    		
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("start", start);
+        return jdbc.query(ProductSqls.SELECT_LIMIT,params,rowMapper); //rowMapper는 컬름을 담을 때만 필요하다.
+		}catch(EmptyResultDataAccessException e)
+		{
+			return null;
+		}
     }
 }

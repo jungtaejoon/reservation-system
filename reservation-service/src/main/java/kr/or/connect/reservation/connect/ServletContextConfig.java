@@ -9,14 +9,28 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+
+// 컨토롤 단
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"kr.or.connect.reservation.controller"})
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
-    @Bean
-    public ViewResolver viewResolver() {
+   /* 
+	@Bean
+    public InternalResourceViewResolver viewResolver() {
          InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/resources/html/");
+        viewResolver.setSuffix(".html");
+        return viewResolver;
+    }
+	*/
+	
+    @Bean
+    public UrlBasedViewResolver viewResolver_2() {
+    		UrlBasedViewResolver	 viewResolver = new UrlBasedViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
@@ -25,6 +39,6 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");  //   webapp/resources 경로를 의미
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");  // webapp/resources 경로를 의미
     }
 }
