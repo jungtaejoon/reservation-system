@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="/resources/css/category.css">
+<link href="/resources/css/category.css" rel="stylesheet">
 </head>
 <body>
 	<h1>Hello First Spring Task (Category CRUD)</h1>
@@ -39,8 +39,6 @@
 		</div>
 	</c:if>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	crossorigin="anonymous"></script>
+<script src="/resources/lib/jquery.min.js"></script>
 <script src="/resources/js/category.js"></script>
 </html>
