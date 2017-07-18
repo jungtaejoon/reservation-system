@@ -14,6 +14,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.util.Log4jConfigListener;
+
 
 public class WebInitializer implements WebApplicationInitializer {
     private static final String CONFIG_LOCATION = "kr.or.reservation.config";
@@ -38,11 +40,19 @@ public class WebInitializer implements WebApplicationInitializer {
         FilterRegistration.Dynamic characterEncoding = servletContext.addFilter("characterEncoding", characterEncodingFilter);
         characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
 
+    	servletContext.setInitParameter( "log4jConfigLocation" , "classpath:log4j.xml" );
+		servletContext.setInitParameter( "log4jRefreshInterval" , "10000" );
+		servletContext.setInitParameter( "log4jExposeWebAppRoot", "false" );
+		
+		Log4jConfigListener log4jListener = new Log4jConfigListener();
+		servletContext.addListener( log4jListener );
+        
         // dispatchder servlet 설정
         servletContext.addListener(new ContextLoaderListener(context));
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(MAPPING_URL);
+        
     }
     
     private AnnotationConfigWebApplicationContext getContext() {

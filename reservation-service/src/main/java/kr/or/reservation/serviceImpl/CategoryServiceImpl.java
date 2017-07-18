@@ -1,4 +1,4 @@
-package kr.or.reservation.service;
+package kr.or.reservation.serviceImpl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.reservation.dao.CategoryDao;
 import kr.or.reservation.domain.Category;
+import kr.or.reservation.service.CategoryService;
 
 @Service
 @Transactional
@@ -45,5 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		return categorydao.selectforList();
 	}
+
+
 
 }

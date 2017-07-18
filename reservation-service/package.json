@@ -1,0 +1,17 @@
+{
+  "name": "reservation-service",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+  	"grunt": "^1.0.1",
+    "handlebar": "^1.0.0",
+    "jquery.1": "^1.0.0",
+    "requirejs": "^2.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

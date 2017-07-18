@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.reservation.domain.Category;
+import kr.or.reservation.sql.CategorySqls;
 
 @Repository
 public class CategoryDao {

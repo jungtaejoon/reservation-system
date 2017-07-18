@@ -10,10 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 	
     @GetMapping(path = "/")
-    public ModelAndView selectAll(Model model){
+    public ModelAndView viewMain(Model model){
     	ModelAndView mav = new ModelAndView("mainpage");
     	return mav;
     }
-  
-
+ 
 }

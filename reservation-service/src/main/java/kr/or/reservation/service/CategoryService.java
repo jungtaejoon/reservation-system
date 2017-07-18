@@ -12,4 +12,5 @@ public interface CategoryService {
 	public Category selectById(Long id);
 	public List<Category> selectforList();
 	
+	
 }
