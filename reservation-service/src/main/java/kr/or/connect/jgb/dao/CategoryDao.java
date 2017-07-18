@@ -23,8 +23,6 @@ public class CategoryDao {
     private RowMapper<Category> rowMapper = BeanPropertyRowMapper.newInstance(Category.class); // 칼럼 이름을 보통 user_name 과 같이 '_'를 활용하는데 자바는 낙타표기법을 사용한다 이것을 자동 맵핑한다.
 
     // Spring은 생성자를 통하여 주입을 하게 된다.
-    // DbConfig에서 bean으로 등록한 dataSource()를 찾아서 넣어준다. DataSource가 하나뿐이기 때문에
-    // dataSource1로 해도 실행이 되지만 만약 또 다른 DataSource가 bean에 등록되면 변수 이름을 맞춰줘야 한다.
     public CategoryDao(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource); // Datasource를 주입
         this.insertAction = new SimpleJdbcInsert(dataSource)  // Datasource를 주입
@@ -32,12 +30,12 @@ public class CategoryDao {
                 .usingGeneratedKeyColumns("id"); // pk 칼럼을 지정
     }
 
-    public Long insert(Category category){
+    public int insert(Category category){
         SqlParameterSource params = new BeanPropertySqlParameterSource(category);
-        return insertAction.executeAndReturnKey(params).longValue();
+        return insertAction.executeAndReturnKey(params).intValue();
     }
 
-    public Category selectById(long id){
+    public Category selectById(int id){
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         return jdbc.queryForObject(CategorySqls.SELECT_BY_ID,params,rowMapper);
@@ -48,13 +46,14 @@ public class CategoryDao {
         return jdbc.update(CategorySqls.UPDATE_BY_ID, params);
     }
 
-    public int delete(Long id){
-        Map<String, ?> params = Collections.singletonMap("id", id);
+    public int delete(int id){
+        Map<String, ?> params = Collections.singletonMap("id", id); // 수정할 수 없음 (immutable)
         return jdbc.update(CategorySqls.DELETE_BY_ID, params);
     }
     
     public List<Category> selectAll() {
     	Map<String, Object> params = Collections.emptyMap();
+    	//jdbc.query(CategorySqls.SELECT_ALL,rowMapper);  // 스프링에서 빈 객체 사용
     	return jdbc.query(CategorySqls.SELECT_ALL,params,rowMapper);
     }
 }

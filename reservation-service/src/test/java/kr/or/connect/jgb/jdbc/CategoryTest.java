@@ -2,7 +2,9 @@ package kr.or.connect.jgb.jdbc;
 
 import kr.or.connect.jgb.config.RootApplicationContextConfig;
 import kr.or.connect.jgb.dao.CategoryDao;
+import kr.or.connect.jgb.dao.ProductDao;
 import kr.or.connect.jgb.domain.Category;
+import kr.or.connect.jgb.domain.Product;
 
 //import com.sun.tools.javac.comp.Todo;
 import org.junit.Test;
@@ -25,11 +27,14 @@ import static org.hamcrest.CoreMatchers.is;
 public class CategoryTest {
     @Autowired
     CategoryDao categoryDao;
+    
+    @Autowired
+    ProductDao productDao;
 
     @Test
     public void shouldInsertAndSelect() {
         Category category = new Category("뮤지컬");
-        Long categoryPk =categoryDao.insert(category);
+        int categoryPk =categoryDao.insert(category);
 
         Category result = categoryDao.selectById(categoryPk);
 
@@ -41,10 +46,10 @@ public class CategoryTest {
     @Test
     public void selectAll() {
         Category category = new Category("뮤지컬");
-        Long categoryPk =categoryDao.insert(category);
+        int categoryPk =categoryDao.insert(category);
         
         Category category2 = new Category("합창");
-        Long categoryPk2 =categoryDao.insert(category2);
+        int categoryPk2 =categoryDao.insert(category2);
 
         Category result = categoryDao.selectById(categoryPk);
 
@@ -54,6 +59,17 @@ public class CategoryTest {
         	System.out.println(categories.get(i).getName());
         }
     }
+    
+//    @Test
+//    public void productAll() {
+//        
+//
+//        List<Product> products = productDao.selectAll();
+//        
+//        for(int i=0;i<products.size();i++) {
+//        	System.out.println(products.get(i).getName());
+//        }
+//    }
 
 
 //    @Test

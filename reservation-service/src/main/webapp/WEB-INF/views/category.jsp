@@ -26,6 +26,6 @@
 	
 </ul>
 <script src="resources/js/libs/jquery.min.js"></script>
-<script src="resources/js/app.js"></script>
+<script src="resources/js/category.js"></script>
 </body>
 </html>

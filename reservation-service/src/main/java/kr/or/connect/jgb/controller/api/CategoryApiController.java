@@ -24,27 +24,26 @@ import kr.or.connect.jgb.service.CategoryService;
 
 @RestController
 @RequestMapping("/api/categories")
-public class CategoryController {
+public class CategoryApiController {
 	
 	@Autowired
 	private CategoryService categoryService;
 	
 	@GetMapping
 	public Collection<Category> list(HttpServletRequest req,HttpServletResponse res) {
-		
 		return categoryService.getAll();
 	}
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void update(@PathVariable Long id, @RequestBody Category category) {
+	void update(@PathVariable int id, @RequestBody Category category) {
 		category.setId(id);
 		categoryService.update(category);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long id) {
+	public void delete(@PathVariable int id) {
 		categoryService.delete(id);
 		
 	}

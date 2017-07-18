@@ -10,6 +10,8 @@ import kr.or.connect.jgb.dao.CategoryDao;
 import kr.or.connect.jgb.domain.Category;
 import kr.or.connect.jgb.service.CategoryService;
 
+
+// 서비스에서 예외 사항 처리 해주는 것이 중요 ( null , attribute)
 @Service
 public class CategoryServiceImpl implements CategoryService{
 	@Autowired
@@ -17,20 +19,20 @@ public class CategoryServiceImpl implements CategoryService{
 	
     @Override
     @Transactional(readOnly = true)
-    public Category get(Long id) {
+    public Category get(int id) {
         return categoryDao.selectById(id);
     }
 
     @Override
     @Transactional(readOnly = false)
     public Category addCategory(Category category){
-        Long insert = categoryDao.insert(category);
+    	int insert = categoryDao.insert(category);
         category.setId(insert);
         return category;
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(int id) {
         return categoryDao.delete(id);
     }
 
@@ -42,7 +44,6 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Category> getAll() {
-		// TODO Auto-generated method stub
 		return categoryDao.selectAll();
 	}
 
