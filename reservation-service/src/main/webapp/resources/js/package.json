@@ -1,0 +1,16 @@
+{
+  "name": "reservation_boostcamp",
+  "version": "1.0.0",
+  "description": "부스트캠프 예약",
+  "main": "category.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.10",
+    "jquery": "1.12.4",
+    "requirejs": "^2.3.3"
+  }
+}

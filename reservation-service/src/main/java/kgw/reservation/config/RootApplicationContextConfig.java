@@ -12,5 +12,4 @@ import org.springframework.context.annotation.Import;
 })
 @Import({DbConfig.class}) // DBConfig 를 설정한다.
 public class RootApplicationContextConfig {
-
 }

@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import kgw.reservation.domain.Category;
 import kgw.reservation.sql.CategorySqls;
@@ -33,28 +34,33 @@ public class CategoryDao {
                 .usingGeneratedKeyColumns("id");
 	}
     
-    public Long insert(Category category) {
+    public Integer insert(Category category) {
         SqlParameterSource params = new BeanPropertySqlParameterSource(category);
-        return insertAction.executeAndReturnKey(params).longValue();
+        return insertAction.executeAndReturnKey(params).intValue();
     }
     
-    public int delete(long id) {
+    public Integer delete(Integer id) {
     		Map<String, ?> params = Collections.singletonMap("id", id);
         return jdbc.update(CategorySqls.DELETE_BY_ID, params);
     }
     
-    public int update (Category category) {
+    public Integer update (Category category) {
     		SqlParameterSource params = new BeanPropertySqlParameterSource(category);
     		return jdbc.update(CategorySqls.UPDATE_BY_ID, params); 
     }
-    
-    public Category selectById (long id) {
+
+    public Category selectById (Integer id) {
     		try {
 	    		Map<String, ?> params = Collections.singletonMap("id", id);
 			return jdbc.queryForObject(CategorySqls.SELECT_BY_ID, params, rowMapper);
     		} catch (EmptyResultDataAccessException e) {
     			return null;
     		}
+    }
+    
+    public Integer selectByName (String name) {
+    		Map<String, ?> params = Collections.singletonMap("name", name);
+    		return jdbc.queryForObject(CategorySqls.SELECT_BY_NAME, params, Integer.class);
     }
     
     public Collection<Category> selectAll () {
@@ -65,4 +71,5 @@ public class CategoryDao {
     			return null;
     		}
     }
+    
 }

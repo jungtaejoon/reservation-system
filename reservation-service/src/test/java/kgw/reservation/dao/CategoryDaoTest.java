@@ -33,15 +33,24 @@ public class CategoryDaoTest {
 	
 	@Test
 	public void shouldInsertAndSelect() {
-		Long id = categoryDao.insert(category);
+		int id = categoryDao.insert(category);
 		
 		Category selected = categoryDao.selectById(id);
 		assertThat(selected.getName(), is(category.getName()));
 	}
 	
 	@Test
+	public void shouldInsertAndSelectByName() {
+		int id = categoryDao.insert(category);
+		category.setId(id);
+		
+		Integer selectedId = categoryDao.selectByName(category.getName());
+		assertThat(selectedId, is(category.getId()));
+	}
+	
+	@Test
 	public void shouldDeleteById() {
-		Long id = categoryDao.insert(category); 
+		int id = categoryDao.insert(category); 
 		int affected = categoryDao.delete(id);
 		assertThat(affected, is(1));
 	}
@@ -55,7 +64,7 @@ public class CategoryDaoTest {
 	
 	@Test 
 	public void shouldUpdateById() {
-		Long id = categoryDao.insert(category);
+		int id = categoryDao.insert(category);
 		category.setId(id);
 		category.setName("전시");
 		

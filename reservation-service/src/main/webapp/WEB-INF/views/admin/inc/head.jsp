@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="/resources/css/common.css">
-	<script src="/resources/js/jquery-1.12.4.min.js"></script>
-	<script src="/resources/js/category.js"></script>
+  <script src="/resources/js/require.js"></script>
+  <script src="/resources/js/config.js"></script>
 	<title>${param.title }</title>
 </head>

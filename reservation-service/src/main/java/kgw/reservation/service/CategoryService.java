@@ -10,6 +10,7 @@ import kgw.reservation.dao.CategoryDao;
 import kgw.reservation.domain.Category;
 
 @Service
+@Transactional
 public class CategoryService {
 	private CategoryDao categoryDao;
 	
@@ -18,24 +19,27 @@ public class CategoryService {
 		this.categoryDao = categoryDao;
 	}
 	
-    @Transactional(readOnly = false)
 	public Category create (Category category) {
     		category.setId(categoryDao.insert(category));
     		return category;
 	}
-   
-    public boolean delete(Long id) {
+    
+    public boolean delete(Integer id) {
         return categoryDao.delete(id) == 1 ? true : false;
     }
     
     public boolean update(Category category) {
         return categoryDao.update(category) == 1 ? true : false;
     }
-    
-    public Category findById(Long id) {
+    @Transactional(readOnly=true)
+    public Category findById(Integer id) {
     		return categoryDao.selectById(id);
     }
-    
+    @Transactional(readOnly=true)
+    public Integer findByName(String name) {
+    		return categoryDao.selectByName(name);
+    }
+    @Transactional(readOnly=true)
     public Collection<Category> find() {
     		return categoryDao.selectAll();
     }

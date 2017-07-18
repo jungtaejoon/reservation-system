@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kgw.reservation.domain.Category;
-import kgw.reservation.dto.ResponseCode;
 import kgw.reservation.service.CategoryService;
 
 @Controller
@@ -57,14 +56,14 @@ public class CategoryController {
 	}
 	@PutMapping("/{id}")
 	@ResponseBody
-	public ResponseCode update(@PathVariable String id, @Valid @RequestBody Category category) {
-		category.setId(Long.parseLong(id));
-		return categoryService.update(category) ? new ResponseCode(1) : new ResponseCode(0);
+	public void update(@PathVariable String id, @Valid @RequestBody Category category) {
+		category.setId(Integer.valueOf(id));
+		categoryService.update(category);
 	}
 	@DeleteMapping("/{id}")
 	@ResponseBody
-	public ResponseCode delete(@PathVariable String id) {
-		return categoryService.delete(Long.parseLong(id)) ? new ResponseCode(1) : new ResponseCode(0);
+	public void delete(@PathVariable String id) {
+		categoryService.delete(Integer.valueOf(id));
 	}
 
 }

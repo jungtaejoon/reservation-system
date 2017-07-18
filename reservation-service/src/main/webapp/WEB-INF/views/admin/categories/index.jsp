@@ -28,9 +28,15 @@
         </ul>
       </c:if>
 	</div>
-	
+
   <script>
-    reservation.category.init();
+  require(['category'], function(category) {
+      // Configuration loaded now, safe to do other require calls
+      // that depend on that config.
+      "use strict";
+      category.init();
+
+    });
   </script>
 </body>
 </html>

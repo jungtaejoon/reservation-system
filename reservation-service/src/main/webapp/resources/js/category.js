@@ -1,7 +1,6 @@
-(function ($) {
+define(['jquery'], function($) {
     "use strict";
-    window.reservation = window.reservation || {};
-    window.reservation.category = (function() {
+
     //카테고리 리스트
     var categoryList = "._categoryList";
     var categoryItem = "._item";
@@ -12,15 +11,14 @@
     // 카테고리 이름 수정 중일 때
     var EDITING = "editing";
     var APIURL = "/admin/categories/";
-    var SUCCESS = 1;
 
     // 이벤트 리스닝
     function eventListen(){
-    	
+
     	  $(categoryList).on("click", modifyBtn, modifyListener)
     	  				.on("click", destroyBtn, destroyListener)
     	  				.on("keyup", editInput, modifyEnterListener);
-    	  
+
       $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
             console.log(xhr);
             alert("일시적 오류가 발생하였습니다.");
@@ -41,13 +39,9 @@
         method: "delete",
         url : APIURL+getId($item),
         headers: {
-          "Content-Type" :"application/json",
-          "X-HTTP-Method-Override" : "delete"}
+          "Content-Type" :"application/json"}
       }).done(function( res ) {
-          if(res.code===SUCCESS)
-            viewRemove($item);
-          else
-            errorMessage();
+        viewRemove($item);
       });
     }
 
@@ -115,16 +109,12 @@
         url : APIURL+getId($item),
         headers: {
           "Content-Type" :"application/json",
-          "X-HTTP-Method-Override" : "put"},
+          },
         data : JSON.stringify({ name : strToBeName})
       }).done(function( res ) {
-        if(res.code===SUCCESS) {
-          $item.find(name).html(strToBeName);
-          viewToggleModifyInput($item);
-          setStatus($item, "");
-        } else  {
-          errorMessage();
-        }
+        $item.find(name).html(strToBeName);
+        viewToggleModifyInput($item);
+        setStatus($item, "");
       });
     }
     // 카테고리 id 가져오기
@@ -140,7 +130,7 @@
       return $this.data("status");
     }
 
-    function errorMessage() {
+    function showErrorMessage() {
       alert("일시적 오류가 발생하였습니다.");
     }
     // 초기화 함수
@@ -148,10 +138,10 @@
       eventListen();
     }
 
-    return {
+    var exports = {
       init : init
     };
 
-  })();
+    return exports;
 
-})(jQuery)
+});

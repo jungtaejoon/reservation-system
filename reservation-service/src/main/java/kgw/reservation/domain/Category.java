@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Category {
-	private long id;
+	private Integer id;
 	@NotNull
 	@NotBlank(message="내용을 입력 해주세요.")
 	private String name;
@@ -17,11 +17,11 @@ public class Category {
 		this.name = name;
 	}
 	
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
