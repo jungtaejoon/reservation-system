@@ -10,14 +10,19 @@ import kr.or.connect.service.*;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
-	@Autowired
+
 	CategoryService categoryService;
-	
-    @GetMapping
-    public String home(Model model){
-    	model.addAttribute("categories", categoryService.getAll());
-        return "admin";
-    }
+
+	@Autowired
+	public AdminController(CategoryService categoryService) {
+		super();
+		this.categoryService = categoryService;
+	}
+
+	@GetMapping
+	public String admin(Model model) {
+		model.addAttribute("categories", categoryService.getAll());
+		return "admin";
+	}
 
 }

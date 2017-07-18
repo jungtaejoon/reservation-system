@@ -13,15 +13,20 @@ import kr.or.connect.service.*;
 @Controller
 @RequestMapping("/my-reservation")
 public class MyReservationController {
-	
-	@Autowired
+
 	LoginService loginService;
 
+	@Autowired
+	public MyReservationController(LoginService loginService) {
+		super();
+		this.loginService = loginService;
+	}
+
 	@GetMapping
-	public String loginCheck(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String check(HttpServletRequest request, HttpServletResponse response, Model model) {
 		String returnPath = null;
-		User checkingUser = loginService.loginCheck(request, response);
-		if(checkingUser != null) {
+		User checkingUser = loginService.check(request, response);
+		if (checkingUser != null) {
 			model.addAttribute("user", checkingUser);
 			returnPath = "myreservation";
 		} else {
@@ -30,7 +35,7 @@ public class MyReservationController {
 		}
 		return returnPath;
 	}
-	
+
 	@GetMapping("/test")
 	public String test(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();

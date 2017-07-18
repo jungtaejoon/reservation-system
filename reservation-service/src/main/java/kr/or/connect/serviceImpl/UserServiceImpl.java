@@ -1,4 +1,4 @@
-package kr.or.connect.service;
+package kr.or.connect.serviceImpl;
 
 import java.util.*;
 
@@ -6,6 +6,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 import kr.or.connect.domain.*;
+import kr.or.connect.service.*;
 
 @Service
 @Transactional
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User insertUser(User user) {
+	public User insert(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

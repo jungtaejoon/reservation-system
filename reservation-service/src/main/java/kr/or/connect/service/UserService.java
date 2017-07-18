@@ -8,6 +8,6 @@ public interface UserService {
     public List<User> getAll();
     public User selectById(Long id);
     public User selectByUsername(String username);
-    public User insertUser(User user);
+    public User insert(User user);
     public int delete(Long id);
 }

@@ -5,5 +5,5 @@ import javax.servlet.http.*;
 import kr.or.connect.domain.*;
 
 public interface LoginService {
-	public User loginCheck(HttpServletRequest request, HttpServletResponse response);
+	public User check(HttpServletRequest request, HttpServletResponse response);
 }

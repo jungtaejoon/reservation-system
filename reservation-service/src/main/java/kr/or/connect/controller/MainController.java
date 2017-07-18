@@ -11,12 +11,21 @@ import kr.or.connect.service.*;
 @RequestMapping("/main")
 public class MainController {
 
-	@Autowired
 	private CategoryService categoryService;
+	private ProductService productService;
+
+	@Autowired
+	public MainController(CategoryService categoryService, ProductService productService) {
+		super();
+		this.categoryService = categoryService;
+		this.productService = productService;
+	}
 
 	@GetMapping
 	public String main(Model model) {
 		model.addAttribute("categories", categoryService.getAll());
+		model.addAttribute("numberOfAll", productService.countSales());
+		model.addAttribute("products", productService.getSales(0));
 		return "mainpage";
 	}
 

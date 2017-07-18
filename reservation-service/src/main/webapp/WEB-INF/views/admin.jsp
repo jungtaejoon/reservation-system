@@ -4,7 +4,6 @@
 
 <html>
 <head>
- <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -14,7 +13,7 @@
 			<tr><th>카테고리명</th><th>삭제</th></tr>
 	  	    <c-rt:forEach var="category" items="${categories}">
 		        <TR>
-		          <TD><c:out value="${category.name}"  /></TD>
+		          <TD><c:out value="${category.name}" /></TD>
 		          <TD><button data-categoryid="${category.id}" class="cat-del-btn">삭제</button></TD>
 		        </TR>
 		    </c-rt:forEach>
@@ -29,37 +28,42 @@
 			<button type="submit">저장</button>
 		</form>
 	</div>
+<script type="text/javascript" src="resources/js/plugin/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="resources/js/plugin/handlebars-v4.0.10.js"></script>
+<script id="category_tr_template" type="text/x-handlebars-template">
+	<tr>
+		<td>{{name}}</td>
+		<td><button data-categoryid="{{id}}" class="cat-del-btn">삭제</button></td>
+	</tr>
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#category-form').submit(function(event) { 
 			event.preventDefault();
-			var category = {};
-			category.name = $('#name').val();
-			jsonStr = JSON.stringify(category);
+			var source = $('#category_tr_template').html();
+			var template = Handlebars.compile(source);
+			var categoryJSON = '{ "name" : "' + $('#name').val() + '" }';
 			$.ajax({
 			    method : 'post',
-			    data : jsonStr,
+			    data : categoryJSON,
 			    contentType : 'application/json; charset=utf-8',
 			    dataType : 'json',
 			    url : '/categories',
 			    success : function(response) {
-			    	var str = '<tr><td>' + response.name + '</td><td><button data-categoryid="' + response.id + '" class="cat-del-btn">삭제</button></td></tr>';
-			    	$('#category-list').append(str);
+			    	$('#category-list').append(template(response));
 			    },
 			    error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
 			    	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		    	},
+		    	}
 			});
 			$('#category-form')[0].reset();
 		});
 		
 		$(document).on('click', '.cat-del-btn', function(){
-			var id = $(this).data().categoryid;
+			var id = $(this).data('categoryid');
 			var btn = $(this);
 			$.ajax({
 			    method : 'delete',
-			    contentType : 'application/json; charset=utf-8',
-			    dataType : 'json',
 			    url : '/categories/' + id,
 			    success : function(response) {
 			      if(response == 1) {
@@ -68,16 +72,10 @@
 			    },
 			    error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
 			    	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		    	},
+		    	}
 			})
-
 		});
-
-		
-
 	});
-
-
 </script>
 </body>
 </html>

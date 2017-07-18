@@ -1,4 +1,4 @@
-package kr.or.connect.service;
+package kr.or.connect.serviceImpl;
 
 import javax.servlet.http.*;
 
@@ -6,6 +6,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 import kr.or.connect.domain.*;
+import kr.or.connect.service.*;
 
 @Service
 @Transactional
@@ -15,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
 //	private LoginDao loginDao;
 	
 	@Override
-	public User loginCheck(HttpServletRequest request, HttpServletResponse response) {
+	public User check(HttpServletRequest request, HttpServletResponse response) {
 		User user = null;
 		Boolean logged = false;
 		HttpSession session = request.getSession();

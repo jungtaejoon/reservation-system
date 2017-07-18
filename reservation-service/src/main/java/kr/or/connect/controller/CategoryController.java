@@ -11,21 +11,26 @@ import kr.or.connect.service.*;
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
-	
-	@Autowired
+
 	CategoryService categoryService;
-	
+
+	@Autowired
+	public CategoryController(CategoryService categoryService) {
+		super();
+		this.categoryService = categoryService;
+	}
+
 	@GetMapping
 	public List<Category> getAll() {
 		return categoryService.getAll();
 	}
-	
+
 	@PostMapping
 	public Category insert(@RequestBody Category category) {
-		return categoryService.insertCategory(category);
+		return categoryService.insert(category);
 	}
-	
-	@DeleteMapping("/{id}")
+
+	@DeleteMapping("/{id:[\\d]+}")
 	public int delete(@PathVariable Long id) {
 		return categoryService.delete(id);
 	}

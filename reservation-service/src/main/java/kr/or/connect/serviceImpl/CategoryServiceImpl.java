@@ -1,4 +1,4 @@
-package kr.or.connect.service;
+package kr.or.connect.serviceImpl;
 
 import java.util.*;
 
@@ -8,13 +8,19 @@ import org.springframework.transaction.annotation.*;
 
 import kr.or.connect.dao.*;
 import kr.or.connect.domain.*;
+import kr.or.connect.service.*;
 
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
-	
-	@Autowired
+
 	CategoryDao categoryDao;
+
+	@Autowired
+	public CategoryServiceImpl(CategoryDao categoryDao) {
+		super();
+		this.categoryDao = categoryDao;
+	}
 
 	@Override
 	public List<Category> getAll() {
@@ -27,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category insertCategory(Category category) {
+	public Category insert(Category category) {
 		return categoryDao.insert(category);
 	}
 
