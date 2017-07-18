@@ -24,7 +24,7 @@
             var result = this.ajaxWrapper('GET', url, null);
 
             result.then(function(res) {
-                this.updateStatus(1, res.product.files.length);
+                this.updateMainStatus(1, res.product.files.length);
                 this.titleAreaRendering(res);
             }.bind(this));
         },
@@ -36,14 +36,38 @@
             result.then(function(res) {
                 this.previewCommentRendering(res);
             }.bind(this))
-            .then(function() {
+            .then(function(res) {
                 //rolling
-                this.callback = $('.visual_img').rolling({ 
+                // this.callback = $('.visual_img').rolling({ 
+                //     autoStart: false, 
+                //     circulation: false,
+                //     flicking: true,
+                //     viewTime: 300,
+                // });
+
+                // var reVal = $('.visual_img').rolling(null, {
+                //     autoStart: false, 
+                //     circulation: false,
+                //     flicking: true,
+                //     viewTime: 300,
+                // });
+
+                var imageCount = $('.visual_img li').length;
+                var proto_ = $('.visual_img').Flicking({
+                    prev : $('.prev'),
+                    next : $('.nxt'),
+                    updateState : DetailProduct.updateMainStatus,
+                }, {
                     autoStart: false, 
                     circulation: false,
                     flicking: true,
                     viewTime: 300,
+                    status: {
+                        size: imageCount,
+                        index: 1,
+                    },
                 });
+
             }.bind(this));
         },
 
@@ -96,8 +120,6 @@
          * 슬라이드 버튼 이벤트 바인딩
          */
         bindEvents : function () {
-            $('.prev').on('click', this.prevProduct.bind(this));
-            $('.nxt').on('click', this.nextProduct.bind(this));
             $('.section_store_details').on('click', '._open, ._close', this.contentMoretoggle.bind(this));
             $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this));
             $('.detail_location').on('click', '.store_location', this.connectNaverMap.bind(this));
@@ -111,7 +133,7 @@
          */
         prevProduct : function () {
             var status = this.callback.prev();
-            status && this.updateStatus(status.index, status.size);
+            status && this.updateMainStatus(status.index, status.size);
         },
 
         /**
@@ -119,7 +141,7 @@
          */
         nextProduct : function () {
             var status = this.callback.next();
-            status && this.updateStatus(status.index, status.size);
+            status && this.updateMainStatus(status.index, status.size);
         },
 
         /**
@@ -127,7 +149,7 @@
          * @param index : 현재 이미지 슬라이드 위치
          * @param total : 총 이미지 슬라이드 갯수
          */
-        updateStatus : function (index, size) {
+        updateMainStatus : function (index, size) {
             var $container = $('.figure_pagination');
             var $indexElem = $container.find('span.num:first');
             var $totalElem = $container.find('span.num.off');
@@ -135,7 +157,21 @@
             $indexElem.text(index);
             $totalElem.text(' / ' + size);
 
-            this.toggleOff(index, size)
+            // this.toggleOff(index, size)
+        },
+
+        /**
+         * PhotoViewer 카운터 업데이트 Flicking에 콜백으로 등록 시킬 함수
+         * @param index : 현재 이미지 슬라이드 위치
+         * @param total : 총 이미지 슬라이드 갯수
+         */
+        updatePreviewStatus : function (index, size) {
+            var $container = $('.preview_center');
+            var $indexElem = $container.find('span.index');
+            var $totalElem = $container.find('span.size');
+
+            $indexElem.text(index);
+            $totalElem.text(' / ' + size);
         },
 
         toggleOff : function(index, size) {
@@ -222,21 +258,51 @@
             $pathContent.toggleClass('hide');
         },
 
+        /**
+         * Popup 형식의 사진 뷰어 ( 댓글 단 사람들의 사진 ) Open
+         */
         openPhotoViewer : function(e) {
             e.preventDefault();
-            // console.log(e);
-
+            
             $('#photoviewer').show();
-            // $('.photo_list').rolling({
-            //     autoStart: false,
-            //     flicking: true,
-            //     circulation: false,
-            // });
+
+            
+            /**
+             * Flicking plugin (this, param, options)
+             * comment images size aJax response 
+             */
+
+
+            var proto_ = $('.photo_list').Flicking({
+                prev : $('.preview_left'),
+                next : $('.preview_right'),
+                updateState : DetailProduct.updatePreviewStatus,
+            }, 
+            {
+                autoStart: false, 
+                circulation: false,
+                flicking: true,
+                viewTime: 300,
+                status: {
+                    size: 3,
+                    index: 1,
+                },
+            });
+
+            console.log(proto_);
+
         },
 
+        /**
+         * PhotoViewer Close
+         */
         closePhotoViewer : function(e) {
             e.preventDefault();
             $('#photoviewer').hide();
+
+            // Flicking plugin 초기화
+            $('.photo_list').css('left' , 0).removeData('et.flicking').off();
+
         },
 
         /**

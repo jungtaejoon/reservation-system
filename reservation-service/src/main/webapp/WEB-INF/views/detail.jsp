@@ -262,20 +262,33 @@
     <div id="photoviewer">
         <div class="popup">
             <label for="photoviewer"></label>
+            
             <div class="popup_title">
-                <h3>PHOTO VIEWER</h3>
+                <div class="preview_left">
+                    <i class="spr_book2 arr_img_lt arr_img"></i>
+                </div>
+                
+                <div class="preview_center">
+                    <h3>PHOTO VIEWER</h3>
+                    <p><span class="index">1 </span><span> / <span class="total"> 0</span></span></p>
+                </div>
+                
+                <div class="preview_right">
+                    <i class="spr_book2 arr_img_rt arr_img"></i> 
+                </div>
             </div>
             <div class="popup_content">
                 <ul class="photo_list">
                     <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
-                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
-                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
+                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170111_195/1484112206459rGQGI_JPEG/%BB%F3%BC%BC%C6%E4%C0%CC%C1%F6_%BB%F3%B4%DC%28%B3%D7%C0%CC%B9%F6_%BF%B9%BE%E0%29.jpg?type=l591_945"> </li>
+                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=l591_945"> </li>
                 </ul>
             </div>
         </div>
     </div>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
-<script src="/resources/js/module/rolling.js"></script>
+ <script src="/resources/js/module/rolling.js"></script> 
+<script src="/resources/js/module/flicking.js"></script>
 <script src="/resources/js/detail.js"></script>
 </html>
