@@ -8,7 +8,7 @@
 <title>Category</title>
 </head>
 <body>
-<form method="post" action="/add">
+<form method="post" action="/category/add">
 	카테고리 추가 : <input type="text" name="name"><br>
 	<input type="submit" value="확인">
 </form>
@@ -23,49 +23,6 @@
 </ul>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-$(document).on("click", ".delete", function(event){
-	var selectedCategory = $(event.target).closest('.category');
-	var categoryId = selectedCategory.attr('id');
-	deleteCategoryRequest(categoryId);
-});
-$(document).on("click", ".update", function(event){
-	var selectedCategory = $(event.target).closest('.category');
-	var categoryId = selectedCategory.attr('id');
-	var categoryName = $(event.target).siblings('.categoryName').val();
-	updateCategoryRequest(categoryId, categoryName);
-})
-
-function deleteCategoryRequest(categoryId){
-	$.ajax({
-		url:'/api/delete/'+categoryId,
-		method:"delete",
-		processData:true,
-		contentType : "application/json; charset=UTF-8",
-		success: deleteList(categoryId)
-	})
-}
-
-function updateCategoryRequest(categoryId, categoryName){
-	$.ajax({
-		url:'/api/update/'+categoryId,
-		method:"post",
-		processData:true,
-		contentType : "application/json; charset=UTF-8",
-		data : JSON.stringify({
-			name:categoryName
-		}),
-		success: updateList(categoryId, categoryName)
-	})
-}
-
-function deleteList(categoryId){
-	$('.category#'+categoryId).remove();	
-}
-
-function updateList(categoryId, categoryName){
-	$('.category#'+categoryId+'>input').val(categoryName);
-}
-</script>
+<script src="/resources/js/category.js?ver1"></script>
 </body>
 </html>
