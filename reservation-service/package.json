@@ -1,0 +1,22 @@
+{
+  "name": "reservation-service",
+  "version": "0.0.1",
+  "description": "npm init for create package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "seyeong",
+  "license": "ISC",
+  "keywords": [
+    "npm"
+  ],
+  "devDependencies": {
+    "jquery": "^3.2.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.10",
+    "jquery": "^3.2.1",
+    "require": "^2.4.20"
+  }
+}

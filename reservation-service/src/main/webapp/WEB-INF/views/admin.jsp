@@ -40,7 +40,7 @@
 	</table>
 	<button id="goToMain" onclick="location.href='/'">메인으로</button>
 	
-<script src="resources/scripts/jquery.min.js"></script>
+<script src="resources/scripts/lib/jquery.min.js"></script>
 <script src="resources/scripts/admin.js"></script>
 
 </body>

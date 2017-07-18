@@ -14,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.util.Log4jConfigListener;
 
 public class WebInitializer implements WebApplicationInitializer{
 	private static final String CONFIG_LOCATION = "kr.or.connect.reservation.config";
@@ -44,7 +45,7 @@ public class WebInitializer implements WebApplicationInitializer{
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(MAPPING_URL);
         
-        
+   
     }
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();

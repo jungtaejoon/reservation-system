@@ -49,32 +49,6 @@ public class CategoryController {
 	        }
 	    }
 	 
-/*	 @PutMapping
-	 @ResponseStatus(HttpStatus.NO_CONTENT)
-	    public void update(@RequestBody Category category) {
-	        if (category == null || category.getName().length() == 0 || category.getId() < 0) {
-	            
-	        }else {       	     
-	            categoryService.update(category); 
-	        }	
-	    }
-	 
-	 @DeleteMapping("/{id}")
-	 @ResponseStatus(HttpStatus.NO_CONTENT)
-	 public void delete(@PathVariable Long id){
-	        categoryService.delete(id);
-	 }*/
-	 
-	/* @PutMapping
-	 @ResponseStatus(HttpStatus.NO_CONTENT)
-	    public void update(@RequestBody Category category) {
-	        if (category == null || category.getName().length() == 0 || category.getId() < 0) {
-	            
-	        }else {       	     
-	            categoryService.update(category); 
-	        }	
-	    }*/
-	 
 	
 
 }
