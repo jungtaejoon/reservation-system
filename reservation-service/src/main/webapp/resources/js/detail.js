@@ -83,7 +83,13 @@
 
         previewCommentRendering : function(res) {
             var Templates = this.Template;
-            $('.short_review_area').append(Templates.comment(res));
+            var rating = (res.total.average / 5.0) * 100;
+            var $commentContainer = $('.short_review_area');
+
+            $commentContainer.append(Templates.comment(res));
+            
+            // comment total rating (%)
+            $('.graph_value').css('width', rating + '%');
         },
         
         /**
@@ -95,6 +101,8 @@
             $('.section_store_details').on('click', '._open, ._close', this.contentMoretoggle.bind(this));
             $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this));
             $('.detail_location').on('click', '.store_location', this.connectNaverMap.bind(this));
+            $('.short_review_area').on('click', '.thumb', this.openPhotoViewer.bind(this));
+            $('.popup').on('click', 'label', this.closePhotoViewer.bind(this));
         },
 
         /**
@@ -214,6 +222,23 @@
             $pathContent.toggleClass('hide');
         },
 
+        openPhotoViewer : function(e) {
+            e.preventDefault();
+            // console.log(e);
+
+            $('#photoviewer').show();
+            // $('.photo_list').rolling({
+            //     autoStart: false,
+            //     flicking: true,
+            //     circulation: false,
+            // });
+        },
+
+        closePhotoViewer : function(e) {
+            e.preventDefault();
+            $('#photoviewer').hide();
+        },
+
         /**
          * 오시는길에서 지도 눌렀을 경우 네이버 지도로 연결
          */
@@ -231,12 +256,12 @@
 
         ajaxWrapper : function(method, url, data) {
             return $.ajax({
-				contentType : 'application/json; charset=UTF-8',
-				method : method,
-				url : url,
-				data : data,
-				dataType : 'json',
-			});
+                contentType : 'application/json; charset=UTF-8',
+                method : method,
+                url : url,
+                data : data,
+                dataType : 'json',
+            });
         },
     };
     

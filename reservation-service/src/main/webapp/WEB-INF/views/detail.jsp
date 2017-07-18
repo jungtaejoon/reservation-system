@@ -11,9 +11,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/photoviewer.css" rel="stylesheet">
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Ai5Hi4Wy72wiWXGCJWg6&submodules=geocoder"></script>
     <script src="/resources/lib/handlebars.min.js"></script>
 
+    <!-- 이미지 슬라이더 템플릿  -->
     <script id="images_templ" type="text/x-handlebars-template">
         {{#each files}}
             <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
@@ -27,19 +29,23 @@
         {{/each}}
     </script>
 
+    <!-- 이미지 슬라이더 안에 Button들 링크 걸어주는 템플릿  -->
     <script id="goto_templ" type="text/x-handlebars-template">
         <a class="btn_goto_home" title="홈페이지" href="{{homepage}}" target="siteUrl"> <i class="fn fn-home1"></i> </a>
         <a class="btn_goto_tel" title="전화" href="tel:{{tel}}"> <i class="fn fn-call1"></i> </a>
         <a class="btn_goto_mail" title="이메일" href="mailto:{{email}}"> <i class="fn fn-mail1"></i> </a>
     </script>
 
+    <!-- 펼쳐보기 / 접기 안에있는 내용 템플릿  -->
     <script id="content_templ" type="text/x-handlebars-template">  
         <p class="dsc">
             {{content}}
         </p>
     </script>
 
+    <!-- 이벤트 정보 템플릿  -->
     <script id="event_templ" type="text/x-handlebars-template">
+        {{#if event}}
         <div class="event_info_box">
             <div class="event_info_tit">
                 <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
@@ -48,8 +54,10 @@
                 <div class="in_dsc">{{{event}}}</div>
             </div>
         </div>
+        {{/if}}
     </script>
 
+    <!-- 예매하기, 매진, 판매완료를 위한 템플릿  -->
     <script id="btn_templ" type="text/x-handlebars-template">
         <button type="button" class="bk_btn"> 
             <i class="fn fn-nbooking-calender2"></i> 
@@ -83,7 +91,7 @@
                         <div class="bg_pagination"></div>
                         <div class="figure_pagination">
                             <span class="num">1</span>
-                            <span class="num off">/ <span>3</span></span>
+                            <span class="num off">/ <span>0</span></span>
                         </div>
                     </div>
                     <div class="group_visual">
@@ -251,7 +259,21 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    <div id="photoviwer"></div>
+    <div id="photoviewer">
+        <div class="popup">
+            <label for="photoviewer"></label>
+            <div class="popup_title">
+                <h3>PHOTO VIEWER</h3>
+            </div>
+            <div class="popup_content">
+                <ul class="photo_list">
+                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
+                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
+                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
 <script src="/resources/js/module/rolling.js"></script>
