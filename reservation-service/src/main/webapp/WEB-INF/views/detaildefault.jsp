@@ -1,4 +1,6 @@
-<!D보CTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -248,6 +250,9 @@
         </div>
     </footer>
     <div id="photoviwer"></div>
+   <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
 </body>
 
 </html>
+    
