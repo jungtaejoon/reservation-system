@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public int modify(CategoryVO category) {
+	public int modifyById(CategoryVO category) {
 		return categoryDao.updateById(category);
 	}
 

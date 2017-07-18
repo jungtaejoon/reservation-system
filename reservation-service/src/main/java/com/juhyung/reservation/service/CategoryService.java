@@ -12,5 +12,5 @@ public interface CategoryService {
 	public List<CategoryVO> getCategoryListAll();
 	public int create(CategoryVO category);
 	public int removeById(Integer id);
-	public int modify(CategoryVO category);
+	public int modifyById(CategoryVO category);
 }
