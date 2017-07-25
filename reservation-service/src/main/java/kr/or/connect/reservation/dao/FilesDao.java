@@ -13,36 +13,28 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import kr.or.connect.reservation.domain.User;
+import kr.or.connect.reservation.domain.Files;
 
 @Repository
-public class UserDao {
+public class FilesDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
-	private RowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
+	private RowMapper<Files> rowMapper = BeanPropertyRowMapper.newInstance(Files.class);
 	
-	public UserDao(DataSource dataSource){
+	public FilesDao(DataSource dataSource){
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 		this.insertAction = new SimpleJdbcInsert(dataSource)
-				.withTableName("users")
+				.withTableName("file")
 				.usingGeneratedKeyColumns("id");
 	}
 	
-	public Integer insert(User user){
-		SqlParameterSource params = new BeanPropertySqlParameterSource(user);
+	public Integer insert(Files files){
+		SqlParameterSource params = new BeanPropertySqlParameterSource(files);
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
-	public User selectById(int id){
-		/*Map<String, Object> params = new HashMap<>();
-		params.put("id", id);
-		*/
+	public Files selectFileById(int id){
 		Map<String, ?> params = Collections.singletonMap("id", id);
-		return jdbc.queryForObject(UserSqls.SELECT_BY_ID, params, rowMapper);
-	}
-	
-	public User selectUserByEmail(String email){
-		Map<String, ?> params = Collections.singletonMap("email", email);
-		return jdbc.queryForObject(UserSqls.SELECT_USER_BY_EMAIL, params, rowMapper);
+		return jdbc.queryForObject(FilesSqls.SELECT_FILE_BY_ID, params, rowMapper);
 	}
 }

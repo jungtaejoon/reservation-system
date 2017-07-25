@@ -1,63 +1,68 @@
-function carouselToLeft() {
-    var width = $('.visual_img > li:first').width();
-    var carouselFirst = $('.visual_img > li:first').clone();
-    $('.visual_img').append(carouselFirst);
+var carouselModule = (function(){
+    function init(){
+        var childWidth = 0;
+        var rootElement = null;
+        var defaultDuration = 500;
 
-    //맨 처음 페이지 왼쪽으로 이동
-    $('.visual_img > li:first').animate({ marginLeft: -width }, {
-        duration: 500,
-        complete: function() {
-            $(this).remove();
+        function ready(param){
+            rootElement = param;
+            childWidth = rootElement.find("li:last").width();   //414
+
+            var clonedChildElement = rootElement.find("li:last").clone();
+            rootElement.prepend(clonedChildElement);
+            rootElement.css({left:-childWidth});
         }
-    });
-}
-
-function carouselToRight() {
-    var width = $('.visual_img > li:last').width();
-    var carouselLast = $('.visual_img > li:last').clone();
-    $(carouselLast).css('margin-left', -1 * width);
-    $('.visual_img').prepend(carouselLast);
-
-    //맨 처음 페이지 왼쪽으로 이동
-    $('.visual_img > li:first').animate({ marginLeft: 0 }, {
-        duration: 500,
-        complete: function() {
-            $('.visual_img > li:last').remove();
+        function duplicatedRootReady(param){
+            rootElement = param;
+            childWidth = rootElement.find("li:last").width();   //414
         }
-    });
-}
-
-//ajax Request Module
-var ajaxModule = (function() {
-    var aVar = {
-        ajaxUrl: null,
-        ajaxMethod: null,
-        ajaxDataType: null
-    }
-
-    function doAjax() {
-        return $.ajax({
-            url: aVar.ajaxUrl,
-            method: aVar.ajaxMethod,
-            dataType: aVar.ajaxDataType
-        });
-    }
-
-    function resetAjaxVar() {
-        for (var i in aVar) {
-            aVar[i] = null;
+        function movePrev(){
+            if(rootElement !== null){
+                rootElement.stop(true,true).animate({left:0},{
+                    duration : defaultDuration,
+                    complete : function(){
+                        rootElement.find("li:last").remove();
+                        var clonedChildElement = rootElement.find("li:last").clone();
+                        rootElement.prepend(clonedChildElement);
+                        rootElement.css({left:-childWidth});
+                    }
+                });
+            }
         }
-    }
+        function moveNext(){
+            if(rootElement !== null){
+                rootElement.stop(true,true).animate({left:-childWidth*2},{
+                    duration : defaultDuration,
+                    complete : function(){
+                        rootElement.find("li:first").remove();
+                        var clonedChildElement = rootElement.find("li:first").clone();
+                        rootElement.append(clonedChildElement);
+                        rootElement.css({left:-childWidth});
 
-    //module pattern에서 private value로 쓰이는 값을 반환하기 위해서
-    //public 영역에서 return 해주어야 한다.
+                    }
+                });
+            }
+        }
+        function getRootElement(){
+            return rootElement;
+        }
+        function getChildWidth(){
+            return childWidth;
+        }
+
+        return {
+            ready : ready,
+            movePrev : movePrev,
+            moveNext : moveNext,
+            getRootElement : getRootElement,
+            duplicatedRootReady : duplicatedRootReady,
+            getChildWidth : getChildWidth
+        };
+    }
     return {
-        cleanAjax: resetAjaxVar,
-        setting: function(pUrl, pMethod, pDataType) {
-            aVar.ajaxUrl = pUrl;
-            aVar.ajaxMethod = pMethod;
-            aVar.ajaxDataType = pDataType;
-        },
-        getAjax: doAjax
+        getInstance : function(){
+            return init();
+        }
     }
+
 })();

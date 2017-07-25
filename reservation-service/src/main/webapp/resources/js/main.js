@@ -2,12 +2,19 @@
 //Timer Module for carousel
 var timerModule = (function() {
     // privates scope
+    var carouselInstance = null;
     var carouselInterval = null;
     var carouselTimer = null;
     var delayTime = 2000;
 
+    function initTimerModule(){
+        console.log("init");
+        carouselInstance = carouselModule.getInstance();
+        carouselInstance.ready($(".visual_img"));
+    }
+
     function startInterval() {
-        carouselInterval = setInterval(carouselToLeft, delayTime);
+        carouselInterval = setInterval(carouselInstance.moveNext, delayTime);
     }
     function stopInterval() {
         if (carouselInterval != null) {
@@ -32,12 +39,13 @@ var timerModule = (function() {
             stopTimer();
             startTimer();
         },
+        initTimerModule : initTimerModule,
         intervalSet: startInterval,
         clickButton: function(whichButton){
             stopInterval();
             stopTimer();
             //If whichButton 'true' then left and 'false' then right
-            whichButton ? carouselToLeft() : carouselToRight();
+            whichButton ? carouselInstance.movePrev() : carouselInstance.moveNext();
             startInterval();
         }
     };
@@ -53,16 +61,16 @@ $('.btn_nxt_e').on('click', timerModule.clickButton.bind(this,false));  //move t
 
 //Category list를 받아오는 함수
 function getCategories() {
-    ajaxModule.setting('./categories/list', 'GET');
-    var result = ajaxModule.getAjax();
     var categoryListSrc = $("#category_list").html();
 
-    result.done(function(res) {
+    $.ajax({
+        url : "/api/categories",
+        method : "GET",
+    }).done(function(res) {
         //응답이 잘못된 경우 해당 영역은 실행되지 않는다.
         var categoryListTemplate = Handlebars.compile(categoryListSrc);
         var categoryListHtml = categoryListTemplate(res);
         $('.section_event_tab').find('ul').append(categoryListHtml);
-        ajaxModule.cleanAjax();
     });
 }
 
@@ -111,13 +119,12 @@ var productModule = (function() {
 
 //product전체 개수를 가져오는 함수
 function getProductCount() {
-    ajaxModule.setting('./api/productlist/count/0', 'GET');
-    var result = ajaxModule.getAjax();
-
-    result.done(function(res) {
+    $.ajax({
+        url : "./api/productlist/count/0",
+        method : "GET",
+    }).done(function(res) {
         var str = res + "개";
         $('.event_lst_txt > .pink').text(str);
-        ajaxModule.cleanAjax();
     });
 }
 
@@ -125,12 +132,12 @@ function getProductCount() {
 function getProducts() {
     productModule.setOffset();
     var temp = productModule.getOption();
-    var url = './api/productlist/' + temp.limit + '/' + temp.offset;
+    var url = './api/productlist?limit=' + temp.limit + '&offset=' + temp.offset + '&categoryId=0';
 
-    ajaxModule.setting(url, 'GET');
-    var result = ajaxModule.getAjax();
-
-    result.done(function(res) {
+    $.ajax({
+        url : url,
+        method : "GET",
+    }).done(function(res) {
         //응답이 잘못된 경우 해당 영역은 실행되지 않는다.
         divideProduct(res);
         productModule.runCompile();
@@ -139,7 +146,6 @@ function getProducts() {
         $('.wrap_event_box > .lst_event_box:last').append(productModule.getObject().rightHtml);
 
         productModule.cleanProduct();
-        ajaxModule.cleanAjax();
     });
 
 }
@@ -152,12 +158,12 @@ function getProducts() {
  function getProductByCategory(categoryId) {
     productModule.setOffset();
     var temp = productModule.getOption();
-    var url = './api/productlist/' + temp.limit + '/' + temp.offset + '/' + categoryId;
+    var url = './api/productlist?limit=' + temp.limit + '&offset=' + temp.offset + '&categoryId=' + categoryId;
 
-    ajaxModule.setting(url, 'GET');
-    var result = ajaxModule.getAjax();
-
-    result.done(function(res) {
+    $.ajax({
+        url : url,
+        method : "GET",
+    }).done(function(res) {
         divideProduct(res);
         productModule.runCompile();
 
@@ -165,16 +171,13 @@ function getProducts() {
         $('.wrap_event_box > .lst_event_box:last').append(productModule.getObject().rightHtml);
 
         productModule.cleanProduct();
-        ajaxModule.cleanAjax();
     });
 }
 
 //Rest API로 받아온 productList를 좌우 영역으로 나누는 function
 function divideProduct(items) {
-    console.log(items);
     for (var i = 0; i < items.length; i++) {
-        var img = items[i].saveFileName + items[i].fileName;
-
+        var img = "/files/"+items[i].fileId;
         if (i % 2 === 0) {
             productModule.getObject().leftItem.push({
                 id: items[i].id,
@@ -251,45 +254,11 @@ $(window).scroll(function() {
     }
 });
 
-//ajax Request Module
-var ajaxModule = (function() {
-    var aVar = {
-        ajaxUrl: null,
-        ajaxMethod: null,
-        ajaxDataType: null
-    }
 
-    function doAjax() {
-        return $.ajax({
-            url: aVar.ajaxUrl,
-            method: aVar.ajaxMethod,
-            dataType: aVar.ajaxDataType
-        });
-    }
-
-    function resetAjaxVar() {
-        for (var i in aVar) {
-            aVar[i] = null;
-        }
-    }
-
-    //module pattern에서 private value로 쓰이는 값을 반환하기 위해서
-    //public 영역에서 return 해주어야 한다.
-    return {
-        cleanAjax: resetAjaxVar,
-        setting: function(pUrl, pMethod, pDataType) {
-            aVar.ajaxUrl = pUrl;
-            aVar.ajaxMethod = pMethod;
-            aVar.ajaxDataType = pDataType;
-        },
-        getAjax: doAjax
-    }
-})();
 
 $(".wrap_event_box").on("click",".item_preview",function(e){
     var productId = $(this).data("product");
     var url = "./detail/" + productId;
-    console.log(url);
 
     //redirect to product page
     //similar behavior as clicking on a link
@@ -301,12 +270,13 @@ $(".wrap_event_box").on("click",".item_preview",function(e){
 
 
 //document ready
-$(document).ready(function() {
+$(function() {
     getCategories();
     getProductCount();
     getProducts();
 });
 
 $(window).on("load",function(){
+    timerModule.initTimerModule();
     timerModule.intervalSet();
 });
