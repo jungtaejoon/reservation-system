@@ -9,6 +9,14 @@ public class ProductDTO {
 	private String placeName;
 	private String placeLot;
 	private String placeStreet;
+	private int fileId;
+	
+	public int getFileId() {
+		return fileId;
+	}
+	public void setFileId(int fileId) {
+		this.fileId = fileId;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -56,36 +64,7 @@ public class ProductDTO {
 	@Override
 	public String toString() {
 		return "ProductDTO [id=" + id + ", name=" + name + ", description=" + description + ", event=" + event
-				+ ", placeName=" + placeName + ", placeLot=" + placeLot + ", placeStreet=" + placeStreet + "]";
+				+ ", placeName=" + placeName + ", placeLot=" + placeLot + ", placeStreet=" + placeStreet + ", fileId="
+				+ fileId + "]";
 	}
 }
-
-/*
-	--product
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`category_id` INT NOT NULL,
-	`name` VARCHAR(50) NOT NULL,
-	`description` VARCHAR(100) NULL,
-	`sales_start` DATETIME NOT NULL,
-	`sales_end` DATETIME NULL,
-	`sales_flag` INT(1) NOT NULL,
-	`event` VARCHAR(4000),
-	`create_date` DATETIME,
-	`modify_date` DATETIME,
-
-	--deatil
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `product_id` INT NOT NULL,
-  `content` TEXT,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
-
-	--price
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `product_id` INT NOT NULL,
-  `price_type` INT NOT NULL,
-  `price` INT NOT NULL,
-  `discount_rate` DECIMAL(5,2) NOT NULL,
-  `create_date` DATETIME,
-  `modify_date` DATETIME,
-*/

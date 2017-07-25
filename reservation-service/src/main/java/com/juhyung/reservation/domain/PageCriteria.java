@@ -6,6 +6,12 @@ public class PageCriteria {
 	private int perNum;
 	
 	public PageCriteria(int page){
+		this.perNum = 10;
+		this.page = (page-1) * perNum;
+	}
+	
+	public PageCriteria(int page, int perNum){
+		this.perNum = perNum;
 		perNum = 10;
 		this.page = (page-1) * perNum;
 	}

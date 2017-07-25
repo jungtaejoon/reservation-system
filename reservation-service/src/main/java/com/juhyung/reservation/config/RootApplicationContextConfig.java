@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Import;
 //dao, service에 대한 컴포넌트를 scan한다. sevice는 미리 추가한다.
 @ComponentScan(basePackages = {
      "com.juhyung.reservation.persistence",
-     "com.juhyung.reservation.service"
+     "com.juhyung.reservation.service",
+     "com.juhyung.reservation.common"
 })
 @Import({DbConfig.class}) // DBConfig 를 설정한다
 public class RootApplicationContextConfig {
