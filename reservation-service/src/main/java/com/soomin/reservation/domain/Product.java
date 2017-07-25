@@ -1,5 +1,7 @@
 package com.soomin.reservation.domain;
 
+import java.util.List;
+
 public class Product {
 	private Long category_id;
 	private String create_date;
@@ -11,7 +13,7 @@ public class Product {
 	private String sales_end;
 	private boolean sales_flag;
 	private String sales_start;
-	
+
 	public Long getCategory_id() {
 		return category_id;
 	}
@@ -72,4 +74,5 @@ public class Product {
 	public void setSales_start(String sales_start) {
 		this.sales_start = sales_start;
 	}
+	
 }

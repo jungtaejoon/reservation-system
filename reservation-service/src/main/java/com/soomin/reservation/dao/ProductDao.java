@@ -52,4 +52,9 @@ public class ProductDao {
 		params.put("offset", offset);
 		return jdbc.query(ProductSqls.SELECT_PRODUCT_BY_CATEGORY, params, rowMapper);
 	}
+	public List<Product> SelectProductById(Long id) {
+		Map<String, ?> params = Collections.singletonMap("id", id);
+		return jdbc.query(ProductSqls.SELECT_PRODUCT_DETAIL_BY_ID, params, rowMapper);
+	}
+	
 }

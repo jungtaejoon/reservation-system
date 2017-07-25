@@ -43,8 +43,8 @@
                                 <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 --->
                                 <ul class="visual_img">
                                     <c:forEach items="${promotionList}" var="promotion">
-                                    <li class="item" style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
-                                        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
+                                    <li class="item" style="background-image: url(/file/product/${promotion.id}); width: 338px;">
+                                        <a href="/detail/${promotion.id}"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
                                             <div class="event_txt">
                                                 <h4 class="event_txt_tit">${promotion.name}</h4>
                                                 <p class="event_txt_adr"></p>
@@ -65,7 +65,7 @@
                     <li class="item" data-category="0">
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
-                    
+
                     <c:forEach items="${categoryList}" var="category">
                    	<li class="item" data-category="${category.id}">
                        	<a class="anchor"> <span>${category.name}</span> </a>
@@ -74,14 +74,14 @@
                 </ul>
             </div>
             <div class="section_event_lst">
-                <p class="event_lst_txt">바로 예매 가능한 전시, 공연, 행사가 <span class="pink">${numberOfProduct}개</span> 있습니다</p>
+                <p class="event_lst_txt">바로 예매 가능한 전시, 공연, 행사가 <span class="pink">${countProducts}개</span> 있습니다</p>
                 <div class="wrap_event_box">
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
                     <ul class="lst_event_box">
-                        
+
                     </ul>
                     <ul class="lst_event_box">
-                        
+
                     </ul>
                     <!-- 더보기 -->
                     <div class="more">
@@ -100,11 +100,22 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    
+
     <!-- script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/resources/js/gnb.js"></script>
-	<script src="/resources/js/mainpage.js?ver1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script id="product-list" type="text/x-handlebars-template">
+      <li class='item'>
+        <a href='/detail/{{id}}' class='item_book'>
+    		 <div class='item_preview'> <img alt='{{name}}' class='img_thumb' src='/file/product/{{id}}'><span class='img_border'></span> </div>
+         <div class='event_txt'>
+    		     <h4 class='event_txt_tit'> <span>{{name}}</span> <small class='sm'></small> </h4>
+    			   <p class='event_txt_dsc'>{{description}}</p>
+    		 </div>
+    		</a>
+    	</li>
+    </script>
+    <script src="/resources/js/gnb.js"></script>
+    <script src="/resources/js/mainpage.js"></script>
 </body>
-
 </html>

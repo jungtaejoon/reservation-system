@@ -8,10 +8,9 @@
 <title>Category</title>
 </head>
 <body>
-<form method="post" action="/category/add">
-	카테고리 추가 : <input type="text" name="name"><br>
-	<input type="submit" value="확인">
-</form>
+
+카테고리 추가 : <input class="categoryName" type="text" name="name"><br>
+<button class="add">확인</button>
 <ul>
 	<c:forEach items="${categoryList}" var="category">
    		<li class="category" id="${category.id}">

@@ -12,17 +12,17 @@ import com.soomin.reservation.domain.Product;
 import com.soomin.reservation.service.ProductService;
 
 @RestController
-@RequestMapping("/api/product")
-public class ProductRestController {
+@RequestMapping("/api/products")
+public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/number/{categoryId}")
-	public Long numberOfProduct(@PathVariable Long categoryId){
-		return productService.numberOfProduct(categoryId);
+	@GetMapping("/count/{categoryId}")
+	public Long countProduct(@PathVariable Long categoryId){
+		return productService.countProduct(categoryId);
 	}
-	@GetMapping("/list/{categoryId}/{offset}")
+	@GetMapping("/categories/{categoryId}/pages/{offset}")
 	public List<Product> productList(@PathVariable("categoryId") Long categoryId, @PathVariable("offset") Long offset){
-		return productService.viewProduct(categoryId, offset);
+		return productService.getProduct(categoryId, offset);
 	}
 }
