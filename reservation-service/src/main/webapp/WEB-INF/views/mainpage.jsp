@@ -20,12 +20,12 @@
             <div class="section_visual">
                 <div class="group_visual">
                     <div class="container_visual">
-                        <div class="btnBanner prev_e">
+                        <div class="imgBtn prev_e">
                             <div class="prev_inn">
                                 <a href="#" class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
                             </div>
                         </div>
-                        <div class="btnBanner nxt_e">
+                        <div class="imgBtn nxt_e">
                             <div class="nxt_inn">
                                 <a href="#" class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
                             </div>
@@ -87,8 +87,8 @@
                     <ul class="lst_event_box">
                     	<script id="product_template" type="text/x-handlebars-template">
 							{{#productList}}
-								<li class="product_list item category{{categoryId}}">
-                    	        <a href="#" class="item_book">
+								<li class="product_list item">
+                    	        <a href="/mvDetail/{{productId}}" class="item_book">
                         	        <div class="item_preview"> 
                             	    	<img alt="{{fileName}}" class="img_thumb" src="{{saveFileName}}">
                                 		<span class="img_border"></span> 
@@ -118,6 +118,8 @@
     <c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
-<script src="/resources/js/handlebars-v4.0.5.js"></script>
-<script src="/resources/js/main_module.js"></script>
+<!-- <script src="/resources/js/handlebars-v4.0.5.js"></script> -->
+<script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
+<script src="/resources/js/modules.js"></script>
+<script src="/resources/js/main.js"></script>
 </html>
