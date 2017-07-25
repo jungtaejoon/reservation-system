@@ -8,12 +8,8 @@
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="/resources/js/handlebars-v4.0.10.js"></script>
-    <script type="text/javascript" src="/resources/js/mainpageModule.js"></script>
     <link href="/resources/css/style.css" rel="stylesheet">
 </head>
-
 <body>
     <div id="container">
         <div class="header">
@@ -22,7 +18,7 @@
                     <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="/myReservation" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/login/myReservations" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <hr>
@@ -80,7 +76,7 @@
             </div>
             <div class="section_event_tab">
                 <ul class="event_tab_lst tab_lst_min">
-                    <li class="item" data-category="1">
+                    <li class="item" data-category="0">
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
                     <script id="categoryTemplate" type="text/x-handlebars-template">
@@ -97,10 +93,9 @@
                     <ul class="lst_event_box">
                       <script id="productTemplate" type="text/x-handlebars-template">
                         {{#productList}}
-                        <li class="item">
-                              <a href="#" class="item_book">
-
-                                <div class="item_preview"> <img alt="{{fileName}}" class="img_thumb" src="{{saveFileName}}">                                    <span class="img_border"></span> </div>
+                        <li class="item" data-id="{{id}}">
+                              <a href="/products/detail?id={{id}}" class="item_book">
+                                <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}">                                    <span class="img_border"></span> </div>
                                   <div class="event_txt">
                                   <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
                                   <p class="event_txt_dsc">{{description}}</p>
@@ -128,6 +123,10 @@
             <p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
             <span class="copyright">© NAVER Corp.</span>
         </div>
+        <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
+    	<script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
+        <script type="text/javascript" src="/resources/js/commonModule.js"></script>
+        <script type="text/javascript" src="/resources/js/mainpage.js"></script>
     </footer>
 </body>
 
