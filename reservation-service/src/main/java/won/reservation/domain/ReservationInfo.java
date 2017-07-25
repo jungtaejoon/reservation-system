@@ -12,7 +12,7 @@ public class ReservationInfo {
 	private String reservationName;
 	private String reservationTel;
 	private String reservationEmail;
-	private String reservationDate;
+	private Timestamp reservationDate;
 	private String reservationType;
 	private Timestamp createDate;
 	private Timestamp modifyDate;
@@ -23,7 +23,7 @@ public class ReservationInfo {
 
 	public ReservationInfo(int id, int productId, int userId, int generalTicketCount, int youthTicketCount,
 			int childTicketCount, String reservationName, String reservationTel, String reservationEmail,
-			String reservationDate, String reservationType, Timestamp createDate, Timestamp modifyDate) {
+			Timestamp reservationDate, String reservationType, Timestamp createDate, Timestamp modifyDate) {
 		this.id = id;
 		this.productId = productId;
 		this.userId = userId;
@@ -111,11 +111,11 @@ public class ReservationInfo {
 		this.reservationEmail = reservationEmail;
 	}
 
-	public String getReservationDate() {
+	public Timestamp getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(String reservationDate) {
+	public void setReservationDate(Timestamp reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 

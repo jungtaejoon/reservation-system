@@ -17,19 +17,23 @@ import won.reservation.service.CategoryService;
 @RequestMapping(value= {"/category"})
 public class CategoryController {
 	
-	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	public CategoryController(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+	
 	@GetMapping
-	public ModelAndView get() {
+	public ModelAndView read() {
 		ModelAndView mav = new ModelAndView("mainpage");
-		mav.addObject("category", categoryService.readCategory());
+		mav.addObject("category", categoryService.get());
 		return mav;
 	}
 	
 	@PostMapping
 	public String create(@RequestParam String name) {
-		int result = categoryService.addCategory(name);
+		int result = categoryService.add(name);
 		return "redirect:/category";
 	}
 	
@@ -37,7 +41,7 @@ public class CategoryController {
 	@ResponseBody
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("id") int id) {
-		categoryService.delete(id);
+		categoryService.remove(id);
 		return "success";
 	}
 	
@@ -45,7 +49,7 @@ public class CategoryController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public void update(@ModelAttribute("category") Category category) {
-		categoryService.update(category);
+		categoryService.modify(category);
 	}
 	
 }

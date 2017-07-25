@@ -4,14 +4,14 @@ import java.sql.Timestamp;
 
 public class Users {
 	private int id;
-	private String username;
+	private String userName;
 	private String email;
 	private String tel;
-	private String nickname;
+	private String nickName;
 	private String snsId;
 	private String snsType;
 	private String snsProfile;
-	private String adminFlag;
+	private Integer adminFlag;
 	private Timestamp createDate;
 	private Timestamp modifyDate;
 	
@@ -19,13 +19,13 @@ public class Users {
 		
 	}
 
-	public Users(int id, String username, String email, String tel, String nickname, String snsId, String snsType,
-			String snsProfile, String adminFlag, Timestamp createDate, Timestamp modifyDate) {
+	public Users(int id, String userName, String email, String tel, String nickName, String snsId, String snsType,
+			String snsProfile, Integer adminFlag, Timestamp createDate, Timestamp modifyDate) {
 		this.id = id;
-		this.username = username;
+		this.userName = userName;
 		this.email = email;
 		this.tel = tel;
-		this.nickname = nickname;
+		this.nickName = nickName;
 		this.snsId = snsId;
 		this.snsType = snsType;
 		this.snsProfile = snsProfile;
@@ -42,12 +42,12 @@ public class Users {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {
@@ -66,12 +66,12 @@ public class Users {
 		this.tel = tel;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getSnsId() {
@@ -98,11 +98,11 @@ public class Users {
 		this.snsProfile = snsProfile;
 	}
 
-	public String getAdminFlag() {
+	public Integer getAdminFlag() {
 		return adminFlag;
 	}
 
-	public void setAdminFlag(String adminFlag) {
+	public void setAdminFlag(Integer adminFlag) {
 		this.adminFlag = adminFlag;
 	}
 
@@ -124,8 +124,8 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "[USERS] id = "+id+" ,username = " + username +" ,email = " + email +" ,tel = "+tel
-				+" ,nickname = " + nickname +" ,snsId = " + snsId +" ,snsType = " + snsType +" ,snsProfile = " + snsProfile
+		return "[USERS] id = "+id+" ,username = " + userName +" ,email = " + email +" ,tel = "+tel
+				+" ,nickname = " + nickName +" ,snsId = " + snsId +" ,snsType = " + snsType +" ,snsProfile = " + snsProfile
 				+" ,adminFlag = " + adminFlag +" , createDate = "+ createDate + " , modifyDate = "+ modifyDate;
 	}
 	

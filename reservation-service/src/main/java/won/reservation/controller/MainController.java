@@ -9,16 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import won.reservation.service.CategoryService;
 
 @Controller
-@RequestMapping("/")
 public class MainController {
 	
-	@Autowired
 	private CategoryService categoryService;
+		
+	@Autowired
+	public MainController(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
 	
 	@GetMapping
+	@RequestMapping("/")
 	public String main(Model model) {
-		model.addAttribute("category", categoryService.readCategory());
+		model.addAttribute("category", categoryService.get());
 		return "mainpage";
+	}
+	
+	@GetMapping
+	@RequestMapping("/review")
+	public String review() {
+		return "review";
 	}
 	
 }

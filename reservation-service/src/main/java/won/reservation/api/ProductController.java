@@ -14,18 +14,22 @@ import won.reservation.service.ProductService;
 @RequestMapping("/api/products")
 public class ProductController {
 	
-	int displaynum = 3;
+	static final int DISPLAY_NUM = 3;
+	
+	private ProductService service;
 	
 	@Autowired
-	ProductService service;
+	public ProductController(ProductService service) {
+		this.service = service;
+	}	
 	
-	@GetMapping("/{start}")
+	@GetMapping("/info/{start}")
 	public Map<String, Object> list(@PathVariable int start) {
-		return service.readProductInfo(start*displaynum);
+		return service.getProductInfo(start*DISPLAY_NUM);
 	}
 
-	@GetMapping("/{categoryId}/start/{start}")
+	@GetMapping("/info/{categoryId}/start/{start}")
 	public Map<String, Object> listCategory(@PathVariable(name = "categoryId") int categoryId, @PathVariable(name = "start") int start) {
-		return service.readProductInfoCategory(categoryId, start*displaynum);
+		return service.getProductInfoCategory(categoryId, start*DISPLAY_NUM);
 	}
 }

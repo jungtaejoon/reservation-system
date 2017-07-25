@@ -15,14 +15,17 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import won.reservation.domain.Product;
+import won.reservation.dto.ProductDetailInfo;
 import won.reservation.dto.ProductInfo;
 
 @Repository
 public class ProductDao {
+	
 	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
 	private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class);
 	private RowMapper<ProductInfo> productInfoRowMapper = BeanPropertyRowMapper.newInstance(ProductInfo.class);
+	private RowMapper<ProductDetailInfo> productDetailInfoRowMapper = BeanPropertyRowMapper.newInstance(ProductDetailInfo.class);
 	
 	public ProductDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -41,18 +44,20 @@ public class ProductDao {
 		return jdbc.query(ProductSqls.SELECT_ALL, rowMapper);
 	}
 	
-	// 카테고리별전체보기
-	public List<Product> select(Integer categoryId) {
+	// 아이디로 상품정보 얻어오기
+	public ProductDetailInfo select(Integer productId) {
 		Map<String, Integer> params = new HashMap<>();
-		params.put("categoryid", categoryId);
-		return jdbc.query(ProductSqls.SELECT_BY_CATEGORYID, params, rowMapper);
+		params.put("productid", productId);
+		return jdbc.queryForObject(ProductSqls.SELECT_DETAIL_BY_PRODUCT_ID, params, productDetailInfoRowMapper);
 	}
 	
+	// 전체 상품 수 조회
 	public int getCount() {
 		Map<String, Integer> params = new HashMap<>();
 		return jdbc.queryForObject(ProductSqls.COUNT_ALL, params, Integer.class);
 	}
 	
+	// 카테고리별 상품 수 조회
 	public int getCount(Integer categoryId) {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("categoryid", categoryId);

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+#photoviwer {
+	position:absolute;
+  	top:50px;
+   	left:0;
+   	width:100%;
+   	height:100%;
+   	background-color: white;
+   	opacity: 0.9;
+   	display: none;
+}
+
+#photoviwer div {
+	width : 414px;
+	height : 500px;
+	background-color : yellow;
+	margin: 0 auto;
+}
+
+#photoviwer div ul {
+   	/* list-style:none; */
+   	margin:0;
+   	padding:0;
+   	display : inline-block;
+}
+
+#photoviwer div ul li{
+   	margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
+#photoviwer div ul li img{
+   	width: 414px;
+}	

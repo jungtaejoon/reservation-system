@@ -1,6 +1,5 @@
 package won.reservation.dao;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +18,7 @@ import won.reservation.domain.Category;
 
 @Repository
 public class CategoryDao {
+	
 	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
 	private RowMapper<Category> rowMapper = BeanPropertyRowMapper.newInstance(Category.class);
@@ -37,10 +37,7 @@ public class CategoryDao {
 	}
 	
 	public List<Category> select() {
-		Map<String, Object> params = Collections.emptyMap();
-		List<Category> list = jdbc.query(CategorySqls.SELECT, params, rowMapper);
-		System.out.println(list);
-		return jdbc.query(CategorySqls.SELECT, params, rowMapper);
+		return jdbc.query(CategorySqls.SELECT, rowMapper);
 	}
 	
 	public Category selectById(int id) {

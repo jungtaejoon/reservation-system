@@ -1,0 +1,33 @@
+@charset "UTF-8";
+ #photoviwer {
+	position: fixed;
+  	top:50px;
+   	left:0;
+   	width:100%;
+   	height:100%;
+   	background-color: white;
+   	opacity: 0.9;
+   	display: none;
+}
+
+#photoviwer div {
+	width : 100%;
+	margin: 0 auto;
+}
+
+
+#photoviwer .inner{
+	overflow-x: hidden;
+	width : 90%;
+}
+
+#photoviwer div ul {
+    list-style:none;
+   	margin:0;
+   	padding:0;
+   	display : inline-block;
+}
+
+#photoviwer div ul li{
+    float: left;
+}

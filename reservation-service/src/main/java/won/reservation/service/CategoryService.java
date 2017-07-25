@@ -5,9 +5,9 @@ import java.util.List;
 import won.reservation.domain.Category;
 
 public interface CategoryService {
-	public List<Category> readCategory();
-	public Category readCategoryById(int id);
-	public int addCategory(String name);
-	public int update(Category category);
-	public int delete(int id);
+	public List<Category> get();
+	public Category get(int id);
+	public int add(String name);
+	public int modify(Category category);
+	public int remove(int id);
 }

@@ -35,6 +35,6 @@
 		</c:forEach>
 	</table>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="resources/js/app.js?ver=2"></script>
+<script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="resources/js/app.js"></script>
 </html>

@@ -21,6 +21,9 @@
                     <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
                 <a href="/myreservation" class="btn_my"><span title="내 예약">MY</span> </a>
+               <!--  
+                <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=7HYSSZyvxLo0lyAcabtI&redirect_uri=http://localhost:8080/api/users/loginCallBack&state=123" class="btn_my"><span title="내 예약">MY</span> </a>
+             -->
             </header>
         </div>
         <hr>
@@ -153,12 +156,16 @@
         </div>
     </footer>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+-->
+<script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script id="project-item-template" type="text/x-handlebars-template">
-	<li class="item" data-category="{{id }}">
-    	<a href="#" class="item_book">
-    		<div class="item_preview"> <img alt="{{fileName }}" class="img_thumb" src="{{saveFileName }}"><span class="img_border"></span> </div>
+	<li class="item" data-category="{{productId }}">
+    	<a href="/products/{{productId }}" class="item_book">
+    		<div class="item_preview"> <img alt="{{fileName }}" class="img_thumb" src="/api/files/{{fileId}}"><span class="img_border"></span> </div>
     		<div class="event_txt">
     			<h4 class="event_txt_tit"> <span>{{productName }}</span> <small class="sm">{{placeName }}</small> </h4>
     			<p class="event_txt_dsc">{{description }}</p>
@@ -166,5 +173,5 @@
     	</a>
     </li>
 </script>
-<script src="resources/js/main.js"></script>
+<script src="/resources/js/main.js"></script>
 </html>

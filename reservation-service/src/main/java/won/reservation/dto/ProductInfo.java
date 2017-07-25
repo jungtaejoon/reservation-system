@@ -2,23 +2,21 @@ package won.reservation.dto;
 
 // 메인페이지에서 보이는 상품 정보를 담는 DTO
 public class ProductInfo {
+	
 	private int productId;
 	private String productName;
 	private String fileName;
-	private String saveFileName;
+	private int fileId;
 	private String placeName;
 	private String description;
 	
-	public ProductInfo() {
-	}
+	public ProductInfo() {}
 	
-	public ProductInfo(int productId, String productName, String fileName, String saveFileName, String placeName,
-			String description) {
-		super();
+	public ProductInfo(int productId, String productName, String fileName, int fileId, String placeName, String description) {
 		this.productId = productId;
 		this.productName = productName;
 		this.fileName = fileName;
-		this.saveFileName = saveFileName;
+		this.fileId = fileId;
 		this.placeName = placeName;
 		this.description = description;
 	}
@@ -47,12 +45,12 @@ public class ProductInfo {
 		this.fileName = fileName;
 	}
 
-	public String getSaveFileName() {
-		return saveFileName;
+	public int getfileId() {
+		return fileId;
 	}
 
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
+	public void setfileId(int fileId) {
+		this.fileId = fileId;
 	}
 
 	public String getPlaceName() {
