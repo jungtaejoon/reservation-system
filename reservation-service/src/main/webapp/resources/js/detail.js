@@ -1,9 +1,10 @@
 
+
 $(document).ready(function() {
 
-    ReservationMain.init();
+    ProductDetail.init();
+
+
 });
-
-
 
 

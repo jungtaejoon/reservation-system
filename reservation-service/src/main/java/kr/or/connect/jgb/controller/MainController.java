@@ -23,8 +23,13 @@ import kr.or.connect.jgb.service.CategoryService;
 @Controller
 @RequestMapping("/")
 public class MainController {
-	@Autowired
+	
 	private CategoryService categoryService;
+	
+	@Autowired
+	MainController(CategoryService categoryService){
+		this.categoryService = categoryService;
+	}
 	
 	@GetMapping("/category")
 	public String catergory(Model model) {
@@ -35,7 +40,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/category")
-    public String create(@ModelAttribute(name="name") String name) {
+    public String create(@RequestParam String name) {
         Category category = new Category(name);
         categoryService.addCategory(category);
         return "redirect:/category";
@@ -45,16 +50,13 @@ public class MainController {
 	public String myreservation(Model model) {
 		return "myreservation";
 	}
-	
-	@GetMapping("/detail")
-	public String detail(Model model) {
-		return "detail";
-	}
-	
+		
 	@GetMapping
 	public String index(Model model) {
 		return "mainpage";
 	}
+	
+	
 	
 
 }
