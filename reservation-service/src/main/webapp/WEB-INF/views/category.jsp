@@ -48,8 +48,7 @@
 			if (evt.target && evt.target.matches("button.delete")) {
 				deleteCategory(evt.target);
 			}
-			console.log(this);
-			
+
 			if (evt.target && evt.target.matches("button.update")) {
 				updateCategory(evt.target);
 			}

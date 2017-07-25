@@ -50,4 +50,12 @@ public class ProductDTOSqls {
     		"AND product.id > :id " + 
     		"GROUP BY product.id " + 
     		"LIMIT 10";
+    
+    final static String SELECT_BY_PRODUCT_ID = "select p.id, p.name, "
+    		+ "p.event, di.place_name, pd.content, "
+    		+ "p.sales_start, p.sales_end, p.sales_flag, p.category_id "
+    		+ "from product p "
+    		+ "join display_info di on di.product_id=p.id "
+    		+ "join product_detail pd on pd.product_id=p.id "
+    		+ "where p.id = :product_id";
 }

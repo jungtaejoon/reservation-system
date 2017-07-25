@@ -1,0 +1,10 @@
+<div class="slider-container">
+    <span class="close">&times;</span>
+    <div class="slide">
+        {{#each commentImage}}
+            <div class="item" data-id="{{commentImageId}}">
+                <img alt="{{fileName}}" src="http://127.0.0.1:8080/files/{{fileId}}">
+            </div>
+        {{/each}}
+    </div>
+</div>

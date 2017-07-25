@@ -1,30 +1,57 @@
 package kr.or.connect.jy.dto;
 
-public class ProductDTO {
-	int id;
-	String name;
-	String placeName;
-	String content;
-	int categoryId;
-	String fileId;
+import java.sql.Timestamp;
 
-	public ProductDTO(int id, String name, String placeName, String content, int categoryId, String fileId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.placeName = placeName;
-		this.content = content;
-		this.categoryId = categoryId;
+public class ProductDTO {
+	int id; // product
+	String name; // product
+	String placeName; // display_info
+	String event; // product
+	String content; // detail
+	int categoryId; // product
+	int fileId; // file
+	Timestamp salesStart;
+	Timestamp salesEnd;
+	boolean salesFlag;
+
+	public Timestamp getSalesStart() {
+		return salesStart;
+	}
+
+	public void setSalesStart(Timestamp salesStart) {
+		this.salesStart = salesStart;
+	}
+
+	public Timestamp getSalesEnd() {
+		return salesEnd;
+	}
+
+	public void setSalesEnd(Timestamp salesEnd) {
+		this.salesEnd = salesEnd;
+	}
+
+	public boolean isSalesFlag() {
+		return salesFlag;
+	}
+
+	public void setSalesFlag(boolean salesFlag) {
+		this.salesFlag = salesFlag;
+	}
+
+	public int getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(int fileId) {
 		this.fileId = fileId;
 	}
 
-	public ProductDTO(int id) {
-		super();
-		this.id = id;
+	public String getEvent() {
+		return event;
 	}
 
-	public ProductDTO() {
-		super();
+	public void setEvent(String event) {
+		this.event = event;
 	}
 
 	public int getId() {
@@ -65,13 +92,5 @@ public class ProductDTO {
 
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
-	}
-
-	public String getFileId() {
-		return fileId;
-	}
-
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
 	}
 }

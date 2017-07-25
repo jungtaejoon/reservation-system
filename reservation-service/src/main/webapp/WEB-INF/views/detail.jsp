@@ -13,9 +13,22 @@
     	.autoslide {
     		left: -414px
     	}
+
+        div.group_visual {
+            max-height: 400px;
+        }
+
+        div.visual_txt {
+            max-height: 400px;
+        }
+
+        .hide {
+            display: none;
+        }
+
     </style>
-</head>
-<body>
+    </head>
+<body data-id=${product.id} data-category-id=${product.categoryId}>
     <div id="container">
         <div class="header fade">
             <header class="header_tit">
@@ -47,30 +60,6 @@
                         <div>
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img">
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="prev">
@@ -102,7 +91,6 @@
                     <!-- [D] 펼쳐보기 클릭 시 store_details에 close3 제거 -->
                     <div class="store_details close3">
                         <p class="dsc">
-                            웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다.
                         </p>
                     </div>
                     <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
@@ -253,15 +241,84 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    <div id="photoviwer"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.runtime.min.js"></script>
+    <style type="text/css">
+        #photoviwer {
+            display: none;
+            max-width: 414px;
+            margin: 0 auto!important;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            background-color: #fefefe;
+            border: 1px solid #888;
+            float: left;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .slider-container .close {
+            z-index: 2;
+        }
+
+        .slider-container div.slide {
+            list-style: none;
+            width: 414px;
+            height: 414px;
+            margin: 0 auto;
+        }
+
+        .slider-container .item {
+            position: absolute;
+            max-width: 414px;
+            min-width: 327px;
+            max-height: 414px;
+            min-height: 327px;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .slider-container .item img {
+            max-width: 414px;
+            min-width: 327px;
+            max-height: 414px;
+            min-height: 327px;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .close {
+            color: blue;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            cursor: pointer;
+        }
+
+    </style>
+    <div id="photoviwer">
+    </div>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
+    <script src="/node_modules/@egjs/component/dist/component.js"></script>
     <script src="/resources/js/templatesCompiled.js"></script>
+
     <script src="/resources/js/reservationCommon.js"></script>
     <script src="/resources/js/sliding-extension.js"></script>
     <script src="/resources/js/detail.js"></script>
-    <!-- <script src="/resources/js/sliding.js"></script> -->
-    
+    <script src="/resources/js/flicker.js"></script>
 </body>
 
 </html>

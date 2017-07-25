@@ -1,8 +1,8 @@
-<li class="item" data-id={{id}}>
+<li class="item" data-id={{id}} data-category-id={{categoryId}}>
     <a href="#" class="item_book">
     <div class="item_preview">
         {{#if fileId}}
-        <img alt="{{name}}" class="img_thumb" src="http://localhost:8080/files/{{fileId}}">
+        <img alt="{{name}}" class="img_thumb" src="http://127.0.0.1:8080/files/{{fileId}}">
         {{else}}
         <img alt="{{name}}" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">
         {{/if}}

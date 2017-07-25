@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -93,6 +92,50 @@ public class FileController {
 		} // if
 		return "redirect:/files";
 	}
+	
+	@PostMapping("/usercomment")
+	public String uploadUserCommentImages(@RequestParam("userId") Integer userId, @RequestParam("file") MultipartFile[] files) {
+		if (files != null && files.length > 0 && userId != null) {
+			String userCommentsDir = baseDir + "UserCommentsImages" + File.separator + userId;
+			
+			File f = new File(userCommentsDir);
+
+			if (!f.exists()) { 
+				f.mkdirs(); 
+			}
+
+			for (MultipartFile file : files) {
+				String contentType = file.getContentType();
+				
+				String originalFilename = file.getOriginalFilename();
+				long size = file.getSize();
+
+				String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
+				String saveFileName = userCommentsDir + File.separator + uuid; // 실제 저장되는 파일의 절대 경로
+
+				Timestamp now = new Timestamp(new Date().getTime());
+				kr.or.connect.jy.dto.File myFile = new kr.or.connect.jy.dto.File(userId, originalFilename, saveFileName,
+						size, contentType, false, now, now);
+				
+				int fileId = fileService.insert(myFile);
+
+				// 실제 파일을 저장함.
+				// try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
+				try (InputStream in = file.getInputStream();
+						FileOutputStream fos = new FileOutputStream(saveFileName)) {
+					int readCount = 0;
+					byte[] buffer = new byte[512];
+					while ((readCount = in.read(buffer)) != -1) {
+						fos.write(buffer, 0, readCount);
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			} // for
+		} // if
+		return "redirect:/files";
+	}
+
 
 	@GetMapping(path ="/{id}")
 	public void downloadImage(@PathVariable(name = "id") long id, HttpServletResponse response) {

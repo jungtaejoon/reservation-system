@@ -10,9 +10,9 @@ import kr.or.connect.jy.dto.ProductImage;
 public class ProductImageService {
 	@Autowired
 	private ProductImageDao productImageDao;
-	
+
 	public int insert(ProductImage productImage) {
 		return productImageDao.insert(productImage);
 	}
-	
+
 }

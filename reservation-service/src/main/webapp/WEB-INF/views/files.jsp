@@ -13,5 +13,13 @@
     <input type="file" name="file"><br>
     <input type="submit" value="등록">
 </form>
-</body>
+
+    <form method="post" action="/files/usercomment" enctype="multipart/form-data">
+    사용자ID: <input type="text" name="userId"><br>
+    <input type="file" name="file"><br>
+    <input type="file" name="file"><br>
+    <input type="submit" value="등록">
+    </form>
+
+    </body>
 </html>

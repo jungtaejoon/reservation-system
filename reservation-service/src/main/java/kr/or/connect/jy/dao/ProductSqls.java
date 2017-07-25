@@ -5,6 +5,7 @@ public class ProductSqls {
     		+ "sales_start, sales_end, sales_flag, "
     		+ "event, create_date, modify_date "
     		+ "from product";
+    
     final static String SELECT_ALL_LIMIT4 = "select id, category_id, name, description, "
     		+ "sales_start, sales_end, sales_flag, "
     		+ "event, create_date, modify_date "
@@ -40,6 +41,7 @@ public class ProductSqls {
     		+ "AND id > :id "
     		+ "LIMIT 10";
     
+    final static String SELECT_BY_ID = "select * from product where id=:id";
     final static String COUNT_ALL = "select count(id) from product";
     final static String COUNT_BY_CATEGORY_ID = "select count(id) from product where category_id = :category_id";
 }

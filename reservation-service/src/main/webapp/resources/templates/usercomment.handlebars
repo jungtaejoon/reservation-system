@@ -1,0 +1,26 @@
+<li class="list_item" data-id="{{comment.id}}">
+    <div>
+    {{#if comment.fileId}}
+        <div class="review_area">
+            <div class="thumb_area">
+                <a href="#" class="thumb" title="이미지 크게 보기">
+                    <img width="90" height="90" class="img_vertical_top"
+                         src="http://127.0.0.1:8080/files/{{comment.fileId}}" alt="리뷰이미지">
+                </a>
+                <span class="img_count">{{comment.imgcount}}</span>
+            </div>
+    {{else}}
+        <div class="review_area no_img">
+    {{/if}}
+            <h4 class="resoc_name">{{product.name}}</h4>
+            <p class="review">{{comment.comment}}</p>
+        </div>
+        <div class="info_area">
+            <div class="review_info">
+                <span class="grade">{{comment.score}}</span>
+                <span class="name">{{comment.username}}</span>
+                <span class="date">{{comment.modifyDate}}</span>
+            </div>
+        </div>
+    </div>
+</li>

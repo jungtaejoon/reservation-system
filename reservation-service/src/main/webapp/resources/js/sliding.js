@@ -1,6 +1,6 @@
     (function (){
-		var _setInterval;	// setInterval 담아둘 변수
-		var _setTimeout;	// setTimeout 담아둘 변수
+		var intervalId;	// setInterval 담아둘 변수
+		var timerId;	// setTimeout 담아둘 변수
     	
         var $lnk_logo_reservation = $('a.lnk_logo[title=예약]');
         $lnk_logo_reservation.attr("href", "/");
@@ -102,7 +102,7 @@
 		
 		var $promotion_area = $('div.container_visual');
 		
-		_setInterval = setInterval(autoSlide, 2000);
+		intervalId = setInterval(autoSlide, 2000);
 		
 		$btn_pre.on("mouseenter", pauseSliding);
 		
@@ -125,10 +125,10 @@
 		function pauseSliding(event){
 			event.preventDefault();		// 취소가능한 이벤트를 취소한다.
 			event.stopPropagation();	// 이벤트 전파를 막는다.
-			clearInterval(_setInterval);
-			clearTimeout(_setTimeout);
-			_setTimeout = setTimeout(function () {
-				_setInterval = setInterval(autoSlide, 2000);
+			clearInterval(intervalId);
+			clearTimeout(timerId);
+			timerId = setTimeout(function () {
+				intervalId = setInterval(autoSlide, 2000);
 			}, 4000);
 		}
 		
