@@ -1,4 +1,4 @@
-var categoryModule = (function(){
+var CategoryModule = (function(){
 	//핸들바 템플릿 가져오기
 	var source = $("#category_template").html(); 
 
@@ -23,7 +23,7 @@ var categoryModule = (function(){
 			type: "GET",
 			url:"/categories",
 			success: function(categoryList){
-				categoryModule.loadCategoryAll(categoryList);
+				CategoryModule.loadCategoryAll(categoryList);
 			}
 		});
 	};
@@ -35,9 +35,10 @@ var categoryModule = (function(){
 	}
 })();
 
-categoryModule.categoryInit();
+CategoryModule.categoryInit();
 
-$("ul.tab_lst_min").on('click',  'li.item', categoryModule.categoryActive);
+$("ul.tab_lst_min").on('click',  'li.item', CategoryModule.categoryActive);
+
 
 
 

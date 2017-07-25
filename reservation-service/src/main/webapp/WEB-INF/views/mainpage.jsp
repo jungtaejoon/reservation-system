@@ -106,9 +106,10 @@
                     <ul class="lst_event_box">
 					<script id="product_template" type="text/x-handlebars-template">
 						<li class="item">
-    						<a href="#" class="item_book">
+
+    						<a href="/detail/{{id}}" class="item_book">
     							<div class="item_preview"> 
-									<img alt="뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">
+									<img alt="{{name}}" class="img_thumb" src="/files/{{id}}">
     								<span class="img_border"></span> 
     							</div>
 							<div class="event_txt">
@@ -140,9 +141,10 @@
         </div>
     </footer>
 </body>
-	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 	<script src="/resources/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/resources/js/common.js"></script>
     <script src="/resources/js/category.js"></script>
     <script src="/resources/js/slider.js"></script>  
 	<script src="/resources/js/product.js"></script>
+	
 </html>

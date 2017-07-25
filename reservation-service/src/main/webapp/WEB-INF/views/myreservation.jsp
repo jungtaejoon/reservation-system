@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,6 +13,10 @@
     <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 
+<c:if test="${userInfo eq null}">
+	<a href="/login"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+</c:if>
+<c:if test="${userInfo ne null}">
 <body>
     <div id="container">
         <div class="header">
@@ -595,5 +600,5 @@
     <!--// 취소 팝업 -->
 
 </body>
-
+</c:if>
 </html>

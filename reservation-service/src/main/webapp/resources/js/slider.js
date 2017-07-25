@@ -1,4 +1,5 @@
-var sliderModule = (function(){
+var SliderModule = (function(){
+
 	var interval;
 	var timeout;
 	var width = 338;
@@ -10,23 +11,30 @@ var sliderModule = (function(){
 	var $slideContainer = $slider.find('ul.visual_img');
 	var $slides = $slideContainer.find('li.item');
 	
+
+	var init = function(){
+		SliderModule.autoMove();
+		$('div.prev_e').on('click', '.prev_inn', SliderModule.preButtonMove);
+		$('div.nxt_e').on('click', '.nxt_inn', SliderModule.nxtButtonMove);
+	}
+
 	var autoMove = function(){
 		var direction = "-=";
 		var pause = 2000;
 
 		interval = setInterval(function() {
-			sliderModule.imgMove(direction);
+
+			CommonModule.imgMove($slideContainer, direction, width, animationSpeed, SliderModule.imgMoveAnimate);
 		}, pause);
 	};
 	
-	var imgMove = function(direction){
-		$slideContainer.animate({'margin-left': direction+width}, animationSpeed, function(){
-			currentSlide++;
-			if(currentSlide === $slides.length-1) {
-				currentSlide = 1;
-				$slideContainer.css('margin-left', 0);
-			}
-		});
+	var imgMoveAnimate = function(){
+		currentSlide++;
+		if(currentSlide === $slides.length-1) {
+			currentSlide = 1;
+			$slideContainer.css('margin-left', 0);
+		}
+
 	};
 	
 	var stopSlider = function(){
@@ -35,22 +43,21 @@ var sliderModule = (function(){
 	
 	var preButtonMove = function(){
 		var direction = "+=";
-		sliderModule.stopTimeout();
-		sliderModule.stopSlider();
+		SliderModule.stopTimeout();
+		SliderModule.stopSlider();
 		if(currentSlide===1) {
 			$slideContainer.css('margin-left', -676);
 		}
-		sliderModule.imgMove(direction);
-		sliderModule.restartAutomove();
+		CommonModule.imgMove($slideContainer, direction, width, animationSpeed, SliderModule.imgMoveAnimate);
+		SliderModule.restartAutomove();
 	};
 	
 	var nxtButtonMove = function(){
 		var direction = "-=";
-		sliderModule.stopTimeout();
-		sliderModule.stopSlider();
-		sliderModule.imgMove(direction);
-		sliderModule.restartAutomove();
-
+		SliderModule.stopTimeout();
+		SliderModule.stopSlider();
+		CommonModule.imgMove($slideContainer, direction, width, animationSpeed, SliderModule.imgMoveAnimate);
+		SliderModule.restartAutomove();
 	};
 	
 	var stopTimeout = function(){
@@ -59,13 +66,14 @@ var sliderModule = (function(){
 	
 	var restartAutomove = function(){
 		timeout = setTimeout(function(){ 
-			sliderModule.autoMove(); 
+			SliderModule.autoMove(); 
 		}, automoveAfter);
 	};
 	
 	return {
+		init : init,
 		autoMove : autoMove,
-		imgMove : imgMove,
+		imgMoveAnimate : imgMoveAnimate,
 		stopSlider : stopSlider,
 		preButtonMove : preButtonMove,
 		nxtButtonMove : nxtButtonMove,
@@ -75,10 +83,10 @@ var sliderModule = (function(){
 	
 })();
 
-sliderModule.autoMove();
+$(function(){
+	SliderModule.init();
+});
 
-$('.prev_inn').on('click', sliderModule.preButtonMove);
-$('.nxt_inn').on('click', sliderModule.nxtButtonMove);
 
 
 

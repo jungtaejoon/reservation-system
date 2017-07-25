@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.CategoryDAO;
 import kr.or.connect.reservation.domain.Category;
-import kr.or.connect.reservation.domain.Product;
 
 @Service
 public class CategoryService {

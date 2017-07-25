@@ -1,4 +1,5 @@
-var productModule = (function(){
+var ProductModule = (function(){
+
 	var productAllCount;
 	var showProductsDefaultCount = 4;//상품 전시 개수 기본값
 	var $productdiv = $('.wrap_event_box');
@@ -19,14 +20,14 @@ var productModule = (function(){
 			showProductsDefaultCount = 4;
 			
 			if(categoryId > 0) {
-				url = "/products/"+ categoryId;
+				url = "/products/"+ categoryId +"/categories";
 			}
 			
 			$.ajax({
 				type: "GET",
 				url: url,
 				success: function(productList){		
-
+          
 					//기존 상품 리스트 삭제
 					$productdiv.find('li').remove();
 					
@@ -35,8 +36,9 @@ var productModule = (function(){
 					
 					//리스트 저장
 					$productdiv.data('productList', productList);
-					productModule.loadProductsList(productList);
-					productModule.productsCountHtml(productAllCount);
+
+					ProductModule.loadProductsList(productList);
+					ProductModule.productsCountHtml(productAllCount);
 					
 				}
 			});
@@ -84,7 +86,7 @@ var productModule = (function(){
 		scrollAuto : function(){
 			$(window).scroll(function() {
 			    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-			    	productModule.showMoreProducts();   
+	  	    	ProductModule.showMoreProducts(); 
 			    }
 			});
 		}
@@ -93,8 +95,8 @@ var productModule = (function(){
 	
 })();
 
-productModule.selectProductAll();
-productModule.scrollAuto();
+ProductModule.selectProductAll();
+ProductModule.scrollAuto();
 
-$("ul.event_tab_lst").on('click', 'li.item', productModule.selectProductAll);
-$("div.more").on('click', '.btn', productModule.showMoreProducts);
+$("ul.event_tab_lst").on('click', 'li.item', ProductModule.selectProductAll);
+$("div.more").on('click', '.btn', ProductModule.showMoreProducts);
