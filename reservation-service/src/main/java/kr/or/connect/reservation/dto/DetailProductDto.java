@@ -3,12 +3,15 @@ package kr.or.connect.reservation.dto;
 import java.sql.Timestamp;
 import java.util.List;
 
+import kr.or.connect.reservation.domain.Price;
+
 public class DetailProductDto {
 	private String name;
 	private String description;
 	private String event;
-	private Timestamp salesEnd; 	// 판매 종료 날짜 (비교를 위해서 TimeStamp)
-	private int salesFlag; 			// 매진 flag ?
+	private Timestamp salesStart;
+	private Timestamp salesEnd;
+	private int salesFlag;
 	private String content;
 	private String observationTime;
 	private String placeName;
@@ -18,6 +21,7 @@ public class DetailProductDto {
 	private String homepage;
 	private String email;
 	private List<ImageDto> files;
+	private List<Price> prices;
 
 	public DetailProductDto() {
 
@@ -45,6 +49,14 @@ public class DetailProductDto {
 
 	public void setEvent(String event) {
 		this.event = event;
+	}
+
+	public Timestamp getSalesStart() {
+		return salesStart;
+	}
+
+	public void setSalesStart(Timestamp salesStart) {
+		this.salesStart = salesStart;
 	}
 
 	public Timestamp getSalesEnd() {
@@ -133,6 +145,14 @@ public class DetailProductDto {
 
 	public void setFiles(List<ImageDto> files) {
 		this.files = files;
+	}
+
+	public List<Price> getPrices() {
+		return prices;
+	}
+
+	public void setPrices(List<Price> prices) {
+		this.prices = prices;
 	}
 
 }

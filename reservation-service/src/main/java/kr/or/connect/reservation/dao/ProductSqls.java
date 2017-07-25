@@ -2,7 +2,7 @@ package kr.or.connect.reservation.dao;
 
 public class ProductSqls {
 	final static String SELECT_BY_CATEGORY_ID = 
-			"SELECT P.id, P.category_id, P.name, P.description, DI.place_name, F.file_name, F.save_file_name"
+			"SELECT P.id, P.category_id, P.name, P.description, DI.place_name, F.id AS file_id"
 			+ " FROM product AS P"
 			+ " JOIN display_info AS DI"
 			+ " ON DI.id = P.id"
@@ -14,7 +14,7 @@ public class ProductSqls {
 			+ " LIMIT :offset, :limit";
 	
 	final static String SELECT_ALL = 
-			"SELECT P.id, P.category_id, P.name, P.description, DI.place_name, F.file_name, F.save_file_name"
+			"SELECT P.id, P.category_id, P.name, P.description, DI.place_name, F.id AS file_id"
 			+ " FROM product AS P"
 			+ " JOIN display_info AS DI"
 			+ " ON DI.id = P.id"
@@ -47,7 +47,7 @@ public class ProductSqls {
 	
 	final static String SELECT_DETAIL_PRODUCT_BY_ID = 
 			"SELECT "
-			+ " P.name, P.description, P.event, P.sales_end, P.sales_flag, " 
+			+ " P.name, P.description, P.event, P.sales_start, P.sales_end, P.sales_flag, " 
 			+ " DI.observation_time, DI.place_name, DI.place_lot, DI.place_street, DI.tel, DI.homepage, DI.email, "
 			+ " PD.content"
 			+ " FROM product AS P"
@@ -56,7 +56,7 @@ public class ProductSqls {
 			+ " WHERE P.id = :pid";
 	
 	final static String DETAIL_PRODUCT_IMGAE_LIST = 
-			"SELECT F.file_name, F.save_file_name, F.file_length, F.content_type"
+			"SELECT F.id, F.file_name, F.save_file_name, F.file_length, F.content_type"
 			 + " FROM product AS P"
 			 + " JOIN product_image AS PI ON P.id = PI.product_id"
 			 + " JOIN file AS F ON PI.file_id = F.id"
@@ -78,7 +78,7 @@ public class ProductSqls {
 				+ " LIMIT 0, 3";
 	
 	final static String PREVIEW_COMMENTS_IMAGE_LIST = 
-			"SELECT F.file_name, F.save_file_name, F.file_length, F.content_type"
+			"SELECT F.id, F.file_name, F.save_file_name, F.file_length, F.content_type"
 				+ " FROM product AS P"
 				+ " JOIN reservation_user_comment AS RUC" 
 				+ " ON RUC.product_id = P.id"
@@ -97,4 +97,12 @@ public class ProductSqls {
 			+ " JOIN reservation_user_comment AS RUC"
 			+ " ON P.id = RUC.product_id"
 			+ " WHERE RUC.product_id = :pid";
+	
+	final static String DETAIL_PRODUCT_PRICE = 
+			"SELECT PR.id, PR.product_id, PR.price_type, PR.price, PR.discount_rate,"
+			+ " PR.create_date, PR.modify_date "
+			+ " FROM product AS P"
+			+ " JOIN product_price AS PR "
+			+ " ON P.id = PR.product_id"
+			+ " WHERE PR.product_id = :pid";
 }

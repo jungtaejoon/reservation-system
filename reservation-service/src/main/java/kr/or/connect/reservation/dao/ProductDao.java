@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.or.connect.reservation.domain.Price;
 import kr.or.connect.reservation.dto.CommentTotalValueDto;
 import kr.or.connect.reservation.dto.DetailProductDto;
 import kr.or.connect.reservation.dto.ImageDto;
@@ -29,6 +30,7 @@ public class ProductDao {
 	private RowMapper<PreviewCommentDto> commentMapper = BeanPropertyRowMapper.newInstance(PreviewCommentDto.class);
 	private RowMapper<CommentTotalValueDto> commentTotalMapper = BeanPropertyRowMapper.newInstance(CommentTotalValueDto.class);
 	private RowMapper<ImageDto> filesMapper = BeanPropertyRowMapper.newInstance(ImageDto.class);
+	private RowMapper<Price> pricesMapper = BeanPropertyRowMapper.newInstance(Price.class);
 	
 
 	public ProductDao(DataSource dataSource) {
@@ -114,6 +116,25 @@ public class ProductDao {
 		
 		result.put("total", previewCommentTotalValue);
 		result.put("comments", previewComments);
+		
+		return result;
+	}
+	
+	public Map<String, Object> selectReservableProductById(long id) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, ?> params = Collections.singletonMap("pid", id);
+		
+		DetailProductDto detailProduct = jdbc.queryForObject(ProductSqls.SELECT_DETAIL_PRODUCT_BY_ID, params, detailMapper);
+		List<ImageDto> files = jdbc.query(ProductSqls.DETAIL_PRODUCT_IMGAE_LIST, params, filesMapper);
+		List<Price> prices = jdbc.query(ProductSqls.DETAIL_PRODUCT_PRICE, params, pricesMapper);
+			
+		detailProduct.setFiles(files);
+		detailProduct.setPrices(prices);
+		
+		if(detailProduct == null || files == null || files.isEmpty() || files.size() == 0) return null;
+		if(prices == null || prices.size() == 0) return null;
+	
+		result.put("product", detailProduct);
 		
 		return result;
 	}

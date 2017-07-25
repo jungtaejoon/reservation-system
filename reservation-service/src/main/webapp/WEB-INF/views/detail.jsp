@@ -12,13 +12,13 @@
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
     <link href="/resources/css/photoviewer.css" rel="stylesheet">
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Ai5Hi4Wy72wiWXGCJWg6&submodules=geocoder"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=xl20W4odLg2Q1bfmwO48&submodules=geocoder"></script>
     <script src="/resources/lib/handlebars.min.js"></script>
 
     <!-- 이미지 슬라이더 템플릿  -->
     <script id="images_templ" type="text/x-handlebars-template">
         {{#each files}}
-            <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
+            <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="/files/{{id}}"> <span class="img_bg"></span>
                 <div class="visual_txt">
                     <div class="visual_txt_inn">
                         <h2 class="visual_txt_tit"> <span>{{lookup ../this "name"}}</span> </h2>
@@ -64,6 +64,45 @@
             <span>{{statusText}}</span>
         </button> 
     </script>
+
+    <!-- 상세정보 템플릿 -->
+    <script id="info_templ" type="text/x-handlebars-template">
+        <li class="detail_info_lst">
+            <strong class="in_tit">[소개]</strong>
+            <p class="in_dsc">
+                {{content}}
+            </p>
+        </li>
+    </script>
+
+    <!-- 오시는길 템플릿  -->
+    <script id="path_templ" type="text/x-handlebars-template">
+        <h3 class="store_name">{{placeName}}</h3>
+        <div class="store_info">
+            <div class="store_addr_wrap">
+                <span class="fn fn-pin2"></span>
+                <p class="store_addr store_addr_bold">{{placeLot}} </p>
+                <p class="store_addr">
+                    <span class="addr_old">지번</span>
+                    <span class="addr_old_detail">{{placeStreet}} </span>
+                </p>
+                <p class="store_addr addr_detail">{{placeDetail}}</p>
+            </div>
+            <div class="lst_store_info_wrap">
+                <ul class="lst_store_info">
+                    <li class="item"> <span class="item_lt"> <i class="fn fn-home1"></i> <span class="sr_only">홈페이지</span> </span> <span class="item_rt"> <a href="{{homepage}}" class="store_tel">{{homepage}}</a></span> </li>
+                    <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">전화번호</span> </span> <span class="item_rt"> <a href="tel:{{tel}}" class="store_tel">{{tel}}</a></span> </li>
+                    <li class="item"> <span class="item_lt"> <i class="fn fn-mail1"></i> <span class="sr_only">이메일</span> </span> <span class="item_rt"> <a href="mailto:{{email}}" class="store_tel">{{email}}</a></span> </li>
+                </ul>
+            </div>
+        </div>
+        <!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
+        <div class="bottom_common_path column2">
+            <a href="#" class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
+            <a hewf="#" class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
+        </div>
+    </script>
+
 </head>
 
 <body>
@@ -74,7 +113,7 @@
                     <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="/" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/my" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <div class="ct main">
@@ -85,7 +124,7 @@
                             <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                             <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                         </h1>
-                        <a href="/" class="btn_my"> <span title="내 예약">MY</span> </a>
+                        <a href="/my" class="btn_my"> <span title="내 예약">MY</span> </a>
                     </header>
                     <div class="pagination">
                         <div class="bg_pagination"></div>
@@ -157,7 +196,7 @@
                                                 {{#each images}} 
                                                     <div class="thumb_area">
                                                          {{#if @first}}  
-                                                        <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="{{saveFileName}}" alt="리뷰이미지"> </a>  
+                                                        <a href="#" data-cid="{{../cid}}" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/{{id}}" alt="리뷰이미지"> </a>  
                                                         <span class="img_count">{{../images.length}}</span> 
                                                          {{/if}}  
                                                     </div>
@@ -176,7 +215,7 @@
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
-                    <a class="btn_review_more" href="#"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
+                    <a class="btn_review_more" href="/review"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
                 </div>
                 <div class="section_info_tab">
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
@@ -194,15 +233,9 @@
                             <div class="detail_info">
                                 <h3 class="blind">상세정보</h3>
                                 <ul class="detail_info_group">
-                                    <li class="detail_info_lst">
-                                        <strong class="in_tit">[소개]</strong>
-                                        <p class="in_dsc">
-                                            웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다. 웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다.
-                                        </p>
-                                    </li>
                                     <li class="detail_info_lst"> <strong class="in_tit">[공지사항]</strong>
                                         <ul class="in_img_group">
-                                            <li class="in_img_lst"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
+                                            <li class="in_img_lst"> <img alt="" class="img_thumb" data-lazy-image="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
                                         </ul>
                                     </li>
                                     <li class="detail_info_lst"> <strong class="in_tit">[공연정보]</strong>
@@ -218,32 +251,10 @@
                     <div class="detail_location hide">
                         <div class="box_store_info no_topline">
                             <a href="#" class="store_location" title="지도웹으로 연결">
-                                 <img class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150"> 
-                                 <span class="img_border"></span> 
-                                 <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span> 
+                                <div id="map" class="store_map" style="width:100%;height:200px;"></div>
+                                <span class="img_border"></span> 
+                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span> 
                             </a>
-                            <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
-                            <div class="store_info">
-                                <div class="store_addr_wrap">
-                                    <span class="fn fn-pin2"></span>
-                                    <p class="store_addr store_addr_bold">서울특별시 종로구 종로33길 15 </p>
-                                    <p class="store_addr">
-                                        <span class="addr_old">지번</span>
-                                        <span class="addr_old_detail">서울특별시 종로구 연지동 270 </span>
-                                    </p>
-                                    <p class="store_addr addr_detail">두산아트센터 연강홀</p>
-                                </div>
-                                <div class="lst_store_info_wrap">
-                                    <ul class="lst_store_info">
-                                        <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">전화번호</span> </span> <span class="item_rt"> <a href="tel:02-548-0597" class="store_tel">02-548-0597</a></span> </li>
-                                    </ul>
-                                </div>
-                            </div>
-							<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
-                            <div class="bottom_common_path column2">
-                                <a href="#" class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
-								<a hewf="#" class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -262,33 +273,34 @@
     <div id="photoviewer">
         <div class="popup">
             <label for="photoviewer"></label>
-            
             <div class="popup_title">
-                <div class="preview_left">
+                <div class="prev">
                     <i class="spr_book2 arr_img_lt arr_img"></i>
                 </div>
                 
                 <div class="preview_center">
                     <h3>PHOTO VIEWER</h3>
-                    <p><span class="index">1 </span><span> / <span class="total"> 0</span></span></p>
+                    <p><span class="index">1 </span><span> / <span class="size"> 0</span></span></p>
                 </div>
                 
-                <div class="preview_right">
+                <div class="nxt">
                     <i class="spr_book2 arr_img_rt arr_img"></i> 
                 </div>
             </div>
             <div class="popup_content">
                 <ul class="photo_list">
-                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
-                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170111_195/1484112206459rGQGI_JPEG/%BB%F3%BC%BC%C6%E4%C0%CC%C1%F6_%BB%F3%B4%DC%28%B3%D7%C0%CC%B9%F6_%BF%B9%BE%E0%29.jpg?type=l591_945"> </li>
-                    <li class="item"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=l591_945"> </li>
+                    <script id="comment_photo_templ" type="text/x-handlebars-template">
+                        {{#each this}}
+                        <li class="item"> <img alt="" class="img_thumb" src="/files/{{id}}"></li>
+                        {{/each}}
+                    </script>
                 </ul>
             </div>
         </div>
     </div>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
- <script src="/resources/js/module/rolling.js"></script> 
 <script src="/resources/js/module/flicking.js"></script>
+<script src="/resources/js/module/naverMap.js"></script>
 <script src="/resources/js/detail.js"></script>
 </html>

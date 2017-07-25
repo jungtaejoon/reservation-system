@@ -15,13 +15,14 @@
 
 <body>
     <div id="container">
+		
         <div class="header">
             <header class="header_tit">
                 <h1 class="logo">
                     <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+					<a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="/my" class="btn_my"> <span title="내 예약">MY</span> </a>
+				<a href="/my" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <hr>
@@ -558,7 +559,8 @@
     </div>
     <footer>
         <div class="gototop">
-            <a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span> </a>
+			<a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span> </a>
+			<a href="/logout" class="lnk_top"> <span class="lnk_top_text">LOGOUT</span> </a>
         </div>
         <div id="footer" class="footer">
             <p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>

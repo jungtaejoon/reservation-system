@@ -47,7 +47,7 @@
     z-index: 9200;
 }
 
-.popup_title .preview_right i.arr_img, .popup_title .preview_left i.arr_img {
+.popup_title .nxt i.arr_img, .popup_title .prev i.arr_img {
     color: #fff;
     align-self: center;
     background-image: url(../img/spr_book2.png);
@@ -117,7 +117,7 @@
     align-content: center;
 }
 
-.preview_left, .preview_right {
+.popup_title .prev, .popup_title .nxt {
     display: flex;
     width: 25px;
     height: 100px;
@@ -125,13 +125,13 @@
     align-content: center;    
 }
 
-.preview_left .arr_img_lt {
+.popup_title .prev .arr_img_lt {
     width: 11px;
     height: 20px;
     background-position: -151px -50px;
 }
 
-.preview_right .arr_img_rt {
+.popup_title .nxt .arr_img_rt {
     width: 11px;
     height: 20px;
     background-position: -164px -50px;

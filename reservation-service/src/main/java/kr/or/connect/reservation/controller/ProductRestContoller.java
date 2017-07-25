@@ -48,6 +48,12 @@ public class ProductRestContoller {
 		return service.getProductById(id);
 	}
 	
+	@GetMapping("/{id}/reserve")
+	@ResponseStatus(HttpStatus.OK)
+	public Map<String, Object> selectReservableProductById(@PathVariable("id") Long id) {
+		return service.getReservableProduct(id);
+	}
+	
 	@GetMapping("/{id}/comments")
 	@ResponseStatus(HttpStatus.OK)
 	public Map<String, Object> getProductPreviewCommentsById(@PathVariable("id") Long id) {

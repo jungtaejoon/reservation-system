@@ -206,26 +206,30 @@
     
     var Main = {
 
-        callback : {},
-
         init : function () {
-            //rolling
-            this.callback = $('.visual_img').rolling({ 
-                autoStart: true, 
-                circulation: true,
-                flicking: false,
-                viewTime: 300,
-            });
-            
+
             Category.init();
             Products.init();
             Common.infiniteScroll(true); // true => infinite Scroll active!
 
-            this.bindEvents();
+            this.initialFilicking();
         },
-        bindEvents : function () {
-            $('.container_visual').on('click', '.prev_e', this.callback.prev);
-            $('.container_visual').on('click', '.nxt_e, .nxt_fix', this.callback.next);
+
+        initialFilicking : function () {
+            var $slider = $('.visual_img');
+            var imageCount = $slider.find('li').length;
+
+            var options = {
+                slider : '.visual_img',
+                buttonContainer : '.container_visual',
+                viewTime: 300,
+                status: {
+                    size: imageCount,
+                    index: 1,
+                },
+            }
+
+            Flicking.setup().init(options);
         }
     }
 

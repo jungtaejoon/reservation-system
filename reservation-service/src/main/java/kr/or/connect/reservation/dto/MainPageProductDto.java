@@ -2,12 +2,11 @@ package kr.or.connect.reservation.dto;
 
 public class MainPageProductDto {
 	private long id;
+	private long fileId;
 	private long categoryId;
 	private String name;
 	private String description;
 	private String placeName;
-	private String fileName;
-	private String saveFileName;
 
 	public MainPageProductDto() {
 	}
@@ -52,25 +51,18 @@ public class MainPageProductDto {
 		this.placeName = placeName;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public long getFileId() {
+		return fileId;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getSaveFileName() {
-		return saveFileName;
-	}
-
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
+	public void setFileId(long fileId) {
+		this.fileId = fileId;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", description=" + description
-				+ ", placeName=" + placeName + ", fileName=" + fileName + ", saveFileName=" + saveFileName + "]";
+		return "MainPageProductDto [id=" + id + ", fileId=" + fileId + ", categoryId=" + categoryId + ", name=" + name
+				+ ", description=" + description + ", placeName=" + placeName + "]";
 	}
+
 }

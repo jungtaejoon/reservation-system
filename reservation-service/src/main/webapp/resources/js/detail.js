@@ -6,70 +6,30 @@
 
     var DetailProduct = {
 
-        callback : {},
         Template : {},
+        comments : [],
+        mainSlider : null,
+        popupSlider : null,
 
-        /**
-         * 초기화 함수
-         */
+
         init : function () {
             this.bindEvents();
             this.initialHandlebars();
             this.getProduct();
             this.getPreviewComments();
+
+            this.mainSlider = Flicking.setup();
+            this.popupSlider = Flicking.setup();
         },
 
-        getProduct : function() {
-            var url = '/api' + window.location.pathname;
-            var result = this.ajaxWrapper('GET', url, null);
-
-            result.then(function(res) {
-                this.updateMainStatus(1, res.product.files.length);
-                this.titleAreaRendering(res);
-            }.bind(this));
+        
+        bindEvents : function () {
+            $('.section_store_details').on('click', '._open, ._close', this.contentMoreToggle.bind(this));
+            $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this));
+            $('.short_review_area').on('click', '.thumb', this.openPhotoViewer.bind(this));
+            $('.popup').on('click', 'label', this.closePhotoViewer.bind(this));
         },
 
-        getPreviewComments : function() {
-            var url = '/api' + window.location.pathname + '/comments';
-            var result = this.ajaxWrapper('GET', url, null);
-
-            result.then(function(res) {
-                this.previewCommentRendering(res);
-            }.bind(this))
-            .then(function(res) {
-                //rolling
-                // this.callback = $('.visual_img').rolling({ 
-                //     autoStart: false, 
-                //     circulation: false,
-                //     flicking: true,
-                //     viewTime: 300,
-                // });
-
-                // var reVal = $('.visual_img').rolling(null, {
-                //     autoStart: false, 
-                //     circulation: false,
-                //     flicking: true,
-                //     viewTime: 300,
-                // });
-
-                var imageCount = $('.visual_img li').length;
-                var proto_ = $('.visual_img').Flicking({
-                    prev : $('.prev'),
-                    next : $('.nxt'),
-                    updateState : DetailProduct.updateMainStatus,
-                }, {
-                    autoStart: false, 
-                    circulation: false,
-                    flicking: true,
-                    viewTime: 300,
-                    status: {
-                        size: imageCount,
-                        index: 1,
-                    },
-                });
-
-            }.bind(this));
-        },
 
         initialHandlebars : function() {
             /**
@@ -85,13 +45,60 @@
              * 예매자 한줄평
              */
             this.Template.comment = Handlebars.compile($('#comment_templ').html());
-
+            this.Template.photoViewer = Handlebars.compile($('#comment_photo_templ').html());
 
             /**
              * 하단 상세 설명
              */
-
+            this.Template.info = Handlebars.compile($('#info_templ').html());
+            this.Template.path = Handlebars.compile($('#path_templ').html());
+            
         },
+
+
+        getProduct : function() {
+            var url = '/api' + window.location.pathname;
+            var result = this.ajaxWrapper('GET', url, null);
+
+            result.then(function(res) {
+
+                DetailProduct.updateMainStatus(1, res.product.files.length);
+                DetailProduct.titleAreaRendering(res);
+                DetailProduct.detailInfoRendering(res.product);
+
+            }).then(function initFlickingSlider(res){
+
+                var $slider = $('.visual_img');
+                var imageCount = $slider.find('li').length;
+
+                DetailProduct.mainSlider.init({
+                    autoStart: false, 
+                    circulation: false,
+                    flicking: true,
+                    viewTime: 300,
+                    slider : '.visual_img',
+                    buttonContainer : '.group_visual',
+                    updateState : DetailProduct.updateMainStatus,
+                    status: {
+                        size: imageCount,
+                        index: 1,
+                    }
+                })
+
+            });
+        },
+
+
+        getPreviewComments : function() {
+            var url = '/api' + window.location.pathname + '/comments';
+            var result = this.ajaxWrapper('GET', url, null);
+
+            result.then(function(res) {
+                DetailProduct.comments = res.comments;
+                DetailProduct.previewCommentRendering(res);
+            });
+        },
+
 
         titleAreaRendering : function(res) {
             var Templates = this.Template;
@@ -105,6 +112,17 @@
             $('.section_btn').append(Templates.confirmBtn(statusText));
         },
 
+
+        detailInfoRendering : function(product) {
+            var Templates = this.Template;
+
+            $('.detail_info_group').prepend(Templates.info(product));
+            $('.box_store_info').append(Templates.path(product));
+
+            NaverMap.init();
+        },
+
+
         previewCommentRendering : function(res) {
             var Templates = this.Template;
             var rating = (res.total.average / 5.0) * 100;
@@ -115,40 +133,8 @@
             // comment total rating (%)
             $('.graph_value').css('width', rating + '%');
         },
-        
-        /**
-         * 슬라이드 버튼 이벤트 바인딩
-         */
-        bindEvents : function () {
-            $('.section_store_details').on('click', '._open, ._close', this.contentMoretoggle.bind(this));
-            $('.info_tab_lst').on('click', '._detail, ._path', this.changeInfoTab.bind(this));
-            $('.detail_location').on('click', '.store_location', this.connectNaverMap.bind(this));
-            $('.short_review_area').on('click', '.thumb', this.openPhotoViewer.bind(this));
-            $('.popup').on('click', 'label', this.closePhotoViewer.bind(this));
-        },
 
-        /**
-         * 이전 슬라이드 클릭
-         * @param status : 슬라이드 이동간에 rotate
-         */
-        prevProduct : function () {
-            var status = this.callback.prev();
-            status && this.updateMainStatus(status.index, status.size);
-        },
 
-        /**
-         * 다음 슬라이드 클릭
-         */
-        nextProduct : function () {
-            var status = this.callback.next();
-            status && this.updateMainStatus(status.index, status.size);
-        },
-
-        /**
-         * 2.1 슬라이드 넘길 경우 슬라이드 위치 업데이트
-         * @param index : 현재 이미지 슬라이드 위치
-         * @param total : 총 이미지 슬라이드 갯수
-         */
         updateMainStatus : function (index, size) {
             var $container = $('.figure_pagination');
             var $indexElem = $container.find('span.num:first');
@@ -160,22 +146,18 @@
             // this.toggleOff(index, size)
         },
 
-        /**
-         * PhotoViewer 카운터 업데이트 Flicking에 콜백으로 등록 시킬 함수
-         * @param index : 현재 이미지 슬라이드 위치
-         * @param total : 총 이미지 슬라이드 갯수
-         */
+
         updatePreviewStatus : function (index, size) {
             var $container = $('.preview_center');
             var $indexElem = $container.find('span.index');
             var $totalElem = $container.find('span.size');
 
             $indexElem.text(index);
-            $totalElem.text(' / ' + size);
+            $totalElem.text(size);
         },
 
+
         toggleOff : function(index, size) {
-            // var $nextBtn = $('.nxt').find('i');
             var $prevBtn = $('.prev').find('i');
 
             if(index === 1) {
@@ -187,10 +169,11 @@
             $prevBtn.removeClass('off');
         },
         
+        
         /**
          * 펼처보기 toggle
          */
-        contentMoretoggle : function (e) {
+        contentMoreToggle : function (e) {
             e.preventDefault();
 
             var $el = $(e.target);
@@ -210,6 +193,7 @@
             $content.toggleClass('close3');
         },
 
+
         /**
          * confirmButton statusText setting
          */
@@ -224,6 +208,7 @@
             }
         },
 
+
         /**
          * Diff Date 
          * @param endDate : 만료 사간
@@ -236,6 +221,7 @@
             if(end < now) return true;
             else return false;
         },
+
 
         /**
          * 상세정보 / 오시는길 Tab 전환
@@ -252,73 +238,82 @@
             var $infoContent = $container.find('.detail_area_wrap');
             var $pathContent = $container.find('.detail_location');
 
-            $infoTab.toggleClass('active');
-            $pathTab.toggleClass('active');
-            $infoContent.toggleClass('hide');
-            $pathContent.toggleClass('hide');
+            if($ele.closest('li').hasClass('active')) return false;
+
+            else {
+                $container.find('li').removeClass('active');
+                $ele.closest('li').addClass('active');
+
+                if($ele.closest('li').hasClass('_detail')) {
+                    $infoTab.addClass('active');
+                    $pathTab.removeClass('active');
+                    $infoContent.removeClass('hide');
+                    $pathContent.addClass('hide');
+                    
+                } else { // map setting
+                    $infoTab.removeClass('active');
+                    $pathTab.addClass('active');
+                    $infoContent.addClass('hide');
+                    $pathContent.removeClass('hide');
+                }
+            }
+
         },
+
 
         /**
          * Popup 형식의 사진 뷰어 ( 댓글 단 사람들의 사진 ) Open
          */
         openPhotoViewer : function(e) {
             e.preventDefault();
+
+            var Templates = this.Template;
+            var cid = $(e.target).data('cid');
             
-            $('#photoviewer').show();
+            var $photoViewer = $('#photoviewer');
+            var $photoList = $('.photo_list');
 
-            
-            /**
-             * Flicking plugin (this, param, options)
-             * comment images size aJax response 
-             */
+            var filteredComment = this.comments.filter(function(comment, i) {
+                if(comment.cid === cid) return comment
+            });
 
+            var comment = filteredComment[0];
+            var imageCount = comment.images.length;
 
-            var proto_ = $('.photo_list').Flicking({
-                prev : $('.preview_left'),
-                next : $('.preview_right'),
+            $photoList.append(Templates.photoViewer(comment.images));
+            DetailProduct.updatePreviewStatus(1, imageCount);
+
+            DetailProduct.popupSlider.init({
+                slider : '.photo_list',
+                buttonContainer : '.popup',
                 updateState : DetailProduct.updatePreviewStatus,
-            }, 
-            {
                 autoStart: false, 
                 circulation: false,
                 flicking: true,
                 viewTime: 300,
                 status: {
-                    size: 3,
+                    size: imageCount,
                     index: 1,
-                },
+                }
             });
 
-            console.log(proto_);
-
+            $photoViewer.show();
         },
+
 
         /**
          * PhotoViewer Close
          */
         closePhotoViewer : function(e) {
             e.preventDefault();
+
             $('#photoviewer').hide();
+            $('.photo_list li').remove();
+            $('.photo_list').css('left' , 0);
 
-            // Flicking plugin 초기화
-            $('.photo_list').css('left' , 0).removeData('et.flicking').off();
-
+            DetailProduct.popupSlider.clear();
         },
 
-        /**
-         * 오시는길에서 지도 눌렀을 경우 네이버 지도로 연결
-         */
-
-        connectNaverMap : function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            console.log(e.target);
-            var url = 'http://map.naver.com/';
-
-            var win = window.open(url, '_blank');
-            win.focus();
-         },
 
         ajaxWrapper : function(method, url, data) {
             return $.ajax({
@@ -329,9 +324,26 @@
                 dataType : 'json',
             });
         },
+
+
     };
+
+
+    function ImageLazyLoad() {
+        var $window = $(window);
+
+        $window.scroll(function() {
+            $.each($('img'), function() {
+                if ( $(this).data('lazy-image') && $(this).offset().top < ($window.scrollTop() + $window.height() + 100) ) {
+                    var source = $(this).data('lazy-image');
+                    $(this).attr('src', source);
+                    $(this).removeAttr('data-lazy-image');
+                }
+            })
+        });
+    }
     
-    
+    ImageLazyLoad();
     DetailProduct.init();
 
 })(window);

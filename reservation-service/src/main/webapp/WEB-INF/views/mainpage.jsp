@@ -90,7 +90,7 @@
                         <script id="product-template" type="text/x-handlebars-template">
                             <li class="item" data-product="{{id}}">
                                 <a href="/products/{{id}}" class="item_book">
-                                    <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src={{saveFileName}}><span class="img_border"></span> </div>
+                                    <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}"><span class="img_border"></span> </div>
                                         <div class="event_txt">
                                         <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
                                         <p class="event_txt_dsc">{{description}}</p>
@@ -121,6 +121,6 @@
     </footer>
 </body>
 <script src="/resources/lib/jquery.min.js"></script>
-<script src="/resources/js/module/rolling.js"></script>
+ <script src="/resources/js/module/flicking.js"></script> 
 <script src="/resources/js/main.js"></script>
 </html>

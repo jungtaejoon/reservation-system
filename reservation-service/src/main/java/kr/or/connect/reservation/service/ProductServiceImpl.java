@@ -37,5 +37,11 @@ public class ProductServiceImpl implements ProductService {
 	public Map<String, Object> getProductPreviewComments(Long id) {
 		return dao.selectProductPreviewComments(id);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String, Object> getReservableProduct(Long id) {
+		return dao.selectReservableProductById(id);
+	}
 	
 }

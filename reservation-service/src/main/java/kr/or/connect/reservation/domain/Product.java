@@ -7,12 +7,12 @@ public class Product {
 	private long categoryId;
 	private String name;
 	private String description;
-	private Date sales_start;
-	private Date sales_end;
+	private String sales_start;
+	private String sales_end;
 	private int sales_flag;
 	private String event;
-	private Date create_date;
-	private Date modify_date;
+	private String create_date;
+	private String modify_date;
 
 	public Product() {
 
@@ -50,19 +50,19 @@ public class Product {
 		this.description = description;
 	}
 
-	public Date getSales_start() {
+	public String getSales_start() {
 		return sales_start;
 	}
 
-	public void setSales_start(Date sales_start) {
+	public void setSales_start(String sales_start) {
 		this.sales_start = sales_start;
 	}
 
-	public Date getSales_end() {
+	public String getSales_end() {
 		return sales_end;
 	}
 
-	public void setSales_end(Date sales_end) {
+	public void setSales_end(String sales_end) {
 		this.sales_end = sales_end;
 	}
 
@@ -82,19 +82,19 @@ public class Product {
 		this.event = event;
 	}
 
-	public Date getCreate_date() {
+	public String getCreate_date() {
 		return create_date;
 	}
 
-	public void setCreate_date(Date create_date) {
+	public void setCreate_date(String create_date) {
 		this.create_date = create_date;
 	}
 
-	public Date getModify_date() {
+	public String getModify_date() {
 		return modify_date;
 	}
 
-	public void setModify_date(Date modify_date) {
+	public void setModify_date(String modify_date) {
 		this.modify_date = modify_date;
 	}
 
