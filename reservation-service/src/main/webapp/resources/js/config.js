@@ -7,7 +7,15 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths : {
-        jquery : 'node_modules/jquery/dist/jquery',
-        handlebars : 'node_modules/handlebars/dist/handlebars'
-    }
+        'jquery' : 'node_modules/jquery/dist/jquery',
+        'handlebars' : 'node_modules/handlebars/dist/handlebars',
+        'egjs' : 'node_modules/egjs/dist/pkgd/eg.pkgd.min'
+    },
+    // AMD를 지원하지 않는 외부 라이브러리를 모듈로 사용할 수 있게 한다.
+   shim: {
+       'egjs' : { // Modernizr 라이브러리
+           exports: 'egjs'
+       }
+   }
+
 });

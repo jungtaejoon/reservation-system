@@ -1,12 +1,14 @@
 package kgw.reservation.dao;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,27 +16,33 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kgw.reservation.dto.ProductDetail;
 import kgw.reservation.dto.ProductInfo;
+import kgw.reservation.dto.ProductReservation;
 import kgw.reservation.sql.ProductSqls;
 
 @Repository
 public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc;
     private RowMapper<ProductInfo> rowMapper = BeanPropertyRowMapper.newInstance(ProductInfo.class);
+    private RowMapper<ProductDetail> productDetailRowMapper = BeanPropertyRowMapper.newInstance(ProductDetail.class);
+	private RowMapper<ProductReservation> productReservationRowMapper = BeanPropertyRowMapper.newInstance(ProductReservation.class);
+	private final Logger log = LoggerFactory.getLogger(ProductDao.class);
+
     
     @Autowired
 	public ProductDao (DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
     
-    public Collection<ProductInfo> selectAllLimit (Integer offset, Integer size) {
+    public List<ProductInfo> selectAllLimit (Integer offset, Integer size) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("offset", offset);
 		params.put("size", size);
 		try {
     			return jdbc.query(ProductSqls.SELECT_ALL_LIMIT, params, rowMapper);
 		} catch(DataAccessException e) {
-			e.printStackTrace();
+			log.error("ProductDao::selectAllLimit",e);
 			return null;
 		}
     }
@@ -44,7 +52,7 @@ public class ProductDao {
 		return jdbc.queryForObject(ProductSqls.COUNT_ALL, params, Integer.class);
     }
     
-    public Collection<ProductInfo> selectByCategoryLimit (Integer categoryId, Integer offset, Integer size) {
+    public List<ProductInfo> selectByCategoryLimit (Integer categoryId, Integer offset, Integer size) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryId", categoryId);
 		params.put("offset", offset);
@@ -53,7 +61,7 @@ public class ProductDao {
 		try {
     			return jdbc.query(ProductSqls.SELECT_BY_CATEGORY_LIMIT, params, rowMapper);
 		} catch(DataAccessException e) {
-			e.printStackTrace();
+			log.error("ProductDao::selectByCategoryLimit",e);
 			return null;
 		}
     }
@@ -63,14 +71,24 @@ public class ProductDao {
 		return jdbc.queryForObject(ProductSqls.COUNT_BY_CATEGORY, params, Integer.class); 
     }
     
-    public Collection<ProductInfo> selectById (Integer id) {
+    public ProductDetail selectProductDetail (Integer id) {
     		Map<String, Object> params = Collections.singletonMap("id", id);
     		try {
-    			return jdbc.query(ProductSqls.SELECT_BY_ID, params, rowMapper);
+    			return jdbc.queryForObject(ProductSqls.SELECT_PRODUCTDETAIL, params, productDetailRowMapper);
     		} catch(DataAccessException e) {
-    			e.printStackTrace();
+    			log.error("ProductDao::selectProductDetail",e);
     			return null;
     		}	
+    }
+    
+    public ProductReservation selectProductReservation (Integer id) {
+    		Map<String, Object> params = Collections.singletonMap("id", id);
+    		try {
+    			return jdbc.queryForObject(ProductSqls.SELECT_PRODUCT_RESERVATION, params, productReservationRowMapper);
+    		} catch (DataAccessException e) {
+    			log.error("ProductDao::selectProductReservation",e);
+    			return null;
+		}
     }
     
 }

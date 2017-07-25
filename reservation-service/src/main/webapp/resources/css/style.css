@@ -773,7 +773,7 @@ button {
     display: table
 }
 
-.header.fade {
+.header_tit.fade {
     display: none;
     opacity: 0;
     -moz-transition: opacity .2s ease-in;
@@ -1032,6 +1032,7 @@ button {
 
 .img_thumb {
     width: 100%;
+    height: 100%;
     vertical-align: top
 }
 
@@ -3805,4 +3806,29 @@ button {
   left: 0;
   top: 0;
   font-size: 10px;
+}
+#photoviwer {
+	position: fixed;
+	top : 0;
+	left : 0;
+	right : 0;
+	bottom: 0;
+	z-index: 9010;
+	background-color: rgba(0,0,0,0.6);
+
+}
+#photo {
+	position: absolute;
+	left: 100px;
+	right: 100px;
+	height: 100%;
+}
+#photoviwer .close {
+	position: absolute;
+	left: 15px;
+	top: 15px;
+	background: none;
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: bold;
 }

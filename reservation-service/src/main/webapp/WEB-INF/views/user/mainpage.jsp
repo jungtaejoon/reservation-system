@@ -85,7 +85,15 @@
 <script id="productList-template" type="text/x-handlebars-template">
 <li class="item" data-id="{{id}}">
     <a href="/products/{{id}}" class="item_book">
-        <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/resources/img/uploads/{{saveFileName}}">                                    <span class="img_border"></span> </div>
+        <div class="item_preview">
+			{{#if fileId}}
+				<img alt="{{name}}" class="img_thumb" src="${initParam.UPLOAD_IMG_URL}/{{fileId}}">                                    
+			{{else}}
+				<img alt="{{name}}" class="img_thumb" src="${initParam.STATIC_IMG_URL}/no_img.png">	
+			{{/if}}
+			<span class="img_border"></span>
+		</div>
+			
         <div class="event_txt">
             <h4 class="event_txt_tit"> <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
             <p class="event_txt_dsc">
@@ -96,24 +104,20 @@
 </li>
 </script>
 <script>
-require(['jquery'], function ($) {
-	require(['product', 'rolling'], function(product, rolling) {
-	    // Configuration loaded now, safe to do other require calls
-	    // that depend on that config.
-      "use strict";
-	  	new rolling(".visual_img", ".item", {"prevBtn" : ".btn_pre_e", "nextBtn" : ".btn_nxt_e"});
-	  	product.init();
-
-      //무한 스크롤링
-      if (!$("body").height() < $(window).height()) {
-        $(window).scroll(function() {
-            if ($(window).scrollTop() === $(document).height() - $(window).height()) {
-                product.getMoreList();
-            }
-        });
-      }
-
-    });
-});
+(function (product, Rolling, $) {
+	 	    "use strict";
+	 	    $(function() {
+	 	    		new Rolling(".visual_img", ".item", { "prevBtn" :".btn_pre_e", "nextBtn" : ".btn_nxt_e"});
+	 	        product.init();
+	 	       //무한 스크롤링
+	 	       if (!$("body").height() < $(window).height()) {
+	 	         $(window).scroll(function() {
+	 	             if ($(window).scrollTop() === $(document).height() - $(window).height()) {
+	 	                 product.getMoreList();
+	 	             }
+	 	         });
+	 	       }
+	 	    });
+})(window.reservation.product, window.reservation.Rolling, jQuery);
 </script>
 </html>

@@ -1,5 +1,6 @@
 package kgw.reservation.controller.admin;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,14 @@ public class CategoryController {
 	private static final String DIRNAME ="/admin/categories";
 	CategoryService categoryService;
 	@Autowired
+    ServletContext context;
+	@Autowired
 	public CategoryController(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 	
 	@GetMapping
 	public String index(Model model) {
-		model.addAttribute("list", categoryService.find());
-		
 		return DIRNAME+"/index";
 	}
 	

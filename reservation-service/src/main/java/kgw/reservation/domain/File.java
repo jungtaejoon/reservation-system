@@ -66,4 +66,11 @@ public class File {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+	@Override
+	public String toString() {
+		return "File [id=" + id + ", userId=" + userId + ", fileName=" + fileName + ", saveFileName=" + saveFileName
+				+ ", fileLength=" + fileLength + ", contentType=" + contentType + ", deleteFlag=" + deleteFlag
+				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + "]";
+	}
+	
 }

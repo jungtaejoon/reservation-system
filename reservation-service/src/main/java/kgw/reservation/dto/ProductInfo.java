@@ -25,7 +25,7 @@ public class ProductInfo {
 //	private Date productDetailModifyDate;
 
 	// file 
-//	private Integer fileId;
+	private Integer fileId;
 //	private Integer userId;
 //	private String fileName;
 	private String saveFileName;
@@ -97,4 +97,13 @@ public class ProductInfo {
 	public void setPlaceName(String placeName) {
 		this.placeName = placeName;
 	}
+
+	public Integer getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(Integer fileId) {
+		this.fileId = fileId;
+	}
+	
 }
