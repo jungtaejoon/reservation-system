@@ -4,6 +4,7 @@
 <html>
 
 <head>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
     <meta charset="utf-8">
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
@@ -13,8 +14,17 @@
 </head>
 
 <body>
-    <div id="container">
-    	<%@include file="common/header.jsp" %>
+		<div id="container">
+			<div class="header">
+			<header class="header_tit">
+			    <h1 class="logo">
+			        <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+			        <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+			    </h1>
+			    <a href="${loginURL}" class="btn_my"> <span title="내 예약">MY</span> </a>
+		    </header>
+			</div>
+
         <hr>
         <div class="event">
             <div class="section_visual">
@@ -116,8 +126,7 @@
 <script src="resources/js/category.js"></script>
 
 <!--  img Slide  -->
-<script src="/resources/js/commonCaroucel.js"></script>
-<script src="/resources/js/caroucelMain.js"></script>
+<script src="/resources/js/slide/caroucel.js"></script>
 
 <!--  productcontents -->
 <script src="resources/js/mainProduct.js"></script>
@@ -131,14 +140,14 @@ $(document).ready(function(){
 		location.href= "/";
 	});	
 	
-	caroucelSlide.setWidth(338);
-	// Slide 실행
-	caroucelSlide.autoSlide.call(caroucelSlide);
+	var $ul = $(".visual_img:first");
 	
-	//이벤트를 취소해야돼 
+	var auto = new AutoCaaroucel($ul);
+	auto.autoSlide();
+	CarocelDetail.init(auto,338);
+	//caroucelSlide.autoSlide.call(caroucelSlide);
 	
-	$(".prev_inn").on("click",caroucelSlide.caroucelLeftClick.bind(caroucelSlide));
-	$(".nxt_inn").on("click",caroucelSlide.caroucelRightClick.bind(caroucelSlide));
+
 });
  
 </script>

@@ -1,11 +1,8 @@
-package kr.or.reservation.sql;
+package kr.or.reservation.sqls;
 
-public class CommentForDetailSql {
-/*	public final static String SELECT_ALL ="SELECT users.nickname, comment.*  " + 
-			"FROM reservation_user_comment as comment inner join users " + 
-			"on comment.user_id = users.id where comment.product_id = :id limit 0,3 ";
-	*/
-	public final static String SELECT_ALL = "select users.nickname,comment.*,file.id as file_id ,count(reservation_user_comment_id) as count from reservation_user_comment as comment inner join users " + 
+public class CommentSqls {
+
+	public final static String SELECT_ALL = "select users.nickname,comment.*,file.id as file_id ,count(*) as count from reservation_user_comment as comment inner join users " + 
 			"	on comment.user_id = users.id  " + 
 			"    left outer join reservation_user_comment_image as img " + 
 			"on  comment.id = img.reservation_user_comment_id " + 
@@ -16,4 +13,6 @@ public class CommentForDetailSql {
 	public final static String SELECT_COUNT_AND_AVGSCORE = "SELECT  count(*) as amount_of_count,ROUND(AVG(score),1) as avg_score " + 
 			"FROM reservation_user_comment " + 
 			" where product_id = :id;";
+
+	public final static String SELECT_FILEID_BY_COMMENTID = "SELECT file_id FROM reservation_user_comment_image where reservation_user_comment_id =:id";
 }

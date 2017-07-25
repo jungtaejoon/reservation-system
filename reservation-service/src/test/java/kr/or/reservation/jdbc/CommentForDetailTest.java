@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.reservation.config.RootApplicationContextConfig;
-import kr.or.reservation.dao.CommentForDetailDao;
-import kr.or.reservation.service.CommentForDetailService;
+import kr.or.reservation.dao.CommentDao;
+import kr.or.reservation.service.CommentService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = RootApplicationContextConfig.class)
@@ -20,7 +20,7 @@ import kr.or.reservation.service.CommentForDetailService;
 public class CommentForDetailTest {
 
 	@Autowired
-	CommentForDetailService service;
+	CommentService service;
 	
 	Logger log = Logger.getLogger(this.getClass());
 	@Test
@@ -28,6 +28,14 @@ public class CommentForDetailTest {
 		
 		List<?> list= service.selectByProductId(2);
 		// 가져 오는지 테스트 
-		log.info(service.selectAvgScoreByProductId(3));
+		//log.info(service.selectAvgScoreByProductId(3));
+	}
+	
+	@Test
+	public void selectFileIdByCommentId() {
+		
+		List<?> list= service.getFileIdByCommentId(1);
+		// 가져 오는지 테스트 
+		log.info(list.toString());
 	}
 }
