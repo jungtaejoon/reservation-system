@@ -1,7 +1,5 @@
 package kr.or.connect.reservation.dao;
 
-import static org.junit.Assert.*;
-import kr.or.connect.reservation.config.RootApplicationContextConfig;
 import kr.or.connect.reservation.domain.Category;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,14 +8,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
+
+//import kr.or.connect.reservation.config.RootApplicationContextConfig;
+
 /**
- * Created by ODOL on 2017. 7. 7..
+ * Created by ODOL on 2017. 7. 12..
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = RootApplicationContextConfig.class)
+@ContextConfiguration(locations = {"classpath:*-context.xml"})
 @Transactional
 public class CategoryDaoTest {
     @Autowired
@@ -33,7 +34,7 @@ public class CategoryDaoTest {
 
     @Test
     public void shouldCategorySelect() {
-        List<Category> categoryList = categoryDao.selectAll();
+        List<Category> categoryList = categoryDao.selectCategoryList();
         assertNotNull(categoryList);
     }
 

@@ -53,15 +53,16 @@ To change this template use File | Settings | File Templates.
 
         var categoryFunctions = {
             init: function () {
-                this.bindEvent();
+                this.bindClickEvent();
             },
-            bindEvent: function () {
+            bindClickEvent: function () {
                 $categoryListWrapper.on('click', '.delete',categoryFunctions.removeCategory);
             },
             removeCategory: function (event) {
                 event.preventDefault();
                 var li = $(this).closest('li')
                 var id = $(li).attr('data-id');
+                var rowId = $(li).data('id');
                 var result = categoryFunctions.deleteAjax(id);
                 result.then(function () {
                     $(li).remove();

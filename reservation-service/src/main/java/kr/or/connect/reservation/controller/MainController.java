@@ -1,32 +1,43 @@
 package kr.or.connect.reservation.controller;
 
-import kr.or.connect.reservation.dao.CategoryDao;
-import kr.or.connect.reservation.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.or.connect.reservation.interceptor.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
+
+
+
 
 /**
- * Created by ODOL on 2017. 7. 7..
+ * Created by ODOL on 2017. 7. 12..
  */
-@RestController
-//@Controller
+@Controller
 @RequestMapping("/")
 public class MainController {
-    @Autowired
-    CategoryService CategoryService;
-    @GetMapping
-    public String index(Model model) {
-//        System.out.println("get mapping");
-//        System.out.println(CategoryService.getCategories());
-//        model.addAttribute("categories", CategoryService.getCategories());
+
+    @GetMapping("/main")
+    public String index() {
         return "mainpage";
     }
 
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id) {
+        return "detail";
+    }
+
+    @GetMapping("/review/{id}")
+    public String review(@PathVariable("id") Long id) {
+        return "review";
+    }
+
+    @GetMapping("/myReservation")
+    @Authentication
+    public String myReservation() {return "myreservation"; }
+
+    @GetMapping("/reserve/{id}")
+    @Authentication
+    public String reserve() {
+        return "reserve";
+    }
 
 
 }
