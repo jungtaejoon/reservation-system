@@ -27,6 +27,7 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
    @Override
    public void addResourceHandlers(ResourceHandlerRegistry registry) {
        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+       //registry.addResourceHandler("/node_modules/**").addResourceLocations("../../../node_modules/");
    }
    
    @Bean
@@ -36,10 +37,13 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
        return multipartResolver;
    }
    
+   
+   
    /*@Override
    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
        converters.add(getFormMessageConverter());
        super.configureMessageConverters(converters);
    }
    */
+   
 }

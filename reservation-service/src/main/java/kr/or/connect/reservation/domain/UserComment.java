@@ -6,11 +6,13 @@ public class UserComment {
 	private Integer id;
 	private String score;
 	private String comment;
-	private Timestamp create_date;
-	private Timestamp modify_date;
+	private Timestamp createDate;
+	private Timestamp modifyDate;
 	private String name;  			//product name
-	private Integer user_id;
+	private Integer userId;
 	private String nickname;
+	private Integer imageCount;
+	private String firstImageSaveFileName;
 	
 	public UserComment() {}
 
@@ -38,20 +40,20 @@ public class UserComment {
 		this.comment = comment;
 	}
 
-	public Timestamp getCreate_date() {
-		return create_date;
+	public Timestamp getCreateDate() {
+		return createDate;
 	}
 
-	public void setCreate_date(Timestamp create_date) {
-		this.create_date = create_date;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
 
-	public Timestamp getModify_date() {
-		return modify_date;
+	public Timestamp getModifyDate() {
+		return modifyDate;
 	}
 
-	public void setModify_date(Timestamp modify_date) {
-		this.modify_date = modify_date;
+	public void setModifyDate(Timestamp modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 	public String getName() {
@@ -62,12 +64,12 @@ public class UserComment {
 		this.name = name;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getNickname() {
@@ -77,6 +79,23 @@ public class UserComment {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+	public Integer getImageCount() {
+		return imageCount;
+	}
+
+	public void setImageCount(Integer imageCount) {
+		this.imageCount = imageCount;
+	}
+
+	public String getFirstImageSaveFileName() {
+		return firstImageSaveFileName;
+	}
+
+	public void setFirstImageSaveFileName(String firstImageSaveFileName) {
+		this.firstImageSaveFileName = firstImageSaveFileName;
+	}
+	
 	
 	
 	

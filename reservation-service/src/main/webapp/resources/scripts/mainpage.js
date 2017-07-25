@@ -99,7 +99,7 @@ const MORE_CALL_PROUDUCT_NUM = 10;
 		
 		// methods:
 		// getProduct, showProduct, showVisual, moreButtonClick, scrollHandler		
-		function getProduct(arg) {
+		function getProduct(productNum) {
 			var url = HOST + "/api/product-for-main";
 			var current_category = $(".event_tab_lst .active").parent().attr("data-category");
 			var call_num;
@@ -110,9 +110,9 @@ const MORE_CALL_PROUDUCT_NUM = 10;
 				call_num = MORE_CALL_PROUDUCT_NUM;
 			}
 			
-			if( arg == 0 && current_category != 0 ) {
+			if( productNum == 0 && current_category != 0 ) {
 					url = url + "/" + current_category;
-			} else if( arg == 1 ) {
+			} else if( productNum == 1 ) {
 				url = url + "/visual";
 			}
 			
@@ -126,7 +126,7 @@ const MORE_CALL_PROUDUCT_NUM = 10;
 			})
 			.done(
 				function(response) {
-					if(arg == 0) {
+					if(productNum == 0) {
 						showProduct(response);
 					}
 					else {
@@ -203,9 +203,9 @@ const MORE_CALL_PROUDUCT_NUM = 10;
 		return {
 			getVisualImgNum: function() { return visualImgNum; },
 			
-			setCurrentProductNum: function(arg) { currentProductNum = arg;},
+			setCurrentProductNum: function(productNum) { currentProductNum = productNum;},
 			
-			doGetProduct: function(arg) { getProduct(arg); }
+			doGetProduct: function(productNum) { getProduct(productNum); }
 		};
 		
 	})();

@@ -37,4 +37,10 @@ public class ProductForDetailDao {
 		return jdbc.query(ProductForDetailSqls.GET_IMAGES, params, rowMapperImg );
 	}
 	
+	public ImageForDetail getMainImage(Integer id) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		return jdbc.queryForObject(ProductForDetailSqls.GET_MAIN_IMAGE, params, rowMapperImg);
+	}
+	
 }

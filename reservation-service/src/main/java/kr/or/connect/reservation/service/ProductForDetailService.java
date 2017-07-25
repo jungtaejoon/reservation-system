@@ -28,4 +28,8 @@ public class ProductForDetailService {
 	public List<ImageForDetail> getImages(Integer id) {
 		return dao.getImages(id);
 	}
+	
+	public ImageForDetail getMainImage(Integer id) {
+		return dao.getMainImage(id);
+	}
 }

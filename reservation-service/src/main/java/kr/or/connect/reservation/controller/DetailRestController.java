@@ -31,4 +31,9 @@ public class DetailRestController {
 	public List<ImageForDetail> getImages(@PathVariable Integer id) {
 		return service.getImages(id);
 	}
+	
+	@GetMapping("/main-image/{id}")
+	public ImageForDetail getMainImage(@PathVariable Integer id) {
+		return service.getMainImage(id);
+	}
 }

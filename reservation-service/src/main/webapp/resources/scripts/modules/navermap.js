@@ -1,5 +1,5 @@
 
-const naverMap_ = (function() {
+var NaverMap_ = (function() {
 	var map = new naver.maps.Map('naver_map');
     var myaddress = "강남구 역삼동 825-11";// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
     
@@ -14,7 +14,7 @@ const naverMap_ = (function() {
 		    // 첫번째 결과 결과 주소: result.items[0].address
 		    // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
 
-		    console.log(result.items[0].addrdetail);
+		    //console.log(result.items[0].addrdetail);
 		    
 		    var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
 		    map.setCenter(myaddr); // 검색된 좌표로 지도 이동

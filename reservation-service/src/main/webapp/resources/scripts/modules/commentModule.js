@@ -1,6 +1,6 @@
 
 
-const commentModule_ = (function(){
+var CommentModule_ = (function(){
 	var HOST = "http://localhost:8080";
 	var productId;
 	
@@ -29,44 +29,26 @@ const commentModule_ = (function(){
 		var template = Handlebars.compile(source);
 		var comments = new Array();
 		
-		var average = 0;
 		
 		$.each(response, function(index, element) {
 			var t = new Date(element.modify_date);
 			var date = t.getFullYear() + "-" + (t.getMonth()+1) + "-" + t.getDate();
-			//console.log(date);
-			element.modify_date = date;
+			element.modifDate = date;
 			comments.push(element);
-			//console.log(element);
-			average += parseFloat(element.score);
+			
+			if(element.imageCount == 0  || element.imageCount == null) {
+				element.display = "display: none;";
+			}
 
 		});
 		var data = {
-				"comments": comments,
-				"count": comments.length		
+				"comments": comments
 		};
 		//console.log(data);
 		var html = template(data);
 		
 		$(".list_short_review").append(html);
-		
-		
-		
-		
-		var source = $("#grade_area_template").html();
-		var template = Handlebars.compile(source);
-		
-		average = (average / 3).toPrecision(2) ;
-		var commentstat = {
-				"average": average,
-				"length" : comments.length
-		};
-		var data = { "commentstat" : commentstat };
-		var html = template(data);
-		
-		//console.log(data);
-		
-		$(".grade_area").append(html);
+
 
 	}
 	
@@ -92,12 +74,25 @@ const commentModule_ = (function(){
 		var template = Handlebars.compile(source);
 		var data = {commentVisual: response};
 		var html = template(data);
+		$(".section_popup ul").find("li").remove();
 		$(".section_popup ul").append(html);
 		
 		$(".section_popup .figure_pagination .num.off span").html(response.length);	
-//		visualModule.setVisualImgNum(response.length);			
-//		visualModule.setPrintPosition( $(".section_popup .figure_pagination .num:first-child") );
-//		
+		
+		
+		
+		var VisualModulePopup = VisualModule_.getInstance();
+		//setting
+			VisualModulePopup.setVisualImgSize(VISUAL_IMG_SIZE);
+			VisualModulePopup.setVisualImgNum(response.length);
+			VisualModulePopup.setAutoRoll(false);
+			VisualModulePopup.setScrollEndFlag(0);
+			VisualModulePopup.setModuleClass("section_popup");
+			VisualModulePopup.setButton($('.section_popup .btn_prev'), $('.section_popup .btn_nxt'));
+			VisualModulePopup.init();
+			VisualModulePopup.initPrintPositionHandler( $(".section_popup .figure_pagination .num:first-child") );
+		
+		
 		if(response.length <= 1) {
 			$(".section_popup .prev").css("visibility", "hidden");
 			$(".section_popup .nxt").css("visibility", "hidden");
@@ -108,6 +103,24 @@ const commentModule_ = (function(){
 		
 	}
 	
+	function initButton() {
+		$(".list_short_review").on("click", ".thumb", function(event){
+			
+			$("#photoviewer").css({display: "inline-block"});
+			event.preventDefault(); 
+			event.stopPropagation();
+			var commentId = $(event.target).data("comment");
+			getVisual(commentId);
+		});
+		
+		$(".photoviewer_closer").on("click", function(event){
+			$("#photoviewer").css({display: "none"});
+			event.preventDefault(); 
+			event.stopPropagation();
+		});
+		
+	}
+	
 	return {
 		setProductId: function(id) {
 			productId = id;
@@ -115,7 +128,7 @@ const commentModule_ = (function(){
 	
 		load: function() {
 			getComment();
-			getVisual(11);
+			initButton();
 		}
 	}
 	

@@ -3,26 +3,28 @@ package kr.or.connect.reservation.dto;
 import java.sql.Timestamp;
 
 public class ProductForDetail {
-	Integer id;
-	Integer categoryId;
-	String name;
-	String description;
-	Timestamp salesStart;
-	Timestamp salesEnd;
-	Integer salesFlag;
-	String event;
-	Timestamp createDate;
-	Timestamp modifyDate;
-	String content;
-	String observationTime;
-	Timestamp displayStart;
-	Timestamp displayEnd;
-	String placeName;
-	String placeLot;
-	String placeStreet;
-	String tel;
-	String homepage;
-	String email;
+	private Integer id;
+	private Integer categoryId;
+	private String name;
+	private String description;
+	private Timestamp salesStart;
+	private Timestamp salesEnd;
+	private Integer salesFlag;
+	private String event;
+	private Timestamp createDate;
+	private Timestamp modifyDate;
+	private String content;
+	private String observationTime;
+	private Timestamp displayStart;
+	private Timestamp displayEnd;
+	private String placeName;
+	private String placeLot;
+	private String placeStreet;
+	private String tel;
+	private String homepage;
+	private String email;
+	private String avgScore;
+	private Integer commentCount;
 	
 	
 	
@@ -231,6 +233,26 @@ public class ProductForDetail {
 	}
 
 
+	public String getAvgScore() {
+		return avgScore;
+	}
+
+
+	public void setAvgScore(String avgScore) {
+		this.avgScore = avgScore;
+	}
+
+
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+
+
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ProductForDetail [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", description="
@@ -238,12 +260,11 @@ public class ProductForDetail {
 				+ ", event=" + event + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", content="
 				+ content + ", observationTime=" + observationTime + ", displayStart=" + displayStart + ", displayEnd="
 				+ displayEnd + ", placeName=" + placeName + ", placeLot=" + placeLot + ", placeStreet=" + placeStreet
-				+ ", tel=" + tel + ", homepage=" + homepage + ", email=" + email + "]";
+				+ ", tel=" + tel + ", homepage=" + homepage + ", email=" + email + ", avgScore=" + avgScore
+				+ ", commentCount=" + commentCount + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 
@@ -9,19 +10,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
-    <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <div id="container">
         <div class="header fade">
-            <header class="header_tit">
-                <h1 class="logo">
-                    <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
-                </h1>
-                <a href="/my" class="btn_my"> <span title="내 예약">MY</span> </a>
-            </header>
+        
+        	 <%@ include file="header.jsp" %>
+        	 
         </div>
         <div class="ct main">
             <div>
@@ -65,7 +61,7 @@
                                 <div class="prev_inn">
                                     <a href="#" class="btn_prev" title="이전">
                                         <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
-                                        <i class="spr_book2 ico_arr6_lt off"></i>
+                                        <i class="spr_book2 ico_arr6_lt"></i>
                                     </a>
                                 </div>
                             </div>
@@ -114,9 +110,9 @@
                         <div class="short_review_area">		
                             <div class="grade_area">
                                 <!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
-                                <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
                                 <script id="grade_area_template" type="text/x-handlebars-template">
-								{{#commentstat}}
+                                {{#commentstat}}
+                                <span class="graph_mask"> <em class="graph_value" style="width: {{avgPercent}}%;"></em> </span>
                                 <strong class="text_value"> <span>{{average}}</span> <em class="total">5.0</em> </strong>
                                 <span class="join_count"><em class="green">{{length}}건</em> 등록</span>
 								{{/commentstat}}
@@ -130,8 +126,8 @@
                                     <div>
                                         <div class="review_area">
                                             <div class="thumb_area">
-                                                <a href="#" class="thumb" title="이미지 크게 보기" data-comment="{{id}}"> 
-													<img width="90" height="90" class="img_vertical_top" src="{{firstImage}}" alt="리뷰이미지"> 
+                                                <a href="#" class="thumb" title="이미지 크게 보기" data-comment="{{id}}" style="{{display}}"> 
+													<img width="90" height="90" class="img_vertical_top" src="{{firstImageSaveFileName}}" alt="리뷰이미지"> 
 												</a> 
 												<span class="img_count">{{imageCount}}</span>                                                
 											</div>
@@ -247,65 +243,70 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    <div id="photoviwer"></div>
-  <!--  
-<div id="photoviwer" class="section_popup" style="display: block;">
-              	
-	<div id="close" style="float: right; width:40px; height:40px;">close</div>
-         
-	<div class="pagination">
-		<div class="bg_pagination"></div>
-           	<div class="figure_pagination">
-               <span class="num">1</span>
-               <span class="num off">/ <span>3</span></span>
-         	</div>
-       	</div>
-             <div class="container_visual" style="width: 414px;">
-                 <ul class="visual_img">
-                     
-                	<script id="container_popup_template" type="text/x-handlebars-template">
-									
-									{{#commentVisual}}
-									<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> 
-										<span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-									{{/commentVisual}}
-									</script>
-                 </ul>
-             </div>
-             <div class="prev">
-                 <div class="prev_inn">
-                     <a href="#" class="btn_prev" title="이전">
-                         <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
-  <!--                       <i class="spr_book2 ico_arr6_lt off"></i>
-                     </a>
-                 </div>
-             </div>
-             <div class="nxt">
-                 <div class="nxt_inn">
-                     <a href="#" class="btn_nxt" title="다음">
-                         <i class="spr_book2 ico_arr6_rt"></i>
-                     </a>
-                 </div>
-             </div>
-         </div>
-    -->
+    <!-- <div id="photoviewer"></div> -->
+   
+<div id="photoviewer" class="section_popup" style="position: fixed; top:0;  display:none;">
+               	
+	
+    <div class="group_visual">
+	    <div class="photoviewer_closer" style="position: absolute; right:0; top:0; width:40px; height:40px; color:white; z-index:10;">close</div>
+	         
+		<div class="pagination">
+			<div class="bg_pagination"></div>
+	       	<div class="figure_pagination">
+	           <span class="num">1</span>
+	           <span class="num off">/ <span>3</span></span>
+	     	</div>
+	   	</div>
+	   	
+        <div class="container_visual" style="width: 414px;">            	
+			<ul class="visual_img">                    
+              	<script id="container_popup_template" type="text/x-handlebars-template">									
+								{{#commentVisual}}
+								<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> 
+									<span class="img_bg"></span>
+                                       <div class="visual_txt">
+                                           <div class="visual_txt_inn">
+                                           <h2 class="visual_txt_tit"> <span></span> </h2>
+                                           <p class="visual_txt_dsc"></p>
+                                       </div>
+                                    </div>
+                                </li>
+								{{/commentVisual}}
+					</script>
+			</ul>
+		</div>
+		<div class="prev">
+               <div class="prev_inn">
+                   <a href="#" class="btn_prev" title="이전">             
+                       <i class="spr_book2 ico_arr6_lt off"></i>
+                   </a>
+               </div>
+		</div>
+		<div class="nxt">
+			<div class="nxt_inn">
+				<a href="#" class="btn_nxt" title="다음">
+					<i class="spr_book2 ico_arr6_rt"></i>
+				</a>
+			</div>
+		</div>
+           
+	</div>
+</div>
+    
     <script>
     	var productId = ${productId};
     </script>
     
     
+    <!-- 
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/handlebars/dist/handlebars.min.js"></script> -->
     
     <script src="/resources/scripts/lib/jquery.min.js"></script>
     <script src="/resources/scripts/lib/handlebars.js"></script>
     
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=KCCSPfdJitXaVx8p1QAc&submodules=geocoder"></script>
+    <script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=KCCSPfdJitXaVx8p1QAc&submodules=geocoder"></script>
     <script src="/resources/scripts/modules/navermap.js"></script>
     
     <script src="/resources/scripts/modules/visualModule.js"></script>

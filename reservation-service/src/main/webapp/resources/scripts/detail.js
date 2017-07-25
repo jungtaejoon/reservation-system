@@ -1,35 +1,34 @@
 const HOST = "http://localhost:8080";
-const VISUAL_IMG_SIZE = 414;
-const VISUAL_IMG_NUM = 2;
 
-//const visualModule;  from visualModule.js
+
+//const VisualModule;  from VisualModule.js
 
 (function(window) {
 	
 	var info;
-	var visualModule;
-	var loadModule;   //image and product info.
-	var naverMap
+	var VisualModule;
+	var LoadModule;   //image and product info.
+	var NaverMap
 	
-	var visualModule = visualModule_;
+	var VisualModule = VisualModule_.getInstance();
 	//setting
-		visualModule.setVisualImgSize(VISUAL_IMG_SIZE);
-		visualModule.setVisualImgNum(VISUAL_IMG_NUM);
-		visualModule.setAutoRoll(false);
-		visualModule.setScrollEndFlag(0);
-		visualModule.setModuleClass("section_visual");
-		visualModule.setButton($('.section_visual .btn_prev'), $('.section_visual .btn_nxt'));
-		visualModule.init();
+		VisualModule.setVisualImgSize(VISUAL_IMG_SIZE);
+		VisualModule.setVisualImgNum(VISUAL_IMG_NUM);
+		VisualModule.setAutoRoll(false);
+		VisualModule.setScrollEndFlag(0);
+		VisualModule.setModuleClass("section_visual");
+		VisualModule.setButton($('.section_visual .btn_prev'), $('.section_visual .btn_nxt'));
+		VisualModule.init();
 	
 	
-	var	commentModule = commentModule_;
-		commentModule.setProductId(productId);
-		commentModule.load();
+	var	CommentModule = CommentModule_;
+		CommentModule.setProductId(productId);
+		CommentModule.load();
 		
-	var naverMap = naverMap_;
+	var NaverMap = NaverMap_;
 		
 	
-	var loadModule = (function(){
+	var LoadModule = (function(){
 		
 		var visualImgNum = VISUAL_IMG_NUM;
 		var getProductAjax;
@@ -86,10 +85,40 @@ const VISUAL_IMG_NUM = 2;
 			$(".btn_goto_mail").attr("href", "malto:" + info.email);
 			
 			
+			// 코멘트 통계 부분
+			var source = $("#grade_area_template").html();
+			var template = Handlebars.compile(source);
+			
+			var avgScore;
+			if(response.avgScore != null) {
+				avgScore = parseFloat(response.avgScore).toPrecision(2);
+			} else {
+				avgScore = 0
+			}
+			var avgPercent = avgScore * 20;
+			
+			var commentCount;
+			if(response.commentCount != null) {
+				commentCount = response.commentCount;
+			} else {
+				commentCount = 0;
+			}
+			
+			var commentstat = {
+					"average": avgScore,
+					"length" : commentCount,
+					"avgPercent" : avgPercent
+			};
+			var data = { "commentstat" : commentstat };
+			var html = template(data);
+			
+			//console.log(data);
+			
+			$(".grade_area").append(html);
 			
 			
 			
-			naverMap.set(info.placeLot);
+			NaverMap.set(info.placeLot);
 			//하단 지도 설명 부분
 			$(".store_name").html(info.name);
 			$(".store_addr_bold").html(info.placeStreet);
@@ -126,8 +155,8 @@ const VISUAL_IMG_NUM = 2;
 			$(".section_visual .container_visual ul").append(html);
 			
 			$(".section_visual .figure_pagination .num.off span").html(response.length);	
-			visualModule.setVisualImgNum(response.length);			
-			visualModule.setPrintPosition( $(".section_visual .figure_pagination .num:first-child") );
+			VisualModule.setVisualImgNum(response.length);			
+			VisualModule.initPrintPositionHandler( $(".section_visual .figure_pagination .num:first-child") );
 			
 			if(response.length <= 1) {
 				$(".section_visual .prev").css("visibility", "hidden");
@@ -141,30 +170,36 @@ const VISUAL_IMG_NUM = 2;
 		
 		function setButtons() {
 			//펼쳐보기
-			$(".bk_more._open").on("click", function() {
+			$(".bk_more._open").on("click", function(event) {
 				console.log("openBtn");
 				$(".bk_more._close").css({display: "block"});
 				$(".store_details").removeClass("close3");
 				$(".bk_more._open").css({display: "none"});
+				event.preventDefault(); 
+				event.stopPropagation();
 			});
 			
 			
 			//접기
-			$(".bk_more._close").on("click", function() {
+			$(".bk_more._close").on("click", function(event) {
 				$(".bk_more._open").css("display", "block");
 				$(".store_details").addClass("close3");
 				$(".bk_more._close").css("display", "none");
+				event.preventDefault(); 
+				event.stopPropagation();
 			});
 			
 			
 			//예매하기
-			$(".section_btn").on("click", function() {
-				if(info.salesFlag == 1) {
-					alert("매진");
-				}
-
+			$(".bk_btn").on("click", function() {
+				
 				if(info.salesEnd < (new Date()).getTime() ) {
-					alert("판매기간 종료");
+					alert("죄송합니다. 판매기간이 종료되었습니다.");
+				} else if(info.salesFlag == 1) {
+					alert("죄송합니다. 매진되었습니다.");
+				} else {
+					
+					location.href =  HOST + "/reserve/" + info.id;
 				}
 			})
 			
