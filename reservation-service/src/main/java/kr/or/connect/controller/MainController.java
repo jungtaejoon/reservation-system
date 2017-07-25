@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import kr.or.connect.service.*;
 
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/")
 public class MainController {
 
 	private CategoryService categoryService;

@@ -28,8 +28,8 @@
 			<button type="submit">저장</button>
 		</form>
 	</div>
-<script type="text/javascript" src="resources/js/plugin/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="resources/js/plugin/handlebars-v4.0.10.js"></script>
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script id="category_tr_template" type="text/x-handlebars-template">
 	<tr>
 		<td>{{name}}</td>

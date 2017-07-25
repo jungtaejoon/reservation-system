@@ -3,6 +3,9 @@ package kr.or.connect.domain;
 import java.util.*;
 
 public class User {
+	
+	public static final String SAME = "Same";
+	public static final String NEED_UPDATE = "Need Update";
 
 	private Long id;
 	private String username;
@@ -118,6 +121,21 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", email=" + email + ", tel=" + tel + ", nickname="
 				+ nickname + ", snsId=" + snsId + ", snsType=" + snsType + ", snsProfile=" + snsProfile + ", adminFlag="
 				+ adminFlag + ", createDate=" + createDate + ", modifyDate=" + modifyDate + "]";
+	}
+
+	public String checkNaverUser(NaverLoginUser naverUser) {
+		String checkResult = SAME;
+		if(naverUser.getNickname() != null) {
+			if(!naverUser.getNickname().equals(this.getNickname())) checkResult = NEED_UPDATE;
+		} else {
+			if(this.getNickname() != null) checkResult = NEED_UPDATE; 
+		}
+		if(naverUser.getProfileImage() != null) {
+			if(!naverUser.getProfileImage().equals(this.getSnsProfile())) checkResult = NEED_UPDATE;
+		} else {
+			if(this.getSnsProfile() != null) checkResult = NEED_UPDATE;
+		}
+		return checkResult;
 	}
 
 }

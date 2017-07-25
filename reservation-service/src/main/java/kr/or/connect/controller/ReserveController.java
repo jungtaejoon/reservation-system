@@ -14,30 +14,35 @@ import kr.or.connect.service.*;
 import kr.or.connect.util.*;
 
 @Controller
-@RequestMapping("/my-reservation")
-public class MyReservationController {
+@RequestMapping("/reserve")
+public class ReserveController {
 
 	private static final String CLIENT_ID = "UT0zsTGjviSL7f6l7c1Q";
 	private static final String NAVER_OAUTH_AUTHORIZE_URL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="
 			+ CLIENT_ID + "&redirect_uri=";
-	private static final String TARGET_JSP = "myreservation";
+	private static final String TARGET_JSP = "reserve";
 
 	private String redirectUri;
 	private UserService userService;
 	private GetStateUtil getStateUtil;
-
+	private ProductService productService;
+	
 	@Autowired
-	public MyReservationController(UserService userService, GetStateUtil getStateUtil) {
+	public ReserveController(UserService userService, GetStateUtil getStateUtil, ProductService productService) {
 		super();
 		this.userService = userService;
 		this.getStateUtil = getStateUtil;
+		this.productService = productService;
 	}
 
-	@GetMapping
-	public String check(HttpSession session, Model model, HttpServletRequest request) {
+	@GetMapping("/{productId:[\\d]+}")
+	public String reserve(@PathVariable Long productId, HttpSession session, Model model, HttpServletRequest request) {
 		if (session.getAttribute("email") != null) {
 			if(userService.selectByEmail((String)session.getAttribute("email")) != null) {
 				model.addAttribute("user", userService.selectByEmail((String)session.getAttribute("email")));
+				model.addAttribute("prices", productService.getPrice(productId));
+				model.addAttribute("productDetail", productService.getDetail(productId));
+				model.addAttribute("images", productService.getImages(productId));
 				return TARGET_JSP;
 			} 
 		} 
@@ -51,5 +56,4 @@ public class MyReservationController {
 		}
 		return "redirect:" + NAVER_OAUTH_AUTHORIZE_URL + this.redirectUri + "&state=" + state;
 	}
-	
 }

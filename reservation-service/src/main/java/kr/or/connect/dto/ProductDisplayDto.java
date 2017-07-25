@@ -7,6 +7,7 @@ public class ProductDisplayDto {
 	private String name;
 	private String description;
 	private String placeName;
+	private Long fileId;
 
 	public ProductDisplayDto() {
 		super();
@@ -52,10 +53,18 @@ public class ProductDisplayDto {
 		this.placeName = placeName;
 	}
 
+	public Long getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(Long fileId) {
+		this.fileId = fileId;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductDisplayDto [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", description="
-				+ description + ", placeName=" + placeName + "]";
+				+ description + ", placeName=" + placeName + ", fileId=" + fileId + "]";
 	}
 
 }

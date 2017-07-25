@@ -4,8 +4,8 @@
 		var counts = 0;
 		
 		return {
-			increaseFirstIndex: function() {
-				firstIndex += 10;
+			increaseFirstIndex: function(value) {
+				firstIndex += value;
 			},
 			resetFirstIndex: function() {
 				firstIndex = 0;

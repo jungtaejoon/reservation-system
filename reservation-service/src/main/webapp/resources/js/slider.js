@@ -1,59 +1,92 @@
-var slider = function(target, needInterval){
-    var childWidth = target.children().outerWidth();
+var Slider = (function(){
+	var target;
+    var childWidth;
+    var slideNum = 1;
+    var slideCounts;
     var slideLoop;
-    if(needInterval) {
-    	slideLoop = setInterval(next, 2000);
-    	$(window).blur(function() {
-    		clearInterval(slideLoop);
-    	});
-    	$(window).focus(function() {
-    		slideLoop = setInterval(next, 2000);
-    	});
+    var needInterval = false;
+    function init(interval) {
+    	target = $('#slider');
+    	needInterval = interval;
+    	childWidth = target.children().outerWidth();
+    	slideCounts = target.children().length;
+    	prepareFirst();
+    	bindEvents();
+    	if(needInterval) {
+    		intervalSetter();
+    		$(window).blur(intervalCleaner.bind(this));
+    		$(window).focus(intervalSetter.bind(this));
+    	}
     }
-    (function prepareFirst() {
-    	var repeat = 1;
+    function intervalSetter() {
+    	slideLoop = setInterval(next, 2000);
+    }
+    function intervalCleaner() {
+    	clearInterval(slideLoop);
+    }
+    function bindEvents() {
+    	$('#btn_nxt').on('click', clickNext.bind(this));
+    	$('#btn_pre').on('click', clickPrev.bind(this));
+    }
+    function clickNext() {
+    	next();
+    	if(needInterval) {waitAndSlide();}
+    }
+    function clickPrev() {
+    	prev();
+    	if(needInterval) {waitAndSlide();}
+    }
+    function prepareFirst() {
+    	var repeat = 0;
     	if(target.children().length > 5) repeat = 2;
+    	else if(target.children().length > 2) repeat = 1;
     	for(var i = 0; i < repeat; i++) prepareLeft();
-    })(); 
+    }
 	function prepareLeft() {
-		target.prepend(target.children().last().clone());
+		target.prepend(target.children().last());
 		target.animate({left: '-=' + childWidth}, 0);
-		target.children().last().remove();
 	}
 	function prepareRight() {
-		target.append(target.children().first().clone());
+		target.append(target.children().first());
 		target.animate({left: '+=' + childWidth}, 0);
-		target.children().first().remove();
 	}
 	function next() {
+		if(slideCounts <= 1) {return;}
+		if(target.is(':animated')) {return;}
 		target.animate({
 		    left: '-=' + childWidth
 		}, {duration: 500, 
 			complete: prepareRight
 		});
+		if(slideNum == slideCounts) {
+			slideNum = 1;
+		} else {
+			slideNum++;
+		}
+		$('#slideNum').html(slideNum);
 	}
 	function prev() {
+		if(slideCounts <= 1) {return;}
+		if(target.is(':animated')) {return;}
+		prepareLeft();
 		target.animate({
 		    left: '+=' + childWidth
-		}, {duration: 500, 
-			complete: prepareLeft
-		});
+		}, {duration: 500});
+		if(slideNum == 1) {
+			slideNum = slideCounts;
+		} else {
+			slideNum--;
+		}
+		$('#slideNum').html(slideNum);
 	}
 	function waitAndSlide() {
-		clearInterval(slideLoop);
+		intervalCleaner();
 		setTimeout(function(){
-			clearInterval(slideLoop);
-			slideLoop = setInterval(next, 2000);
+			intervalCleaner();
+			intervalSetter();
 		}, 2000);
 	}
 	return {
-		next: function() {
-			next();
-			if(needInterval) waitAndSlide();
-		},
-		prev: function() {
-			prev();
-			if(needInterval) waitAndSlide();
-		}
+		init: init,
 	}
-}
+})();
