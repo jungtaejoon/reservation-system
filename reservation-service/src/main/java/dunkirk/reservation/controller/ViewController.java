@@ -9,6 +9,6 @@ public class ViewController {
 
 	@GetMapping("/")
 	public String home(Model model) {
-		return null;
+		return "mainpage";
 	}
 }
