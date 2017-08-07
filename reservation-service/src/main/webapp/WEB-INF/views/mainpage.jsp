@@ -177,5 +177,6 @@
         </div>
     </footer>
 </body>
-
+<script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
 </html>
