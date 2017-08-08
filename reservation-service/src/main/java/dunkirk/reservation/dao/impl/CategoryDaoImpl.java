@@ -29,6 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
 							.usingGeneratedKeyColumns("id");	
 	}
 	
+	@Override
 	public List<Category> getList() {
 		return jdbc.query(CategorySqls.GET_LIST, rowMapper);
 	}

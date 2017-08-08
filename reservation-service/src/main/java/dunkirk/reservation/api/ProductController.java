@@ -22,6 +22,6 @@ public class ProductController {
 
 	@GetMapping("/categories/{categoryId:[\\d]+}/products")
 	public List<Product> getList(@PathVariable int categoryId, @RequestParam int start) {
-		return new ProductServiceImpl(new ProductDao()).getList(categoryId, start);
+		return productService.getList(categoryId, start);
 	}
 }
