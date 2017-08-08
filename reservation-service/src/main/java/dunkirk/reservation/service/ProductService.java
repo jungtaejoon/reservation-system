@@ -6,6 +6,6 @@ import dunkirk.reservation.domain.*;
 
 public interface ProductService {
 
-	List<Product> getList(int categoryId, int start);
-
+	public List<Product> getList(int categoryId, int start);
+	
 }

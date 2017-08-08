@@ -1,13 +1,14 @@
 package dunkirk.reservation.service.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import dunkirk.reservation.dao.*;
-import dunkirk.reservation.domain.*;
-import dunkirk.reservation.service.*;
+import dunkirk.reservation.dao.ProductDao;
+import dunkirk.reservation.domain.Product;
+import dunkirk.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,7 +23,17 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> getList(int categoryId, int start) {
-		return productDao.getList(categoryId, start);
+		List<Product> list = new ArrayList<Product>();
+		list = productDao.getList1();
+		for(int i=0; i<list.size(); i++)
+			System.out.println(list.get(i).toString());
+		
+		return list;
 	}
 
+	
+	
+	
+
+	
 }

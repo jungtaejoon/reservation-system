@@ -16,6 +16,16 @@ public class Product {
 	private String event;
 	private Timestamp createDate;
 	private Timestamp modifyDate;
+	
+	private DisplayInfo displayInfo;
+
+	public DisplayInfo getDisplayInfo() {
+		return displayInfo;
+	}
+
+	public void setDisplayInfo(DisplayInfo displayInfo) {
+		this.displayInfo = displayInfo;
+	}
 
 	public Product() {
 		super();

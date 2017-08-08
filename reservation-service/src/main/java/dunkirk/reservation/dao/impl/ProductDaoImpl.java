@@ -22,12 +22,14 @@ public class ProductDaoImpl implements ProductDao {
 		super();
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
-
-
-
+	
 	@Override
 	public List<Product> getList(int categoryId, int start) {
 		return jdbc.query(ProductSqls.GET_LIST, rowMapper);
 	}
 
+	@Override
+	public List<Product> getList1() {
+		return jdbc.query(ProductSqls.GET_LIST1, rowMapper);
+	}
 }
