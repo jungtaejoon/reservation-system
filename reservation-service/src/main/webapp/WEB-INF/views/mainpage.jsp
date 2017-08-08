@@ -15,10 +15,10 @@
         <div class="header">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <hr>
@@ -28,12 +28,12 @@
                     <div class="container_visual">
                         <div class="prev_e">
                             <div class="prev_inn">
-                                <a href="#" class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
+                                <a class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
                             </div>
                         </div>
                         <div class="nxt_e">
                             <div class="nxt_inn">
-                                <a href="#" class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
+                                <a class="btn_nxt_e" title="다음"> <i class="spr_book_event spr_event_nxt">다음</i> </a>
                             </div>
                         </div>
                         <div>
@@ -76,34 +76,16 @@
             </div>
             <div class="section_event_tab">
                 <ul class="event_tab_lst tab_lst_min">
-                    <li class="item" data-category="1">
+                    <li class="item" data-category="0">
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
-                    <li class="item" data-category="2">
-                        <a class="anchor"> <span>전시</span> </a>
-                    </li>
-                    <li class="item" data-category="3">
-                        <!-- [D] 활성화 된 anchor는 active 추가 -->
-                        <a class="anchor"> <span>뮤지컬</span> </a>
-                    </li>
-                    <li class="item" data-category="4">
-                        <a class="anchor"> <span>콘서트</span> </a>
-                    </li>
-                    <li class="item" data-category="5">
-                        <a class="anchor"> <span>클래식</span> </a>
-                    </li>
-                    <li class="item" data-category="6">
-                        <a class="anchor"> <span>연극</span> </a>
-                    </li>
-                    <li class="item" data-category="7">
-                        <a class="anchor"> <span>클래스</span> </a>
-                    </li>
-                    <li class="item" data-category="8">
-                        <a class="anchor"> <span>체험</span> </a>
-                    </li>
-                    <li class="item" data-category="9">
-                        <a class="anchor last"> <span>키즈</span> </a>
-                    </li>
+                	<script id="category_list_template"  type="text/x-handlebars-template">
+						{{#items}}
+	                    <li class="item" data-category="{{id}}">
+	                        <a class="anchor {{#if @last}}last{{/if}}"> <span>{{name}}</span> </a>
+	                    </li>
+						{{/items}}
+                	</script>
                 </ul>
             </div>
             <div class="section_event_lst">
@@ -112,7 +94,7 @@
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
                     <ul class="lst_event_box">
                         <li class="item">
-                            <a href="#" class="item_book">
+                            <a class="item_book">
                                 <div class="item_preview"> <img alt="뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
                                 <div class="event_txt">
                                     <h4 class="event_txt_tit"> <span>뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한</span> <small class="sm">샤롯데 씨어터</small> </h4>
@@ -124,7 +106,7 @@
                             </a>
                         </li>
                         <li class="item">
-                            <a href="#" class="item_book">
+                            <a class="item_book">
                                 <div class="item_preview"> <img alt="뮤지컬 더 데빌 The DEVIL" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170111_195/1484112206459rGQGI_JPEG/%BB%F3%BC%BC%C6%E4%C0%CC%C1%F6_%BB%F3%B4%DC%28%B3%D7%C0%CC%B9%F6_%BF%B9%BE%E0%29.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
                                 <div class="event_txt">
                                     <h4 class="event_txt_tit"> <span>뮤지컬 더 데빌 The DEVIL</span> <small class="sm">드림아트센터 1관 에스비타운</small> </h4>
@@ -140,7 +122,7 @@
                     </ul>
                     <ul class="lst_event_box">
                         <li class="item">
-                            <a href="#" class="item_book">
+                            <a class="item_book">
                                 <div class="item_preview"> <img alt="뮤지컬 로미오와 줄리엣" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=l591_945"> <span class="img_border"></span> </div>
                                 <div class="event_txt">
                                     <h4 class="event_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> <small class="sm">종로구 두산아트센터 연강홀</small> </h4>
@@ -149,7 +131,7 @@
                             </a>
                         </li>
                         <li class="item">
-                            <a href="#" class="item_book">
+                            <a class="item_book">
                                 <div class="item_preview"> <img alt="뮤지컬 인 더 하이츠(IN THE HEIGHTS)" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170111_225/1484116579024rNkXW_JPEG/2016_%B9%C2%C1%F6%C4%C3_%C0%CE_%B4%F5_%C7%CF%C0%CC%C3%F7_%C6%F7%BD%BA%C5%CD%2820MB%29.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
                                 <div class="event_txt">
                                     <h4 class="event_txt_tit"> <span>뮤지컬 인 더 하이츠(IN THE HEIGHTS)</span> <small class="sm">예술의전당 CJ토월극장</small> </h4>
@@ -178,5 +160,7 @@
     </footer>
 </body>
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script type="text/javascript" src="/resources/js/callAjax.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
 </html>
