@@ -27,7 +27,14 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> getList(int categoryId, int start) {
-		return jdbc.query(ProductSqls.GET_LIST, rowMapper);
+		Map<String, Integer> params = new HashMap<>();
+		params.put("start", start);
+		if(categoryId == 0) {
+			return jdbc.query(ProductSqls.GET_LIST, params, rowMapper);
+		}else {
+			params.put("category_id", categoryId);
+			return jdbc.query(ProductSqls.GET_LIST_BY_CATEGORY, params, rowMapper);
+		}
 	}
 
 }
