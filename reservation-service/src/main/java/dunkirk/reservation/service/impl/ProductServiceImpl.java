@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dunkirk.reservation.dao.ProductDao;
-import dunkirk.reservation.domain.Product;
-import dunkirk.reservation.service.ProductService;
+import dunkirk.reservation.dao.*;
+import dunkirk.reservation.service.*;
+import durkirk.reservation.dto.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getList(int categoryId, int start) {
+	public List<ProductForMainDto> getList(int categoryId, int start) {
 		return productDao.getList(categoryId, start);
 	}
 

@@ -10,14 +10,14 @@ import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.stereotype.*;
 
 import dunkirk.reservation.dao.*;
-import dunkirk.reservation.domain.*;
 import dunkirk.reservation.sql.*;
+import durkirk.reservation.dto.*;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
 
 	private NamedParameterJdbcTemplate jdbc;
-	private RowMapper<Product> rowMapper = new BeanPropertyRowMapper<Product>(Product.class);
+	private RowMapper<ProductForMainDto> rowMapper = new BeanPropertyRowMapper<ProductForMainDto>(ProductForMainDto.class);
 
 	@Autowired
 	public ProductDaoImpl(DataSource dataSource) {
@@ -26,12 +26,15 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> getList(int categoryId, int start) {
-		return jdbc.query(ProductSqls.GET_LIST, rowMapper);
+	public List<ProductForMainDto> getList(int categoryId, int start) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("start", start);
+		if(categoryId == 0) {
+			return jdbc.query(ProductSqls.GET_LIST, params, rowMapper);
+		}else {
+			params.put("category_id", categoryId);
+			return jdbc.query(ProductSqls.GET_LIST_BY_CATEGORY, params, rowMapper);
+		}
 	}
 
-	@Override
-	public List<Product> getList1() {
-		return jdbc.query(ProductSqls.GET_LIST1, rowMapper);
-	}
 }

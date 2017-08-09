@@ -2,10 +2,8 @@ package dunkirk.reservation.service;
 
 import java.util.*;
 
-import dunkirk.reservation.domain.*;
+import durkirk.reservation.dto.*;
 
 public interface ProductService {
-
-	public List<Product> getList(int categoryId, int start);
-	
+	public List<ProductForMainDto> getList(int categoryId, int start);
 }
