@@ -81,7 +81,7 @@
                     </li>
                 	<script id="category_list_template"  type="text/x-handlebars-template">
 						{{#items}}
-	                    <li class="item" data-category="{{id}}">
+	                    <li class="item" data-category="{{id}}" data-product-count="{{productCount}}">
 	                        <a class="anchor {{#if @last}}last{{/if}}"> <span>{{name}}</span> </a>
 	                    </li>
 						{{/items}}

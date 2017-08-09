@@ -31,6 +31,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	
 	@Override
 	public List<Category> getList() {
+		System.out.println("dao");
 		return jdbc.query(CategorySqls.GET_LIST, rowMapper);
 	}
 

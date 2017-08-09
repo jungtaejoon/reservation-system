@@ -23,6 +23,9 @@ $(function() {
 		function clickCategoryEvent(e){
 			$('li.item a').removeClass('active');
 			$(e.currentTarget).find('a').addClass('active');
+			var cnt = $(e.currentTarget).data('product-count');
+			console.log(cnt);
+			$('.event_lst_txt .pink').text(cnt+'개');
 			categoryId = $(e.currentTarget).data('category');
 			getProductList();
 		}
