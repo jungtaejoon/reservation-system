@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Category {
 	private int id;
 	private String name;
+	private int productCount;
 	
 	public Category() {
 		
@@ -21,6 +22,12 @@ public class Category {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getProductCount() {
+		return productCount;
+	}
+	public void setProductCount(int productCount) {
+		this.productCount = productCount;
 	}
 	
 	@Override

@@ -20,7 +20,12 @@ public class CategoryServiceImpl implements CategoryService{
 		this.categoryDao = categoryDao;
 	}
 	
+	@Override
 	public List<Category> getList() {
+		List<Category> list = categoryDao.getList();
+		for(Category c : list) {
+			System.out.println(c.getProductCount());
+		}
 		return categoryDao.getList();
 	}
 
