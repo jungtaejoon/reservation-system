@@ -17,7 +17,7 @@ import durkirk.reservation.dto.*;
 public class ProductDaoImpl implements ProductDao {
 
 	private NamedParameterJdbcTemplate jdbc;
-	private RowMapper<ProductForMainDto> rowMapper = new BeanPropertyRowMapper<ProductForMainDto>(ProductForMainDto.class);
+	private RowMapper<ProductForMainDto> rowMapper = new BeanPropertyRowMapper<>(ProductForMainDto.class);
 
 	@Autowired
 	public ProductDaoImpl(DataSource dataSource) {
@@ -26,12 +26,12 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<ProductForMainDto> getList(int categoryId, int start) {
+	public List<ProductForMainDto> getList(int categoryId, int page) {
 		Map<String, Integer> params = new HashMap<>();
-		params.put("start", start);
-		if(categoryId == 0) {
+		params.put("page", page);
+		if (categoryId == 0) {
 			return jdbc.query(ProductSqls.GET_LIST, params, rowMapper);
-		}else {
+		} else {
 			params.put("category_id", categoryId);
 			return jdbc.query(ProductSqls.GET_LIST_BY_CATEGORY, params, rowMapper);
 		}

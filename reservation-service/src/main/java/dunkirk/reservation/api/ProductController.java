@@ -20,7 +20,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/categories/{categoryId:[\\d]+}/products")
-	public List<ProductForMainDto> getList(@PathVariable int categoryId, @RequestParam int start) {
-		return productService.getList(categoryId, start);
+	public List<ProductForMainDto> getList(@PathVariable int categoryId, @RequestParam int page) {
+		return productService.getList(categoryId, page*10);
 	}
 }
