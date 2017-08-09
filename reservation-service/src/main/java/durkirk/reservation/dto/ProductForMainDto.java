@@ -1,13 +1,13 @@
 package durkirk.reservation.dto;
 
-public class ProductDto {
+public class ProductForMainDto {
 	private int id;
 	private String name;
 	private String description;
 	private String placeName;
 	private int fileId;
 	
-	public ProductDto(){
+	public ProductForMainDto(){
 		
 	}
 

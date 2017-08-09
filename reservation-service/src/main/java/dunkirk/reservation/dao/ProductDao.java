@@ -2,9 +2,9 @@ package dunkirk.reservation.dao;
 
 import java.util.*;
 
-import dunkirk.reservation.domain.*;
+import durkirk.reservation.dto.*;
 
 public interface ProductDao {
 
-	public List<Product> getList(int categoryId, int start);
+	public List<ProductForMainDto> getList(int categoryId, int start);
 }

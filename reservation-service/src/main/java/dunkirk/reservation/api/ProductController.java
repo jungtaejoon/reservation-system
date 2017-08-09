@@ -5,8 +5,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
-import dunkirk.reservation.domain.*;
 import dunkirk.reservation.service.*;
+import durkirk.reservation.dto.*;
 
 @RestController
 public class ProductController {
@@ -20,7 +20,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/categories/{categoryId:[\\d]+}/products")
-	public List<Product> getList(@PathVariable int categoryId, @RequestParam int start) {
+	public List<ProductForMainDto> getList(@PathVariable int categoryId, @RequestParam int start) {
 		return productService.getList(categoryId, start);
 	}
 }
