@@ -1,7 +1,7 @@
 $(function() {
 	var CategoryList = (function() {
 		var template = Handlebars.compile($('#category_list_template').html());
-		CashedAjax.ajax('/categories').then(appendCategory);
+		CachedAjax.ajax('/categories').then(appendCategory);
 		function appendCategory(res) {
 			
 			var productTotalCount = res.reduce(function add(acc, value) {
@@ -40,7 +40,7 @@ $(function() {
 		}
 		function getProductList(pageNum, type) {
 			var url = '/categories/' + categoryId + '/products?page='+pageNum;
-			CashedAjax.ajax(url).then(appendProduct.bind(this, type));
+			CachedAjax.ajax(url).then(appendProduct.bind(this, type));
 		}
 		function appendProduct(type, res) {
 			var left = [];

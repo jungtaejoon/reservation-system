@@ -133,6 +133,6 @@
 </body>
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script type="text/javascript" src="/resources/js/cashedAjax.js"></script>
+<script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
 </html>

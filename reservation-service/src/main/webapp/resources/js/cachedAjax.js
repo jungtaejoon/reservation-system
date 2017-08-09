@@ -1,13 +1,13 @@
-var CashedAjax = (function() {
-	var cashedData = {};
+var CachedAjax = (function() {
+	var cachedData = {};
 	var returnObj;
 	function ajax(url) {
-		if(cashedData[url]) {
-			returnObj = Promise.resolve(cashedData[url]);
+		if(cachedData[url]) {
+			returnObj = Promise.resolve(cachedData[url]);
 		} else {
 			returnObj = $.ajax(url);
 			returnObj.then(function(res) {
-				cashedData[url] = res;
+				cachedData[url] = res;
 			});
 		}
 		return returnObj;
