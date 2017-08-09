@@ -24,7 +24,7 @@ $(function() {
 		var pageNum = 0;
 		function init() {
 			bindEvents();
-			getProductList(pageNum, "html");
+			getProductList(pageNum, 'html');
 		}
 		function bindEvents() {
 			$('ul.event_tab_lst').on('click', 'li.item', clickCategoryEvent);
@@ -36,7 +36,7 @@ $(function() {
 			$(e.currentTarget).find('a').addClass('active');
 			$('.event_lst_txt .pink').text($(e.currentTarget).data('product-count')+'개');
 			categoryId = $(e.currentTarget).data('category');
-			getProductList(pageNum, "html");
+			getProductList(pageNum, 'html');
 		}
 		function getProductList(pageNum, type) {
 			var url = '/categories/' + categoryId + '/products?page='+pageNum;
@@ -59,10 +59,10 @@ $(function() {
 			var maxHeight = $(document).height();
 			var currentScroll = $(document).scrollTop() + $(window).height();
 			if(maxHeight - currentScroll < 30){
-				var productTotalCount = parseInt($(".event_lst_txt .pink").text().replace('개', ''));
+				var productTotalCount = parseInt($('.event_lst_txt .pink').text().replace('개', ''));
 				pageNum++;
 				if(productTotalCount > pageNum*10){					
-					getProductList(pageNum, "append");
+					getProductList(pageNum, 'append');
 				}
 			}
 		}
