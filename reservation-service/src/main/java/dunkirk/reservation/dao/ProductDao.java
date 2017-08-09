@@ -7,5 +7,4 @@ import dunkirk.reservation.domain.*;
 public interface ProductDao {
 
 	public List<Product> getList(int categoryId, int start);
-	public List<Product> getList1();
 }
