@@ -2,7 +2,14 @@ $(function() {
 	var CategoryList = (function() {
 		var template = Handlebars.compile($('#category_list_template').html());
 		CashedAjax.ajax('/categories').then(appendCategory);
-		function appendCategory(res) {
+		function appendCategory(res) {		
+			var productTotalCount = res.reduce(function add(acc, value) {
+				return acc + value.productCount;
+			}, 0);
+			
+			$(".event_tab_lst li[data-category='0']").attr("data-product-count", productTotalCount);
+			$('.event_lst_txt .pink').text(productTotalCount+'개');
+			
 			res = {
 				items: res
 			}

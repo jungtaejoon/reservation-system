@@ -76,7 +76,7 @@
             </div>
             <div class="section_event_tab">
                 <ul class="event_tab_lst tab_lst_min">
-                    <li class="item" data-category="0">
+                    <li class="item" data-category="0" data-product-count>
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
                 	<script id="category_list_template"  type="text/x-handlebars-template">
