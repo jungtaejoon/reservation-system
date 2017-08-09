@@ -94,18 +94,20 @@
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
                     <ul class="lst_event_box left_box">
                     	<script id="product_list_template" type="text/x-handlebars-template">
+						{{#products}}
                     	<li class="item">
                             <a class="item_book">
-                                <div class="item_preview"> <img alt="뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170303_271/1488514705030TuUK4_JPEG/17%B5%E5%B8%B2%B0%C9%C1%EE_%B8%DE%C0%CE%C6%F7%BD%BA%C5%CD_%C3%D6%C1%BE.jpg?type=l591_945">                                    <span class="img_border"></span> </div>
+                                <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}">
+                                    <span class="img_border"></span> </div>
                                 <div class="event_txt">
-                                    <h4 class="event_txt_tit"> <span>뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한</span> <small class="sm">샤롯데 씨어터</small> </h4>
-                                    <p class="event_txt_dsc">뮤지컬 드림걸즈(DREAMGIRLS) 최초 내한! 1981년 미국 브로드웨이 초연 당시 전미(全美) 흥행 돌풍 2006년 비욘세, 제이미 폭스, 제니퍼 허드슨 등 초호화 캐스팅 영화로 재탄생 2009년 브로드웨이와 국내 제작진이 힘을 합쳐 세계 최초로 선보인 월드 프리미어 2017년 뮤지컬 드림걸즈 최초 내한 드림걸즈의 진가를 느낄 수 있는 최고의 무대가 온다! 오리지널 소울에 압도
-                                        당하다! &lt;드림걸즈&gt;의 실제 주인공들인 &lt;슈프림스(Supremes)&gt;의 본 고장 최고의 팀이 뭉쳤다 파워풀한 가창력과 최고의 기량을 지닌 미국 브로드웨이 배우들이 최초로 내한! ＇Listen＇, ＇One Night Only＇, ＇Move＇, ＇To The Bad Side＇ 등 환상적인 뮤지컬 넘버를 오리지널 흑인 R&amp;B, 소울, 그루브로 선보이며
-                                        관객의 눈과 귀를 사로잡는다! 당신의 놓치면 안 될 가장 화려한 꿈의 무대 드림걸즈! ALL 아프리칸 아메리칸 캐스트가 전하는 음악의 진수! 브로드웨이의 새로운 트렌드의 중심, 차원이 다른 사운드! 주역부터 앙상블까지 브로드웨이 아프리칸 아메리칸(African-American) 배우로 구성! 진정한 R&amp;B 오리지널 소울을 그대로 전하는 2017년 최고의 기대작!
+                                    <h4 class="event_txt_tit"> 
+										<span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
+                                    <p class="event_txt_dsc">{{description}}
                                     </p>
                                 </div>
                             </a>
                         </li>
+						{{/products}}
                     	</script>
                         
                     </ul>

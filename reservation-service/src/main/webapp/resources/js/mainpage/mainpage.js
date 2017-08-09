@@ -12,7 +12,7 @@ $(function() {
 	
 	var ProductList = (function() {
 		var categoryId = 0;
-		
+		var template = Handlebars.compile($('#product_list_template').html());
 		function init() {
 			bindEvents();
 			getProductList();
@@ -40,6 +40,8 @@ $(function() {
 					left.push(res[i]);
 				}
 			}
+			$('.lst_event_box.left_box').append(template({products:left}));
+			$('.lst_event_box.right_box').append(template({products:right}));
 		}
 		return {
 			init: init
