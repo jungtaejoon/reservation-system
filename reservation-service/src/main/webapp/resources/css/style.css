@@ -1,3 +1,7 @@
+.invisible {
+    display: none
+}
+
 @font-face {
     font-family: "Naver booking Icons";
     src: url('../font/Naver-booking-Icons.woff') format('woff');
