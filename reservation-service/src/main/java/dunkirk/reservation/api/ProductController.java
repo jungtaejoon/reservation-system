@@ -5,8 +5,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
+import dunkirk.reservation.dto.*;
 import dunkirk.reservation.service.*;
-import durkirk.reservation.dto.*;
 
 @RestController
 public class ProductController {

@@ -96,7 +96,7 @@
                     	<script id="product_list_template" type="text/x-handlebars-template">
 						{{#products}}
                     	<li class="item">
-                            <a class="item_book">
+                            <a class="item_book" href="/product-detail/{{id}}">
                                 <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}">
                                     <span class="img_border"></span> </div>
                                 <div class="event_txt">

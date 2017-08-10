@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -44,8 +45,8 @@
                                     <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
                                         <div class="visual_txt">
                                             <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
+                                                <h2 class="visual_txt_tit"> <span>${product.name }</span> </h2>
+                                                <p class="visual_txt_dsc">${product.description }</p>
                                             </div>
                                         </div>
                                     </li>
@@ -95,9 +96,8 @@
                 <div class="section_store_details">
                     <!-- [D] 펼쳐보기 클릭 시 store_details에 close3 제거 -->
                     <div class="store_details close3">
-                        <p class="dsc">
-                            웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다.
-                        </p>
+                        <p class="dsc">${product.content }</p>
+                         <p class="dsc">${product.observationTime }</p>
                     </div>
                     <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
                     <a href="#" class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i> </a>
@@ -109,7 +109,7 @@
                             <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
                         </div>
                         <div class="event_info">
-                            <div class="in_dsc">[네이버예약 특별할인]<br>R석 50%, S석 60% 할인</div>
+                            <div class="in_dsc">${product.event }</div>
                         </div>
                     </div>
                 </div>
@@ -170,10 +170,10 @@
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
                     <ul class="info_tab_lst">
                         <li class="item active _detail">
-                            <a href="#" class="anchor"> <span>상세정보</span> </a>
+                            <a class="anchor"> <span>상세정보</span> </a>
                         </li>
                         <li class="item _path">
-                            <a href="#" class="anchor"> <span>오시는길</span> </a>
+                            <a class="anchor"> <span>오시는길</span> </a>
                         </li>
                     </ul>
                     <!-- [D] 상세정보 외 다른 탭 선택 시 detail_area_wrap에 hide 추가 -->
@@ -184,9 +184,7 @@
                                 <ul class="detail_info_group">
                                     <li class="detail_info_lst">
                                         <strong class="in_tit">[소개]</strong>
-                                        <p class="in_dsc">
-                                            웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다. 웰메이드 창작 뮤지컬의 대표 브랜드 '김수로 프로젝트' 최신작! 연극, 뮤지컬, 무용 등 매년 작품성 있는 창작 공연을 선보이며, 대한민국 대표 웰메이드 창작 브랜드로 자리매김한 '김수로 프로젝트'의 최신작 입니다.
-                                        </p>
+                                        <p class="in_dsc">${product.content }</p>
                                     </li>
                                     <li class="detail_info_lst"> <strong class="in_tit">[공지사항]</strong>
                                         <ul class="in_img_group">
@@ -210,27 +208,27 @@
                                 <span class="img_border"></span>
                                 <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
                             </a>
-                            <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
+                            <h3 class="store_name">${product.placeName }</h3>
                             <div class="store_info">
                                 <div class="store_addr_wrap">
                                     <span class="fn fn-pin2"></span>
-                                    <p class="store_addr store_addr_bold">서울특별시 종로구 종로33길 15 </p>
+                                    <p class="store_addr store_addr_bold">${product.placeStreet } </p>
                                     <p class="store_addr">
                                         <span class="addr_old">지번</span>
-                                        <span class="addr_old_detail">서울특별시 종로구 연지동 270 </span>
+                                        <span class="addr_old_detail">${product.placeLot } </span>
                                     </p>
-                                    <p class="store_addr addr_detail">두산아트센터 연강홀</p>
+                                    <p class="store_addr addr_detail">${product.placeName }</p>
                                 </div>
                                 <div class="lst_store_info_wrap">
                                     <ul class="lst_store_info">
-                                        <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">전화번호</span> </span> <span class="item_rt"> <a href="tel:02-548-0597" class="store_tel">02-548-0597</a></span> </li>
+                                        <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">전화번호</span> </span> <span class="item_rt"> <a href="tel:${product.tel} " class="store_tel">${product.tel }</a></span> </li>
                                     </ul>
                                 </div>
                             </div>
 							<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
                             <div class="bottom_common_path column2">
-                                <a href="#" class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
-								<a hewf="#" class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
+                                <a class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
+								<a class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
                             </div>
                         </div>
                     </div>
@@ -249,5 +247,4 @@
     </footer>
     <div id="photoviwer"></div>
 </body>
-
 </html>

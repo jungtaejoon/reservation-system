@@ -1,4 +1,7 @@
-package durkirk.reservation.dto;
+package dunkirk.reservation.dto;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class ProductForMainDto {
 	private int id;
@@ -6,9 +9,9 @@ public class ProductForMainDto {
 	private String description;
 	private String placeName;
 	private int fileId;
-	
-	public ProductForMainDto(){
-		
+
+	public ProductForMainDto() {
+
 	}
 
 	public int getId() {
@@ -50,5 +53,10 @@ public class ProductForMainDto {
 	public void setFileId(int fileId) {
 		this.fileId = fileId;
 	}
-	
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+	}
+
 }
