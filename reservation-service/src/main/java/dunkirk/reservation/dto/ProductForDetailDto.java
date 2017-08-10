@@ -23,6 +23,8 @@ public class ProductForDetailDto {
 	private String tel;
 	private String homepage;
 	private String email;
+	private float avgScore;
+	private int reviewCount;
 
 	public ProductForDetailDto() {
 
@@ -146,6 +148,22 @@ public class ProductForDetailDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public float getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAvgScore(float avgScore) {
+		this.avgScore = avgScore;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 
 	@Override
