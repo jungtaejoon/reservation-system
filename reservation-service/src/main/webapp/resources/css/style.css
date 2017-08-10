@@ -1,5 +1,10 @@
 .invisible {
-    display: none
+    display: none;
+}
+
+
+.bk_more.invisible {
+    display: none;
 }
 
 @font-face {
