@@ -136,7 +136,7 @@
 <script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
 <script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
 <script type="text/javascript" src="/resources/js/slider.js"></script>
-<script type="text/javascript" src="/resources/js/slideTimer.js"></script>
+<script type="text/javascript" src="/resources/js/mainpage/slideTimer.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/productList.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/categoryList.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>

@@ -3,7 +3,7 @@ class SlideTimer extends eg.Component {
 		super();
 		this.slider = slider;
 		this.interval;
-		
+		this.timeout;
 		this.startTimer();
 		this.bindEvents();
 	}
@@ -14,7 +14,8 @@ class SlideTimer extends eg.Component {
 		this.interval = setInterval(this.slider.next.bind(this.slider), 2000);
 	}
 	pauseTimer() {
+		clearTimeout(this.timeout);
 		clearInterval(this.interval);
-		setTimeout(this.startTimer.bind(this), 4000);
+		this.timeout = setTimeout(this.startTimer.bind(this), 2000);
 	}
 };
