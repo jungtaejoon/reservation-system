@@ -25,7 +25,7 @@
         <div class="event">
             <div class="section_visual">
                 <div class="group_visual">
-                    <div class="container_visual">
+                    <div class="container_visual" id="main_slider">
                         <div class="prev_e">
                             <div class="prev_inn">
                                 <a class="btn_pre_e" title="이전"> <i class="spr_book_event spr_event_pre">이전</i> </a>
@@ -133,7 +133,9 @@
 </body>
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
 <script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
+<script type="text/javascript" src="/resources/js/slider.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/productList.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/categoryList.js"></script>
 <script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
