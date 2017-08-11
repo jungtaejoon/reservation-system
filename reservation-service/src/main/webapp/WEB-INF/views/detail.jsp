@@ -195,7 +195,7 @@
                     <div class="detail_location detail_common hide">
                         <div class="box_store_info no_topline">
                             <a class="store_location" title="지도웹으로 연결">
-                                <img class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
+                                <img id="map"  class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
                                 <span class="img_border"></span>
                                 <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
                             </a>
@@ -241,6 +241,8 @@
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=eGDuy2NMeDv1C1QCsPGF&submodules=geocoder"></script>
+<!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=DnKZdo7puIZaftEgVyjF&submodules=geocoder"></script> -->
 <script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
 <script type="text/javascript" src="/resources/js/slider.js"></script>
 <script type="text/javascript" src="/resources/js/detail/detail.js"></script>
