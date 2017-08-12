@@ -86,17 +86,26 @@
                     <!-- [D] 펼쳐보기 클릭 시 store_details에 close3 제거 -->
                     <div class="store_details close3">
                         <p class="dsc">${product.content }</p>
-                         <p class="dsc">${product.observationTime }</p>
+                        <p class="dsc">${product.observationTime }</p>
                     </div>
                     <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
-                    <a class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i> </a>
-                    <a class="bk_more _close" style="display: none;"> <span class="bk_more_txt">접기</span> <i class="fn fn-up2"></i> </a>
+                    <a class="bk_more _open"> 
+                    	<span class="bk_more_txt">펼쳐보기</span> 
+                    	<i class="fn fn-down2"></i> 
+                    </a>
+                    <a class="bk_more _close" style="display: none;"> 
+                    	<span class="bk_more_txt">접기</span> 
+                    	<i class="fn fn-up2"></i> 
+                    </a>
                 </div>
                 <c:if test="${product.event ne null}">
                 <div class="section_event">
                     <div class="event_info_box">
                         <div class="event_info_tit">
-                            <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
+                            <h4 class="in_tit"> 
+                            	<i class="spr_book ico_evt"></i> 
+                            	<span>이벤트 정보</span> 
+                            </h4>
                         </div>
                         <div class="event_info">
                             <div class="in_dsc">${product.event }</div>
