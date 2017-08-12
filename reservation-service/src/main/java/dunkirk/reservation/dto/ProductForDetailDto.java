@@ -1,6 +1,7 @@
 package dunkirk.reservation.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -25,6 +26,10 @@ public class ProductForDetailDto {
 	private String email;
 	private float avgScore;
 	private int reviewCount;
+	private List<Integer> bannerImages;
+	private List<CommentForDetailDto> comments;
+	private List<Integer> noticeImages;
+	private int informationImage;
 
 	public ProductForDetailDto() {
 
@@ -164,6 +169,38 @@ public class ProductForDetailDto {
 
 	public void setReviewCount(int reviewCount) {
 		this.reviewCount = reviewCount;
+	}
+
+	public List<Integer> getBannerImages() {
+		return bannerImages;
+	}
+
+	public void setBannerImages(List<Integer> bannerImages) {
+		this.bannerImages = bannerImages;
+	}
+
+	public List<CommentForDetailDto> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentForDetailDto> comments) {
+		this.comments = comments;
+	}
+
+	public List<Integer> getNoticeImages() {
+		return noticeImages;
+	}
+
+	public void setNoticeImages(List<Integer> noticeImages) {
+		this.noticeImages = noticeImages;
+	}
+
+	public int getInformationImage() {
+		return informationImage;
+	}
+
+	public void setInformationImage(int informationImage) {
+		this.informationImage = informationImage;
 	}
 
 	@Override
