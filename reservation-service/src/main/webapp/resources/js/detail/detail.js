@@ -51,7 +51,13 @@ $(function() {
 	var sliderPanel = new SliderPanel('span.num:not(.off)', slider);
 	Detail.init();
 	NaverMap.init();
+	
+	$('.thumb').on('click', test);
 });
+
+function test() {
+	$('#photoviwer').removeClass('invisible');
+}
 
 
 

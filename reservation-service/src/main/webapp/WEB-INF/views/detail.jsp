@@ -42,17 +42,22 @@
                     </div>
                     <div class="group_visual">
                         <div id="detail_slider">
-                            <div class="container_visual" style="width: 414px;">
+                            <div class="container_visual" style="width: 414px;" >
                                 <ul class="visual_img">
-                                	<c:forEach var="productImage" items="${product.bannerImages }">
-	                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="/files/${productImage }"> 
+                                	<c:forEach var="productImage" items="${product.bannerImages }" varStatus="status">
+	                                    <li class="item" style="width: 414px;"> 
+	                                    	<img alt="" class="img_thumb" src="/files/${productImage }"> 
 	                                    	<span class="img_bg"></span>
-	                                        <div class="visual_txt">
-	                                            <div class="visual_txt_inn">
-	                                                <h2 class="visual_txt_tit"> <span>${product.name }</span> </h2>
-	                                                <p class="visual_txt_dsc">${product.description }</p>
-	                                            </div>
-	                                        </div>
+	                                    	<c:if test="${status.first}">
+		                                        <div class="visual_txt">
+		                                            <div class="visual_txt_inn">
+		                                                <h2 class="visual_txt_tit"> 
+		                                                	<span>${product.name }</span> 
+		                                                </h2>
+		                                                <p class="visual_txt_dsc">${product.description }</p>
+		                                            </div>
+		                                        </div>
+	                                        </c:if>
 	                                    </li>
                                     </c:forEach>
                                 </ul>
@@ -236,7 +241,26 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    <div id="photoviwer"></div>
+    <div id="photoviwer" class="invisible">
+    	<div class="container_visual_pop">
+            
+		</div>
+    	<div class="prev">
+	        <div class="prev_inn">
+	            <a class="btn_prev" title="이전">
+	                <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
+	                <i class="spr_book2 ico_arr6_lt off"></i>
+	            </a>
+	        </div>
+	    </div>
+	    <div class="nxt">
+	        <div class="nxt_inn">
+	            <a class="btn_nxt" title="다음">
+	                <i class="spr_book2 ico_arr6_rt"></i>
+	            </a>
+	        </div>
+	    </div>
+    </div>
 </body>
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
@@ -248,5 +272,4 @@
 <script type="text/javascript" src="/resources/js/detail/naverMap.js"></script>
 <script type="text/javascript" src="/resources/js/detail/sliderPanel.js"></script>
 <script type="text/javascript" src="/resources/js/detail/detail.js"></script>
->>>>>>> 467b61ab07d104c45ecd5aa1da79475907b0308a
 </html>

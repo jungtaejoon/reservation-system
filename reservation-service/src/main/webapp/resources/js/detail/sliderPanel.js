@@ -3,7 +3,13 @@ class SliderPanel extends eg.Component {
 		super();
 		this.panel = panel;
 	    this.slider = slider;
-	    this.bindEvents();
+	    
+	    if(this.slider.maxIndex == 1) {
+	    	$(this.slider.option.nextButton).find('i').addClass('off');
+	    }
+	    else {
+	    	this.bindEvents();
+	    }
 	}
 	bindEvents() {
 		this.slider.on('moveEnd', this.refreshPanel.bind(this));
@@ -11,13 +17,12 @@ class SliderPanel extends eg.Component {
 	refreshPanel() {
 		$(this.panel).text(this.slider.currentIndex + 1);
 		if(this.slider.currentIndex === 0) {
-			console.log('first')
+			$(this.slider.option.prevButton).find('i').addClass('off');
 		} else if (this.slider.currentIndex === this.slider.maxIndex - 1) {
-			console.log('last')
-			
+			$(this.slider.option.nextButton).find('i').addClass('off');
 		} else {
-			console.log('else')
-			
+			$(this.slider.option.prevButton).find('i.off').removeClass('off');
+			$(this.slider.option.nextButton).find('i.off').removeClass('off');
 		}
 	}
 }
