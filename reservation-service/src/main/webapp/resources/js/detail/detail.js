@@ -57,8 +57,12 @@ $(function() {
 
 function test() {
 	$('#photoviwer').removeClass('invisible');
+	var childCnt = $('.container_visual_pop ul').children('li').length;
+	$('.container_visual_pop ul').width(620*childCnt);
+	console.log($('.container_visual_pop ul').children('li'));
 }
 
 
+//$('.container_visual_pop ul').width();
 
 

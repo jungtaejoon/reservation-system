@@ -130,7 +130,7 @@
 		                                                 <a class="thumb" title="이미지 크게 보기"> 
 		                                                 	<img width="90" height="90" class="img_vertical_top" src="/files/${comment.thumbnailFileId }" alt="리뷰이미지"> 
 		                                                 </a> 
-		                                                 <span class="img_count">1</span>
+		                                                 <span class="img_count">${comment.thumbnailCount }</span>
 	                                                </div>
                                                 </c:if>
 	                                            <h4 class="resoc_name">${product.name }</h4>
@@ -242,9 +242,6 @@
         </div>
     </footer>
     <div id="photoviwer" class="invisible">
-    	<div class="container_visual_pop">
-            
-		</div>
     	<div class="prev">
 	        <div class="prev_inn">
 	            <a class="btn_prev" title="이전">
@@ -260,6 +257,13 @@
 	            </a>
 	        </div>
 	    </div>
+    	<div class="container_visual_pop">
+            <ul>
+            	<li><div id="red"></div></li>
+            	<li><div id="blue"></div></li>
+            	<li><div id="yellow"></div></li>
+            </ul>
+		</div>
     </div>
 </body>
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
