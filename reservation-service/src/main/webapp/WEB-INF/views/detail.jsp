@@ -29,7 +29,7 @@
                     <header>
                         <h1 class="logo">
                             <a class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                            <a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                            <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                         </h1>
                         <a class="btn_my"> <span title="내 예약">MY</span> </a>
                     </header>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="group_visual">
-                        <div>
+                        <div id="detail_slider">
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img">
                                 	<c:forEach var="productImage" items="${product.bannerImages }">
@@ -245,5 +245,7 @@
 <!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=DnKZdo7puIZaftEgVyjF&submodules=geocoder"></script> -->
 <script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
 <script type="text/javascript" src="/resources/js/slider.js"></script>
+<script type="text/javascript" src="/resources/js/detail/naverMap.js"></script>
+<script type="text/javascript" src="/resources/js/detail/sliderPanel.js"></script>
 <script type="text/javascript" src="/resources/js/detail/detail.js"></script>
 </html>

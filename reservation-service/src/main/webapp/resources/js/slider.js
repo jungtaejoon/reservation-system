@@ -4,9 +4,10 @@ class Slider extends eg.Component {
 	    this.id = id;
 	    this.option = option;
 	    this.maxIndex = option.max;
+	    this.moveRange = option.moveRange;
+	    this.stopOption = option.stopOption || false;
 	    this.currentIndex = 0;
 	    this.isMoving = false;
-	    this.moveRange = 338;
 	    this.bindEvents();
 	}
 	bindEvents() {
@@ -31,6 +32,10 @@ class Slider extends eg.Component {
 		if(this.currentIndex > 0) {
 			this.currentIndex--;
 		} else if (this.currentIndex === 0) {
+			if(this.stopOption) {
+				console.log($(this.option.prevButton).find('i'));
+				return;
+			}
 			this.currentIndex = (this.maxIndex - 1);
 		}
 		this.move();
@@ -39,6 +44,10 @@ class Slider extends eg.Component {
 		if(this.currentIndex < this.maxIndex - 1) {
 			this.currentIndex++;
 		} else if (this.currentIndex === this.maxIndex - 1) {
+			if(this.stopOption) {
+				
+				return;
+			}
 			this.currentIndex = 0;
 		}
 		this.move();
@@ -49,6 +58,7 @@ class Slider extends eg.Component {
 	}
 	endMove() {
 		this.isMoving = false;
+		this.trigger('moveEnd');
 	}
 	
 }
