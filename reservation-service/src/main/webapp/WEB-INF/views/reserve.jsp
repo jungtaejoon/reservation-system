@@ -171,5 +171,6 @@
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
+<script type="text/javascript" src="/resources/js/reserve/reserve.js"></script>
 <script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
 </html>

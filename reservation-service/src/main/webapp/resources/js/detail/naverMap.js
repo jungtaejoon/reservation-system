@@ -8,16 +8,17 @@ var NaverMap = (function(){
     	getPosition();
     }
     function getPosition(){   	
-	    naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-	        if (status !== naver.maps.Service.Status.OK) {
-	            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
-	        }
-	        var result = response.result;
-	        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
-	        pointX = result.items[0].point.x;
-	        pointY = result.items[0].point.y;
-	        drawMap();
-	    });
+	    naver.maps.Service.geocode({address: myaddress}, setGeocode);
+    }
+    function setGeocode(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+        pointX = result.items[0].point.x;
+        pointY = result.items[0].point.y;
+        drawMap();
     }
     function drawMap(){
     	var mapSrc = 'https://openapi.naver.com/v1/map/staticmap.bin?clientId=eGDuy2NMeDv1C1QCsPGF&url=http://localhost:8080&crs=EPSG:4326&center='+pointX+','+pointY+'&level=11&w=300&h=250&baselayer=default&markers='+pointX+','+pointY;
