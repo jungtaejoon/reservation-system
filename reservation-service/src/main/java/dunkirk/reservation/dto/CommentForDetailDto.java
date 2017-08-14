@@ -11,6 +11,7 @@ public class CommentForDetailDto {
 	private String nickname;
 	private Timestamp createDate;
 	private int thumbnailFileId;
+	private int thumbnailCount;
 
 	public CommentForDetailDto() {
 		super();
@@ -62,6 +63,14 @@ public class CommentForDetailDto {
 
 	public void setThumbnailFileId(int thumbnailFileId) {
 		this.thumbnailFileId = thumbnailFileId;
+	}
+
+	public int getThumbnailCount() {
+		return thumbnailCount;
+	}
+
+	public void setThumbnailCount(int thumbnailCount) {
+		this.thumbnailCount = thumbnailCount;
 	}
 
 	@Override
