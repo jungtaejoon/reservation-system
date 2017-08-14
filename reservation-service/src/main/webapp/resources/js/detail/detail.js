@@ -5,6 +5,15 @@ var Detail = (function() {
 	function bindEvents() {
 		$('.section_store_details').on('click', '.bk_more', toggleMoreButton);
 		$('.info_tab_lst .item').on('click', 'a.anchor', toggleTab);
+		$('.bk_btn').on('click', function(){
+			var productId = $('#container').data('product-id');
+			var salesFlag = $(".bk_btn").data('sales-flag');
+			if(salesFlag === 'SALE'){
+				location.href='/reservation?productId='+productId;
+			}else{
+				alert('매진입니다.')
+			}
+		});
 	}
 	function toggleMoreButton() {
 		$('.store_details').toggleClass('close3');
