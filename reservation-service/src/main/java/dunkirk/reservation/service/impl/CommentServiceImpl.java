@@ -25,4 +25,9 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.getListByProduct(page, limit, productId);
 	}
 
+	@Override
+	public List<Integer> getImageList(int id) {
+		return commentDao.getImageList(id);
+	}
+
 }

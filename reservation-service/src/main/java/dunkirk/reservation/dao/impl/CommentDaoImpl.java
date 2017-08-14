@@ -33,4 +33,11 @@ public class CommentDaoImpl implements CommentDao {
 		params.put("productId", productId);
 		return jdbc.query(CommentSqls.GET_LIST_BY_PRODUCT, params, rowMapper);
 	}
+
+	@Override
+	public List<Integer> getImageList(int id) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("id", id);
+		return jdbc.queryForList(CommentSqls.GET_IMAGE_LIST, params, Integer.class);
+	}
 }
