@@ -30,6 +30,7 @@ public class ViewController {
 	
 	@GetMapping("/reservation")
 	public String reservation(Model model, @RequestParam int productId) {
+		model.addAttribute("product", productService.getForReservation(productId));
 		return "reserve";
 	}
 }

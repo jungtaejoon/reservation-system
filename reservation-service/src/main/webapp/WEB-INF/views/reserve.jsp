@@ -28,27 +28,28 @@
             <div class="ct_wrap">
                 <div class="top_title">
                     <a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
-                    <h2><span class="title">클림트 인사이드</span></h2>
+                    <h2><span class="title">${product.name }</span></h2>
                 </div>
                 <div class="group_visual">
                     <div class="container_visual" style="width: 414px;">
                         <ul class="visual_img">
                             <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170217_264/1487312141947lTddT_JPEG/%B3%D7%C0%CC%B9%F6.jpg?type=ff1242_816"> <span class="img_bg"></span>
                                 <div class="preview_txt">
-                                    <h2 class="preview_txt_tit">클림트 인사이드</h2> <em class="preview_txt_dsc">₩12,000 ~ </em><em class="preview_txt_dsc">2017.2.17.(금)~2017.4.18.(화), 잔여티켓 2769매</em> </div>
+                                    <h2 class="preview_txt_tit">${product.name }</h2> <em class="preview_txt_dsc">₩12,000 ~ </em>
+                                    <em class="preview_txt_dsc"><fmt:formatDate value="${product.displayStart }" pattern="yyyy.MM.dd.(E)"/>~<fmt:formatDate value="${product.displayEnd }" pattern="yyyy.MM.dd.(E)"/></em> </div>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="section_store_details">
                     <div class="store_details">
-                        <h3 class="in_tit">클림트 인사이드</h3>
+                        <h3 class="in_tit">${product.name }</h3>
                         <p class="dsc">
-                            장소 : 서울 종로구 경희궁길 42(신문로 2가 1-101번지)<br> 기간 : 2017.2.17.(금)~2017.4.18.(화)
+                            장소 : ${product.placeStreet }(${product.placeLot })<br> 기간 : <fmt:formatDate value="${product.displayStart }" pattern="yyyy.MM.dd.(E)"/>~<fmt:formatDate value="${product.displayEnd }" pattern="yyyy.MM.dd.(E)"/>
                         </p>
                         <h3 class="in_tit">관람시간</h3>
                         <p class="dsc">
-                            화, 목, 금 일요일 10:00am~06:00pm(입장마감 05:30pm)<br> ‘문화가 있는 날’ 매월 마지막 주 수요일은 오후 8시까지 연장
+                           ${product.observationTime }
                         </p>
                         <h3 class="in_tit">요금</h3>
                         <p class="dsc">

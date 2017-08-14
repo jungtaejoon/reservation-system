@@ -45,4 +45,11 @@ public class ProductDaoImpl implements ProductDao {
 		return jdbc.queryForObject(ProductSqls.GET_DETAIL, params, rowMapper);
 	}
 
+	@Override
+	public ProductForReservationDto getForReservation(int id) {
+		RowMapper<ProductForReservationDto> rowMapper = new BeanPropertyRowMapper<>(ProductForReservationDto.class);
+		Map<String, Integer> params = new HashMap<>();
+		params.put("id", id);
+		return jdbc.queryForObject(ProductSqls.GET_FOR_RESERVATION, params, rowMapper);
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dunkirk.reservation.dao.ProductDao;
 import dunkirk.reservation.dto.ProductForDetailDto;
 import dunkirk.reservation.dto.ProductForMainDto;
+import dunkirk.reservation.dto.ProductForReservationDto;
 import dunkirk.reservation.service.CommentService;
 import dunkirk.reservation.service.FileService;
 import dunkirk.reservation.service.ProductService;
@@ -38,6 +39,13 @@ public class ProductServiceImpl implements ProductService {
 		product.setBannerImages(fileService.getProductImageList(id));
 		product.setInformationImage(fileService.getProductInformationImage(id));
 		product.setNoticeImages(fileService.getProductNoticeImageList(id));
+		return product;
+	}
+
+	@Override
+	public ProductForReservationDto getForReservation(int id) {
+		ProductForReservationDto product = productDao.getForReservation(id);
+		//product.setProductPrices(productPrices);
 		return product;
 	}
 
