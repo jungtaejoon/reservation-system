@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -164,5 +167,8 @@
         </div>
     </footer>
 </body>
-
+<script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
+<script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
 </html>

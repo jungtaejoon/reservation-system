@@ -561,6 +561,9 @@ hr {
 .spr_book2.ico_arr6_lt.off {
 	opacity: 0.6;
 }
+.spr_book2.ico_arr6_rt.off {
+	opacity: 0.6;
+}
 .spr_bi {
     background-image: url(../img/spr_bi.png);
     background-size: 130px 120px

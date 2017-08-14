@@ -8,14 +8,21 @@ class SlideTimer extends eg.Component {
 		this.bindEvents();
 	}
 	bindEvents() {
-		this.slider.on('btnClick', this.pauseTimer.bind(this));
+		this.slider.on('btnClick', this.pauseTimer.bind(this, true));
+		$(window).on('blur', this.pauseTimer.bind(this, false))
+			.on('focus', this.startTimer.bind(this));
 	}
 	startTimer() {
 		this.interval = setInterval(this.slider.next.bind(this.slider), 2000);
 	}
-	pauseTimer() {
+	pauseTimer(alt) {
 		clearTimeout(this.timeout);
 		clearInterval(this.interval);
-		this.timeout = setTimeout(this.startTimer.bind(this), 2000);
+		if(alt) {
+            this.resetTimeout();
+		}
+	}
+	resetTimeout() {
+        this.timeout = setTimeout(this.startTimer.bind(this), 2000);
 	}
 };
