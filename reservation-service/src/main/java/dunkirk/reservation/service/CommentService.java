@@ -6,6 +6,6 @@ import dunkirk.reservation.dto.*;
 
 public interface CommentService {
 
-	public List<CommentForDetailDto> getListByProduct(int page, int limit, int productId);
-	public List<Integer> getImageList(int id);
+	List<CommentForDetailDto> getListByProduct(int page, int limit, int productId);
+	List<Integer> getImageIdList(int id);
 }

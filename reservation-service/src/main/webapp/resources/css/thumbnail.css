@@ -1,0 +1,59 @@
+#photoviewer {
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    z-index:9000;
+    background-color:#000;
+    word-wrap: normal;
+}
+#layer{
+    position: fixed;
+    z-index: 8000;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.sub_layer{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index:6500;
+    -ms-transform: translate(0px, 0px); /* IE 9 */
+    -webkit-transform: translate(0px, 0px); /* Safari */
+    transform: translate(0px, 0px);
+}
+.sub_layer.touch{
+    -moz-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    transition: all 500ms ease
+}
+div.wrapper{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(0px, 0px); /* IE 9 */
+    -webkit-transform: translate(0px, 0px); /* Safari */
+    transform: translate(0px, 0px);
+}
+.com_img_btn {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    margin-top: -25px;
+    z-index: 6000;
+    display : block
+}
+.btn_wrapper.invisible{
+    display : none
+}
+.com_img_btn.nxt {
+    right: 0
+}
+.com_img_btn.close {
+    top: 0;
+    margin-top: 0
+}

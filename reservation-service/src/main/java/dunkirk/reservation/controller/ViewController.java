@@ -10,27 +10,27 @@ import dunkirk.reservation.service.*;
 @Controller
 public class ViewController {
 
-	private ProductService productService;
+    private ProductService productService;
 
-	@Autowired
-	public ViewController(ProductService productService) {
-		this.productService = productService;
-	}
+    @Autowired
+    public ViewController(ProductService productService) {
+        this.productService = productService;
+    }
 
-	@GetMapping("/")
-	public String home(Model model) {
-		return "mainpage";
-	}
+    @GetMapping("/")
+    public String home(Model model) {
+        return "mainpage";
+    }
 
-	@GetMapping("/product-detail/{productId:[\\d]+}")
-	public String detail(Model model, @PathVariable int productId) {
-		model.addAttribute("product", productService.getDetail(productId));
-		return "detail";
-	}
-	
-	@GetMapping("/reservation")
-	public String reservation(Model model, @RequestParam int productId) {
-		model.addAttribute("product", productService.getForReservation(productId));
-		return "reserve";
-	}
+    @GetMapping("/product-detail/{productId:[\\d]+}")
+    public String detail(Model model, @PathVariable int productId) {
+        model.addAttribute("product", productService.getDetail(productId));
+        return "detail";
+    }
+
+    @GetMapping("/reservation")
+    public String reservation(Model model, @RequestParam int productId) {
+        model.addAttribute("product", productService.getForReservation(productId));
+        return "reserve";
+    }
 }

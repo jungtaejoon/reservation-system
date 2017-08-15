@@ -4,89 +4,98 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import dunkirk.reservation.domain.ProductPrice;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class ProductForReservationDto {
-	private int id;
-	private String name;
-	private int fileId;
-	private String observationTime;
-	private Timestamp displayStart;
-	private Timestamp displayEnd;
-	private String placeStreet;
-	private String placeLot;
-	private List<ProductPrice> productPrices;
-	
-	public ProductForReservationDto() {}
+    private int id;
+    private String name;
+    private int fileId;
+    private String observationTime;
+    private Timestamp displayStart;
+    private Timestamp displayEnd;
+    private String placeStreet;
+    private String placeLot;
+    private List<ProductPrice> productPrices;
 
-	public int getId() {
-		return id;
-	}
+    public ProductForReservationDto() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getFileId() {
-		return fileId;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setFileId(int fileId) {
-		this.fileId = fileId;
-	}
+    public int getFileId() {
+        return fileId;
+    }
 
-	public String getObservationTime() {
-		return observationTime;
-	}
+    public void setFileId(int fileId) {
+        this.fileId = fileId;
+    }
 
-	public void setObservationTime(String observationTime) {
-		this.observationTime = observationTime;
-	}
+    public String getObservationTime() {
+        return observationTime;
+    }
 
-	public Timestamp getDisplayStart() {
-		return displayStart;
-	}
+    public void setObservationTime(String observationTime) {
+        this.observationTime = observationTime;
+    }
 
-	public void setDisplayStart(Timestamp displayStart) {
-		this.displayStart = displayStart;
-	}
+    public Timestamp getDisplayStart() {
+        return displayStart;
+    }
 
-	public Timestamp getDisplayEnd() {
-		return displayEnd;
-	}
+    public void setDisplayStart(Timestamp displayStart) {
+        this.displayStart = displayStart;
+    }
 
-	public void setDisplayEnd(Timestamp displayEnd) {
-		this.displayEnd = displayEnd;
-	}
+    public Timestamp getDisplayEnd() {
+        return displayEnd;
+    }
 
-	public String getPlaceStreet() {
-		return placeStreet;
-	}
+    public void setDisplayEnd(Timestamp displayEnd) {
+        this.displayEnd = displayEnd;
+    }
 
-	public void setPlaceStreet(String placeStreet) {
-		this.placeStreet = placeStreet;
-	}
+    public String getPlaceStreet() {
+        return placeStreet;
+    }
 
-	public String getPlaceLot() {
-		return placeLot;
-	}
+    public void setPlaceStreet(String placeStreet) {
+        this.placeStreet = placeStreet;
+    }
 
-	public void setPlaceLot(String placeLot) {
-		this.placeLot = placeLot;
-	}
+    public String getPlaceLot() {
+        return placeLot;
+    }
 
-	public List<ProductPrice> getProductPrices() {
-		return productPrices;
-	}
+    public void setPlaceLot(String placeLot) {
+        this.placeLot = placeLot;
+    }
 
-	public void setProductPrices(List<ProductPrice> productPrices) {
-		this.productPrices = productPrices;
-	}
+    public List<ProductPrice> getProductPrices() {
+        return productPrices;
+    }
+
+    public void setProductPrices(List<ProductPrice> productPrices) {
+        this.productPrices = productPrices;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+    }
+
 }

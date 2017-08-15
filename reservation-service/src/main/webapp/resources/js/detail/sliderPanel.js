@@ -4,7 +4,7 @@ class SliderPanel extends eg.Component {
 		this.panel = panel;
 	    this.slider = slider;
 	    
-	    if(this.slider.maxIndex == 1) {
+	    if(this.slider.maxIndex == 0) {
 	    	$(this.slider.option.nextButton).find('i').addClass('off');
 	    }
 	    else {
@@ -18,7 +18,7 @@ class SliderPanel extends eg.Component {
 		$(this.panel).text(this.slider.currentIndex + 1);
 		if(this.slider.currentIndex === 0) {
 			$(this.slider.option.prevButton).find('i').addClass('off');
-		} else if (this.slider.currentIndex === this.slider.maxIndex - 1) {
+		} else if (this.slider.currentIndex === this.slider.maxIndex) {
 			$(this.slider.option.nextButton).find('i').addClass('off');
 		} else {
 			$(this.slider.option.prevButton).find('i.off').removeClass('off');

@@ -23,7 +23,7 @@ var ProductList = (function() {
     function getProductList(type) {
         productTotalCount = parseInt($('.event_lst_txt .pink').text().replace('개', ''));
         var url = '/categories/' + categoryId + '/products?page='+pageNum;
-        CachedAjax.ajax(url).then(appendProduct.bind(this, type));
+        CachedAjax.get(url).then(appendProduct.bind(this, type));
     }
     function appendProduct(type, res) {
         var left = [];

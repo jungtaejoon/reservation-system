@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Integer> getImageList(int id) {
+	public List<Integer> getImageIdList(int id) {
 		return commentDao.getImageList(id);
 	}
 

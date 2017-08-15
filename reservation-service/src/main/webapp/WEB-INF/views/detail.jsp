@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/thumbnail.css" rel="stylesheet">
 </head>
 
 <body>
@@ -127,7 +128,7 @@
 	                                        <div class="review_area">
 		                                        <c:if test="${comment.thumbnailFileId ne 0}">
 		                                            <div class="thumb_area">
-		                                                 <a class="thumb" title="이미지 크게 보기"> 
+		                                                 <a class="thumb" title="이미지 크게 보기" data-comment-id="${comment.id}">
 		                                                 	<img width="90" height="90" class="img_vertical_top" src="/files/${comment.thumbnailFileId }" alt="리뷰이미지"> 
 		                                                 </a> 
 		                                                 <span class="img_count">${comment.thumbnailCount }</span>
@@ -241,31 +242,23 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
-    <div id="photoviwer" class="invisible">
-    	<div class="prev">
-	        <div class="prev_inn">
-	            <a class="btn_prev" title="이전">
-	                <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
-	                <i class="spr_book2 ico_arr6_lt off"></i>
-	            </a>
-	        </div>
-	    </div>
-	    <div class="nxt">
-	        <div class="nxt_inn">
-	            <a class="btn_nxt" title="다음">
-	                <i class="spr_book2 ico_arr6_rt"></i>
-	            </a>
-	        </div>
-	    </div>
-    	<div class="container_visual_pop">
-            <ul>
-            	<li><div id="red"></div></li>
-            	<li><div id="blue"></div></li>
-            	<li><div id="yellow"></div></li>
-            </ul>
-		</div>
+    <div id="photoviewer" class="invisible">
+        <div class="layer" id="layer"></div>
     </div>
 </body>
+<script id="popup_layer_template" type="text/x-handlebars-template">
+    {{#items}}
+    <div class="sub_layer" style="transform: translateX({{tranx}}%)">
+        <div class="wrapper">
+            <img src="/files/{{fileId}}">
+        </div>
+        <div class="btn_wrapper">
+            <button class="com_img_btn close">X</button>
+            <button class="com_img_btn prev"><</button><button class="com_img_btn nxt">></button>
+        </div>
+    </div>
+    {{/items}}
+</script>
 <script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
@@ -275,5 +268,8 @@
 <script type="text/javascript" src="/resources/js/slider.js"></script>
 <script type="text/javascript" src="/resources/js/detail/naverMap.js"></script>
 <script type="text/javascript" src="/resources/js/detail/sliderPanel.js"></script>
+<script type="text/javascript" src="/resources/js/detail/thumbnailSlider.js"></script>
+<script type="text/javascript" src="/resources/js/flicker.js"></script>
+<script type="text/javascript" src="/resources/js/detail/buildDetail.js"></script>
 <script type="text/javascript" src="/resources/js/detail/detail.js"></script>
 </html>

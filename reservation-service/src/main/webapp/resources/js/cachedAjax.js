@@ -1,7 +1,7 @@
 var CachedAjax = (function() {
 	var cachedData = {};
 	var returnObj;
-	function ajax(url) {
+	function get(url) {
 		if(cachedData[url]) {
 			returnObj = Promise.resolve(cachedData[url]);
 		} else {
@@ -13,7 +13,7 @@ var CachedAjax = (function() {
 		return returnObj;
 	}
 	return {
-		ajax: ajax
+		get: get
 	}
 })();
 
