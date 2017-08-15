@@ -1,8 +1,8 @@
 class Flicker extends eg.Component {
-    constructor(slider, option) {
+    constructor(slider) {
         super();
         this.slider = slider;
-        this.option = option || {};
+        this.isPureSlider = slider.constructor === Slider;
         this.moveGapX;
         this.touchStartPointX;
         this.bindEvents();
@@ -16,7 +16,9 @@ class Flicker extends eg.Component {
     }
 
     viewerTouchStart(e) {
-        this.slider.touchStartTrigger();
+        if(this.isPureSlider) {
+            this.slider.touchStartTrigger();
+        }
         $(this.slider.SUB_LAYER).addClass('touch');
         var event = e.originalEvent;
         this.moveGapX = 0;
@@ -32,7 +34,9 @@ class Flicker extends eg.Component {
     }
 
     viewerTouchEnd(e) {
-        this.slider.touchEndTrigger()
+        if(this.isPureSlider) {
+            this.slider.touchEndTrigger()
+        }
         if (this.moveGapX < -50) {
             $(this.slider.BUTTON_WRAPPER).addClass('invisible');
             this.slider.prev();
