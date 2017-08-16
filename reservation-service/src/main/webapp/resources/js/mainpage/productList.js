@@ -12,7 +12,7 @@ var ProductList = (function () {
     function init() {
         bindEvents();
         template = require('./product-list-template.html');
-        getProductList('html');
+        buildProductList('html');
     }
 
     function bindEvents() {
@@ -26,10 +26,10 @@ var ProductList = (function () {
         $(e.currentTarget).find('a').addClass('active');
         $('.event_lst_txt .pink').text($(e.currentTarget).data('product-count') + '개');
         categoryId = $(e.currentTarget).data('category');
-        getProductList('html');
+        buildProductList('html');
     }
 
-    function getProductList(type) {
+    function buildProductList(type) {
         productTotalCount = parseInt($('.event_lst_txt .pink').text().replace('개', ''));
         var url = '/products?page=' + pageNum + '&categoryId=' + categoryId;
         CachedAjax.get(url).then(appendProduct.bind(this, type));
@@ -60,7 +60,7 @@ var ProductList = (function () {
         if (maxHeight - currentScroll < 30) {
             pageNum++;
             if (productTotalCount > pageNum * 10) {
-                getProductList('append');
+                buildProductList('append');
             }
         }
     }

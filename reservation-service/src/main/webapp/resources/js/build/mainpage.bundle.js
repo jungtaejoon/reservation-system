@@ -11574,7 +11574,7 @@
 	    function init() {
 	        bindEvents();
 	        template = __webpack_require__(33);
-	        getProductList('html');
+	        buildProductList('html');
 	    }
 	
 	    function bindEvents() {
@@ -11588,10 +11588,10 @@
 	        $(e.currentTarget).find('a').addClass('active');
 	        $('.event_lst_txt .pink').text($(e.currentTarget).data('product-count') + '개');
 	        categoryId = $(e.currentTarget).data('category');
-	        getProductList('html');
+	        buildProductList('html');
 	    }
 	
-	    function getProductList(type) {
+	    function buildProductList(type) {
 	        productTotalCount = parseInt($('.event_lst_txt .pink').text().replace('개', ''));
 	        var url = '/products?page=' + pageNum + '&categoryId=' + categoryId;
 	        _cachedAjax.CachedAjax.get(url).then(appendProduct.bind(this, type));
@@ -11622,7 +11622,7 @@
 	        if (maxHeight - currentScroll < 30) {
 	            pageNum++;
 	            if (productTotalCount > pageNum * 10) {
-	                getProductList('append');
+	                buildProductList('append');
 	            }
 	        }
 	    }
