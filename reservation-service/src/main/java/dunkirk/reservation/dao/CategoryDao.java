@@ -6,6 +6,6 @@ import dunkirk.reservation.domain.Category;
 
 public interface CategoryDao {
 
-	public List<Category> getList();
+    List<Category> getList();
 
 }

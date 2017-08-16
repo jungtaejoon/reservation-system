@@ -16,7 +16,7 @@ class Flicker extends eg.Component {
     }
 
     viewerTouchStart(e) {
-        if(this.isPureSlider) {
+        if (this.isPureSlider) {
             this.slider.touchStartTrigger();
         }
         $(this.slider.SUB_LAYER).addClass('touch');
@@ -34,18 +34,16 @@ class Flicker extends eg.Component {
     }
 
     viewerTouchEnd(e) {
-        if(this.isPureSlider) {
+        if (this.isPureSlider) {
             this.slider.touchEndTrigger()
         }
         if (this.moveGapX < -50) {
             $(this.slider.BUTTON_WRAPPER).addClass('invisible');
             this.slider.prev();
-        }
-        if (this.moveGapX > 50) {
+        } else if (this.moveGapX > 50) {
             $(this.slider.BUTTON_WRAPPER).addClass('invisible');
             this.slider.next();
-        }
-        if (this.moveGapX === 0) {
+        } else if (this.moveGapX === 0) {
             $(this.slider.BUTTON_WRAPPER).removeClass('invisible');
         }
         $(this.slider.toBeMovedDOM).css('transform', 'translateX(0px)');

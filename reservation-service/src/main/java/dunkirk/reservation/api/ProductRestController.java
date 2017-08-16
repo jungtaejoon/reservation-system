@@ -9,18 +9,19 @@ import dunkirk.reservation.dto.*;
 import dunkirk.reservation.service.*;
 
 @RestController
-public class ProductController {
+@RequestMapping("/products")
+public class ProductRestController {
 
 	private ProductService productService;
 
 	@Autowired
-	public ProductController(ProductService productService) {
+	public ProductRestController(ProductService productService) {
 		super();
 		this.productService = productService;
 	}
 
-	@GetMapping("/categories/{categoryId:[\\d]+}/products")
-	public List<ProductForMainDto> getList(@PathVariable int categoryId, @RequestParam int page) {
+	@GetMapping
+	public List<ProductForMainDto> getList(@RequestParam int categoryId, @RequestParam int page) {
 		return productService.getList(categoryId, page*10);
 	}
 }

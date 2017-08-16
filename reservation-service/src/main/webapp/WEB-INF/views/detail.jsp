@@ -38,16 +38,16 @@
                         <div class="bg_pagination"></div>
                         <div class="figure_pagination">
                             <span class="num">1</span>
-                            <span class="num off">/ <span>${product.bannerImages.size()}</span></span>
+                            <span class="num off">/ <span>${product.bannerImageIdList.size()}</span></span>
                         </div>
                     </div>
                     <div class="group_visual">
                         <div id="detail_slider">
                             <div class="container_visual" style="width: 414px;" >
                                 <ul class="visual_img">
-                                	<c:forEach var="productImage" items="${product.bannerImages }" varStatus="status">
+                                	<c:forEach var="productImageId" items="${product.bannerImageIdList }" varStatus="status">
 	                                    <li class="item" style="width: 414px;"> 
-	                                    	<img alt="" class="img_thumb" src="/files/${productImage }"> 
+	                                    	<img alt="" class="img_thumb" src="/files/${productImageId }">
 	                                    	<span class="img_bg"></span>
 	                                    	<c:if test="${status.first}">
 		                                        <div class="visual_txt">
@@ -175,21 +175,21 @@
                                         <strong class="in_tit">[소개]</strong>
                                         <p class="in_dsc">${product.content }</p>
                                     </li>
-                                    <c:if test="${product.noticeImages ne null}">
+                                    <c:if test="${product.noticeImageIdList ne null}">
 	                                    <li class="detail_info_lst"> <strong class="in_tit">[공지사항]</strong>
 	                                        <ul class="in_img_group">
-	                                        	<c:forEach var="noticeImage" items="${product.noticeImages }">
+	                                        	<c:forEach var="noticeImageId" items="${product.noticeImageIdList }">
 	                                            	<li class="in_img_lst"> 
-	                                            		<img alt="" class="img_thumb" src="/files/${noticeImage }"> 
+	                                            		<img alt="" class="img_thumb" src="/files/${noticeImageId }">
 	                                            	</li>
 	                                        	</c:forEach>
 	                                        </ul>
 	                                    </li>
                                     </c:if>
-                                    <c:if test="${product.informationImage ne 0}">
+                                    <c:if test="${product.descriptionImageId ne 0}">
 	                                    <li class="detail_info_lst"> <strong class="in_tit">[공연정보]</strong>
 	                                        <ul class="in_img_group">
-		                                    	<li class="in_img_lst"> <img alt="" class="img_thumb" data-lazy-image="/files/${product.informationImage}"> </li>
+		                                    	<li class="in_img_lst"> <img alt="" class="img_thumb" data-lazy-image="/files/${product.descriptionImageId}"> </li>
 	                                        </ul>
 	                                    </li>
 									</c:if>

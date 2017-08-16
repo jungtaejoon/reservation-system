@@ -24,17 +24,17 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public List<Integer> getProductImageList(int productId) {
-		return fileDao.getProductImageList(productId);
+	public List<Integer> getProductImageIdList(int productId) {
+		return fileDao.getProductImageIdList(productId);
 	}
 
 	@Override
-	public List<Integer> getProductNoticeImageList(int productId) {
-		return fileDao.getProductNoticeImageList(productId);
+	public List<Integer> getProductNoticeImageIdList(int productId) {
+		return fileDao.getProductNoticeImageIdList(productId);
 	}
 
 	@Override
-	public int getProductInformationImage(int productId) {
-		return fileDao.getProductInformationImage(productId);
+	public int getProductDescriptionImageId(int productId) {
+		return fileDao.getProductDescriptionImageId(productId);
 	}
 }

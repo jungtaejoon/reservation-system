@@ -10,12 +10,12 @@ import dunkirk.reservation.domain.Category;
 import dunkirk.reservation.service.CategoryService;
 
 @RestController
-public class CategoryController {
+public class CategoryRestController {
 
 	private CategoryService categoryService;
 	
 	@Autowired
-	public CategoryController(CategoryService categoryService) {
+	public CategoryRestController(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 	

@@ -9,202 +9,202 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import dunkirk.reservation.domain.SalesFlag;
 
 public class ProductForDetailDto {
-	private int id;
-	private String name;
-	private String description;
-	private SalesFlag salesFlag;
-	private String event;
-	private String content;
-	private String observationTime;
-	private Timestamp displayStart;
-	private Timestamp displayEnd;
-	private String placeName;
-	private String placeLot;
-	private String placeStreet;
-	private String tel;
-	private String homepage;
-	private String email;
-	private float avgScore;
-	private int reviewCount;
-	private List<Integer> bannerImages;
-	private List<CommentForDetailDto> comments;
-	private List<Integer> noticeImages;
-	private int informationImage;
+    private int id;
+    private String name;
+    private String description;
+    private SalesFlag salesFlag;
+    private String event;
+    private String content;
+    private String observationTime;
+    private Timestamp displayStart;
+    private Timestamp displayEnd;
+    private String placeName;
+    private String placeLot;
+    private String placeStreet;
+    private String tel;
+    private String homepage;
+    private String email;
+    private float avgScore;
+    private int reviewCount;
+    private List<Integer> bannerImageIdList;
+    private List<CommentForDetailDto> comments;
+    private List<Integer> noticeImageIdList;
+    private int descriptionImageId;
 
-	public ProductForDetailDto() {
+    public ProductForDetailDto() {
 
-	}
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public SalesFlag getSalesFlag() {
-		return salesFlag;
-	}
+    public SalesFlag getSalesFlag() {
+        return salesFlag;
+    }
 
-	public void setSalesFlag(SalesFlag salesFlag) {
-		this.salesFlag = salesFlag;
-	}
+    public void setSalesFlag(SalesFlag salesFlag) {
+        this.salesFlag = salesFlag;
+    }
 
-	public String getEvent() {
-		return event;
-	}
+    public String getEvent() {
+        return event;
+    }
 
-	public void setEvent(String event) {
-		this.event = event;
-	}
+    public void setEvent(String event) {
+        this.event = event;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getObservationTime() {
-		return observationTime;
-	}
+    public String getObservationTime() {
+        return observationTime;
+    }
 
-	public void setObservationTime(String observationTime) {
-		this.observationTime = observationTime;
-	}
+    public void setObservationTime(String observationTime) {
+        this.observationTime = observationTime;
+    }
 
-	public Timestamp getDisplayStart() {
-		return displayStart;
-	}
+    public Timestamp getDisplayStart() {
+        return displayStart;
+    }
 
-	public void setDisplayStart(Timestamp displayStart) {
-		this.displayStart = displayStart;
-	}
+    public void setDisplayStart(Timestamp displayStart) {
+        this.displayStart = displayStart;
+    }
 
-	public Timestamp getDisplayEnd() {
-		return displayEnd;
-	}
+    public Timestamp getDisplayEnd() {
+        return displayEnd;
+    }
 
-	public void setDisplayEnd(Timestamp displayEnd) {
-		this.displayEnd = displayEnd;
-	}
+    public void setDisplayEnd(Timestamp displayEnd) {
+        this.displayEnd = displayEnd;
+    }
 
-	public String getPlaceName() {
-		return placeName;
-	}
+    public String getPlaceName() {
+        return placeName;
+    }
 
-	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
-	}
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
 
-	public String getPlaceLot() {
-		return placeLot;
-	}
+    public String getPlaceLot() {
+        return placeLot;
+    }
 
-	public void setPlaceLot(String placeLot) {
-		this.placeLot = placeLot;
-	}
+    public void setPlaceLot(String placeLot) {
+        this.placeLot = placeLot;
+    }
 
-	public String getPlaceStreet() {
-		return placeStreet;
-	}
+    public String getPlaceStreet() {
+        return placeStreet;
+    }
 
-	public void setPlaceStreet(String placeStreet) {
-		this.placeStreet = placeStreet;
-	}
+    public void setPlaceStreet(String placeStreet) {
+        this.placeStreet = placeStreet;
+    }
 
-	public String getTel() {
-		return tel;
-	}
+    public String getTel() {
+        return tel;
+    }
 
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
-	public String getHomepage() {
-		return homepage;
-	}
+    public String getHomepage() {
+        return homepage;
+    }
 
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
-	}
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public float getAvgScore() {
-		return avgScore;
-	}
+    public float getAvgScore() {
+        return avgScore;
+    }
 
-	public void setAvgScore(float avgScore) {
-		this.avgScore = avgScore;
-	}
+    public void setAvgScore(float avgScore) {
+        this.avgScore = avgScore;
+    }
 
-	public int getReviewCount() {
-		return reviewCount;
-	}
+    public int getReviewCount() {
+        return reviewCount;
+    }
 
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
 
-	public List<Integer> getBannerImages() {
-		return bannerImages;
-	}
+    public List<Integer> getBannerImageIdList() {
+        return bannerImageIdList;
+    }
 
-	public void setBannerImages(List<Integer> bannerImages) {
-		this.bannerImages = bannerImages;
-	}
+    public void setBannerImageIdList(List<Integer> bannerImageIdList) {
+        this.bannerImageIdList = bannerImageIdList;
+    }
 
-	public List<CommentForDetailDto> getComments() {
-		return comments;
-	}
+    public List<CommentForDetailDto> getComments() {
+        return comments;
+    }
 
-	public void setComments(List<CommentForDetailDto> comments) {
-		this.comments = comments;
-	}
+    public void setComments(List<CommentForDetailDto> comments) {
+        this.comments = comments;
+    }
 
-	public List<Integer> getNoticeImages() {
-		return noticeImages;
-	}
+    public List<Integer> getNoticeImageIdList() {
+        return noticeImageIdList;
+    }
 
-	public void setNoticeImages(List<Integer> noticeImages) {
-		this.noticeImages = noticeImages;
-	}
+    public void setNoticeImageIdList(List<Integer> noticeImageIdList) {
+        this.noticeImageIdList = noticeImageIdList;
+    }
 
-	public int getInformationImage() {
-		return informationImage;
-	}
+    public int getDescriptionImageId() {
+        return descriptionImageId;
+    }
 
-	public void setInformationImage(int informationImage) {
-		this.informationImage = informationImage;
-	}
+    public void setDescriptionImageId(int descriptionImageId) {
+        this.descriptionImageId = descriptionImageId;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+    }
 }

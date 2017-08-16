@@ -15,45 +15,45 @@ import dunkirk.reservation.dao.FileDao;
 import dunkirk.reservation.sql.FileSqls;
 
 @Repository
-public class FileDaoImpl implements FileDao{
-	private NamedParameterJdbcTemplate jdbc;
-	//RowMapper<>
-	
-	@Autowired
-	public FileDaoImpl(DataSource dataSource){
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-	}
-	
-	@Override
-	public String getSaveFileName(int id) {
-		Map<String, Integer> params = new HashMap<String, Integer>();
-		params.put("id", id);
-		return jdbc.queryForObject(FileSqls.GET_SAVE_FILE_NAME, params, String.class);
-	}
+public class FileDaoImpl implements FileDao {
+    private NamedParameterJdbcTemplate jdbc;
+    //RowMapper<>
 
-	@Override
-	public List<Integer> getProductImageList(int productId) {
-		Map<String, Integer> params = new HashMap<String, Integer>();
-		params.put("id", productId);
-		return jdbc.queryForList(FileSqls.GET_PRODUCT_IMAGE_LIST, params, Integer.class);
-	}
+    @Autowired
+    public FileDaoImpl(DataSource dataSource) {
+        this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+    }
 
-	@Override
-	public List<Integer> getProductNoticeImageList(int productId) {
-		Map<String, Integer> params = new HashMap<String, Integer>();
-		params.put("id", productId);
-		return jdbc.queryForList(FileSqls.GET_PRODUCT_NOTICE_IMAGE_LIST, params, Integer.class);
-	}
+    @Override
+    public String getSaveFileName(int id) {
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("id", id);
+        return jdbc.queryForObject(FileSqls.GET_SAVE_FILE_NAME, params, String.class);
+    }
 
-	@Override
-	public int getProductInformationImage(int productId) {
-		Map<String, Integer> params = new HashMap<String, Integer>();
-		params.put("id", productId);
-		try {
-			return jdbc.queryForObject(FileSqls.GET_PRODUCT_INFORMATION_IMAGE, params, Integer.class);
-		} catch (EmptyResultDataAccessException e) {
-			return 0;
-		}
-	}
-	
+    @Override
+    public List<Integer> getProductImageIdList(int productId) {
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("id", productId);
+        return jdbc.queryForList(FileSqls.GET_PRODUCT_IMAGE_LIST, params, Integer.class);
+    }
+
+    @Override
+    public List<Integer> getProductNoticeImageIdList(int productId) {
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("id", productId);
+        return jdbc.queryForList(FileSqls.GET_PRODUCT_NOTICE_IMAGE_LIST, params, Integer.class);
+    }
+
+    @Override
+    public int getProductDescriptionImageId(int productId) {
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("id", productId);
+        try {
+            return jdbc.queryForObject(FileSqls.GET_PRODUCT_INFORMATION_IMAGE, params, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
 }

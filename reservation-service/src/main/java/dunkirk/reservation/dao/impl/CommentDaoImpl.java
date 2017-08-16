@@ -35,7 +35,7 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public List<Integer> getImageList(int id) {
+	public List<Integer> getImageIdList(int id) {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("id", id);
 		return jdbc.queryForList(CommentSqls.GET_IMAGE_LIST, params, Integer.class);

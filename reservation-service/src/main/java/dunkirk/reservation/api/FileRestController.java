@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import dunkirk.reservation.service.FileService;
 
 @RestController
-public class FileController {
+public class FileRestController {
 	
 	private FileService fileService;
 	
 	@Autowired
-	public FileController(FileService fileService) {
+	public FileRestController(FileService fileService) {
 		this.fileService = fileService;
 	}
 
