@@ -1,4 +1,10 @@
-class ThumbnailSlider extends eg.Component {
+import jQuery from "jquery";
+import Component from "@egjs/component";
+import {CachedAjax} from "../cachedAjax";
+
+window.$ = jQuery;
+
+class ThumbnailSlider extends Component {
     constructor() {
         super();
         this.THUMBNAIL = '.thumb';
@@ -13,7 +19,7 @@ class ThumbnailSlider extends eg.Component {
         this.x = 0;
         this.point = 0;
         this.imgCount = 0;
-        this.template = Handlebars.compile($('#popup_layer_template').html());
+        this.template = require('./popup-layer-template.html');
         this.rootDOM = this.PHOTO_VIEWER;
         this.toBeMovedDOM = this.IMG_WRAPPER;
         this.bindEvents();
@@ -111,3 +117,5 @@ class ThumbnailSlider extends eg.Component {
         $(this.IMG_WRAPPER).on('load', this.resizeImg.bind(this));
     }
 }
+
+export {ThumbnailSlider};

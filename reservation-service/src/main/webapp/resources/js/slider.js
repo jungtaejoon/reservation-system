@@ -1,4 +1,9 @@
-class Slider extends eg.Component {
+import jQuery from "jquery";
+import Component from "@egjs/component";
+
+window.$ = jQuery;
+
+class Slider extends Component {
     constructor(id, option) {
         super();
         this.id = id;
@@ -77,3 +82,5 @@ class Slider extends eg.Component {
     }
 
 }
+
+export {Slider};

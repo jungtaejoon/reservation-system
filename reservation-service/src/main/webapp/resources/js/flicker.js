@@ -1,4 +1,10 @@
-class Flicker extends eg.Component {
+import {Slider} from "./slider";
+import jQuery from "jquery";
+import Component from "@egjs/component";
+
+window.$ = jQuery;
+
+class Flicker extends Component {
     constructor(slider) {
         super();
         this.slider = slider;
@@ -50,3 +56,5 @@ class Flicker extends eg.Component {
         e.preventDefault();
     }
 }
+
+export {Flicker};

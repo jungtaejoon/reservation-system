@@ -246,30 +246,7 @@
         <div class="layer" id="layer"></div>
     </div>
 </body>
-<script id="popup_layer_template" type="text/x-handlebars-template">
-    {{#items}}
-    <div class="sub_layer" style="transform: translateX({{tranx}}%)">
-        <div class="wrapper">
-            <img src="/files/{{fileId}}">
-        </div>
-        <div class="btn_wrapper">
-            <button class="com_img_btn close">X</button>
-            <button class="com_img_btn prev"><</button><button class="com_img_btn nxt">></button>
-        </div>
-    </div>
-    {{/items}}
-</script>
-<script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=eGDuy2NMeDv1C1QCsPGF&submodules=geocoder"></script>
 <!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=DnKZdo7puIZaftEgVyjF&submodules=geocoder"></script> -->
-<script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
-<script type="text/javascript" src="/resources/js/slider.js"></script>
-<script type="text/javascript" src="/resources/js/detail/naverMap.js"></script>
-<script type="text/javascript" src="/resources/js/detail/sliderPanel.js"></script>
-<script type="text/javascript" src="/resources/js/detail/thumbnailSlider.js"></script>
-<script type="text/javascript" src="/resources/js/flicker.js"></script>
-<script type="text/javascript" src="/resources/js/detail/buildDetail.js"></script>
-<script type="text/javascript" src="/resources/js/detail/detail.js"></script>
+<script type="text/javascript" src="/resources/js/build/detail.bundle.js"></script>
 </html>

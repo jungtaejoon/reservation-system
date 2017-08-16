@@ -79,13 +79,6 @@
                     <li class="item" data-category="0" data-product-count>
                         <a class="anchor active"> <span>전체</span> </a>
                     </li>
-                	<script id="category_list_template"  type="text/x-handlebars-template">
-						{{#items}}
-	                    <li class="item" data-category="{{id}}" data-product-count="{{productCount}}">
-	                        <a class="anchor {{#if @last}}last{{/if}}"> <span>{{name}}</span> </a>
-	                    </li>
-						{{/items}}
-                	</script>
                 </ul>
             </div>
             <div class="section_event_lst">
@@ -93,23 +86,6 @@
                 <div class="wrap_event_box">
                     <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
                     <ul class="lst_event_box left_box">
-                    	<script id="product_list_template" type="text/x-handlebars-template">
-						{{#products}}
-                    	<li class="item">
-                            <a class="item_book" href="/product-detail/{{id}}">
-                                <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}">
-                                    <span class="img_border"></span> </div>
-                                <div class="event_txt">
-                                    <h4 class="event_txt_tit"> 
-										<span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
-                                    <p class="event_txt_dsc">{{description}}
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-						{{/products}}
-                    	</script>
-                        
                     </ul>
                     <ul class="lst_event_box right_box">
                     </ul>
@@ -131,14 +107,5 @@
         </div>
     </footer>
 </body>
-<script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script type="text/javascript" src="/resources/js/node_modules/@egjs/component/dist/component.min.js"></script>
-<script type="text/javascript" src="/resources/js/cachedAjax.js"></script>
-<script type="text/javascript" src="/resources/js/slider.js"></script>
-<script type="text/javascript" src="/resources/js/flicker.js"></script>
-<script type="text/javascript" src="/resources/js/mainpage/slideTimer.js"></script>
-<script type="text/javascript" src="/resources/js/mainpage/productList.js"></script>
-<script type="text/javascript" src="/resources/js/mainpage/categoryList.js"></script>
-<script type="text/javascript" src="/resources/js/mainpage/mainpage.js"></script>
+<script type="text/javascript" src="/resources/js/build/mainpage.bundle.js"></script>
 </html>

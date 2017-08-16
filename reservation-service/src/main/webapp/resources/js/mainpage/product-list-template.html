@@ -1,0 +1,14 @@
+{{#products}}
+<li class="item">
+    <a class="item_book" href="/product-detail/{{id}}">
+        <div class="item_preview"> <img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}">
+            <span class="img_border"></span> </div>
+        <div class="event_txt">
+            <h4 class="event_txt_tit">
+                <span>{{name}}</span> <small class="sm">{{placeName}}</small> </h4>
+            <p class="event_txt_dsc">{{description}}
+            </p>
+        </div>
+    </a>
+</li>
+{{/products}}

@@ -1,4 +1,9 @@
-class SlideTimer extends eg.Component {
+import jQuery from "jquery";
+import Component from "@egjs/component";
+
+window.$ = jQuery;
+
+class SlideTimer extends Component {
     constructor(slider) {
         super();
         this.slider = slider;
@@ -36,3 +41,5 @@ class SlideTimer extends eg.Component {
         this.resetTimer();
     }
 };
+
+export {SlideTimer};
