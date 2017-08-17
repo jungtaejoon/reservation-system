@@ -60,10 +60,11 @@
 	window.$ = _jquery2.default;
 	
 	$(function () {
-	    _reserver.Reserver.init();
+	    var tickets = [];
 	    $(".qty").each(function (i, e) {
-	        new _ticket.Ticket($(e).attr('id'));
+	        tickets.push(new _ticket.Ticket($(e).attr('id')));
 	    });
+	    _reserver.Reserver.init(tickets);
 	});
 
 /***/ }),
@@ -10328,26 +10329,47 @@
 	        name: false,
 	        email: false,
 	        tel: false,
-	        agreement: false
+	        agreement: false,
+	        totalCount: false
 	    };
+	    var ticketArray;
+	    var totalCount = 0;
 	
-	    function init() {
-	        bindEvents();
-	        nameCheck.apply(document.getElementById('name'));
-	        telCheck.apply(document.getElementById('tel'));
-	        emailCheck.apply(document.getElementById('email'));
-	        agreementCheck.apply(document.getElementById('agreement'));
+	    function init(tickets) {
+	        ticketArray = tickets;
+	        bindEvents(tickets);
+	        nameCheck.apply($('#name').get(0));
+	        telCheck.apply($('#tel').get(0));
+	        emailCheck.apply($('#email').get(0));
+	        agreementCheck.apply($('#agreement').get(0));
 	    }
 	
-	    function bindEvents() {
+	    function bindEvents(tickets) {
 	        $('#name').on('keyup', nameCheck);
 	        $('#tel').on('keyup', telCheck);
 	        $('#email').on('keyup', emailCheck);
 	        $('#chk3').on('click', agreementCheck);
-	        $('a.btn_agreement').on('click', function (e) {
-	            $(this).find('i').toggleClass('fn-up2 fn-down2');
-	            $(this).closest('div.agreement').toggleClass('open');
-	        });
+	        $('a.btn_agreement').on('click', toggleOpen);
+	        $(tickets).each(bindTicketsEvents);
+	    }
+	
+	    function bindTicketsEvents(i, v) {
+	        v.on('changeCount', changeTotalCount);
+	    }
+	
+	    function changeTotalCount() {
+	        totalCount = ticketArray.reduce(addAll, 0);
+	        $('#total_count').text(totalCount);
+	        totalCountCheck();
+	    }
+	
+	    function addAll(a, v) {
+	        return a + v.count;
+	    }
+	
+	    function toggleOpen() {
+	        $(this).find('i').toggleClass('fn-up2 fn-down2');
+	        $(this).closest('div.agreement').toggleClass('open');
 	    }
 	
 	    function nameCheck() {
@@ -10388,8 +10410,13 @@
 	        checkAll();
 	    }
 	
+	    function totalCountCheck() {
+	        validation['totalCount'] = parseInt($('#total_count').text()) !== 0;
+	        checkAll();
+	    }
+	
 	    function checkAll() {
-	        if (validation['agreement'] && validation['email'] && validation['tel'] && validation['name']) {
+	        if (validation['agreement'] && validation['email'] && validation['tel'] && validation['name'] && validation['totalCount']) {
 	            $('div.bk_btn_wrap').removeClass('disable');
 	        } else {
 	            $('div.bk_btn_wrap').addClass('disable');
@@ -10448,6 +10475,9 @@
 	        _this.$btnPlus = $(_this.root).find('.ico_plus3');
 	        _this.$countInput = $(_this.root).find('.count_control_input');
 	        _this.count = 0;
+	        _this.price = parseInt($(_this.root).find('.price').text().replace(',', ''));
+	        _this.totalPrice;
+	        _this.$indPrice = $(_this.root).find('.individual_price');
 	        _this.bindEvents();
 	        return _this;
 	    }
@@ -10491,8 +10521,24 @@
 	    }, {
 	        key: 'setTotalPrice',
 	        value: function setTotalPrice() {
-	            var totalPrice = this.count * parseInt($(this.root).find('.price').text().replace(',', ''));
-	            $(this.root).find('.total_price').text(totalPrice);
+	            this.totalPrice = this.count * this.price;
+	            $(this.root).find('.total_price').text(this.threeComma(this.totalPrice));
+	            if (this.totalPrice && !this.$indPrice.hasClass('on_color')) {
+	                this.$indPrice.addClass('on_color');
+	            } else if (!this.totalPrice && this.$indPrice.hasClass('on_color')) {
+	                this.$indPrice.removeClass('on_color');
+	            }
+	            this.trigger('changeCount');
+	        }
+	    }, {
+	        key: 'threeComma',
+	        value: function threeComma(num) {
+	            var reg = /(^[+-]?\d+)(\d{3})/;
+	            num += '';
+	            while (reg.test(num)) {
+	                num = num.replace(reg, '$1' + ',' + '$2');
+	            }
+	            return num;
 	        }
 	    }]);
 	

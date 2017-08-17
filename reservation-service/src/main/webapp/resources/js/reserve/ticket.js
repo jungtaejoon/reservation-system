@@ -11,6 +11,9 @@ class Ticket extends Component {
         this.$btnPlus = $(this.root).find('.ico_plus3');
         this.$countInput = $(this.root).find('.count_control_input');
         this.count = 0;
+        this.price = parseInt($(this.root).find('.price').text().replace(',', ''));
+        this.totalPrice;
+        this.$indPrice = $(this.root).find('.individual_price');
         this.bindEvents();
     }
     
@@ -47,9 +50,24 @@ class Ticket extends Component {
     }
      
     setTotalPrice() {
-    	var totalPrice = this.count * parseInt($(this.root).find('.price').text().replace(',', ''));
-    	$(this.root).find('.total_price').text(totalPrice);
+    	this.totalPrice = this.count * this.price;
+    	$(this.root).find('.total_price').text(this.threeComma(this.totalPrice));
+    	if(this.totalPrice && !this.$indPrice.hasClass('on_color')) {
+            this.$indPrice.addClass('on_color');
+        } else if (!this.totalPrice && this.$indPrice.hasClass('on_color')) {
+            this.$indPrice.removeClass('on_color');
+		}
+    	this.trigger('changeCount');
     }
+
+    threeComma(num) {
+        var reg = /(^[+-]?\d+)(\d{3})/;
+        num += '';
+        while (reg.test(num)) {
+            num = num.replace(reg,'$1'+','+'$2');
+        }
+        return num;
+	}
 }
 
 export {Ticket};
