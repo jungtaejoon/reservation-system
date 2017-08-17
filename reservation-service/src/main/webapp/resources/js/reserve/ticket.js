@@ -12,7 +12,7 @@ class Ticket extends Component {
         this.$countInput = $(this.root).find('.count_control_input');
         this.count = 0;
         this.price = parseInt($(this.root).find('.price').text().replace(',', ''));
-        this.totalPrice;
+        this.totalPrice = 0;
         this.$indPrice = $(this.root).find('.individual_price');
         this.bindEvents();
     }

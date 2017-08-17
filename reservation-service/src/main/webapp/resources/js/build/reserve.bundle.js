@@ -10351,6 +10351,7 @@
 	        $('#chk3').on('click', agreementCheck);
 	        $('a.btn_agreement').on('click', toggleOpen);
 	        $(tickets).each(bindTicketsEvents);
+	        $('button.bk_btn').on('click', checkButton);
 	    }
 	
 	    function bindTicketsEvents(i, v) {
@@ -10358,13 +10359,17 @@
 	    }
 	
 	    function changeTotalCount() {
-	        totalCount = ticketArray.reduce(addAll, 0);
+	        totalCount = ticketArray.reduce(addAllCount, 0);
 	        $('#total_count').text(totalCount);
 	        totalCountCheck();
 	    }
 	
-	    function addAll(a, v) {
+	    function addAllCount(a, v) {
 	        return a + v.count;
+	    }
+	
+	    function addAllTotalPrice(a, v) {
+	        return a + parseInt(v.totalPrice);
 	    }
 	
 	    function toggleOpen() {
@@ -10423,6 +10428,40 @@
 	        }
 	    }
 	
+	    function checkButton() {
+	        if ($('div.bk_btn_wrap').hasClass('disable')) {
+	            return;
+	        } else {
+	            makeReservation();
+	        }
+	    }
+	
+	    function makeReservation() {
+	
+	        var productId = $('#container').data('product-id');
+	        var reservationName = $('#name').val();
+	        var reservationTel = $('#tel').val();
+	        var reservationEmail = $('#email').val();
+	        var reservationDate = $('#reservation_date').text();
+	        var generalTicketCount = ticketArray[0].count;
+	        var youthTicketCount = ticketArray[1].count;
+	        var childTicketCount = ticketArray[2].count;
+	        var totalPrice = ticketArray.reduce(addAllTotalPrice, 0);
+	        var obj = {
+	            productId: productId,
+	            generalTicketCount: generalTicketCount,
+	            youthTicketCount: youthTicketCount,
+	            childTicketCount: childTicketCount,
+	            reservationName: reservationName,
+	            reservationEmail: reservationEmail,
+	            reservationTel: reservationTel,
+	            reservationDate: reservationDate,
+	            totalPrice: totalPrice
+	        };
+	
+	        $.ajax();
+	    }
+	
 	    return {
 	        init: init
 	    };
@@ -10476,7 +10515,7 @@
 	        _this.$countInput = $(_this.root).find('.count_control_input');
 	        _this.count = 0;
 	        _this.price = parseInt($(_this.root).find('.price').text().replace(',', ''));
-	        _this.totalPrice;
+	        _this.totalPrice = 0;
 	        _this.$indPrice = $(_this.root).find('.individual_price');
 	        _this.bindEvents();
 	        return _this;

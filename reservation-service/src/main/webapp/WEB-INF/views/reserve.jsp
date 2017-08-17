@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div id="container">
+    <div id="container" data-product-id="${product.id}">
         <!-- [D] 예약하기로 들어오면 header에 fade 클래스 추가로 숨김 -->
         <div class="header fade">
             <header class="header_tit">
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">
-                                        <p class="inline_txt selected">2017.2.17.(금)~2017.4.18.(화), 총 <span id="total_count">0</span>매</p>
+                                        <p class="inline_txt selected"><span id="reservation_date"><fmt:formatDate value="${product.displayStart }" pattern="yyyy.MM.dd.(E)"/>~<fmt:formatDate value="${product.displayEnd }" pattern="yyyy.MM.dd.(E)"/></span>, 총 <span id="total_count">0</span>매</p>
                                     </div>
                                 </div>
                             </form>

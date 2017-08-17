@@ -29,6 +29,7 @@ var Reserver = (function () {
         $('#chk3').on('click', agreementCheck);
         $('a.btn_agreement').on('click', toggleOpen);
         $(tickets).each(bindTicketsEvents);
+        $('button.bk_btn').on('click', checkButton);
     }
 
     function bindTicketsEvents(i, v) {
@@ -36,13 +37,17 @@ var Reserver = (function () {
     }
 
     function changeTotalCount() {
-        totalCount = ticketArray.reduce(addAll, 0);
+        totalCount = ticketArray.reduce(addAllCount, 0);
         $('#total_count').text(totalCount);
         totalCountCheck();
     }
 
-    function addAll(a, v) {
+    function addAllCount(a, v) {
         return a + v.count;
+    }
+
+    function addAllTotalPrice(a, v) {
+        return a + parseInt(v.totalPrice);
     }
 
     function toggleOpen() {
@@ -99,6 +104,40 @@ var Reserver = (function () {
         } else {
             $('div.bk_btn_wrap').addClass('disable');
         }
+    }
+
+    function checkButton() {
+        if($('div.bk_btn_wrap').hasClass('disable')) {
+            return;
+        } else {
+            makeReservation();
+        }
+    }
+    
+    function makeReservation() {
+
+        var productId = $('#container').data('product-id');
+        var reservationName = $('#name').val();
+        var reservationTel = $('#tel').val();
+        var reservationEmail = $('#email').val();
+        var reservationDate = $('#reservation_date').text();
+        var generalTicketCount = ticketArray[0].count;
+        var youthTicketCount = ticketArray[1].count;
+        var childTicketCount = ticketArray[2].count;
+        var totalPrice = ticketArray.reduce(addAllTotalPrice, 0);
+        var obj = {
+            productId: productId,
+            generalTicketCount: generalTicketCount,
+            youthTicketCount: youthTicketCount,
+            childTicketCount: childTicketCount,
+            reservationName: reservationName,
+            reservationEmail: reservationEmail,
+            reservationTel: reservationTel,
+            reservationDate: reservationDate,
+            totalPrice: totalPrice
+        };
+
+        $.ajax()
     }
 
     return {
