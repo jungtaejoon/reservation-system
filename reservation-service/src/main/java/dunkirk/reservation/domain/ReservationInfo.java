@@ -17,6 +17,7 @@ public class ReservationInfo {
 	private String reservationEmail;
 	private String reservationDate;
 	private String reservationType;
+	private int totalPrice;
 	private Timestamp createDate;
 	private Timestamp modifyDate;
 
@@ -110,6 +111,14 @@ public class ReservationInfo {
 
 	public void setReservationType(String reservationType) {
 		this.reservationType = reservationType;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public Timestamp getCreateDate() {
