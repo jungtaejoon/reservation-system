@@ -1,7 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Eclipse template
 
-**/build/
 .metadata
 bin/
 tmp/
@@ -137,6 +136,6 @@ target
 
 # for js
 node_modules/
-
+*.bundle.js*
 
 

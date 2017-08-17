@@ -67,6 +67,7 @@ class Ticket extends Component {
             num = num.replace(reg,'$1'+','+'$2');
         }
         return num;
+        console.log(this);
 	}
 }
 
