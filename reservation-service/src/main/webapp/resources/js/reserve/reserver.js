@@ -134,10 +134,27 @@ var Reserver = (function () {
             reservationEmail: reservationEmail,
             reservationTel: reservationTel,
             reservationDate: reservationDate,
+            reservationType: 1,
             totalPrice: totalPrice
         };
 
-        $.ajax()
+        $.ajax({
+            method : 'post',
+            data : JSON.stringify(obj),
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            url : '/reservations',
+            success : (response) => {
+                if(response === 1) {
+                    location.href = '/my-reservation';
+                } else {
+                    alert('뭔가 잘못되었습니다. ^^;');
+                }
+            },
+            error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다.
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
     }
 
     return {
