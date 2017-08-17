@@ -1,71 +1,81 @@
 package dunkirk.reservation.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.sql.Timestamp;
 
 public class ProductPrice {
-	private int id;
-	private int productId;
-	private int priceType;
-	private int price;
-	private double discountRate;
-	private Timestamp createDate;
-	private Timestamp modifyDate;
-	
-	public ProductPrice() {}
+    private int id;
+    private int productId;
+    private PriceType priceType;
+    private int price;
+    private double discountRate;
+    private Timestamp createDate;
+    private Timestamp modifyDate;
 
-	public int getId() {
-		return id;
-	}
+    public ProductPrice() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getProductId() {
-		return productId;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+    public int getProductId() {
+        return productId;
+    }
 
-	public int getPriceType() {
-		return priceType;
-	}
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-	public void setPriceType(int priceType) {
-		this.priceType = priceType;
-	}
+    public PriceType getPriceType() {
+        return priceType;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    public void setPriceType(PriceType priceType) {
+        this.priceType = priceType;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public double getDiscountRate() {
-		return discountRate;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public void setDiscountRate(double discountRate) {
-		this.discountRate = discountRate;
-	}
+    public double getDiscountRate() {
+        return discountRate;
+    }
 
-	public Timestamp getCreateDate() {
-		return createDate;
-	}
+    public void setDiscountRate(double discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
 
-	public Timestamp getModifyDate() {
-		return modifyDate;
-	}
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setModifyDate(Timestamp modifyDate) {
-		this.modifyDate = modifyDate;
-	}
+    public Timestamp getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(Timestamp modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+    }
+
 }

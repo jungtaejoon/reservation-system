@@ -23,9 +23,13 @@ var Reserver = (function () {
         $('#tel').on('keyup', telCheck);
         $('#email').on('keyup', emailCheck);
         $('#chk3').on('click', agreementCheck);
+        $('a.btn_agreement').on('click', function (e) {
+            $(this).find('i').toggleClass('fn-up2 fn-down2');
+            $(this).closest('div.agreement').toggleClass('open');
+        })
     }
 
-    function nameCheck(e) {
+    function nameCheck() {
         if ($(this).val()) {
             validation['name'] = true;
         } else {

@@ -47,9 +47,9 @@
 
 	"use strict";
 	
-	var _reserver = __webpack_require__(35);
+	var _reserver = __webpack_require__(36);
 	
-	var _jquery = __webpack_require__(3);
+	var _jquery = __webpack_require__(2);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -63,7 +63,7 @@
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -9894,11 +9894,11 @@
 	
 		return jQuery;
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -9916,7 +9916,7 @@
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9926,7 +9926,7 @@
 	});
 	exports.Reserver = undefined;
 	
-	var _jquery = __webpack_require__(3);
+	var _jquery = __webpack_require__(2);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -9955,9 +9955,13 @@
 	        $('#tel').on('keyup', telCheck);
 	        $('#email').on('keyup', emailCheck);
 	        $('#chk3').on('click', agreementCheck);
+	        $('a.btn_agreement').on('click', function (e) {
+	            $(this).find('i').toggleClass('fn-up2 fn-down2');
+	            $(this).closest('div.agreement').toggleClass('open');
+	        });
 	    }
 	
-	    function nameCheck(e) {
+	    function nameCheck() {
 	        if ($(this).val()) {
 	            validation['name'] = true;
 	        } else {

@@ -46,15 +46,15 @@
 
 	"use strict";
 	
-	var _slideTimer = __webpack_require__(30);
+	var _slideTimer = __webpack_require__(31);
 	
-	var _flicker = __webpack_require__(7);
+	var _flicker = __webpack_require__(8);
 	
-	var _categoryList = __webpack_require__(31);
+	var _categoryList = __webpack_require__(32);
 	
 	var _slider = __webpack_require__(5);
 	
-	var _jquery = __webpack_require__(3);
+	var _jquery = __webpack_require__(2);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -77,8 +77,7 @@
 
 /***/ }),
 /* 1 */,
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {"use strict";
@@ -9909,10 +9908,10 @@
 	
 		return jQuery;
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -9929,6 +9928,7 @@
 	};
 
 /***/ }),
+/* 4 */,
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9941,11 +9941,11 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _jquery = __webpack_require__(3);
+	var _jquery = __webpack_require__(2);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _component = __webpack_require__(36);
+	var _component = __webpack_require__(6);
 	
 	var _component2 = _interopRequireDefault(_component);
 	
@@ -10060,1654 +10060,7 @@
 	exports.Slider = Slider;
 
 /***/ }),
-/* 6 */,
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.Flicker = undefined;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _slider = __webpack_require__(5);
-	
-	var _jquery = __webpack_require__(3);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _component = __webpack_require__(36);
-	
-	var _component2 = _interopRequireDefault(_component);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	window.$ = _jquery2.default;
-	
-	var Flicker = function (_Component) {
-	    _inherits(Flicker, _Component);
-	
-	    function Flicker(slider) {
-	        _classCallCheck(this, Flicker);
-	
-	        var _this = _possibleConstructorReturn(this, (Flicker.__proto__ || Object.getPrototypeOf(Flicker)).call(this));
-	
-	        _this.slider = slider;
-	        _this.isPureSlider = slider.constructor === _slider.Slider;
-	        _this.moveGapX;
-	        _this.touchStartPointX;
-	        _this.bindEvents();
-	        return _this;
-	    }
-	
-	    _createClass(Flicker, [{
-	        key: "bindEvents",
-	        value: function bindEvents() {
-	            $(this.slider.rootDOM).on('touchstart', this.slider.toBeMovedDOM, this.viewerTouchStart.bind(this)).on('touchmove', this.slider.toBeMovedDOM, this.viewerTouchMove.bind(this)).on('touchend', this.slider.toBeMovedDOM, this.viewerTouchEnd.bind(this));
-	        }
-	    }, {
-	        key: "viewerTouchStart",
-	        value: function viewerTouchStart(e) {
-	            if (this.isPureSlider) {
-	                this.slider.touchStartTrigger();
-	            }
-	            $(this.slider.SUB_LAYER).addClass('touch');
-	            var event = e.originalEvent;
-	            this.moveGapX = 0;
-	            this.touchStartPointX = event.changedTouches[0].screenX;
-	            e.preventDefault();
-	        }
-	    }, {
-	        key: "viewerTouchMove",
-	        value: function viewerTouchMove(e) {
-	            var event = e.originalEvent;
-	            this.moveGapX = this.touchStartPointX - event.changedTouches[0].screenX;
-	            $(this.slider.toBeMovedDOM).css('transform', 'translateX(' + -this.moveGapX + 'px)');
-	            e.preventDefault();
-	        }
-	    }, {
-	        key: "viewerTouchEnd",
-	        value: function viewerTouchEnd(e) {
-	            if (this.isPureSlider) {
-	                this.slider.touchEndTrigger();
-	            }
-	            if (this.moveGapX < -50) {
-	                $(this.slider.BUTTON_WRAPPER).addClass('invisible');
-	                this.slider.prev();
-	            } else if (this.moveGapX > 50) {
-	                $(this.slider.BUTTON_WRAPPER).addClass('invisible');
-	                this.slider.next();
-	            } else if (this.moveGapX === 0) {
-	                $(this.slider.BUTTON_WRAPPER).removeClass('invisible');
-	            }
-	            $(this.slider.toBeMovedDOM).css('transform', 'translateX(0px)');
-	            e.preventDefault();
-	        }
-	    }]);
-	
-	    return Flicker;
-	}(_component2.default);
-	
-	exports.Flicker = Flicker;
-
-/***/ }),
-/* 8 */,
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.CachedAjax = undefined;
-	
-	var _jquery = __webpack_require__(3);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	window.$ = _jquery2.default;
-	
-	var CachedAjax = function () {
-	    var cachedData = {};
-	    var returnObj;
-	
-	    function get(url) {
-	        if (cachedData[url]) {
-	            returnObj = Promise.resolve(cachedData[url]);
-	        } else {
-	            returnObj = $.ajax(url);
-	            returnObj.then(function (res) {
-	                cachedData[url] = res;
-	            });
-	        }
-	        return returnObj;
-	    }
-	
-	    return {
-	        get: get
-	    };
-	}();
-	
-	exports.CachedAjax = CachedAjax;
-
-/***/ }),
-/* 10 */,
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	// Create a simple path alias to allow browserify to resolve
-	// the runtime on a supported path.
-	module.exports = __webpack_require__(12)['default'];
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	// istanbul ignore next
-	
-	function _interopRequireWildcard(obj) {
-	  if (obj && obj.__esModule) {
-	    return obj;
-	  } else {
-	    var newObj = {};if (obj != null) {
-	      for (var key in obj) {
-	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-	      }
-	    }newObj['default'] = obj;return newObj;
-	  }
-	}
-	
-	var _handlebarsBase = __webpack_require__(13);
-	
-	var base = _interopRequireWildcard(_handlebarsBase);
-	
-	// Each of these augment the Handlebars object. No need to setup here.
-	// (This is done to easily share code between commonjs and browse envs)
-	
-	var _handlebarsSafeString = __webpack_require__(27);
-	
-	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
-	
-	var _handlebarsException = __webpack_require__(15);
-	
-	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
-	
-	var _handlebarsUtils = __webpack_require__(14);
-	
-	var Utils = _interopRequireWildcard(_handlebarsUtils);
-	
-	var _handlebarsRuntime = __webpack_require__(28);
-	
-	var runtime = _interopRequireWildcard(_handlebarsRuntime);
-	
-	var _handlebarsNoConflict = __webpack_require__(29);
-	
-	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
-	
-	// For compatibility and usage outside of module systems, make the Handlebars object a namespace
-	function create() {
-	  var hb = new base.HandlebarsEnvironment();
-	
-	  Utils.extend(hb, base);
-	  hb.SafeString = _handlebarsSafeString2['default'];
-	  hb.Exception = _handlebarsException2['default'];
-	  hb.Utils = Utils;
-	  hb.escapeExpression = Utils.escapeExpression;
-	
-	  hb.VM = runtime;
-	  hb.template = function (spec) {
-	    return runtime.template(spec, hb);
-	  };
-	
-	  return hb;
-	}
-	
-	var inst = create();
-	inst.create = create;
-	
-	_handlebarsNoConflict2['default'](inst);
-	
-	inst['default'] = inst;
-	
-	exports['default'] = inst;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.HandlebarsEnvironment = HandlebarsEnvironment;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _utils = __webpack_require__(14);
-	
-	var _exception = __webpack_require__(15);
-	
-	var _exception2 = _interopRequireDefault(_exception);
-	
-	var _helpers = __webpack_require__(16);
-	
-	var _decorators = __webpack_require__(24);
-	
-	var _logger = __webpack_require__(26);
-	
-	var _logger2 = _interopRequireDefault(_logger);
-	
-	var VERSION = '4.0.10';
-	exports.VERSION = VERSION;
-	var COMPILER_REVISION = 7;
-	
-	exports.COMPILER_REVISION = COMPILER_REVISION;
-	var REVISION_CHANGES = {
-	  1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
-	  2: '== 1.0.0-rc.3',
-	  3: '== 1.0.0-rc.4',
-	  4: '== 1.x.x',
-	  5: '== 2.0.0-alpha.x',
-	  6: '>= 2.0.0-beta.1',
-	  7: '>= 4.0.0'
-	};
-	
-	exports.REVISION_CHANGES = REVISION_CHANGES;
-	var objectType = '[object Object]';
-	
-	function HandlebarsEnvironment(helpers, partials, decorators) {
-	  this.helpers = helpers || {};
-	  this.partials = partials || {};
-	  this.decorators = decorators || {};
-	
-	  _helpers.registerDefaultHelpers(this);
-	  _decorators.registerDefaultDecorators(this);
-	}
-	
-	HandlebarsEnvironment.prototype = {
-	  constructor: HandlebarsEnvironment,
-	
-	  logger: _logger2['default'],
-	  log: _logger2['default'].log,
-	
-	  registerHelper: function registerHelper(name, fn) {
-	    if (_utils.toString.call(name) === objectType) {
-	      if (fn) {
-	        throw new _exception2['default']('Arg not supported with multiple helpers');
-	      }
-	      _utils.extend(this.helpers, name);
-	    } else {
-	      this.helpers[name] = fn;
-	    }
-	  },
-	  unregisterHelper: function unregisterHelper(name) {
-	    delete this.helpers[name];
-	  },
-	
-	  registerPartial: function registerPartial(name, partial) {
-	    if (_utils.toString.call(name) === objectType) {
-	      _utils.extend(this.partials, name);
-	    } else {
-	      if (typeof partial === 'undefined') {
-	        throw new _exception2['default']('Attempting to register a partial called "' + name + '" as undefined');
-	      }
-	      this.partials[name] = partial;
-	    }
-	  },
-	  unregisterPartial: function unregisterPartial(name) {
-	    delete this.partials[name];
-	  },
-	
-	  registerDecorator: function registerDecorator(name, fn) {
-	    if (_utils.toString.call(name) === objectType) {
-	      if (fn) {
-	        throw new _exception2['default']('Arg not supported with multiple decorators');
-	      }
-	      _utils.extend(this.decorators, name);
-	    } else {
-	      this.decorators[name] = fn;
-	    }
-	  },
-	  unregisterDecorator: function unregisterDecorator(name) {
-	    delete this.decorators[name];
-	  }
-	};
-	
-	var log = _logger2['default'].log;
-	
-	exports.log = log;
-	exports.createFrame = _utils.createFrame;
-	exports.logger = _logger2['default'];
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	exports.__esModule = true;
-	exports.extend = extend;
-	exports.indexOf = indexOf;
-	exports.escapeExpression = escapeExpression;
-	exports.isEmpty = isEmpty;
-	exports.createFrame = createFrame;
-	exports.blockParams = blockParams;
-	exports.appendContextPath = appendContextPath;
-	var escape = {
-	  '&': '&amp;',
-	  '<': '&lt;',
-	  '>': '&gt;',
-	  '"': '&quot;',
-	  "'": '&#x27;',
-	  '`': '&#x60;',
-	  '=': '&#x3D;'
-	};
-	
-	var badChars = /[&<>"'`=]/g,
-	    possible = /[&<>"'`=]/;
-	
-	function escapeChar(chr) {
-	  return escape[chr];
-	}
-	
-	function extend(obj /* , ...source */) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    for (var key in arguments[i]) {
-	      if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
-	        obj[key] = arguments[i][key];
-	      }
-	    }
-	  }
-	
-	  return obj;
-	}
-	
-	var toString = Object.prototype.toString;
-	
-	exports.toString = toString;
-	// Sourced from lodash
-	// https://github.com/bestiejs/lodash/blob/master/LICENSE.txt
-	/* eslint-disable func-style */
-	var isFunction = function isFunction(value) {
-	  return typeof value === 'function';
-	};
-	// fallback for older versions of Chrome and Safari
-	/* istanbul ignore next */
-	if (isFunction(/x/)) {
-	  exports.isFunction = isFunction = function isFunction(value) {
-	    return typeof value === 'function' && toString.call(value) === '[object Function]';
-	  };
-	}
-	exports.isFunction = isFunction;
-	
-	/* eslint-enable func-style */
-	
-	/* istanbul ignore next */
-	var isArray = Array.isArray || function (value) {
-	  return value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? toString.call(value) === '[object Array]' : false;
-	};
-	
-	exports.isArray = isArray;
-	// Older IE versions do not directly support indexOf so we must implement our own, sadly.
-	
-	function indexOf(array, value) {
-	  for (var i = 0, len = array.length; i < len; i++) {
-	    if (array[i] === value) {
-	      return i;
-	    }
-	  }
-	  return -1;
-	}
-	
-	function escapeExpression(string) {
-	  if (typeof string !== 'string') {
-	    // don't escape SafeStrings, since they're already safe
-	    if (string && string.toHTML) {
-	      return string.toHTML();
-	    } else if (string == null) {
-	      return '';
-	    } else if (!string) {
-	      return string + '';
-	    }
-	
-	    // Force a string conversion as this will be done by the append regardless and
-	    // the regex test will do this transparently behind the scenes, causing issues if
-	    // an object's to string has escaped characters in it.
-	    string = '' + string;
-	  }
-	
-	  if (!possible.test(string)) {
-	    return string;
-	  }
-	  return string.replace(badChars, escapeChar);
-	}
-	
-	function isEmpty(value) {
-	  if (!value && value !== 0) {
-	    return true;
-	  } else if (isArray(value) && value.length === 0) {
-	    return true;
-	  } else {
-	    return false;
-	  }
-	}
-	
-	function createFrame(object) {
-	  var frame = extend({}, object);
-	  frame._parent = object;
-	  return frame;
-	}
-	
-	function blockParams(params, ids) {
-	  params.path = ids;
-	  return params;
-	}
-	
-	function appendContextPath(contextPath, id) {
-	  return (contextPath ? contextPath + '.' : '') + id;
-	}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
-	
-	function Exception(message, node) {
-	  var loc = node && node.loc,
-	      line = undefined,
-	      column = undefined;
-	  if (loc) {
-	    line = loc.start.line;
-	    column = loc.start.column;
-	
-	    message += ' - ' + line + ':' + column;
-	  }
-	
-	  var tmp = Error.prototype.constructor.call(this, message);
-	
-	  // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
-	  for (var idx = 0; idx < errorProps.length; idx++) {
-	    this[errorProps[idx]] = tmp[errorProps[idx]];
-	  }
-	
-	  /* istanbul ignore else */
-	  if (Error.captureStackTrace) {
-	    Error.captureStackTrace(this, Exception);
-	  }
-	
-	  try {
-	    if (loc) {
-	      this.lineNumber = line;
-	
-	      // Work around issue under safari where we can't directly set the column value
-	      /* istanbul ignore next */
-	      if (Object.defineProperty) {
-	        Object.defineProperty(this, 'column', {
-	          value: column,
-	          enumerable: true
-	        });
-	      } else {
-	        this.column = column;
-	      }
-	    }
-	  } catch (nop) {
-	    /* Ignore if the browser is very particular */
-	  }
-	}
-	
-	Exception.prototype = new Error();
-	
-	exports['default'] = Exception;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.registerDefaultHelpers = registerDefaultHelpers;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _helpersBlockHelperMissing = __webpack_require__(17);
-	
-	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
-	
-	var _helpersEach = __webpack_require__(18);
-	
-	var _helpersEach2 = _interopRequireDefault(_helpersEach);
-	
-	var _helpersHelperMissing = __webpack_require__(19);
-	
-	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
-	
-	var _helpersIf = __webpack_require__(20);
-	
-	var _helpersIf2 = _interopRequireDefault(_helpersIf);
-	
-	var _helpersLog = __webpack_require__(21);
-	
-	var _helpersLog2 = _interopRequireDefault(_helpersLog);
-	
-	var _helpersLookup = __webpack_require__(22);
-	
-	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
-	
-	var _helpersWith = __webpack_require__(23);
-	
-	var _helpersWith2 = _interopRequireDefault(_helpersWith);
-	
-	function registerDefaultHelpers(instance) {
-	  _helpersBlockHelperMissing2['default'](instance);
-	  _helpersEach2['default'](instance);
-	  _helpersHelperMissing2['default'](instance);
-	  _helpersIf2['default'](instance);
-	  _helpersLog2['default'](instance);
-	  _helpersLookup2['default'](instance);
-	  _helpersWith2['default'](instance);
-	}
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _utils = __webpack_require__(14);
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('blockHelperMissing', function (context, options) {
-	    var inverse = options.inverse,
-	        fn = options.fn;
-	
-	    if (context === true) {
-	      return fn(this);
-	    } else if (context === false || context == null) {
-	      return inverse(this);
-	    } else if (_utils.isArray(context)) {
-	      if (context.length > 0) {
-	        if (options.ids) {
-	          options.ids = [options.name];
-	        }
-	
-	        return instance.helpers.each(context, options);
-	      } else {
-	        return inverse(this);
-	      }
-	    } else {
-	      if (options.data && options.ids) {
-	        var data = _utils.createFrame(options.data);
-	        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.name);
-	        options = { data: data };
-	      }
-	
-	      return fn(context, options);
-	    }
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	exports.__esModule = true;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _utils = __webpack_require__(14);
-	
-	var _exception = __webpack_require__(15);
-	
-	var _exception2 = _interopRequireDefault(_exception);
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('each', function (context, options) {
-	    if (!options) {
-	      throw new _exception2['default']('Must pass iterator to #each');
-	    }
-	
-	    var fn = options.fn,
-	        inverse = options.inverse,
-	        i = 0,
-	        ret = '',
-	        data = undefined,
-	        contextPath = undefined;
-	
-	    if (options.data && options.ids) {
-	      contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';
-	    }
-	
-	    if (_utils.isFunction(context)) {
-	      context = context.call(this);
-	    }
-	
-	    if (options.data) {
-	      data = _utils.createFrame(options.data);
-	    }
-	
-	    function execIteration(field, index, last) {
-	      if (data) {
-	        data.key = field;
-	        data.index = index;
-	        data.first = index === 0;
-	        data.last = !!last;
-	
-	        if (contextPath) {
-	          data.contextPath = contextPath + field;
-	        }
-	      }
-	
-	      ret = ret + fn(context[field], {
-	        data: data,
-	        blockParams: _utils.blockParams([context[field], field], [contextPath + field, null])
-	      });
-	    }
-	
-	    if (context && (typeof context === 'undefined' ? 'undefined' : _typeof(context)) === 'object') {
-	      if (_utils.isArray(context)) {
-	        for (var j = context.length; i < j; i++) {
-	          if (i in context) {
-	            execIteration(i, i, i === context.length - 1);
-	          }
-	        }
-	      } else {
-	        var priorKey = undefined;
-	
-	        for (var key in context) {
-	          if (context.hasOwnProperty(key)) {
-	            // We're running the iterations one step out of sync so we can detect
-	            // the last iteration without have to scan the object twice and create
-	            // an itermediate keys array.
-	            if (priorKey !== undefined) {
-	              execIteration(priorKey, i - 1);
-	            }
-	            priorKey = key;
-	            i++;
-	          }
-	        }
-	        if (priorKey !== undefined) {
-	          execIteration(priorKey, i - 1, true);
-	        }
-	      }
-	    }
-	
-	    if (i === 0) {
-	      ret = inverse(this);
-	    }
-	
-	    return ret;
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _exception = __webpack_require__(15);
-	
-	var _exception2 = _interopRequireDefault(_exception);
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('helperMissing', function () /* [args, ]options */{
-	    if (arguments.length === 1) {
-	      // A missing field in a {{foo}} construct.
-	      return undefined;
-	    } else {
-	      // Someone is actually trying to call something, blow up.
-	      throw new _exception2['default']('Missing helper: "' + arguments[arguments.length - 1].name + '"');
-	    }
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _utils = __webpack_require__(14);
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('if', function (conditional, options) {
-	    if (_utils.isFunction(conditional)) {
-	      conditional = conditional.call(this);
-	    }
-	
-	    // Default behavior is to render the positive path if the value is truthy and not empty.
-	    // The `includeZero` option may be set to treat the condtional as purely not empty based on the
-	    // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.
-	    if (!options.hash.includeZero && !conditional || _utils.isEmpty(conditional)) {
-	      return options.inverse(this);
-	    } else {
-	      return options.fn(this);
-	    }
-	  });
-	
-	  instance.registerHelper('unless', function (conditional, options) {
-	    return instance.helpers['if'].call(this, conditional, { fn: options.inverse, inverse: options.fn, hash: options.hash });
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('log', function () /* message, options */{
-	    var args = [undefined],
-	        options = arguments[arguments.length - 1];
-	    for (var i = 0; i < arguments.length - 1; i++) {
-	      args.push(arguments[i]);
-	    }
-	
-	    var level = 1;
-	    if (options.hash.level != null) {
-	      level = options.hash.level;
-	    } else if (options.data && options.data.level != null) {
-	      level = options.data.level;
-	    }
-	    args[0] = level;
-	
-	    instance.log.apply(instance, args);
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('lookup', function (obj, field) {
-	    return obj && obj[field];
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _utils = __webpack_require__(14);
-	
-	exports['default'] = function (instance) {
-	  instance.registerHelper('with', function (context, options) {
-	    if (_utils.isFunction(context)) {
-	      context = context.call(this);
-	    }
-	
-	    var fn = options.fn;
-	
-	    if (!_utils.isEmpty(context)) {
-	      var data = options.data;
-	      if (options.data && options.ids) {
-	        data = _utils.createFrame(options.data);
-	        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]);
-	      }
-	
-	      return fn(context, {
-	        data: data,
-	        blockParams: _utils.blockParams([context], [data && data.contextPath])
-	      });
-	    } else {
-	      return options.inverse(this);
-	    }
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.registerDefaultDecorators = registerDefaultDecorators;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _decoratorsInline = __webpack_require__(25);
-	
-	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
-	
-	function registerDefaultDecorators(instance) {
-	  _decoratorsInline2['default'](instance);
-	}
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _utils = __webpack_require__(14);
-	
-	exports['default'] = function (instance) {
-	  instance.registerDecorator('inline', function (fn, props, container, options) {
-	    var ret = fn;
-	    if (!props.partials) {
-	      props.partials = {};
-	      ret = function ret(context, options) {
-	        // Create a new partials stack frame prior to exec.
-	        var original = container.partials;
-	        container.partials = _utils.extend({}, original, props.partials);
-	        var ret = fn(context, options);
-	        container.partials = original;
-	        return ret;
-	      };
-	    }
-	
-	    props.partials[options.args[0]] = options.fn;
-	
-	    return ret;
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _utils = __webpack_require__(14);
-	
-	var logger = {
-	  methodMap: ['debug', 'info', 'warn', 'error'],
-	  level: 'info',
-	
-	  // Maps a given level value to the `methodMap` indexes above.
-	  lookupLevel: function lookupLevel(level) {
-	    if (typeof level === 'string') {
-	      var levelMap = _utils.indexOf(logger.methodMap, level.toLowerCase());
-	      if (levelMap >= 0) {
-	        level = levelMap;
-	      } else {
-	        level = parseInt(level, 10);
-	      }
-	    }
-	
-	    return level;
-	  },
-	
-	  // Can be overridden in the host environment
-	  log: function log(level) {
-	    level = logger.lookupLevel(level);
-	
-	    if (typeof console !== 'undefined' && logger.lookupLevel(logger.level) <= level) {
-	      var method = logger.methodMap[level];
-	      if (!console[method]) {
-	        // eslint-disable-line no-console
-	        method = 'log';
-	      }
-	
-	      for (var _len = arguments.length, message = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	        message[_key - 1] = arguments[_key];
-	      }
-	
-	      console[method].apply(console, message); // eslint-disable-line no-console
-	    }
-	  }
-	};
-	
-	exports['default'] = logger;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-	// Build out our basic SafeString type
-	'use strict';
-	
-	exports.__esModule = true;
-	function SafeString(string) {
-	  this.string = string;
-	}
-	
-	SafeString.prototype.toString = SafeString.prototype.toHTML = function () {
-	  return '' + this.string;
-	};
-	
-	exports['default'] = SafeString;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	exports.__esModule = true;
-	exports.checkRevision = checkRevision;
-	exports.template = template;
-	exports.wrapProgram = wrapProgram;
-	exports.resolvePartial = resolvePartial;
-	exports.invokePartial = invokePartial;
-	exports.noop = noop;
-	// istanbul ignore next
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	// istanbul ignore next
-	
-	function _interopRequireWildcard(obj) {
-	  if (obj && obj.__esModule) {
-	    return obj;
-	  } else {
-	    var newObj = {};if (obj != null) {
-	      for (var key in obj) {
-	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-	      }
-	    }newObj['default'] = obj;return newObj;
-	  }
-	}
-	
-	var _utils = __webpack_require__(14);
-	
-	var Utils = _interopRequireWildcard(_utils);
-	
-	var _exception = __webpack_require__(15);
-	
-	var _exception2 = _interopRequireDefault(_exception);
-	
-	var _base = __webpack_require__(13);
-	
-	function checkRevision(compilerInfo) {
-	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
-	      currentRevision = _base.COMPILER_REVISION;
-	
-	  if (compilerRevision !== currentRevision) {
-	    if (compilerRevision < currentRevision) {
-	      var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
-	          compilerVersions = _base.REVISION_CHANGES[compilerRevision];
-	      throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
-	    } else {
-	      // Use the embedded version info since the runtime doesn't know about this revision yet
-	      throw new _exception2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
-	    }
-	  }
-	}
-	
-	function template(templateSpec, env) {
-	  /* istanbul ignore next */
-	  if (!env) {
-	    throw new _exception2['default']('No environment passed to template');
-	  }
-	  if (!templateSpec || !templateSpec.main) {
-	    throw new _exception2['default']('Unknown template object: ' + (typeof templateSpec === 'undefined' ? 'undefined' : _typeof(templateSpec)));
-	  }
-	
-	  templateSpec.main.decorator = templateSpec.main_d;
-	
-	  // Note: Using env.VM references rather than local var references throughout this section to allow
-	  // for external users to override these as psuedo-supported APIs.
-	  env.VM.checkRevision(templateSpec.compiler);
-	
-	  function invokePartialWrapper(partial, context, options) {
-	    if (options.hash) {
-	      context = Utils.extend({}, context, options.hash);
-	      if (options.ids) {
-	        options.ids[0] = true;
-	      }
-	    }
-	
-	    partial = env.VM.resolvePartial.call(this, partial, context, options);
-	    var result = env.VM.invokePartial.call(this, partial, context, options);
-	
-	    if (result == null && env.compile) {
-	      options.partials[options.name] = env.compile(partial, templateSpec.compilerOptions, env);
-	      result = options.partials[options.name](context, options);
-	    }
-	    if (result != null) {
-	      if (options.indent) {
-	        var lines = result.split('\n');
-	        for (var i = 0, l = lines.length; i < l; i++) {
-	          if (!lines[i] && i + 1 === l) {
-	            break;
-	          }
-	
-	          lines[i] = options.indent + lines[i];
-	        }
-	        result = lines.join('\n');
-	      }
-	      return result;
-	    } else {
-	      throw new _exception2['default']('The partial ' + options.name + ' could not be compiled when running in runtime-only mode');
-	    }
-	  }
-	
-	  // Just add water
-	  var container = {
-	    strict: function strict(obj, name) {
-	      if (!(name in obj)) {
-	        throw new _exception2['default']('"' + name + '" not defined in ' + obj);
-	      }
-	      return obj[name];
-	    },
-	    lookup: function lookup(depths, name) {
-	      var len = depths.length;
-	      for (var i = 0; i < len; i++) {
-	        if (depths[i] && depths[i][name] != null) {
-	          return depths[i][name];
-	        }
-	      }
-	    },
-	    lambda: function lambda(current, context) {
-	      return typeof current === 'function' ? current.call(context) : current;
-	    },
-	
-	    escapeExpression: Utils.escapeExpression,
-	    invokePartial: invokePartialWrapper,
-	
-	    fn: function fn(i) {
-	      var ret = templateSpec[i];
-	      ret.decorator = templateSpec[i + '_d'];
-	      return ret;
-	    },
-	
-	    programs: [],
-	    program: function program(i, data, declaredBlockParams, blockParams, depths) {
-	      var programWrapper = this.programs[i],
-	          fn = this.fn(i);
-	      if (data || depths || blockParams || declaredBlockParams) {
-	        programWrapper = wrapProgram(this, i, fn, data, declaredBlockParams, blockParams, depths);
-	      } else if (!programWrapper) {
-	        programWrapper = this.programs[i] = wrapProgram(this, i, fn);
-	      }
-	      return programWrapper;
-	    },
-	
-	    data: function data(value, depth) {
-	      while (value && depth--) {
-	        value = value._parent;
-	      }
-	      return value;
-	    },
-	    merge: function merge(param, common) {
-	      var obj = param || common;
-	
-	      if (param && common && param !== common) {
-	        obj = Utils.extend({}, common, param);
-	      }
-	
-	      return obj;
-	    },
-	    // An empty object to use as replacement for null-contexts
-	    nullContext: Object.seal({}),
-	
-	    noop: env.VM.noop,
-	    compilerInfo: templateSpec.compiler
-	  };
-	
-	  function ret(context) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	    var data = options.data;
-	
-	    ret._setup(options);
-	    if (!options.partial && templateSpec.useData) {
-	      data = initData(context, data);
-	    }
-	    var depths = undefined,
-	        blockParams = templateSpec.useBlockParams ? [] : undefined;
-	    if (templateSpec.useDepths) {
-	      if (options.depths) {
-	        depths = context != options.depths[0] ? [context].concat(options.depths) : options.depths;
-	      } else {
-	        depths = [context];
-	      }
-	    }
-	
-	    function main(context /*, options*/) {
-	      return '' + templateSpec.main(container, context, container.helpers, container.partials, data, blockParams, depths);
-	    }
-	    main = executeDecorators(templateSpec.main, main, container, options.depths || [], data, blockParams);
-	    return main(context, options);
-	  }
-	  ret.isTop = true;
-	
-	  ret._setup = function (options) {
-	    if (!options.partial) {
-	      container.helpers = container.merge(options.helpers, env.helpers);
-	
-	      if (templateSpec.usePartial) {
-	        container.partials = container.merge(options.partials, env.partials);
-	      }
-	      if (templateSpec.usePartial || templateSpec.useDecorators) {
-	        container.decorators = container.merge(options.decorators, env.decorators);
-	      }
-	    } else {
-	      container.helpers = options.helpers;
-	      container.partials = options.partials;
-	      container.decorators = options.decorators;
-	    }
-	  };
-	
-	  ret._child = function (i, data, blockParams, depths) {
-	    if (templateSpec.useBlockParams && !blockParams) {
-	      throw new _exception2['default']('must pass block params');
-	    }
-	    if (templateSpec.useDepths && !depths) {
-	      throw new _exception2['default']('must pass parent depths');
-	    }
-	
-	    return wrapProgram(container, i, templateSpec[i], data, 0, blockParams, depths);
-	  };
-	  return ret;
-	}
-	
-	function wrapProgram(container, i, fn, data, declaredBlockParams, blockParams, depths) {
-	  function prog(context) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	    var currentDepths = depths;
-	    if (depths && context != depths[0] && !(context === container.nullContext && depths[0] === null)) {
-	      currentDepths = [context].concat(depths);
-	    }
-	
-	    return fn(container, context, container.helpers, container.partials, options.data || data, blockParams && [options.blockParams].concat(blockParams), currentDepths);
-	  }
-	
-	  prog = executeDecorators(fn, prog, container, depths, data, blockParams);
-	
-	  prog.program = i;
-	  prog.depth = depths ? depths.length : 0;
-	  prog.blockParams = declaredBlockParams || 0;
-	  return prog;
-	}
-	
-	function resolvePartial(partial, context, options) {
-	  if (!partial) {
-	    if (options.name === '@partial-block') {
-	      partial = options.data['partial-block'];
-	    } else {
-	      partial = options.partials[options.name];
-	    }
-	  } else if (!partial.call && !options.name) {
-	    // This is a dynamic partial that returned a string
-	    options.name = partial;
-	    partial = options.partials[partial];
-	  }
-	  return partial;
-	}
-	
-	function invokePartial(partial, context, options) {
-	  // Use the current closure context to save the partial-block if this partial
-	  var currentPartialBlock = options.data && options.data['partial-block'];
-	  options.partial = true;
-	  if (options.ids) {
-	    options.data.contextPath = options.ids[0] || options.data.contextPath;
-	  }
-	
-	  var partialBlock = undefined;
-	  if (options.fn && options.fn !== noop) {
-	    (function () {
-	      options.data = _base.createFrame(options.data);
-	      // Wrapper function to get access to currentPartialBlock from the closure
-	      var fn = options.fn;
-	      partialBlock = options.data['partial-block'] = function partialBlockWrapper(context) {
-	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	        // Restore the partial-block from the closure for the execution of the block
-	        // i.e. the part inside the block of the partial call.
-	        options.data = _base.createFrame(options.data);
-	        options.data['partial-block'] = currentPartialBlock;
-	        return fn(context, options);
-	      };
-	      if (fn.partials) {
-	        options.partials = Utils.extend({}, options.partials, fn.partials);
-	      }
-	    })();
-	  }
-	
-	  if (partial === undefined && partialBlock) {
-	    partial = partialBlock;
-	  }
-	
-	  if (partial === undefined) {
-	    throw new _exception2['default']('The partial ' + options.name + ' could not be found');
-	  } else if (partial instanceof Function) {
-	    return partial(context, options);
-	  }
-	}
-	
-	function noop() {
-	  return '';
-	}
-	
-	function initData(context, data) {
-	  if (!data || !('root' in data)) {
-	    data = data ? _base.createFrame(data) : {};
-	    data.root = context;
-	  }
-	  return data;
-	}
-	
-	function executeDecorators(fn, prog, container, depths, data, blockParams) {
-	  if (fn.decorator) {
-	    var props = {};
-	    prog = fn.decorator(prog, props, container, depths && depths[0], data, blockParams, depths);
-	    Utils.extend(prog, props);
-	  }
-	  return prog;
-	}
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	exports['default'] = function (Handlebars) {
-	  /* istanbul ignore next */
-	  var root = typeof global !== 'undefined' ? global : window,
-	      $Handlebars = root.Handlebars;
-	  /* istanbul ignore next */
-	  Handlebars.noConflict = function () {
-	    if (root.Handlebars === Handlebars) {
-	      root.Handlebars = $Handlebars;
-	    }
-	    return Handlebars;
-	  };
-	};
-	
-	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.SlideTimer = undefined;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _jquery = __webpack_require__(3);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _component = __webpack_require__(36);
-	
-	var _component2 = _interopRequireDefault(_component);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	window.$ = _jquery2.default;
-	
-	var SlideTimer = function (_Component) {
-	    _inherits(SlideTimer, _Component);
-	
-	    function SlideTimer(slider) {
-	        _classCallCheck(this, SlideTimer);
-	
-	        var _this = _possibleConstructorReturn(this, (SlideTimer.__proto__ || Object.getPrototypeOf(SlideTimer)).call(this));
-	
-	        _this.slider = slider;
-	        _this.interval;
-	        _this.timeout;
-	        _this.startTimer();
-	        _this.bindEvents();
-	        return _this;
-	    }
-	
-	    _createClass(SlideTimer, [{
-	        key: "bindEvents",
-	        value: function bindEvents() {
-	            this.slider.on('btnClick', this.clearAndResetTimer.bind(this)).on('touchStart', this.pauseTimer.bind(this)).on('touchEnd', this.resetTimer.bind(this));
-	            $(window).on('blur', this.pauseTimer.bind(this)).on('focus', this.startTimer.bind(this));
-	        }
-	    }, {
-	        key: "pauseTimer",
-	        value: function pauseTimer() {
-	            clearTimeout(this.timeout);
-	            clearInterval(this.interval);
-	        }
-	    }, {
-	        key: "startTimer",
-	        value: function startTimer() {
-	            this.interval = setInterval(this.slider.next.bind(this.slider), 2000);
-	        }
-	    }, {
-	        key: "resetTimer",
-	        value: function resetTimer() {
-	            this.timeout = setTimeout(this.startTimer.bind(this), 2000);
-	        }
-	    }, {
-	        key: "clearAndResetTimer",
-	        value: function clearAndResetTimer() {
-	            this.pauseTimer();
-	            this.resetTimer();
-	        }
-	    }]);
-	
-	    return SlideTimer;
-	}(_component2.default);
-	
-	;
-	
-	exports.SlideTimer = SlideTimer;
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.CategoryList = undefined;
-	
-	var _cachedAjax = __webpack_require__(9);
-	
-	var _productList = __webpack_require__(32);
-	
-	var _jquery = __webpack_require__(3);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	window.$ = _jquery2.default;
-	
-	var CategoryList = function () {
-	    var template;
-	    var productTotalCount;
-	
-	    function init() {
-	        template = __webpack_require__(34);
-	        _cachedAjax.CachedAjax.get('/categories').then(appendCategory);
-	    }
-	
-	    function appendCategory(res) {
-	        productTotalCount = res.reduce(function add(acc, value) {
-	            return acc + value.productCount;
-	        }, 0);
-	        $('.event_tab_lst li[data-category="0"]').data('product-count', productTotalCount);
-	        $('.event_lst_txt .pink').text(productTotalCount + '개');
-	        $('ul.event_tab_lst').append(template({ items: res }));
-	        _productList.ProductList.init();
-	    }
-	
-	    return {
-	        init: init
-	    };
-	}();
-	exports.CategoryList = CategoryList;
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.ProductList = undefined;
-	
-	var _cachedAjax = __webpack_require__(9);
-	
-	var _jquery = __webpack_require__(3);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	window.$ = _jquery2.default;
-	
-	var ProductList = function () {
-	    var productTotalCount = 0;
-	    var categoryId = 0;
-	    var pageNum = 0;
-	    var template;
-	
-	    function init() {
-	        bindEvents();
-	        template = __webpack_require__(33);
-	        buildProductList('html');
-	    }
-	
-	    function bindEvents() {
-	        $('ul.event_tab_lst').on('click', 'li.item', clickCategoryEvent);
-	        $(window).scroll(scrollUpdate);
-	    }
-	
-	    function clickCategoryEvent(e) {
-	        pageNum = 0;
-	        $('li.item a.active').removeClass('active');
-	        $(e.currentTarget).find('a').addClass('active');
-	        $('.event_lst_txt .pink').text($(e.currentTarget).data('product-count') + '개');
-	        categoryId = $(e.currentTarget).data('category');
-	        buildProductList('html');
-	    }
-	
-	    function buildProductList(type) {
-	        productTotalCount = parseInt($('.event_lst_txt .pink').text().replace('개', ''));
-	        var url = '/products?page=' + pageNum + '&categoryId=' + categoryId;
-	        _cachedAjax.CachedAjax.get(url).then(appendProduct.bind(this, type));
-	    }
-	
-	    function appendProduct(type, res) {
-	        var left = [];
-	        var right = [];
-	        for (var i = 0, l = res.length; i < l; i++) {
-	            if (i % 2) {
-	                right.push(res[i]);
-	            } else {
-	                left.push(res[i]);
-	            }
-	        }
-	        $('.lst_event_box.left_box')[type](template({ products: left }));
-	        $('.lst_event_box.right_box')[type](template({ products: right }));
-	        if (productTotalCount > (pageNum + 1) * 10) {
-	            $('.more .btn').removeClass('invisible');
-	        } else {
-	            $('.more .btn').addClass('invisible');
-	        }
-	    }
-	
-	    function scrollUpdate() {
-	        var maxHeight = $(document).height();
-	        var currentScroll = $(document).scrollTop() + $(window).height();
-	        if (maxHeight - currentScroll < 30) {
-	            pageNum++;
-	            if (productTotalCount > pageNum * 10) {
-	                buildProductList('append');
-	            }
-	        }
-	    }
-	
-	    return {
-	        init: init
-	    };
-	}();
-	
-	exports.ProductList = ProductList;
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	var Handlebars = __webpack_require__(11);
-	function __default(obj) {
-	  return obj && (obj.__esModule ? obj["default"] : obj);
-	}
-	module.exports = (Handlebars["default"] || Handlebars).template({ "1": function _(container, depth0, helpers, partials, data) {
-	    var helper,
-	        alias1 = depth0 != null ? depth0 : container.nullContext || {},
-	        alias2 = helpers.helperMissing,
-	        alias3 = "function",
-	        alias4 = container.escapeExpression;
-	
-	    return "<li class=\"item\">\n    <a class=\"item_book\" href=\"/product-detail/" + alias4((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "id", "hash": {}, "data": data }) : helper)) + "\">\n        <div class=\"item_preview\"> <img alt=\"" + alias4((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "name", "hash": {}, "data": data }) : helper)) + "\" class=\"img_thumb\" src=\"/files/" + alias4((helper = (helper = helpers.fileId || (depth0 != null ? depth0.fileId : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "fileId", "hash": {}, "data": data }) : helper)) + "\">\n            <span class=\"img_border\"></span> </div>\n        <div class=\"event_txt\">\n            <h4 class=\"event_txt_tit\">\n                <span>" + alias4((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "name", "hash": {}, "data": data }) : helper)) + "</span> <small class=\"sm\">" + alias4((helper = (helper = helpers.placeName || (depth0 != null ? depth0.placeName : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "placeName", "hash": {}, "data": data }) : helper)) + "</small> </h4>\n            <p class=\"event_txt_dsc\">" + alias4((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "description", "hash": {}, "data": data }) : helper)) + "\n            </p>\n        </div>\n    </a>\n</li>\n";
-	  }, "compiler": [7, ">= 4.0.0"], "main": function main(container, depth0, helpers, partials, data) {
-	    var stack1, helper, options;
-	
-	    stack1 = (helper = (helper = helpers.products || (depth0 != null ? depth0.products : depth0)) != null ? helper : helpers.helperMissing, options = { "name": "products", "hash": {}, "fn": container.program(1, data, 0), "inverse": container.noop, "data": data }, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, options) : helper);
-	    if (!helpers.products) {
-	      stack1 = helpers.blockHelperMissing.call(depth0, stack1, options);
-	    }
-	    if (stack1 != null) {
-	      return stack1;
-	    } else {
-	      return '';
-	    }
-	  }, "useData": true });
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	var Handlebars = __webpack_require__(11);
-	function __default(obj) {
-	    return obj && (obj.__esModule ? obj["default"] : obj);
-	}
-	module.exports = (Handlebars["default"] || Handlebars).template({ "1": function _(container, depth0, helpers, partials, data) {
-	        var stack1,
-	            helper,
-	            alias1 = depth0 != null ? depth0 : container.nullContext || {},
-	            alias2 = helpers.helperMissing,
-	            alias3 = "function",
-	            alias4 = container.escapeExpression;
-	
-	        return "<li class=\"item\" data-category=\"" + alias4((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "id", "hash": {}, "data": data }) : helper)) + "\" data-product-count=\"" + alias4((helper = (helper = helpers.productCount || (depth0 != null ? depth0.productCount : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "productCount", "hash": {}, "data": data }) : helper)) + "\">\n    <a class=\"anchor " + ((stack1 = helpers["if"].call(alias1, data && data.last, { "name": "if", "hash": {}, "fn": container.program(2, data, 0), "inverse": container.noop, "data": data })) != null ? stack1 : "") + "\"> <span>" + alias4((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "name", "hash": {}, "data": data }) : helper)) + "</span> </a>\n</li>\n";
-	    }, "2": function _(container, depth0, helpers, partials, data) {
-	        return "last";
-	    }, "compiler": [7, ">= 4.0.0"], "main": function main(container, depth0, helpers, partials, data) {
-	        var stack1, helper, options;
-	
-	        stack1 = (helper = (helper = helpers.items || (depth0 != null ? depth0.items : depth0)) != null ? helper : helpers.helperMissing, options = { "name": "items", "hash": {}, "fn": container.program(1, data, 0), "inverse": container.noop, "data": data }, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, options) : helper);
-	        if (!helpers.items) {
-	            stack1 = helpers.blockHelperMissing.call(depth0, stack1, options);
-	        }
-	        if (stack1 != null) {
-	            return stack1;
-	        } else {
-	            return '';
-	        }
-	    }, "useData": true });
-
-/***/ }),
-/* 35 */,
-/* 36 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {'use strict';
@@ -12087,7 +10440,1653 @@
 		);
 	});
 	//# sourceMappingURL=component.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
+
+/***/ }),
+/* 7 */,
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Flicker = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _slider = __webpack_require__(5);
+	
+	var _jquery = __webpack_require__(2);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _component = __webpack_require__(6);
+	
+	var _component2 = _interopRequireDefault(_component);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	window.$ = _jquery2.default;
+	
+	var Flicker = function (_Component) {
+	    _inherits(Flicker, _Component);
+	
+	    function Flicker(slider) {
+	        _classCallCheck(this, Flicker);
+	
+	        var _this = _possibleConstructorReturn(this, (Flicker.__proto__ || Object.getPrototypeOf(Flicker)).call(this));
+	
+	        _this.slider = slider;
+	        _this.isPureSlider = slider.constructor === _slider.Slider;
+	        _this.moveGapX;
+	        _this.touchStartPointX;
+	        _this.bindEvents();
+	        return _this;
+	    }
+	
+	    _createClass(Flicker, [{
+	        key: "bindEvents",
+	        value: function bindEvents() {
+	            $(this.slider.rootDOM).on('touchstart', this.slider.toBeMovedDOM, this.viewerTouchStart.bind(this)).on('touchmove', this.slider.toBeMovedDOM, this.viewerTouchMove.bind(this)).on('touchend', this.slider.toBeMovedDOM, this.viewerTouchEnd.bind(this));
+	        }
+	    }, {
+	        key: "viewerTouchStart",
+	        value: function viewerTouchStart(e) {
+	            if (this.isPureSlider) {
+	                this.slider.touchStartTrigger();
+	            }
+	            $(this.slider.SUB_LAYER).addClass('touch');
+	            var event = e.originalEvent;
+	            this.moveGapX = 0;
+	            this.touchStartPointX = event.changedTouches[0].screenX;
+	            e.preventDefault();
+	        }
+	    }, {
+	        key: "viewerTouchMove",
+	        value: function viewerTouchMove(e) {
+	            var event = e.originalEvent;
+	            this.moveGapX = this.touchStartPointX - event.changedTouches[0].screenX;
+	            $(this.slider.toBeMovedDOM).css('transform', 'translateX(' + -this.moveGapX + 'px)');
+	            e.preventDefault();
+	        }
+	    }, {
+	        key: "viewerTouchEnd",
+	        value: function viewerTouchEnd(e) {
+	            if (this.isPureSlider) {
+	                this.slider.touchEndTrigger();
+	            }
+	            if (this.moveGapX < -50) {
+	                $(this.slider.BUTTON_WRAPPER).addClass('invisible');
+	                this.slider.prev();
+	            } else if (this.moveGapX > 50) {
+	                $(this.slider.BUTTON_WRAPPER).addClass('invisible');
+	                this.slider.next();
+	            } else if (this.moveGapX === 0) {
+	                $(this.slider.BUTTON_WRAPPER).removeClass('invisible');
+	            }
+	            $(this.slider.toBeMovedDOM).css('transform', 'translateX(0px)');
+	            e.preventDefault();
+	        }
+	    }]);
+	
+	    return Flicker;
+	}(_component2.default);
+	
+	exports.Flicker = Flicker;
+
+/***/ }),
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.CachedAjax = undefined;
+	
+	var _jquery = __webpack_require__(2);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	window.$ = _jquery2.default;
+	
+	var CachedAjax = function () {
+	    var cachedData = {};
+	    var returnObj;
+	
+	    function get(url) {
+	        if (cachedData[url]) {
+	            returnObj = Promise.resolve(cachedData[url]);
+	        } else {
+	            returnObj = $.ajax(url);
+	            returnObj.then(function (res) {
+	                cachedData[url] = res;
+	            });
+	        }
+	        return returnObj;
+	    }
+	
+	    return {
+	        get: get
+	    };
+	}();
+	
+	exports.CachedAjax = CachedAjax;
+
+/***/ }),
+/* 11 */,
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	// Create a simple path alias to allow browserify to resolve
+	// the runtime on a supported path.
+	module.exports = __webpack_require__(13)['default'];
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	// istanbul ignore next
+	
+	function _interopRequireWildcard(obj) {
+	  if (obj && obj.__esModule) {
+	    return obj;
+	  } else {
+	    var newObj = {};if (obj != null) {
+	      for (var key in obj) {
+	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+	      }
+	    }newObj['default'] = obj;return newObj;
+	  }
+	}
+	
+	var _handlebarsBase = __webpack_require__(14);
+	
+	var base = _interopRequireWildcard(_handlebarsBase);
+	
+	// Each of these augment the Handlebars object. No need to setup here.
+	// (This is done to easily share code between commonjs and browse envs)
+	
+	var _handlebarsSafeString = __webpack_require__(28);
+	
+	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
+	
+	var _handlebarsException = __webpack_require__(16);
+	
+	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
+	
+	var _handlebarsUtils = __webpack_require__(15);
+	
+	var Utils = _interopRequireWildcard(_handlebarsUtils);
+	
+	var _handlebarsRuntime = __webpack_require__(29);
+	
+	var runtime = _interopRequireWildcard(_handlebarsRuntime);
+	
+	var _handlebarsNoConflict = __webpack_require__(30);
+	
+	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
+	
+	// For compatibility and usage outside of module systems, make the Handlebars object a namespace
+	function create() {
+	  var hb = new base.HandlebarsEnvironment();
+	
+	  Utils.extend(hb, base);
+	  hb.SafeString = _handlebarsSafeString2['default'];
+	  hb.Exception = _handlebarsException2['default'];
+	  hb.Utils = Utils;
+	  hb.escapeExpression = Utils.escapeExpression;
+	
+	  hb.VM = runtime;
+	  hb.template = function (spec) {
+	    return runtime.template(spec, hb);
+	  };
+	
+	  return hb;
+	}
+	
+	var inst = create();
+	inst.create = create;
+	
+	_handlebarsNoConflict2['default'](inst);
+	
+	inst['default'] = inst;
+	
+	exports['default'] = inst;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.HandlebarsEnvironment = HandlebarsEnvironment;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _utils = __webpack_require__(15);
+	
+	var _exception = __webpack_require__(16);
+	
+	var _exception2 = _interopRequireDefault(_exception);
+	
+	var _helpers = __webpack_require__(17);
+	
+	var _decorators = __webpack_require__(25);
+	
+	var _logger = __webpack_require__(27);
+	
+	var _logger2 = _interopRequireDefault(_logger);
+	
+	var VERSION = '4.0.10';
+	exports.VERSION = VERSION;
+	var COMPILER_REVISION = 7;
+	
+	exports.COMPILER_REVISION = COMPILER_REVISION;
+	var REVISION_CHANGES = {
+	  1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
+	  2: '== 1.0.0-rc.3',
+	  3: '== 1.0.0-rc.4',
+	  4: '== 1.x.x',
+	  5: '== 2.0.0-alpha.x',
+	  6: '>= 2.0.0-beta.1',
+	  7: '>= 4.0.0'
+	};
+	
+	exports.REVISION_CHANGES = REVISION_CHANGES;
+	var objectType = '[object Object]';
+	
+	function HandlebarsEnvironment(helpers, partials, decorators) {
+	  this.helpers = helpers || {};
+	  this.partials = partials || {};
+	  this.decorators = decorators || {};
+	
+	  _helpers.registerDefaultHelpers(this);
+	  _decorators.registerDefaultDecorators(this);
+	}
+	
+	HandlebarsEnvironment.prototype = {
+	  constructor: HandlebarsEnvironment,
+	
+	  logger: _logger2['default'],
+	  log: _logger2['default'].log,
+	
+	  registerHelper: function registerHelper(name, fn) {
+	    if (_utils.toString.call(name) === objectType) {
+	      if (fn) {
+	        throw new _exception2['default']('Arg not supported with multiple helpers');
+	      }
+	      _utils.extend(this.helpers, name);
+	    } else {
+	      this.helpers[name] = fn;
+	    }
+	  },
+	  unregisterHelper: function unregisterHelper(name) {
+	    delete this.helpers[name];
+	  },
+	
+	  registerPartial: function registerPartial(name, partial) {
+	    if (_utils.toString.call(name) === objectType) {
+	      _utils.extend(this.partials, name);
+	    } else {
+	      if (typeof partial === 'undefined') {
+	        throw new _exception2['default']('Attempting to register a partial called "' + name + '" as undefined');
+	      }
+	      this.partials[name] = partial;
+	    }
+	  },
+	  unregisterPartial: function unregisterPartial(name) {
+	    delete this.partials[name];
+	  },
+	
+	  registerDecorator: function registerDecorator(name, fn) {
+	    if (_utils.toString.call(name) === objectType) {
+	      if (fn) {
+	        throw new _exception2['default']('Arg not supported with multiple decorators');
+	      }
+	      _utils.extend(this.decorators, name);
+	    } else {
+	      this.decorators[name] = fn;
+	    }
+	  },
+	  unregisterDecorator: function unregisterDecorator(name) {
+	    delete this.decorators[name];
+	  }
+	};
+	
+	var log = _logger2['default'].log;
+	
+	exports.log = log;
+	exports.createFrame = _utils.createFrame;
+	exports.logger = _logger2['default'];
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	exports.__esModule = true;
+	exports.extend = extend;
+	exports.indexOf = indexOf;
+	exports.escapeExpression = escapeExpression;
+	exports.isEmpty = isEmpty;
+	exports.createFrame = createFrame;
+	exports.blockParams = blockParams;
+	exports.appendContextPath = appendContextPath;
+	var escape = {
+	  '&': '&amp;',
+	  '<': '&lt;',
+	  '>': '&gt;',
+	  '"': '&quot;',
+	  "'": '&#x27;',
+	  '`': '&#x60;',
+	  '=': '&#x3D;'
+	};
+	
+	var badChars = /[&<>"'`=]/g,
+	    possible = /[&<>"'`=]/;
+	
+	function escapeChar(chr) {
+	  return escape[chr];
+	}
+	
+	function extend(obj /* , ...source */) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    for (var key in arguments[i]) {
+	      if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
+	        obj[key] = arguments[i][key];
+	      }
+	    }
+	  }
+	
+	  return obj;
+	}
+	
+	var toString = Object.prototype.toString;
+	
+	exports.toString = toString;
+	// Sourced from lodash
+	// https://github.com/bestiejs/lodash/blob/master/LICENSE.txt
+	/* eslint-disable func-style */
+	var isFunction = function isFunction(value) {
+	  return typeof value === 'function';
+	};
+	// fallback for older versions of Chrome and Safari
+	/* istanbul ignore next */
+	if (isFunction(/x/)) {
+	  exports.isFunction = isFunction = function isFunction(value) {
+	    return typeof value === 'function' && toString.call(value) === '[object Function]';
+	  };
+	}
+	exports.isFunction = isFunction;
+	
+	/* eslint-enable func-style */
+	
+	/* istanbul ignore next */
+	var isArray = Array.isArray || function (value) {
+	  return value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? toString.call(value) === '[object Array]' : false;
+	};
+	
+	exports.isArray = isArray;
+	// Older IE versions do not directly support indexOf so we must implement our own, sadly.
+	
+	function indexOf(array, value) {
+	  for (var i = 0, len = array.length; i < len; i++) {
+	    if (array[i] === value) {
+	      return i;
+	    }
+	  }
+	  return -1;
+	}
+	
+	function escapeExpression(string) {
+	  if (typeof string !== 'string') {
+	    // don't escape SafeStrings, since they're already safe
+	    if (string && string.toHTML) {
+	      return string.toHTML();
+	    } else if (string == null) {
+	      return '';
+	    } else if (!string) {
+	      return string + '';
+	    }
+	
+	    // Force a string conversion as this will be done by the append regardless and
+	    // the regex test will do this transparently behind the scenes, causing issues if
+	    // an object's to string has escaped characters in it.
+	    string = '' + string;
+	  }
+	
+	  if (!possible.test(string)) {
+	    return string;
+	  }
+	  return string.replace(badChars, escapeChar);
+	}
+	
+	function isEmpty(value) {
+	  if (!value && value !== 0) {
+	    return true;
+	  } else if (isArray(value) && value.length === 0) {
+	    return true;
+	  } else {
+	    return false;
+	  }
+	}
+	
+	function createFrame(object) {
+	  var frame = extend({}, object);
+	  frame._parent = object;
+	  return frame;
+	}
+	
+	function blockParams(params, ids) {
+	  params.path = ids;
+	  return params;
+	}
+	
+	function appendContextPath(contextPath, id) {
+	  return (contextPath ? contextPath + '.' : '') + id;
+	}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
+	
+	function Exception(message, node) {
+	  var loc = node && node.loc,
+	      line = undefined,
+	      column = undefined;
+	  if (loc) {
+	    line = loc.start.line;
+	    column = loc.start.column;
+	
+	    message += ' - ' + line + ':' + column;
+	  }
+	
+	  var tmp = Error.prototype.constructor.call(this, message);
+	
+	  // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
+	  for (var idx = 0; idx < errorProps.length; idx++) {
+	    this[errorProps[idx]] = tmp[errorProps[idx]];
+	  }
+	
+	  /* istanbul ignore else */
+	  if (Error.captureStackTrace) {
+	    Error.captureStackTrace(this, Exception);
+	  }
+	
+	  try {
+	    if (loc) {
+	      this.lineNumber = line;
+	
+	      // Work around issue under safari where we can't directly set the column value
+	      /* istanbul ignore next */
+	      if (Object.defineProperty) {
+	        Object.defineProperty(this, 'column', {
+	          value: column,
+	          enumerable: true
+	        });
+	      } else {
+	        this.column = column;
+	      }
+	    }
+	  } catch (nop) {
+	    /* Ignore if the browser is very particular */
+	  }
+	}
+	
+	Exception.prototype = new Error();
+	
+	exports['default'] = Exception;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.registerDefaultHelpers = registerDefaultHelpers;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _helpersBlockHelperMissing = __webpack_require__(18);
+	
+	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
+	
+	var _helpersEach = __webpack_require__(19);
+	
+	var _helpersEach2 = _interopRequireDefault(_helpersEach);
+	
+	var _helpersHelperMissing = __webpack_require__(20);
+	
+	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
+	
+	var _helpersIf = __webpack_require__(21);
+	
+	var _helpersIf2 = _interopRequireDefault(_helpersIf);
+	
+	var _helpersLog = __webpack_require__(22);
+	
+	var _helpersLog2 = _interopRequireDefault(_helpersLog);
+	
+	var _helpersLookup = __webpack_require__(23);
+	
+	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
+	
+	var _helpersWith = __webpack_require__(24);
+	
+	var _helpersWith2 = _interopRequireDefault(_helpersWith);
+	
+	function registerDefaultHelpers(instance) {
+	  _helpersBlockHelperMissing2['default'](instance);
+	  _helpersEach2['default'](instance);
+	  _helpersHelperMissing2['default'](instance);
+	  _helpersIf2['default'](instance);
+	  _helpersLog2['default'](instance);
+	  _helpersLookup2['default'](instance);
+	  _helpersWith2['default'](instance);
+	}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _utils = __webpack_require__(15);
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('blockHelperMissing', function (context, options) {
+	    var inverse = options.inverse,
+	        fn = options.fn;
+	
+	    if (context === true) {
+	      return fn(this);
+	    } else if (context === false || context == null) {
+	      return inverse(this);
+	    } else if (_utils.isArray(context)) {
+	      if (context.length > 0) {
+	        if (options.ids) {
+	          options.ids = [options.name];
+	        }
+	
+	        return instance.helpers.each(context, options);
+	      } else {
+	        return inverse(this);
+	      }
+	    } else {
+	      if (options.data && options.ids) {
+	        var data = _utils.createFrame(options.data);
+	        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.name);
+	        options = { data: data };
+	      }
+	
+	      return fn(context, options);
+	    }
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	exports.__esModule = true;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _utils = __webpack_require__(15);
+	
+	var _exception = __webpack_require__(16);
+	
+	var _exception2 = _interopRequireDefault(_exception);
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('each', function (context, options) {
+	    if (!options) {
+	      throw new _exception2['default']('Must pass iterator to #each');
+	    }
+	
+	    var fn = options.fn,
+	        inverse = options.inverse,
+	        i = 0,
+	        ret = '',
+	        data = undefined,
+	        contextPath = undefined;
+	
+	    if (options.data && options.ids) {
+	      contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';
+	    }
+	
+	    if (_utils.isFunction(context)) {
+	      context = context.call(this);
+	    }
+	
+	    if (options.data) {
+	      data = _utils.createFrame(options.data);
+	    }
+	
+	    function execIteration(field, index, last) {
+	      if (data) {
+	        data.key = field;
+	        data.index = index;
+	        data.first = index === 0;
+	        data.last = !!last;
+	
+	        if (contextPath) {
+	          data.contextPath = contextPath + field;
+	        }
+	      }
+	
+	      ret = ret + fn(context[field], {
+	        data: data,
+	        blockParams: _utils.blockParams([context[field], field], [contextPath + field, null])
+	      });
+	    }
+	
+	    if (context && (typeof context === 'undefined' ? 'undefined' : _typeof(context)) === 'object') {
+	      if (_utils.isArray(context)) {
+	        for (var j = context.length; i < j; i++) {
+	          if (i in context) {
+	            execIteration(i, i, i === context.length - 1);
+	          }
+	        }
+	      } else {
+	        var priorKey = undefined;
+	
+	        for (var key in context) {
+	          if (context.hasOwnProperty(key)) {
+	            // We're running the iterations one step out of sync so we can detect
+	            // the last iteration without have to scan the object twice and create
+	            // an itermediate keys array.
+	            if (priorKey !== undefined) {
+	              execIteration(priorKey, i - 1);
+	            }
+	            priorKey = key;
+	            i++;
+	          }
+	        }
+	        if (priorKey !== undefined) {
+	          execIteration(priorKey, i - 1, true);
+	        }
+	      }
+	    }
+	
+	    if (i === 0) {
+	      ret = inverse(this);
+	    }
+	
+	    return ret;
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _exception = __webpack_require__(16);
+	
+	var _exception2 = _interopRequireDefault(_exception);
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('helperMissing', function () /* [args, ]options */{
+	    if (arguments.length === 1) {
+	      // A missing field in a {{foo}} construct.
+	      return undefined;
+	    } else {
+	      // Someone is actually trying to call something, blow up.
+	      throw new _exception2['default']('Missing helper: "' + arguments[arguments.length - 1].name + '"');
+	    }
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _utils = __webpack_require__(15);
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('if', function (conditional, options) {
+	    if (_utils.isFunction(conditional)) {
+	      conditional = conditional.call(this);
+	    }
+	
+	    // Default behavior is to render the positive path if the value is truthy and not empty.
+	    // The `includeZero` option may be set to treat the condtional as purely not empty based on the
+	    // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.
+	    if (!options.hash.includeZero && !conditional || _utils.isEmpty(conditional)) {
+	      return options.inverse(this);
+	    } else {
+	      return options.fn(this);
+	    }
+	  });
+	
+	  instance.registerHelper('unless', function (conditional, options) {
+	    return instance.helpers['if'].call(this, conditional, { fn: options.inverse, inverse: options.fn, hash: options.hash });
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('log', function () /* message, options */{
+	    var args = [undefined],
+	        options = arguments[arguments.length - 1];
+	    for (var i = 0; i < arguments.length - 1; i++) {
+	      args.push(arguments[i]);
+	    }
+	
+	    var level = 1;
+	    if (options.hash.level != null) {
+	      level = options.hash.level;
+	    } else if (options.data && options.data.level != null) {
+	      level = options.data.level;
+	    }
+	    args[0] = level;
+	
+	    instance.log.apply(instance, args);
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('lookup', function (obj, field) {
+	    return obj && obj[field];
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _utils = __webpack_require__(15);
+	
+	exports['default'] = function (instance) {
+	  instance.registerHelper('with', function (context, options) {
+	    if (_utils.isFunction(context)) {
+	      context = context.call(this);
+	    }
+	
+	    var fn = options.fn;
+	
+	    if (!_utils.isEmpty(context)) {
+	      var data = options.data;
+	      if (options.data && options.ids) {
+	        data = _utils.createFrame(options.data);
+	        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]);
+	      }
+	
+	      return fn(context, {
+	        data: data,
+	        blockParams: _utils.blockParams([context], [data && data.contextPath])
+	      });
+	    } else {
+	      return options.inverse(this);
+	    }
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.registerDefaultDecorators = registerDefaultDecorators;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _decoratorsInline = __webpack_require__(26);
+	
+	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
+	
+	function registerDefaultDecorators(instance) {
+	  _decoratorsInline2['default'](instance);
+	}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _utils = __webpack_require__(15);
+	
+	exports['default'] = function (instance) {
+	  instance.registerDecorator('inline', function (fn, props, container, options) {
+	    var ret = fn;
+	    if (!props.partials) {
+	      props.partials = {};
+	      ret = function ret(context, options) {
+	        // Create a new partials stack frame prior to exec.
+	        var original = container.partials;
+	        container.partials = _utils.extend({}, original, props.partials);
+	        var ret = fn(context, options);
+	        container.partials = original;
+	        return ret;
+	      };
+	    }
+	
+	    props.partials[options.args[0]] = options.fn;
+	
+	    return ret;
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _utils = __webpack_require__(15);
+	
+	var logger = {
+	  methodMap: ['debug', 'info', 'warn', 'error'],
+	  level: 'info',
+	
+	  // Maps a given level value to the `methodMap` indexes above.
+	  lookupLevel: function lookupLevel(level) {
+	    if (typeof level === 'string') {
+	      var levelMap = _utils.indexOf(logger.methodMap, level.toLowerCase());
+	      if (levelMap >= 0) {
+	        level = levelMap;
+	      } else {
+	        level = parseInt(level, 10);
+	      }
+	    }
+	
+	    return level;
+	  },
+	
+	  // Can be overridden in the host environment
+	  log: function log(level) {
+	    level = logger.lookupLevel(level);
+	
+	    if (typeof console !== 'undefined' && logger.lookupLevel(logger.level) <= level) {
+	      var method = logger.methodMap[level];
+	      if (!console[method]) {
+	        // eslint-disable-line no-console
+	        method = 'log';
+	      }
+	
+	      for (var _len = arguments.length, message = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        message[_key - 1] = arguments[_key];
+	      }
+	
+	      console[method].apply(console, message); // eslint-disable-line no-console
+	    }
+	  }
+	};
+	
+	exports['default'] = logger;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+	// Build out our basic SafeString type
+	'use strict';
+	
+	exports.__esModule = true;
+	function SafeString(string) {
+	  this.string = string;
+	}
+	
+	SafeString.prototype.toString = SafeString.prototype.toHTML = function () {
+	  return '' + this.string;
+	};
+	
+	exports['default'] = SafeString;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	exports.__esModule = true;
+	exports.checkRevision = checkRevision;
+	exports.template = template;
+	exports.wrapProgram = wrapProgram;
+	exports.resolvePartial = resolvePartial;
+	exports.invokePartial = invokePartial;
+	exports.noop = noop;
+	// istanbul ignore next
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	// istanbul ignore next
+	
+	function _interopRequireWildcard(obj) {
+	  if (obj && obj.__esModule) {
+	    return obj;
+	  } else {
+	    var newObj = {};if (obj != null) {
+	      for (var key in obj) {
+	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+	      }
+	    }newObj['default'] = obj;return newObj;
+	  }
+	}
+	
+	var _utils = __webpack_require__(15);
+	
+	var Utils = _interopRequireWildcard(_utils);
+	
+	var _exception = __webpack_require__(16);
+	
+	var _exception2 = _interopRequireDefault(_exception);
+	
+	var _base = __webpack_require__(14);
+	
+	function checkRevision(compilerInfo) {
+	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
+	      currentRevision = _base.COMPILER_REVISION;
+	
+	  if (compilerRevision !== currentRevision) {
+	    if (compilerRevision < currentRevision) {
+	      var runtimeVersions = _base.REVISION_CHANGES[currentRevision],
+	          compilerVersions = _base.REVISION_CHANGES[compilerRevision];
+	      throw new _exception2['default']('Template was precompiled with an older version of Handlebars than the current runtime. ' + 'Please update your precompiler to a newer version (' + runtimeVersions + ') or downgrade your runtime to an older version (' + compilerVersions + ').');
+	    } else {
+	      // Use the embedded version info since the runtime doesn't know about this revision yet
+	      throw new _exception2['default']('Template was precompiled with a newer version of Handlebars than the current runtime. ' + 'Please update your runtime to a newer version (' + compilerInfo[1] + ').');
+	    }
+	  }
+	}
+	
+	function template(templateSpec, env) {
+	  /* istanbul ignore next */
+	  if (!env) {
+	    throw new _exception2['default']('No environment passed to template');
+	  }
+	  if (!templateSpec || !templateSpec.main) {
+	    throw new _exception2['default']('Unknown template object: ' + (typeof templateSpec === 'undefined' ? 'undefined' : _typeof(templateSpec)));
+	  }
+	
+	  templateSpec.main.decorator = templateSpec.main_d;
+	
+	  // Note: Using env.VM references rather than local var references throughout this section to allow
+	  // for external users to override these as psuedo-supported APIs.
+	  env.VM.checkRevision(templateSpec.compiler);
+	
+	  function invokePartialWrapper(partial, context, options) {
+	    if (options.hash) {
+	      context = Utils.extend({}, context, options.hash);
+	      if (options.ids) {
+	        options.ids[0] = true;
+	      }
+	    }
+	
+	    partial = env.VM.resolvePartial.call(this, partial, context, options);
+	    var result = env.VM.invokePartial.call(this, partial, context, options);
+	
+	    if (result == null && env.compile) {
+	      options.partials[options.name] = env.compile(partial, templateSpec.compilerOptions, env);
+	      result = options.partials[options.name](context, options);
+	    }
+	    if (result != null) {
+	      if (options.indent) {
+	        var lines = result.split('\n');
+	        for (var i = 0, l = lines.length; i < l; i++) {
+	          if (!lines[i] && i + 1 === l) {
+	            break;
+	          }
+	
+	          lines[i] = options.indent + lines[i];
+	        }
+	        result = lines.join('\n');
+	      }
+	      return result;
+	    } else {
+	      throw new _exception2['default']('The partial ' + options.name + ' could not be compiled when running in runtime-only mode');
+	    }
+	  }
+	
+	  // Just add water
+	  var container = {
+	    strict: function strict(obj, name) {
+	      if (!(name in obj)) {
+	        throw new _exception2['default']('"' + name + '" not defined in ' + obj);
+	      }
+	      return obj[name];
+	    },
+	    lookup: function lookup(depths, name) {
+	      var len = depths.length;
+	      for (var i = 0; i < len; i++) {
+	        if (depths[i] && depths[i][name] != null) {
+	          return depths[i][name];
+	        }
+	      }
+	    },
+	    lambda: function lambda(current, context) {
+	      return typeof current === 'function' ? current.call(context) : current;
+	    },
+	
+	    escapeExpression: Utils.escapeExpression,
+	    invokePartial: invokePartialWrapper,
+	
+	    fn: function fn(i) {
+	      var ret = templateSpec[i];
+	      ret.decorator = templateSpec[i + '_d'];
+	      return ret;
+	    },
+	
+	    programs: [],
+	    program: function program(i, data, declaredBlockParams, blockParams, depths) {
+	      var programWrapper = this.programs[i],
+	          fn = this.fn(i);
+	      if (data || depths || blockParams || declaredBlockParams) {
+	        programWrapper = wrapProgram(this, i, fn, data, declaredBlockParams, blockParams, depths);
+	      } else if (!programWrapper) {
+	        programWrapper = this.programs[i] = wrapProgram(this, i, fn);
+	      }
+	      return programWrapper;
+	    },
+	
+	    data: function data(value, depth) {
+	      while (value && depth--) {
+	        value = value._parent;
+	      }
+	      return value;
+	    },
+	    merge: function merge(param, common) {
+	      var obj = param || common;
+	
+	      if (param && common && param !== common) {
+	        obj = Utils.extend({}, common, param);
+	      }
+	
+	      return obj;
+	    },
+	    // An empty object to use as replacement for null-contexts
+	    nullContext: Object.seal({}),
+	
+	    noop: env.VM.noop,
+	    compilerInfo: templateSpec.compiler
+	  };
+	
+	  function ret(context) {
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    var data = options.data;
+	
+	    ret._setup(options);
+	    if (!options.partial && templateSpec.useData) {
+	      data = initData(context, data);
+	    }
+	    var depths = undefined,
+	        blockParams = templateSpec.useBlockParams ? [] : undefined;
+	    if (templateSpec.useDepths) {
+	      if (options.depths) {
+	        depths = context != options.depths[0] ? [context].concat(options.depths) : options.depths;
+	      } else {
+	        depths = [context];
+	      }
+	    }
+	
+	    function main(context /*, options*/) {
+	      return '' + templateSpec.main(container, context, container.helpers, container.partials, data, blockParams, depths);
+	    }
+	    main = executeDecorators(templateSpec.main, main, container, options.depths || [], data, blockParams);
+	    return main(context, options);
+	  }
+	  ret.isTop = true;
+	
+	  ret._setup = function (options) {
+	    if (!options.partial) {
+	      container.helpers = container.merge(options.helpers, env.helpers);
+	
+	      if (templateSpec.usePartial) {
+	        container.partials = container.merge(options.partials, env.partials);
+	      }
+	      if (templateSpec.usePartial || templateSpec.useDecorators) {
+	        container.decorators = container.merge(options.decorators, env.decorators);
+	      }
+	    } else {
+	      container.helpers = options.helpers;
+	      container.partials = options.partials;
+	      container.decorators = options.decorators;
+	    }
+	  };
+	
+	  ret._child = function (i, data, blockParams, depths) {
+	    if (templateSpec.useBlockParams && !blockParams) {
+	      throw new _exception2['default']('must pass block params');
+	    }
+	    if (templateSpec.useDepths && !depths) {
+	      throw new _exception2['default']('must pass parent depths');
+	    }
+	
+	    return wrapProgram(container, i, templateSpec[i], data, 0, blockParams, depths);
+	  };
+	  return ret;
+	}
+	
+	function wrapProgram(container, i, fn, data, declaredBlockParams, blockParams, depths) {
+	  function prog(context) {
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    var currentDepths = depths;
+	    if (depths && context != depths[0] && !(context === container.nullContext && depths[0] === null)) {
+	      currentDepths = [context].concat(depths);
+	    }
+	
+	    return fn(container, context, container.helpers, container.partials, options.data || data, blockParams && [options.blockParams].concat(blockParams), currentDepths);
+	  }
+	
+	  prog = executeDecorators(fn, prog, container, depths, data, blockParams);
+	
+	  prog.program = i;
+	  prog.depth = depths ? depths.length : 0;
+	  prog.blockParams = declaredBlockParams || 0;
+	  return prog;
+	}
+	
+	function resolvePartial(partial, context, options) {
+	  if (!partial) {
+	    if (options.name === '@partial-block') {
+	      partial = options.data['partial-block'];
+	    } else {
+	      partial = options.partials[options.name];
+	    }
+	  } else if (!partial.call && !options.name) {
+	    // This is a dynamic partial that returned a string
+	    options.name = partial;
+	    partial = options.partials[partial];
+	  }
+	  return partial;
+	}
+	
+	function invokePartial(partial, context, options) {
+	  // Use the current closure context to save the partial-block if this partial
+	  var currentPartialBlock = options.data && options.data['partial-block'];
+	  options.partial = true;
+	  if (options.ids) {
+	    options.data.contextPath = options.ids[0] || options.data.contextPath;
+	  }
+	
+	  var partialBlock = undefined;
+	  if (options.fn && options.fn !== noop) {
+	    (function () {
+	      options.data = _base.createFrame(options.data);
+	      // Wrapper function to get access to currentPartialBlock from the closure
+	      var fn = options.fn;
+	      partialBlock = options.data['partial-block'] = function partialBlockWrapper(context) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	        // Restore the partial-block from the closure for the execution of the block
+	        // i.e. the part inside the block of the partial call.
+	        options.data = _base.createFrame(options.data);
+	        options.data['partial-block'] = currentPartialBlock;
+	        return fn(context, options);
+	      };
+	      if (fn.partials) {
+	        options.partials = Utils.extend({}, options.partials, fn.partials);
+	      }
+	    })();
+	  }
+	
+	  if (partial === undefined && partialBlock) {
+	    partial = partialBlock;
+	  }
+	
+	  if (partial === undefined) {
+	    throw new _exception2['default']('The partial ' + options.name + ' could not be found');
+	  } else if (partial instanceof Function) {
+	    return partial(context, options);
+	  }
+	}
+	
+	function noop() {
+	  return '';
+	}
+	
+	function initData(context, data) {
+	  if (!data || !('root' in data)) {
+	    data = data ? _base.createFrame(data) : {};
+	    data.root = context;
+	  }
+	  return data;
+	}
+	
+	function executeDecorators(fn, prog, container, depths, data, blockParams) {
+	  if (fn.decorator) {
+	    var props = {};
+	    prog = fn.decorator(prog, props, container, depths && depths[0], data, blockParams, depths);
+	    Utils.extend(prog, props);
+	  }
+	  return prog;
+	}
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	exports['default'] = function (Handlebars) {
+	  /* istanbul ignore next */
+	  var root = typeof global !== 'undefined' ? global : window,
+	      $Handlebars = root.Handlebars;
+	  /* istanbul ignore next */
+	  Handlebars.noConflict = function () {
+	    if (root.Handlebars === Handlebars) {
+	      root.Handlebars = $Handlebars;
+	    }
+	    return Handlebars;
+	  };
+	};
+	
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.SlideTimer = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _jquery = __webpack_require__(2);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _component = __webpack_require__(6);
+	
+	var _component2 = _interopRequireDefault(_component);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	window.$ = _jquery2.default;
+	
+	var SlideTimer = function (_Component) {
+	    _inherits(SlideTimer, _Component);
+	
+	    function SlideTimer(slider) {
+	        _classCallCheck(this, SlideTimer);
+	
+	        var _this = _possibleConstructorReturn(this, (SlideTimer.__proto__ || Object.getPrototypeOf(SlideTimer)).call(this));
+	
+	        _this.slider = slider;
+	        _this.interval;
+	        _this.timeout;
+	        _this.startTimer();
+	        _this.bindEvents();
+	        return _this;
+	    }
+	
+	    _createClass(SlideTimer, [{
+	        key: "bindEvents",
+	        value: function bindEvents() {
+	            this.slider.on('btnClick', this.clearAndResetTimer.bind(this)).on('touchStart', this.pauseTimer.bind(this)).on('touchEnd', this.resetTimer.bind(this));
+	            $(window).on('blur', this.pauseTimer.bind(this)).on('focus', this.startTimer.bind(this));
+	        }
+	    }, {
+	        key: "pauseTimer",
+	        value: function pauseTimer() {
+	            clearTimeout(this.timeout);
+	            clearInterval(this.interval);
+	        }
+	    }, {
+	        key: "startTimer",
+	        value: function startTimer() {
+	            this.interval = setInterval(this.slider.next.bind(this.slider), 2000);
+	        }
+	    }, {
+	        key: "resetTimer",
+	        value: function resetTimer() {
+	            this.timeout = setTimeout(this.startTimer.bind(this), 2000);
+	        }
+	    }, {
+	        key: "clearAndResetTimer",
+	        value: function clearAndResetTimer() {
+	            this.pauseTimer();
+	            this.resetTimer();
+	        }
+	    }]);
+	
+	    return SlideTimer;
+	}(_component2.default);
+	
+	;
+	
+	exports.SlideTimer = SlideTimer;
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.CategoryList = undefined;
+	
+	var _cachedAjax = __webpack_require__(10);
+	
+	var _productList = __webpack_require__(33);
+	
+	var _jquery = __webpack_require__(2);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	window.$ = _jquery2.default;
+	
+	var CategoryList = function () {
+	    var template;
+	    var productTotalCount;
+	
+	    function init() {
+	        template = __webpack_require__(35);
+	        _cachedAjax.CachedAjax.get('/categories').then(appendCategory);
+	    }
+	
+	    function appendCategory(res) {
+	        productTotalCount = res.reduce(function add(acc, value) {
+	            return acc + value.productCount;
+	        }, 0);
+	        $('.event_tab_lst li[data-category="0"]').data('product-count', productTotalCount);
+	        $('.event_lst_txt .pink').text(productTotalCount + '개');
+	        $('ul.event_tab_lst').append(template({ items: res }));
+	        _productList.ProductList.init();
+	    }
+	
+	    return {
+	        init: init
+	    };
+	}();
+	exports.CategoryList = CategoryList;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.ProductList = undefined;
+	
+	var _cachedAjax = __webpack_require__(10);
+	
+	var _jquery = __webpack_require__(2);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	window.$ = _jquery2.default;
+	
+	var ProductList = function () {
+	    var productTotalCount = 0;
+	    var categoryId = 0;
+	    var pageNum = 0;
+	    var template;
+	
+	    function init() {
+	        bindEvents();
+	        template = __webpack_require__(34);
+	        buildProductList('html');
+	    }
+	
+	    function bindEvents() {
+	        $('ul.event_tab_lst').on('click', 'li.item', clickCategoryEvent);
+	        $(window).scroll(scrollUpdate);
+	    }
+	
+	    function clickCategoryEvent(e) {
+	        pageNum = 0;
+	        $('li.item a.active').removeClass('active');
+	        $(e.currentTarget).find('a').addClass('active');
+	        $('.event_lst_txt .pink').text($(e.currentTarget).data('product-count') + '개');
+	        categoryId = $(e.currentTarget).data('category');
+	        buildProductList('html');
+	    }
+	
+	    function buildProductList(type) {
+	        productTotalCount = parseInt($('.event_lst_txt .pink').text().replace('개', ''));
+	        var url = '/products?page=' + pageNum + '&categoryId=' + categoryId;
+	        _cachedAjax.CachedAjax.get(url).then(appendProduct.bind(this, type));
+	    }
+	
+	    function appendProduct(type, res) {
+	        var left = [];
+	        var right = [];
+	        for (var i = 0, l = res.length; i < l; i++) {
+	            if (i % 2) {
+	                right.push(res[i]);
+	            } else {
+	                left.push(res[i]);
+	            }
+	        }
+	        $('.lst_event_box.left_box')[type](template({ products: left }));
+	        $('.lst_event_box.right_box')[type](template({ products: right }));
+	        if (productTotalCount > (pageNum + 1) * 10) {
+	            $('.more .btn').removeClass('invisible');
+	        } else {
+	            $('.more .btn').addClass('invisible');
+	        }
+	    }
+	
+	    function scrollUpdate() {
+	        var maxHeight = $(document).height();
+	        var currentScroll = $(document).scrollTop() + $(window).height();
+	        if (maxHeight - currentScroll < 30) {
+	            pageNum++;
+	            if (productTotalCount > pageNum * 10) {
+	                buildProductList('append');
+	            }
+	        }
+	    }
+	
+	    return {
+	        init: init
+	    };
+	}();
+	
+	exports.ProductList = ProductList;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var Handlebars = __webpack_require__(12);
+	function __default(obj) {
+	  return obj && (obj.__esModule ? obj["default"] : obj);
+	}
+	module.exports = (Handlebars["default"] || Handlebars).template({ "1": function _(container, depth0, helpers, partials, data) {
+	    var helper,
+	        alias1 = depth0 != null ? depth0 : container.nullContext || {},
+	        alias2 = helpers.helperMissing,
+	        alias3 = "function",
+	        alias4 = container.escapeExpression;
+	
+	    return "<li class=\"item\">\n    <a class=\"item_book\" href=\"/product-detail/" + alias4((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "id", "hash": {}, "data": data }) : helper)) + "\">\n        <div class=\"item_preview\"> <img alt=\"" + alias4((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "name", "hash": {}, "data": data }) : helper)) + "\" class=\"img_thumb\" src=\"/files/" + alias4((helper = (helper = helpers.fileId || (depth0 != null ? depth0.fileId : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "fileId", "hash": {}, "data": data }) : helper)) + "\">\n            <span class=\"img_border\"></span> </div>\n        <div class=\"event_txt\">\n            <h4 class=\"event_txt_tit\">\n                <span>" + alias4((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "name", "hash": {}, "data": data }) : helper)) + "</span> <small class=\"sm\">" + alias4((helper = (helper = helpers.placeName || (depth0 != null ? depth0.placeName : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "placeName", "hash": {}, "data": data }) : helper)) + "</small> </h4>\n            <p class=\"event_txt_dsc\">" + alias4((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "description", "hash": {}, "data": data }) : helper)) + "\n            </p>\n        </div>\n    </a>\n</li>\n";
+	  }, "compiler": [7, ">= 4.0.0"], "main": function main(container, depth0, helpers, partials, data) {
+	    var stack1, helper, options;
+	
+	    stack1 = (helper = (helper = helpers.products || (depth0 != null ? depth0.products : depth0)) != null ? helper : helpers.helperMissing, options = { "name": "products", "hash": {}, "fn": container.program(1, data, 0), "inverse": container.noop, "data": data }, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, options) : helper);
+	    if (!helpers.products) {
+	      stack1 = helpers.blockHelperMissing.call(depth0, stack1, options);
+	    }
+	    if (stack1 != null) {
+	      return stack1;
+	    } else {
+	      return '';
+	    }
+	  }, "useData": true });
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var Handlebars = __webpack_require__(12);
+	function __default(obj) {
+	    return obj && (obj.__esModule ? obj["default"] : obj);
+	}
+	module.exports = (Handlebars["default"] || Handlebars).template({ "1": function _(container, depth0, helpers, partials, data) {
+	        var stack1,
+	            helper,
+	            alias1 = depth0 != null ? depth0 : container.nullContext || {},
+	            alias2 = helpers.helperMissing,
+	            alias3 = "function",
+	            alias4 = container.escapeExpression;
+	
+	        return "<li class=\"item\" data-category=\"" + alias4((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "id", "hash": {}, "data": data }) : helper)) + "\" data-product-count=\"" + alias4((helper = (helper = helpers.productCount || (depth0 != null ? depth0.productCount : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "productCount", "hash": {}, "data": data }) : helper)) + "\">\n    <a class=\"anchor " + ((stack1 = helpers["if"].call(alias1, data && data.last, { "name": "if", "hash": {}, "fn": container.program(2, data, 0), "inverse": container.noop, "data": data })) != null ? stack1 : "") + "\"> <span>" + alias4((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2, (typeof helper === "undefined" ? "undefined" : _typeof(helper)) === alias3 ? helper.call(alias1, { "name": "name", "hash": {}, "data": data }) : helper)) + "</span> </a>\n</li>\n";
+	    }, "2": function _(container, depth0, helpers, partials, data) {
+	        return "last";
+	    }, "compiler": [7, ">= 4.0.0"], "main": function main(container, depth0, helpers, partials, data) {
+	        var stack1, helper, options;
+	
+	        stack1 = (helper = (helper = helpers.items || (depth0 != null ? depth0.items : depth0)) != null ? helper : helpers.helperMissing, options = { "name": "items", "hash": {}, "fn": container.program(1, data, 0), "inverse": container.noop, "data": data }, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, options) : helper);
+	        if (!helpers.items) {
+	            stack1 = helpers.blockHelperMissing.call(depth0, stack1, options);
+	        }
+	        if (stack1 != null) {
+	            return stack1;
+	        } else {
+	            return '';
+	        }
+	    }, "useData": true });
 
 /***/ })
 /******/ ]);

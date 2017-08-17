@@ -1,5 +1,6 @@
 package dunkirk.reservation.controller;
 
+import dunkirk.reservation.dao.ProductPriceDao;
 import dunkirk.reservation.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

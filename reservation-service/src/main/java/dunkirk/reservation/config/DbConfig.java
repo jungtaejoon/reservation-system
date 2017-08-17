@@ -5,6 +5,7 @@ import javax.sql.*;
 import org.apache.commons.dbcp2.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.*;
 import org.springframework.transaction.*;
 import org.springframework.transaction.annotation.*;
@@ -34,6 +35,12 @@ public class DbConfig {
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
 		return dataSource;
+	}
+
+	@Bean
+	@Autowired
+	public NamedParameterJdbcTemplate getJdbcTemplate(DataSource dataSource) {
+		return new NamedParameterJdbcTemplate(dataSource);
 	}
 	
 	@Bean
