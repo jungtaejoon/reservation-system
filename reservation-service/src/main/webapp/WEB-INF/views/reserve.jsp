@@ -59,8 +59,8 @@
                 </div>
                 <div class="section_booking_ticket">
                     <div class="ticket_body">
-                        <c:forEach var="productPrice" items="${product.productPrices}">
-                            <div class="qty">
+                        <c:forEach var="productPrice" items="${product.productPrices}" varStatus="status">
+                            <div class="qty" id="price${status.index }">
                                 <div class="count_control">
                                     <!-- [D] 수량이 최소 값이 일때 ico_minus3, count_control_input에 disabled 각각 추가, 수량이 최대 값일 때는 ico_plus3에 disabled 추가 -->
                                     <div class="clearfix">
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">
-                                        <p class="inline_txt selected">2017.2.17.(금)~2017.4.18.(화), 총 0매</p>
+                                        <p class="inline_txt selected">2017.2.17.(금)~2017.4.18.(화), 총 <span id="total_count">0</span>매</p>
                                     </div>
                                 </div>
                             </form>

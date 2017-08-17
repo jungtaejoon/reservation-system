@@ -26,7 +26,7 @@ var Reserver = (function () {
         $('a.btn_agreement').on('click', function (e) {
             $(this).find('i').toggleClass('fn-up2 fn-down2');
             $(this).closest('div.agreement').toggleClass('open');
-        })
+        });
     }
 
     function nameCheck() {
