@@ -5,8 +5,9 @@ import jQuery from "jquery";
 window.$ = jQuery;
 
 $(function () {
-    Reserver.init();
-    $(".qty").each(function(i, e){    	
-    	new Ticket($(e).attr('id'));
+    var tickets = []
+    $(".qty").each(function(i, e){
+        tickets.push(new Ticket($(e).attr('id')));
     });
+    Reserver.init(tickets);
 });
