@@ -16,5 +16,10 @@ public class CommentSqls {
 			+ " SELECT ruci.file_id"
 			+ " FROM reservation_user_comment ruc LEFT JOIN reservation_user_comment_image ruci ON ruc.id = ruci.reservation_user_comment_id"
 			+ " WHERE ruc.id = :id";
+	
+	public static final String GET_PRODUCT_NAME_BY_RESERVATION_ID = ""
+			+ " SELECT p.name"
+			+ " FROM reservation_info ri INNER JOIN product p ON ri.product_id = p.id"
+			+ " WHERE ri.id = :reservation_id"; 
 
 }
