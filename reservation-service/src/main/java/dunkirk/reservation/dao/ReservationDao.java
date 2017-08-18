@@ -9,5 +9,5 @@ import dunkirk.reservation.dto.MyReservationDto;
 public interface ReservationDao {
 	int add(ReservationInfo reservationInfo);
 	List<MyReservationDto> getList(int userId);
-	Map<String, Object> getReservationTypeCountList(int userId);
+	List<Map<String, Object>> getReservationTypeCountList(int userId);
 }

@@ -31,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public Map<String, Object> getReservationTypeCountList(int userId) {
+	public List<Map<String, Object>> getReservationTypeCountList(int userId) {
 		return reservationDao.getReservationTypeCountList(userId);
 	}
 }

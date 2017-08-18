@@ -48,10 +48,10 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 
 	@Override
-	public Map<String, Object> getReservationTypeCountList(int userId) {
+	public List<Map<String, Object>> getReservationTypeCountList(int userId) {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("user_id", userId);
-		return jdbc.queryForMap(ReservationSqls.GET_RESERVATION_TYPE_COUNT, params);
+		return jdbc.queryForList(ReservationSqls.GET_RESERVATION_TYPE_COUNT, params);
 	}
 
 }
