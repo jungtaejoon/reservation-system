@@ -9,4 +9,6 @@ public interface CommentDao {
     List<CommentForDetailDto> getListByProduct(int page, int limit, int productId);
 
     List<Integer> getImageIdList(int id);
+    
+    String getProductNameByReservationId(int reservationId);
 }
