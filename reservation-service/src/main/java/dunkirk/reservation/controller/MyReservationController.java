@@ -21,7 +21,7 @@ public class MyReservationController {
 	public String mypage(Model model) {
 		int userId = 1;
 		model.addAttribute("myCount", reservationService.getReservationTypeCountList(userId));
-		model.addAttribute("myReservation", reservationService.getList(userId));
+		model.addAttribute("myReservations", reservationService.getList(userId));
 		return "myreservation";
 	}
 }

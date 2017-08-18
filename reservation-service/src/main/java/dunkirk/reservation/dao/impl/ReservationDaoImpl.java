@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import dunkirk.reservation.dao.ReservationDao;
 import dunkirk.reservation.domain.ReservationInfo;
 import dunkirk.reservation.dto.MyReservationDto;
+import dunkirk.reservation.dto.ReservationTypeCount;
 import dunkirk.reservation.sql.ReservationSqls;
 
 @Repository
@@ -48,10 +49,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 
 	@Override
-	public List<Map<String, Object>> getReservationTypeCountList(int userId) {
+	public List<ReservationTypeCount> getReservationTypeCountList(int userId) {
+		RowMapper<ReservationTypeCount> rowMapper = new BeanPropertyRowMapper<>(ReservationTypeCount.class);
 		Map<String, Integer> params = new HashMap<>();
 		params.put("user_id", userId);
-		return jdbc.queryForList(ReservationSqls.GET_RESERVATION_TYPE_COUNT, params);
+		return jdbc.query(ReservationSqls.GET_RESERVATION_TYPE_COUNT, params, rowMapper);
 	}
 
 }
