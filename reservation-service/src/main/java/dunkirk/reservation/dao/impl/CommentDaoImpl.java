@@ -40,4 +40,12 @@ public class CommentDaoImpl implements CommentDao {
 		params.put("id", id);
 		return jdbc.queryForList(CommentSqls.GET_IMAGE_LIST, params, Integer.class);
 	}
+
+	@Override
+	public String getProductNameByReservationId(int reservationId) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("reservation_id", reservationId);
+		return jdbc.queryForObject(CommentSqls.GET_PRODUCT_NAME_BY_RESERVATION_ID, params, String.class);
+	}
+	
 }

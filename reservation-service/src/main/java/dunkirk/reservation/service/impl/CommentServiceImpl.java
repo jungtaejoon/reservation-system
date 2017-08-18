@@ -30,4 +30,8 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.getImageIdList(id);
 	}
 
+	@Override
+	public String getProductNameByReservationId(int reservationId) {
+		return commentDao.getProductNameByReservationId(reservationId);
+	}
 }
