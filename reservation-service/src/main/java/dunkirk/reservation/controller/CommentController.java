@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CommentController {
 	
-	@GetMapping("comment-write")
+	@GetMapping("/comment-write")
 	public String write(@RequestParam int reservationId){
+		
 		return "reviewWrite";
 	}
 
