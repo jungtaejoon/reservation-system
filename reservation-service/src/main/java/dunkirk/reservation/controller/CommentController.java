@@ -12,4 +12,9 @@ public class CommentController {
 		return "reviewWrite";
 	}
 
+	@GetMapping("/comment-read")
+	public String readHome(@RequestParam int productId) {
+		return "review";
+	}
+
 }

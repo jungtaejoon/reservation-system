@@ -26,7 +26,7 @@ var BuildDetail = (function () {
         var productId = $('#container').data('product-id');
         var salesFlag = $(".bk_btn").data('sales-flag');
         if (salesFlag === 'SALE') {
-            location.href = '/reservation?productId=' + productId;
+            location.href = '/booking?productId=' + productId;
         } else {
             alert('매진입니다.');
         }
