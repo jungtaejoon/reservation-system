@@ -10,7 +10,9 @@ import dunkirk.reservation.service.CommentService;
 
 @Controller
 public class CommentController {
-	
+
+	private static final int FIRST_PAGE = 0;
+	private static final int LIMIT_10 = 10;
 	private CommentService commentService;
 	
 	
@@ -27,7 +29,8 @@ public class CommentController {
 	}
 
 	@GetMapping("/comment-read")
-	public String readHome(@RequestParam int productId) {
+	public String readHome(@RequestParam int productId, Model model) {
+		model.addAttribute("comments", commentService.getListByProduct(FIRST_PAGE, LIMIT_10, productId));
 		return "review";
 	}
 
