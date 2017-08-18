@@ -28,7 +28,7 @@ public class CommentDaoImpl implements CommentDao {
 	public List<CommentForDetailDto> getListByProduct(int page, int limit, int productId) {
 		RowMapper<CommentForDetailDto> rowMapper = new BeanPropertyRowMapper<>(CommentForDetailDto.class);
 		Map<String, Integer> params = new HashMap<>();
-		params.put("page", page);
+		params.put("page", page * 10);
 		params.put("limit", limit);
 		params.put("productId", productId);
 		return jdbc.query(CommentSqls.GET_LIST_BY_PRODUCT, params, rowMapper);

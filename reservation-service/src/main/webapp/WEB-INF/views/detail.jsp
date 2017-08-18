@@ -142,7 +142,7 @@
 		                                            <span class="grade">${comment.score }</span> 
 		                                            <span class="name">${comment.nickname }</span> 
 		                                            <span class="date">
-		                                            	<fmt:formatDate value="${comment.createDate }"  pattern="yyyy.MM.dd"/> 작성
+		                                            	<fmt:formatDate value="${comment.createDate }" pattern="yyyy.MM.dd"/> 작성
 		                                            </span> 
 		                                        </div>
 	                                        </div>

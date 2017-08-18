@@ -34,6 +34,9 @@ public class DbConfig {
 		dataSource.setUrl(url);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
+		dataSource.setConnectionProperties("maxActive=20");
+		dataSource.setConnectionProperties("maxIdle=10");
+		dataSource.setConnectionProperties("maxWait=-1");
 		return dataSource;
 	}
 

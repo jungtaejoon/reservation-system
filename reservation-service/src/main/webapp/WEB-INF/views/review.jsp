@@ -10,10 +10,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/thumbnail.css" rel="stylesheet">
 </head>
 
 <body>
-    <div id="container">
+    <div id="container" data-product-id="${product.id}">
 		<!-- [D] 예약하기로 들어오면 header에 fade 클래스 추가로 숨김 -->
 		<div class="header fade">
 			<header class="header_tit">
@@ -29,7 +30,7 @@
                 <div class="review_header">
                     <div class="top_title gr">
                         <a class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
-                        <h2><a class="title" href="#">오디컴퍼니 주식회사</a></h2>
+                        <h2><a class="title">${product.name}</a></h2>
                     </div>
                 </div>
                 <div class="section_review_list">
@@ -50,30 +51,19 @@
                                                         <span class="img_count">${comment.thumbnailCount}</span>
                                                     </div>
                                                 </c:if>
-                                                <%--<h4 class="resoc_name">${product.name}</h4>--%>
+                                                <h4 class="resoc_name">${product.name}</h4>
                                                 <p class="review">${comment.comment}</p>
                                             </div>
                                             <div class="info_area">
                                                 <div class="review_info">
                                                     <span class="grade">${comment.score}</span>
                                                     <span class="name">${comment.nickname}</span>
-                                                    <span class="date">${comment.createDate} 작성</span>
+                                                    <span class="date"><fmt:formatDate value="${comment.createDate }" pattern="yyyy.MM.dd"/> 작성</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
                                 </c:forEach>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name">뮤지컬_드림걸즈(DREAMGIRLS)_최초_내한</h4>
-                                            <p class="review">극 구성과 무대는 말할것도 없고 노래 실력이 와우 소름이 끼치네요 ㅎㅎㅎ 특히 에피역 배우의 원 나잇온리는 정말 녹음 까지 하고싶었습니다ㅎㅎㅎ 정말 강추에요. 꼭보세요 두번보세요ㅎㅎㅎ</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">5.0</span> <span class="name">khw5****</span> <span class="date">2017.4.8. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
@@ -91,6 +81,10 @@
 	            <span class="copyright">© NAVER Corp.</span>
 	        </div>
 	    </footer>
+    <div id="photoviewer" class="invisible">
+        <div class="layer" id="layer"></div>
+    </div>
+<script src="/resources/js/build/review.bundle.js"></script>
 </body>
 
 </html>

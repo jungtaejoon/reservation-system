@@ -1,12 +1,13 @@
 import jQuery from "jquery";
 import Component from "@egjs/component";
-import {CachedAjax} from "../cachedAjax";
+import {CachedAjax} from "./cachedAjax";
 
 window.$ = jQuery;
 
 class ThumbnailSlider extends Component {
-    constructor() {
+    constructor(root) {
         super();
+        this.root = root;
         this.THUMBNAIL = '.thumb';
         this.PHOTO_VIEWER = '#photoviewer';
         this.LAYER = '#layer';
@@ -26,7 +27,11 @@ class ThumbnailSlider extends Component {
     }
 
     bindEvents() {
-        $(this.THUMBNAIL).on('click', this.popupViewer.bind(this));
+        if (this.root) {
+            $(this.root).on('click', this.THUMBNAIL, this.popupViewer.bind(this));
+        } else {
+            $(this.THUMBNAIL).on('click', this.popupViewer.bind(this));
+        }
         $(this.LAYER)
             .on('click', this.CLOSE_BUTTON, this.hideViewer.bind(this))
             .on('click', this.PREV_BUTTON, this.clickPrev.bind(this))

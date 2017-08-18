@@ -3,7 +3,7 @@ import {NaverMap} from './naverMap';
 import {Slider} from '../slider';
 import {SliderPanel} from './sliderPanel';
 import {Flicker} from '../flicker';
-import {ThumbnailSlider} from './thumbnailSlider';
+import {ThumbnailSlider} from '../thumbnailSlider';
 import jQuery from "jquery";
 
 window.$ = jQuery;
