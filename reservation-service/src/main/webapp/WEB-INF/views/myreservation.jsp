@@ -89,16 +89,21 @@
 								                    </li>
 													<li class="item">
 														<span class="item_tit">내역</span>
-														<em class="item_dsc">내역이 없습니다.</em>
+														<em class="item_dsc">
+														<c:if test="${reservation.generalTicketCount ne 0}">일반(${reservation.generalTicketCount})</c:if>
+														<c:if test="${reservation.youthTicketCount ne 0}"> 청소년(${reservation.youthTicketCount})</c:if>
+														<c:if test="${reservation.childTicketCount ne 0}"> 어린이(${reservation.childTicketCount})</c:if>
+														- 합계(${reservation.generalTicketCount+reservation.youthTicketCount+reservation.childTicketCount})
+														</em>
 													</li>
-													<li class="item">
+													<!-- <li class="item">
 													    <span class="item_tit">상품</span>
 													    <em class="item_dsc">내역이 없습니다.</em>
 													</li>
 													<li class="item">
 													    <span class="item_tit">업체</span>
 													    <em class="item_dsc">업체명이 없습니다.</em>
-													</li>
+													</li> -->
 												</ul>
 								                <div class="price_summary">
 								                	<span class="price_tit">결제 예정금액</span>
@@ -107,7 +112,13 @@
 								                <c:if test="${(reservation.reservationType eq 'REQUESTING') or (reservation.reservationType eq 'DUE')}">
 								                <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
 								                <div class="booking_cancel">
-								                    <button class="btn"><span>취소</span></button>
+	                                                <button class="btn"><span>취소</span></button>
+								                </div>
+							                    </c:if>
+							                    <c:if test="${reservation.reservationType eq 'USED'}">
+								                <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
+								                <div class="booking_cancel">
+	                                                <button class="btn"><span>예매자 리뷰 남기기</span></button>
 								                </div>
 							                    </c:if>
 								            </div>
@@ -129,11 +140,13 @@
                     </ul>
                 </div>
                 <!--// 내 예약 리스트 -->
-
+				
                 <!-- 예약 리스트 없음 -->
+                <c:if test="${myReservations eq null}">
                 <div class="err"> <i class="spr_book ico_info_nolist"></i>
                     <h1 class="tit">예약 리스트가 없습니다</h1>
                 </div>
+                </c:if>
                 <!--// 예약 리스트 없음 -->
             </div>
         </div>
