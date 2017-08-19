@@ -11,4 +11,5 @@ public interface ReservationService {
 	int add(ReservationInfo reservationInfo);
 	List<MyReservationDto> getList(int userId);
 	Map<String, Integer> getReservationTypeCountList(int userId);
+	int remove(int id);
 }

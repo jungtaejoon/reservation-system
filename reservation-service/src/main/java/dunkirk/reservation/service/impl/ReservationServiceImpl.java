@@ -51,4 +51,9 @@ public class ReservationServiceImpl implements ReservationService {
 		result.put("전체", totalCount);
 		return result;
 	}
+
+	@Override
+	public int remove(int id) {
+		return reservationDao.modifyReservationType(id, ReservationType.REFUND_CANCEL);
+	}
 }

@@ -9,7 +9,6 @@
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
-    <link href="css/style.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 
@@ -85,20 +84,25 @@
 									            <ul class="detail">
 									                <li class="item">
 									                    <span class="item_tit">일정</span>
-									                    <em class="item_dsc">${reservation.reservationDate }</em>
+									                    <em class="item_dsc item_reservation_date">${reservation.reservationDate }</em>
 								                    </li>
 													<li class="item">
 														<span class="item_tit">내역</span>
-														<em class="item_dsc">내역이 없습니다.</em>
+														<em class="item_dsc">
+														<c:if test="${reservation.generalTicketCount ne 0}">일반(${reservation.generalTicketCount})</c:if>
+														<c:if test="${reservation.youthTicketCount ne 0}"> 청소년(${reservation.youthTicketCount})</c:if>
+														<c:if test="${reservation.childTicketCount ne 0}"> 어린이(${reservation.childTicketCount})</c:if>
+														- 합계(${reservation.generalTicketCount+reservation.youthTicketCount+reservation.childTicketCount})
+														</em>
 													</li>
-													<li class="item">
+													<!-- <li class="item">
 													    <span class="item_tit">상품</span>
 													    <em class="item_dsc">내역이 없습니다.</em>
 													</li>
 													<li class="item">
 													    <span class="item_tit">업체</span>
 													    <em class="item_dsc">업체명이 없습니다.</em>
-													</li>
+													</li> -->
 												</ul>
 								                <div class="price_summary">
 								                	<span class="price_tit">결제 예정금액</span>
@@ -106,8 +110,14 @@
 								                </div>
 								                <c:if test="${(reservation.reservationType eq 'REQUESTING') or (reservation.reservationType eq 'DUE')}">
 								                <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
-								                <div class="booking_cancel">
-								                    <button class="btn"><span>취소</span></button>
+								                <div class="booking_cancel cancel" data-reservation-id="${reservation.id }">
+	                                                <button class="btn"><span>취소</span></button>
+								                </div>
+							                    </c:if>
+							                    <c:if test="${reservation.reservationType eq 'USED'}">
+								                <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
+								                <div class="booking_cancel used" data-reservation-id="${reservation.id }">
+	                                                <button class="btn"><span>예매자 리뷰 남기기</span></button>
 								                </div>
 							                    </c:if>
 								            </div>
@@ -129,11 +139,13 @@
                     </ul>
                 </div>
                 <!--// 내 예약 리스트 -->
-
+				
                 <!-- 예약 리스트 없음 -->
+                <c:if test="${myReservations eq null}">
                 <div class="err"> <i class="spr_book ico_info_nolist"></i>
                     <h1 class="tit">예약 리스트가 없습니다</h1>
                 </div>
+                </c:if>
                 <!--// 예약 리스트 없음 -->
             </div>
         </div>
@@ -151,7 +163,7 @@
 
     <!-- 취소 팝업 -->
     <!-- [D] 활성화 display:block, 아니오 버튼 or 닫기 버튼 클릭 시 숨김 display:none; -->
-    <div class="popup_booking_wrapper" style="display:none;">
+    <div class="popup_booking_wrapper invisible">
         <div class="dimm_dark" style="display:block"></div>
         <div class="popup_booking refund">
             <h1 class="pop_tit">
@@ -163,14 +175,14 @@
             </div>
             <div class="pop_bottom_btnarea">
                 <div class="btn_gray">
-                    <a href="#" class="btn_bottom"><span>아니오</span></a>
+                    <a class="btn_bottom"><span>아니오</span></a>
                 </div>
                 <div class="btn_green">
-                    <a href="#" class="btn_bottom"><span>예</span></a>
+                    <a class="btn_bottom"><span>예</span></a>
                 </div>
             </div>
             <!-- 닫기 -->
-            <a href="#" class="popup_btn_close" title="close">
+            <a class="popup_btn_close" title="close">
                 <i class="spr_book2 ico_cls"></i>
             </a>
             <!--// 닫기 -->
@@ -179,5 +191,7 @@
     <!--// 취소 팝업 -->
 
 </body>
-
+<script type="text/javascript" src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/myreservation/myreservation.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/build/reserve.bundle.js"></script> -->
 </html>
