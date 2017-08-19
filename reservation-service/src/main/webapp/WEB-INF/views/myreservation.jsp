@@ -84,7 +84,7 @@
 									            <ul class="detail">
 									                <li class="item">
 									                    <span class="item_tit">일정</span>
-									                    <em class="item_dsc">${reservation.reservationDate }</em>
+									                    <em class="item_dsc item_reservation_date">${reservation.reservationDate }</em>
 								                    </li>
 													<li class="item">
 														<span class="item_tit">내역</span>
@@ -110,13 +110,13 @@
 								                </div>
 								                <c:if test="${(reservation.reservationType eq 'REQUESTING') or (reservation.reservationType eq 'DUE')}">
 								                <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
-								                <div class="booking_cancel">
+								                <div class="booking_cancel cancel" data-reservation-id="${reservation.id }">
 	                                                <button class="btn"><span>취소</span></button>
 								                </div>
 							                    </c:if>
 							                    <c:if test="${reservation.reservationType eq 'USED'}">
 								                <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
-								                <div class="booking_cancel">
+								                <div class="booking_cancel used" data-reservation-id="${reservation.id }">
 	                                                <button class="btn"><span>예매자 리뷰 남기기</span></button>
 								                </div>
 							                    </c:if>
@@ -163,7 +163,7 @@
 
     <!-- 취소 팝업 -->
     <!-- [D] 활성화 display:block, 아니오 버튼 or 닫기 버튼 클릭 시 숨김 display:none; -->
-    <div class="popup_booking_wrapper" style="display:none;">
+    <div class="popup_booking_wrapper invisible">
         <div class="dimm_dark" style="display:block"></div>
         <div class="popup_booking refund">
             <h1 class="pop_tit">
@@ -175,14 +175,14 @@
             </div>
             <div class="pop_bottom_btnarea">
                 <div class="btn_gray">
-                    <a href="#" class="btn_bottom"><span>아니오</span></a>
+                    <a class="btn_bottom"><span>아니오</span></a>
                 </div>
                 <div class="btn_green">
-                    <a href="#" class="btn_bottom"><span>예</span></a>
+                    <a class="btn_bottom"><span>예</span></a>
                 </div>
             </div>
             <!-- 닫기 -->
-            <a href="#" class="popup_btn_close" title="close">
+            <a class="popup_btn_close" title="close">
                 <i class="spr_book2 ico_cls"></i>
             </a>
             <!--// 닫기 -->
