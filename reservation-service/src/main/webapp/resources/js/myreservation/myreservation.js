@@ -36,7 +36,6 @@ var MyReservation = (function() {
 	
 	function clickReservationiCancle(e){
 		id = $(this).data('reservation-id');
-		console.log('취소 > ' + id);
 		$('.popup_booking_wrapper').removeClass('invisible');
 		$('.pop_tit span').text($(this).closest('.card_detail').find('.tit').text());
 		$('.pop_tit .sm').text($(this).closest('.card_detail').find('.item_reservation_date').text());
@@ -51,7 +50,7 @@ var MyReservation = (function() {
 			method:'delete',
 			url :'/reservations/'+id,
 			success : function(res){
-				console.log(res);
+				location.href = '/my-reservation';
 			}
 		});
 	}
@@ -59,7 +58,6 @@ var MyReservation = (function() {
 	function clickPopUpBtnNo(){
 		$('.popup_booking_wrapper').addClass('invisible');
 	}
-
 
 	return {
 		init : init
