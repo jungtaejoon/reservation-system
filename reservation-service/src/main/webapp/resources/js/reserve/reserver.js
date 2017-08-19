@@ -28,26 +28,14 @@ var Reserver = (function () {
         $('#email').on('keyup', emailCheck);
         $('#chk3').on('click', agreementCheck);
         $('a.btn_agreement').on('click', toggleOpen);
-        $(tickets).each(bindTicketsEvents);
         $('button.bk_btn').on('click', checkButton);
-    }
-
-    function bindTicketsEvents(i, v) {
-        v.on('changeCount', changeTotalCount);
+        $(tickets).each((i, v) => v.on('changeCount', changeTotalCount));
     }
 
     function changeTotalCount() {
-        totalCount = ticketArray.reduce(addAllCount, 0);
+        totalCount = ticketArray.reduce((a, v) => a + v.count, 0);
         $('#total_count').text(totalCount);
         totalCountCheck();
-    }
-
-    function addAllCount(a, v) {
-        return a + v.count;
-    }
-
-    function addAllTotalPrice(a, v) {
-        return a + parseInt(v.totalPrice);
     }
 
     function toggleOpen() {
@@ -67,17 +55,16 @@ var Reserver = (function () {
     function telCheck() {
         var regNum = /^[0-9]+$/;
         var regDash = /[\-]/gi;
-        if (regNum.test($(this).val())) {
-            var num = $(this).val();
-            num = num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");
-            $(this).val(num);
-        } else {
-            var num = $(this).val();
-            num = num.replace(regDash, '');
-            num = num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");
-            $(this).val(num);
-        }
+        var regTelNum = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
         var regTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
+        var num = $(this).val();
+        if (regNum.test($(this).val())) {
+            num = num.replace(regTelNum, "$1-$2-$3");
+        } else {
+            num = num.replace(regDash, '');
+            num = num.replace(regTelNum, "$1-$2-$3");
+        }
+        $(this).val(num);
         validation['tel'] = regTel.test($(this).val());
         checkAll();
     }
@@ -107,52 +94,41 @@ var Reserver = (function () {
     }
 
     function checkButton() {
-        if($('div.bk_btn_wrap').hasClass('disable')) {
+        if ($('div.bk_btn_wrap').hasClass('disable')) {
             return;
         } else {
             makeReservation();
         }
     }
-    
-    function makeReservation() {
 
-        var productId = $('#container').data('product-id');
-        var reservationName = $('#name').val();
-        var reservationTel = $('#tel').val();
-        var reservationEmail = $('#email').val();
-        var reservationDate = $('#reservation_date').text();
-        var generalTicketCount = ticketArray[0].count;
-        var youthTicketCount = ticketArray[1].count;
-        var childTicketCount = ticketArray[2].count;
-        var totalPrice = ticketArray.reduce(addAllTotalPrice, 0);
+    function makeReservation() {
         var obj = {
-            productId: productId,
-            generalTicketCount: generalTicketCount,
-            youthTicketCount: youthTicketCount,
-            childTicketCount: childTicketCount,
-            reservationName: reservationName,
-            reservationEmail: reservationEmail,
-            reservationTel: reservationTel,
-            reservationDate: reservationDate,
+            productId: $('#container').data('product-id'),
+            generalTicketCount: ticketArray[0].count,
+            youthTicketCount: ticketArray[1].count,
+            childTicketCount: ticketArray[2].count,
+            reservationName: $('#name').val(),
+            reservationEmail: $('#email').val(),
+            reservationTel: $('#tel').val(),
+            reservationDate: $('#reservation_date').text(),
             reservationType: 1,
-            totalPrice: totalPrice
+            totalPrice: ticketArray.reduce((a, v) => a + parseInt(v.totalPrice), 0)
         };
 
         $.ajax({
-            method : 'post',
-            data : JSON.stringify(obj),
-            contentType : 'application/json; charset=utf-8',
-            dataType : 'json',
-            url : '/reservations',
-            success : (response) => {
-                if(response === 1) {
+            method: 'post',
+            data: JSON.stringify(obj),
+            contentType: 'application/json; charset=utf-8',
+            url: '/reservations',
+            success: response => {
+                if (response === 1) {
                     location.href = '/my-reservation';
                 } else {
                     alert('뭔가 잘못되었습니다. ^^;');
                 }
             },
-            error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다.
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            error: (request, status, error) => {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         });
     }
