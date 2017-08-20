@@ -58,12 +58,10 @@ var Reserver = (function () {
         var regTelNum = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
         var regTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
         var num = $(this).val();
-        if (regNum.test($(this).val())) {
-            num = num.replace(regTelNum, "$1-$2-$3");
-        } else {
+        if (!regNum.test(num)) {
             num = num.replace(regDash, '');
-            num = num.replace(regTelNum, "$1-$2-$3");
         }
+        num = num.replace(regTelNum, "$1-$2-$3");
         $(this).val(num);
         validation['tel'] = regTel.test($(this).val());
         checkAll();
