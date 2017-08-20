@@ -39,6 +39,9 @@ public class LoginController {
     @Value("${naver.login.oauth.user.url}")
     private String naverOauthUserUrl;
 
+    @Value("${naver.login.callback.url}")
+    private String naverCallbackUrl;
+
     private RestOperations restOperations;
     private UserService userService;
     private GetStateUtil getStateUtil;
@@ -57,7 +60,7 @@ public class LoginController {
         session.setAttribute("state", state);
         String redirectUri = null;
         try {
-            redirectUri = URLEncoder.encode("http://localhost:8080/login/callback", "UTF-8");
+            redirectUri = URLEncoder.encode(naverCallbackUrl, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
