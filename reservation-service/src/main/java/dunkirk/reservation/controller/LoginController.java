@@ -81,22 +81,15 @@ public class LoginController {
             return "redirect:/?state-error=true";
 
         } else {
-            getNaverUser(resultState, code, session, response);
+            setUserToSession(resultState, code, session, response);
             return "redirect:" + session.getAttribute("path");
 
         }
     }
 
-    private void getNaverUser(String state, String code, HttpSession session, HttpServletResponse response) {
-        String url = naverOauthTokenUrl + clientIdQuery + clientSecretQuery + "&state=" + state + "&code=" + code;
-        JSONObject json = restOperations.getForObject(url, JSONObject.class);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", json.get("token_type") + " " + json.get("access_token"));
-        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-        ResponseEntity<NaverLoginUserResult> result = restOperations.exchange(naverOauthUserUrl, HttpMethod.GET, entity,
-                NaverLoginUserResult.class);
-
+    private void setUserToSession(String state, String code, HttpSession session, HttpServletResponse response) {
+        JSONObject token = getNaverOauthToken(state, code);
+        ResponseEntity<NaverLoginUserResult> result = getNaverOauthUserResult(token);
         if (result != null && result.getStatusCode() == HttpStatus.OK) {
             NaverLoginUser naverUser = result.getBody().getResponse();
             User checkingUser = userService.getByEmail(naverUser.getEmail());
@@ -122,5 +115,17 @@ public class LoginController {
                 e.printStackTrace();
             }
         }
+    }
+
+    private JSONObject getNaverOauthToken(String state, String code) {
+        String url = naverOauthTokenUrl + clientIdQuery + clientSecretQuery + "&state=" + state + "&code=" + code;
+        return restOperations.getForObject(url, JSONObject.class);
+    }
+
+    private ResponseEntity<NaverLoginUserResult> getNaverOauthUserResult(JSONObject token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token.get("token_type") + " " + token.get("access_token"));
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        return restOperations.exchange(naverOauthUserUrl, HttpMethod.GET, entity, NaverLoginUserResult.class);
     }
 }
