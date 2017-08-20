@@ -41,17 +41,18 @@ public class LoginController {
 
     private RestOperations restOperations;
     private UserService userService;
+    private GetStateUtil getStateUtil;
 
     @Autowired
-    public LoginController(RestOperations restOperations, UserService userService) {
+    public LoginController(RestOperations restOperations, UserService userService, GetStateUtil getStateUtil) {
         super();
         this.restOperations = restOperations;
         this.userService = userService;
+        this.getStateUtil = getStateUtil;
     }
 
     @GetMapping
     public void login(HttpServletResponse response, HttpSession session) {
-        GetStateUtil getStateUtil = new GetStateUtil();
         String state = getStateUtil.getState();
         session.setAttribute("state", state);
         String redirectUri = null;
