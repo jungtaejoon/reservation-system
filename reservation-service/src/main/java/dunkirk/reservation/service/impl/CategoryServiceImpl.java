@@ -8,21 +8,21 @@ import org.springframework.stereotype.Service;
 import dunkirk.reservation.dao.CategoryDao;
 import dunkirk.reservation.domain.Category;
 import dunkirk.reservation.service.CategoryService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+@Transactional
+public class CategoryServiceImpl implements CategoryService {
+    private CategoryDao categoryDao;
 
-	private CategoryDao categoryDao;
-	
-	
-	@Autowired
-	public CategoryServiceImpl(CategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
-	
-	@Override
-	public List<Category> getList() {
-		return categoryDao.getList();
-	}
+    @Autowired
+    public CategoryServiceImpl(CategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
+    }
+
+    @Override
+    public List<Category> getList() {
+        return categoryDao.getList();
+    }
 
 }

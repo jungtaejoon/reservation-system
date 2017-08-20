@@ -11,17 +11,16 @@ import dunkirk.reservation.service.*;
 @RestController
 @RequestMapping("/products")
 public class ProductRestController {
+    private ProductService productService;
 
-	private ProductService productService;
+    @Autowired
+    public ProductRestController(ProductService productService) {
+        super();
+        this.productService = productService;
+    }
 
-	@Autowired
-	public ProductRestController(ProductService productService) {
-		super();
-		this.productService = productService;
-	}
-
-	@GetMapping
-	public List<ProductForMainDto> getList(@RequestParam int categoryId, @RequestParam int page) {
-		return productService.getList(categoryId, page*10);
-	}
+    @GetMapping
+    public List<ProductForMainDto> getList(@RequestParam int categoryId, @RequestParam int page) {
+        return productService.getList(categoryId, page * 10);
+    }
 }

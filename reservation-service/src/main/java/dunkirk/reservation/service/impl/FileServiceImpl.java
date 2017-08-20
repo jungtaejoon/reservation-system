@@ -7,34 +7,35 @@ import org.springframework.stereotype.Service;
 
 import dunkirk.reservation.dao.FileDao;
 import dunkirk.reservation.service.FileService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class FileServiceImpl implements FileService{
+@Transactional
+public class FileServiceImpl implements FileService {
+    private FileDao fileDao;
 
-	private FileDao fileDao;
-	
-	@Autowired
-	public FileServiceImpl(FileDao fileDao) {
-		this.fileDao = fileDao;
-	}
-	
-	@Override
-	public String getSaveFileName(int id) {
-		return fileDao.getSaveFileName(id);
-	}
+    @Autowired
+    public FileServiceImpl(FileDao fileDao) {
+        this.fileDao = fileDao;
+    }
 
-	@Override
-	public List<Integer> getProductImageIdList(int productId) {
-		return fileDao.getProductImageIdList(productId);
-	}
+    @Override
+    public String getSaveFileName(int id) {
+        return fileDao.getSaveFileName(id);
+    }
 
-	@Override
-	public List<Integer> getProductNoticeImageIdList(int productId) {
-		return fileDao.getProductNoticeImageIdList(productId);
-	}
+    @Override
+    public List<Integer> getProductImageIdList(int productId) {
+        return fileDao.getProductImageIdList(productId);
+    }
 
-	@Override
-	public int getProductDescriptionImageId(int productId) {
-		return fileDao.getProductDescriptionImageId(productId);
-	}
+    @Override
+    public List<Integer> getProductNoticeImageIdList(int productId) {
+        return fileDao.getProductNoticeImageIdList(productId);
+    }
+
+    @Override
+    public int getProductDescriptionImageId(int productId) {
+        return fileDao.getProductDescriptionImageId(productId);
+    }
 }

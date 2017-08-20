@@ -11,16 +11,15 @@ import dunkirk.reservation.service.CategoryService;
 
 @RestController
 public class CategoryRestController {
+    private CategoryService categoryService;
 
-	private CategoryService categoryService;
-	
-	@Autowired
-	public CategoryRestController(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
-	
-	@GetMapping("/categories")
-	public List<Category> getList() {
-		return categoryService.getList();
-	}
+    @Autowired
+    public CategoryRestController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    @GetMapping("/categories")
+    public List<Category> getList() {
+        return categoryService.getList();
+    }
 }

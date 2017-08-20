@@ -12,13 +12,12 @@ import org.springframework.web.filter.*;
 import org.springframework.web.servlet.*;
 
 public class WebInitializer implements WebApplicationInitializer {
-	
-	private static final String CONTEXT_LOCATION = "dunkirk.reservation.config";
-	private static final String MAPPING_URL = "/";
+    private static final String CONTEXT_LOCATION = "dunkirk.reservation.config";
+    private static final String MAPPING_URL = "/";
 
-	public void onStartup(ServletContext servletContext) throws ServletException {
-		WebApplicationContext context = getContext();
-		
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        WebApplicationContext context = getContext();
+
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
 
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
@@ -32,12 +31,12 @@ public class WebInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(MAPPING_URL);
-	}
-	
-	public AnnotationConfigWebApplicationContext getContext() {
-		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.setConfigLocation(CONTEXT_LOCATION);
-		return context;
-	}
+    }
+
+    public AnnotationConfigWebApplicationContext getContext() {
+        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.setConfigLocation(CONTEXT_LOCATION);
+        return context;
+    }
 
 }

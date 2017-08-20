@@ -13,47 +13,48 @@ import dunkirk.reservation.domain.ReservationType;
 import dunkirk.reservation.dto.MyReservationDto;
 import dunkirk.reservation.dto.ReservationTypeCount;
 import dunkirk.reservation.service.ReservationService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ReservationServiceImpl implements ReservationService {
+    private ReservationDao reservationDao;
 
-	private ReservationDao reservationDao;
+    @Autowired
+    public ReservationServiceImpl(ReservationDao reservationDao) {
+        this.reservationDao = reservationDao;
+    }
 
-	@Autowired
-	public ReservationServiceImpl(ReservationDao reservationDao) {
-		this.reservationDao = reservationDao;
-	}
+    @Override
+    public int add(ReservationInfo reservationInfo) {
+        return reservationDao.add(reservationInfo);
+    }
 
-	public int add(ReservationInfo reservationInfo) {
-		return reservationDao.add(reservationInfo);
-	}
+    @Override
+    public List<MyReservationDto> getList(int userId) {
+        return reservationDao.getList(userId);
+    }
 
-	@Override
-	public List<MyReservationDto> getList(int userId) {
-		return reservationDao.getList(userId);
-	}
+    @Override
+    public Map<String, Integer> getReservationTypeCountList(int userId) {
+        Map<String, Integer> result = new HashMap<>();
+        int totalCount = 0;
+        int requestAndDueCount = 0;
+        for (ReservationTypeCount rtc : reservationDao.getReservationTypeCountList(userId)) {
+            if (rtc.getReservationType() == ReservationType.REQUESTING || rtc.getReservationType() == ReservationType.DUE) {
+                requestAndDueCount += rtc.getCount();
+                result.put("이용예정", requestAndDueCount);
+            } else {
+                result.put(rtc.getReservationType().getName(), rtc.getCount());
+            }
+            totalCount += rtc.getCount();
+        }
+        result.put("전체", totalCount);
+        return result;
+    }
 
-	@Override
-	public Map<String, Integer> getReservationTypeCountList(int userId) {
-		Map<String, Integer> result = new HashMap<>();
-		int totalCount = 0;
-		int i = 0;
-		int requestAndDueCount = 0;
-		for(ReservationTypeCount rtc : reservationDao.getReservationTypeCountList(userId)) {
-			if(rtc.getReservationType() == ReservationType.REQUESTING || rtc.getReservationType() == ReservationType.DUE) {
-				requestAndDueCount += rtc.getCount();
-				result.put("이용예정", requestAndDueCount);
-			}else {
-				result.put(rtc.getReservationType().getName(), rtc.getCount());
-			}
-			totalCount += rtc.getCount();
-		}
-		result.put("전체", totalCount);
-		return result;
-	}
-
-	@Override
-	public int remove(int id) {
-		return reservationDao.modifyReservationType(id, ReservationType.REFUND_CANCEL);
-	}
+    @Override
+    public int remove(int id) {
+        return reservationDao.modifyReservationType(id, ReservationType.REFUND_CANCEL);
+    }
 }

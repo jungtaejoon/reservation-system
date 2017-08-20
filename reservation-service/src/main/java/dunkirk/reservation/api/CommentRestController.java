@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/comments")
 public class CommentRestController {
-
     private static final int LIMIT_10 = 10;
     private CommentService commentService;
 

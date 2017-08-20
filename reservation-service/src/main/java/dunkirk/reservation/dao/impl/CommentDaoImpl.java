@@ -15,37 +15,36 @@ import dunkirk.reservation.sql.*;
 
 @Repository
 public class CommentDaoImpl implements CommentDao {
+    private NamedParameterJdbcTemplate jdbc;
 
-	private NamedParameterJdbcTemplate jdbc;
+    @Autowired
+    public CommentDaoImpl(DataSource dataSource) {
+        super();
+        this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+    }
 
-	@Autowired
-	public CommentDaoImpl(DataSource dataSource) {
-		super();
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-	}
+    @Override
+    public List<CommentForDetailDto> getListByProduct(int page, int limit, int productId) {
+        RowMapper<CommentForDetailDto> rowMapper = new BeanPropertyRowMapper<>(CommentForDetailDto.class);
+        Map<String, Integer> params = new HashMap<>();
+        params.put("page", page * 10);
+        params.put("limit", limit);
+        params.put("productId", productId);
+        return jdbc.query(CommentSqls.GET_LIST_BY_PRODUCT, params, rowMapper);
+    }
 
-	@Override
-	public List<CommentForDetailDto> getListByProduct(int page, int limit, int productId) {
-		RowMapper<CommentForDetailDto> rowMapper = new BeanPropertyRowMapper<>(CommentForDetailDto.class);
-		Map<String, Integer> params = new HashMap<>();
-		params.put("page", page * 10);
-		params.put("limit", limit);
-		params.put("productId", productId);
-		return jdbc.query(CommentSqls.GET_LIST_BY_PRODUCT, params, rowMapper);
-	}
+    @Override
+    public List<Integer> getImageIdList(int id) {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("id", id);
+        return jdbc.queryForList(CommentSqls.GET_IMAGE_LIST, params, Integer.class);
+    }
 
-	@Override
-	public List<Integer> getImageIdList(int id) {
-		Map<String, Integer> params = new HashMap<>();
-		params.put("id", id);
-		return jdbc.queryForList(CommentSqls.GET_IMAGE_LIST, params, Integer.class);
-	}
+    @Override
+    public String getProductNameByReservationId(int reservationId) {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("reservation_id", reservationId);
+        return jdbc.queryForObject(CommentSqls.GET_PRODUCT_NAME_BY_RESERVATION_ID, params, String.class);
+    }
 
-	@Override
-	public String getProductNameByReservationId(int reservationId) {
-		Map<String, Integer> params = new HashMap<>();
-		params.put("reservation_id", reservationId);
-		return jdbc.queryForObject(CommentSqls.GET_PRODUCT_NAME_BY_RESERVATION_ID, params, String.class);
-	}
-	
 }

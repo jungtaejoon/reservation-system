@@ -15,7 +15,6 @@ import java.util.Map;
 
 @Repository
 public class ProductPriceDaoImpl implements ProductPriceDao {
-
     private NamedParameterJdbcOperations jdbc;
 
     @Autowired

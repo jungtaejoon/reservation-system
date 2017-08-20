@@ -14,7 +14,6 @@ import dunkirk.reservation.service.ReservationService;
 @RestController
 @RequestMapping("/reservations")    // 수정하기
 public class ReservationRestController {
-
     private ReservationService reservationService;
 
     public ReservationRestController(ReservationService reservationService) {
@@ -30,9 +29,9 @@ public class ReservationRestController {
             return -1;
         }
     }
-    
+
     @DeleteMapping("/{id}")
     public int delete(@PathVariable int id) {
-    	return reservationService.remove(id);
+        return reservationService.remove(id);
     }
 }

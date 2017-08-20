@@ -14,10 +14,11 @@ import dunkirk.reservation.dto.ProductForReservationDto;
 import dunkirk.reservation.service.CommentService;
 import dunkirk.reservation.service.FileService;
 import dunkirk.reservation.service.ProductService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
-
     private ProductDao productDao;
     private ProductPriceDao productPriceDao;
     private CommentService commentService;

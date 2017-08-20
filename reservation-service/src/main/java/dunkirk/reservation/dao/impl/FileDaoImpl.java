@@ -17,7 +17,6 @@ import dunkirk.reservation.sql.FileSqls;
 @Repository
 public class FileDaoImpl implements FileDao {
     private NamedParameterJdbcTemplate jdbc;
-    //RowMapper<>
 
     @Autowired
     public FileDaoImpl(DataSource dataSource) {

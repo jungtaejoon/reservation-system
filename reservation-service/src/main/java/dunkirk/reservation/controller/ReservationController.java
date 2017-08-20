@@ -10,7 +10,6 @@ import dunkirk.reservation.service.ProductService;
 
 @Controller
 public class ReservationController {
-
     private ProductService productService;
 
     @Autowired

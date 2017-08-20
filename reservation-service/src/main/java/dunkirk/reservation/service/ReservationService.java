@@ -8,8 +8,11 @@ import dunkirk.reservation.domain.ReservationType;
 import dunkirk.reservation.dto.MyReservationDto;
 
 public interface ReservationService {
-	int add(ReservationInfo reservationInfo);
-	List<MyReservationDto> getList(int userId);
-	Map<String, Integer> getReservationTypeCountList(int userId);
-	int remove(int id);
+    int add(ReservationInfo reservationInfo);
+
+    List<MyReservationDto> getList(int userId);
+
+    Map<String, Integer> getReservationTypeCountList(int userId);
+
+    int remove(int id);
 }

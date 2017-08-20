@@ -12,22 +12,20 @@ import dunkirk.reservation.service.FileService;
 
 @RestController
 public class FileRestController {
-	
-	private FileService fileService;
-	
-	@Autowired
-	public FileRestController(FileService fileService) {
-		this.fileService = fileService;
-	}
+    private FileService fileService;
 
-	@GetMapping("/files/{id:[\\d]+}")
-	public FileSystemResource test(@PathVariable int id){
-		File file = new File(fileService.getSaveFileName(id));
-		if(!file.exists()){
-			throw new RuntimeException("file not found");
-		}
-		else {
-			return new FileSystemResource(file);
-		}
-	}
+    @Autowired
+    public FileRestController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/files/{id:[\\d]+}")
+    public FileSystemResource test(@PathVariable int id) {
+        File file = new File(fileService.getSaveFileName(id));
+        if (!file.exists()) {
+            throw new RuntimeException("file not found");
+        } else {
+            return new FileSystemResource(file);
+        }
+    }
 }

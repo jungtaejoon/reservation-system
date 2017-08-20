@@ -11,7 +11,6 @@ import dunkirk.reservation.service.CommentService;
 
 @Controller
 public class CommentController {
-
     private static final int FIRST_PAGE = 0;
     private static final int LIMIT_10 = 10;
     private CommentService commentService;

@@ -32,7 +32,6 @@ public class ProductForDetailDto {
     private int descriptionImageId;
 
     public ProductForDetailDto() {
-
     }
 
     public int getId() {
