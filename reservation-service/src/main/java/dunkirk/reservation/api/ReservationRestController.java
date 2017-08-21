@@ -1,5 +1,6 @@
 package dunkirk.reservation.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import dunkirk.reservation.service.ReservationService;
 public class ReservationRestController {
     private ReservationService reservationService;
 
+    @Autowired
     public ReservationRestController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
