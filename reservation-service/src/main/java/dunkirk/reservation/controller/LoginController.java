@@ -4,7 +4,7 @@ import dunkirk.reservation.domain.NaverLoginUser;
 import dunkirk.reservation.domain.NaverLoginUserResult;
 import dunkirk.reservation.domain.User;
 import dunkirk.reservation.service.UserService;
-import dunkirk.reservation.util.GetStateUtil;
+import dunkirk.reservation.util.NaverLoginStateUtil;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,19 +44,19 @@ public class LoginController {
 
     private RestOperations restOperations;
     private UserService userService;
-    private GetStateUtil getStateUtil;
+    private NaverLoginStateUtil naverLoginStateUtil;
 
     @Autowired
-    public LoginController(RestOperations restOperations, UserService userService, GetStateUtil getStateUtil) {
+    public LoginController(RestOperations restOperations, UserService userService, NaverLoginStateUtil naverLoginStateUtil) {
         super();
         this.restOperations = restOperations;
         this.userService = userService;
-        this.getStateUtil = getStateUtil;
+        this.naverLoginStateUtil = naverLoginStateUtil;
     }
 
     @GetMapping
     public void login(HttpServletResponse response, HttpSession session) {
-        String state = getStateUtil.getState();
+        String state = naverLoginStateUtil.getState();
         session.setAttribute("state", state);
         String redirectUri = null;
         try {

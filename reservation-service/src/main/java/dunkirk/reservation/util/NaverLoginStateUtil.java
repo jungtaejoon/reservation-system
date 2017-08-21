@@ -5,7 +5,7 @@ import java.security.*;
 import org.springframework.stereotype.*;
 
 @Component
-public class GetStateUtil {
+public class NaverLoginStateUtil {
     public String getState() {
         String str = Double.toString(Math.random()) + System.currentTimeMillis();
         String md5;
