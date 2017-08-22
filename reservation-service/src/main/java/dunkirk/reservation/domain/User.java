@@ -9,7 +9,7 @@ public class User {
     public static final String SAME = "Same";
     public static final String NEED_UPDATE = "Need Update";
 
-    private Long id;
+    private int id;
     private String username;
     private String email;
     private String tel;
@@ -30,11 +30,11 @@ public class User {
         this.username = username;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

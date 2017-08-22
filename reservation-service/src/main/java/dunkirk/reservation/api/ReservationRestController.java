@@ -1,5 +1,7 @@
 package dunkirk.reservation.api;
 
+import dunkirk.reservation.config.AuthUser;
+import dunkirk.reservation.domain.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import dunkirk.reservation.domain.ReservationInfo;
 import dunkirk.reservation.service.ReservationService;
 
+import java.sql.Timestamp;
+
 @RestController
-@RequestMapping("/reservations")    // 수정하기
+@RequestMapping("/reservations")
 public class ReservationRestController {
     private ReservationService reservationService;
 
@@ -21,9 +25,10 @@ public class ReservationRestController {
     }
 
     @PostMapping
-    public int add(@RequestBody ReservationInfo reservationInfo) {
+    public int add(@RequestBody ReservationInfo reservationInfo, @AuthUser User user) {
         if (reservationInfo != null) {
-            reservationInfo.setUserId(1);
+            reservationInfo.setUserId(user.getId());
+            reservationInfo.setCreateDate(new Timestamp(System.currentTimeMillis()));
             return reservationService.add(reservationInfo);
         } else {
             return -1;
