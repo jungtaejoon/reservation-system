@@ -1,3 +1,7 @@
+import jQuery from "jquery";
+
+window.$ = jQuery;
+
 var MyReservation = (function() {
 	var summaryBoard = '.summary_board';
 	var summaryIndex = 0;

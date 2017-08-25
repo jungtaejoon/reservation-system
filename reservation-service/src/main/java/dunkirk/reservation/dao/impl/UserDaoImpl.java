@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 
     public User add(User user) {
         SqlParameterSource params = new BeanPropertySqlParameterSource(user);
-        user.setId(insertAction.executeAndReturnKey(params).longValue());
+        user.setId(insertAction.executeAndReturnKey(params).intValue());
         return user;
     }
 

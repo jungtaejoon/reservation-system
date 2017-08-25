@@ -3,9 +3,12 @@ package dunkirk.reservation.config;
 import dunkirk.reservation.interceptor.LoginCheckInterceptor;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.*;
+
+import java.util.List;
 
 @Configuration
 @EnableWebMvc
@@ -45,5 +48,10 @@ public class ServletContext extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/my-reservation/**")
                 .addPathPatterns("/booking/**");
         super.addInterceptors(registry);
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new AuthUserArgumentResolver());
     }
 }
