@@ -18,7 +18,6 @@ import dunkirk.reservation.dao.UserDao;
 public class UserDaoImpl implements UserDao {
     private NamedParameterJdbcTemplate jdbc;
     private SimpleJdbcInsert insertAction;
-    private RowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
 
     public UserDaoImpl(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -26,6 +25,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     public User getByEmail(String email) {
+    	RowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
         Map<String, String> params = new HashMap<>();
         params.put("email", email);
         try {
