@@ -36,7 +36,7 @@ public class ReservationRestController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id:[\\d]+}")
     public int delete(@PathVariable int id) {
         return reservationService.remove(id);
     }
