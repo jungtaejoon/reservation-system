@@ -11,29 +11,29 @@ import dunkirk.reservation.service.CommentService;
 
 @Controller
 public class CommentController {
-    private static final int FIRST_PAGE = 0;
-    private static final int LIMIT_10 = 10;
-    private CommentService commentService;
-    private ProductService productService;
+	private static final int FIRST_PAGE = 0;
+	private static final int LIMIT = 10;
+	private CommentService commentService;
+	private ProductService productService;
 
-    @Autowired
-    public CommentController(CommentService commentService, ProductService productService) {
-        this.commentService = commentService;
-        this.productService = productService;
-    }
+	@Autowired
+	public CommentController(CommentService commentService, ProductService productService) {
+		this.commentService = commentService;
+		this.productService = productService;
+	}
 
-    @GetMapping("/comment-write")
-    public String write(Model model, @RequestParam int reservationId) {
-        model.addAttribute("reservationId", reservationId);
-        model.addAttribute("productName", commentService.getProductNameByReservationId(reservationId));
-        return "reviewWrite";
-    }
+	@GetMapping("/comment-write")
+	public String write(Model model, @RequestParam int reservationId) {
+		model.addAttribute("reservationId", reservationId);
+		model.addAttribute("productName", commentService.getProductNameByReservationId(reservationId));
+		return "reviewWrite";
+	}
 
-    @GetMapping("/comment-read")
-    public String readHome(@RequestParam int productId, Model model) {
-        model.addAttribute("product", productService.getDetail(productId));
-        model.addAttribute("comments", commentService.getListByProduct(FIRST_PAGE, LIMIT_10, productId));
-        return "review";
-    }
+	@GetMapping("/comment-read")
+	public String readHome(@RequestParam int productId, Model model) {
+		model.addAttribute("product", productService.getDetail(productId));
+		model.addAttribute("comments", commentService.getListByProduct(FIRST_PAGE, LIMIT, productId));
+		return "review";
+	}
 
 }
